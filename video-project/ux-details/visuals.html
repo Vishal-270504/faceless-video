@@ -1,0 +1,167 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .abs { position: absolute; }
+  .t { font-family: Inter, sans-serif; color: #f2f2f7; }
+  #wTitle { left: 56px; top: 40px; font: 700 30px Inter, sans-serif; color: #f2f2f7; }
+  #lblTitle { left: 56px; top: 124px; font: 700 22px Inter, sans-serif; color: #b9bbcc; }
+  #field { left: 56px; top: 164px; width: 560px; height: 80px; border-radius: 16px; background: #0d0d13; border: 2px solid #2b2b3b; padding: 0 24px; }
+  .fv { position: absolute; left: 24px; top: 0; line-height: 76px; font: 400 30px Inter, sans-serif; white-space: nowrap; }
+  #tPh { color: #5d6072; }
+  #tHi, #tHello { color: #f2f2f7; opacity: 0; }
+  #save { left: 644px; top: 164px; width: 200px; height: 80px; border-radius: 16px; background: #f2f2f7; color: #0d0d13; font: 700 28px Inter, sans-serif; text-align: center; line-height: 80px; }
+  #msgHelp, #msgErr { left: 56px; top: 260px; font: 400 22px Inter, sans-serif; color: #8b8fa3; opacity: 0; }
+  #msgErr { color: #ff7a7a; font-weight: 700; }
+  #generic { left: 56px; top: 258px; width: 788px; height: 52px; border-radius: 12px; background: rgba(255,107,107,0.12); color: #ff8a8a; font: 700 22px Inter, sans-serif; line-height: 52px; padding: 0 20px; opacity: 0; }
+
+  .row { left: 56px; width: 788px; height: 80px; border-radius: 16px; background: #1a1a25; border: 1px solid #262636; }
+  .row .nm { position: absolute; left: 28px; top: 0; line-height: 78px; font: 700 26px Inter, sans-serif; color: #e9e9f1; }
+  .row .dl { position: absolute; right: 28px; top: 0; line-height: 78px; font: 700 22px Inter, sans-serif; color: #8b8fa3; }
+  #row1 { top: 340px; }
+  #row2 { top: 436px; }
+  #row3 { top: 436px; opacity: 0; border-left: 4px solid #8fa8ff; }
+
+  .chk { left: 56px; width: 788px; height: 80px; border-radius: 16px; background: #1a1a25; border: 1px solid #262636; opacity: 0; }
+  .chk .nm { position: absolute; left: 64px; top: 0; line-height: 78px; font: 700 26px Inter, sans-serif; color: #e9e9f1; }
+  .tick { position: absolute; left: 26px; top: 26px; width: 12px; height: 22px; border-right: 4px solid #8fa8ff; border-bottom: 4px solid #8fa8ff; transform: rotate(45deg); }
+  #chk1 { top: 340px; }
+  #chk2 { top: 436px; }
+  #chk3 { top: 532px; }
+
+  #dim { left: 0; top: 0; width: 900px; height: 640px; background: rgba(6,6,10,0.72); opacity: 0; }
+  #dlg { left: 150px; top: 180px; width: 600px; height: 280px; border-radius: 22px; background: #1c1c27; border: 1px solid #2e2e40; opacity: 0; }
+  #dlg .h { position: absolute; left: 40px; top: 40px; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  #dlg .p { position: absolute; left: 40px; top: 94px; font: 400 22px Inter, sans-serif; color: #8b8fa3; }
+  #cancel, #delBtn { position: absolute; top: 180px; width: 150px; height: 60px; border-radius: 14px; font: 700 24px Inter, sans-serif; text-align: center; line-height: 60px; }
+  #cancel { left: 240px; background: #2a2a3a; color: #f2f2f7; }
+  #delBtn { left: 410px; background: #ff6b6b; color: #0d0d13; }
+  #esc { position: absolute; right: 24px; top: 24px; padding: 6px 14px; border: 1px solid #3a3a4e; border-radius: 8px; font: 700 18px Inter, sans-serif; color: #8b8fa3; opacity: 0; }
+
+  #toast { left: 486px; top: 22px; width: 380px; height: 64px; border-radius: 14px; background: #1d1d28; border: 1px solid #2e2e40; opacity: 0; }
+  #toast .t2 { position: absolute; left: 62px; top: 0; line-height: 62px; font: 700 24px Inter, sans-serif; color: #f2f2f7; }
+  #toast .ok { position: absolute; left: 24px; top: 20px; width: 11px; height: 20px; border-right: 4px solid #5fd39a; border-bottom: 4px solid #5fd39a; transform: rotate(45deg); }
+
+  #big { left: 0; top: 200px; width: 900px; text-align: center; font: 900 84px Inter, sans-serif; color: #f2f2f7; line-height: 1.08; opacity: 0; }
+  #big span { display: block; }
+  #q { left: 0; top: 250px; width: 900px; text-align: center; font: 900 72px Inter, sans-serif; color: #f2f2f7; line-height: 1.1; opacity: 0; }
+</style>
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="7.3" data-track-index="1">The difference</div>
+  <div id="k1" class="kick clip" data-start="7.4" data-duration="7.0" data-track-index="1">01 · Errors</div>
+  <div id="k2" class="kick clip" data-start="14.5" data-duration="7.4" data-track-index="1">02 · Confirm</div>
+  <div id="k3" class="kick clip" data-start="22.0" data-duration="6.2" data-track-index="1">03 · Feedback</div>
+  <div id="k4" class="kick clip" data-start="28.3" data-duration="5.7" data-track-index="1">04 · Helper text</div>
+  <div id="k5" class="kick clip" data-start="34.1" data-duration="6.6" data-track-index="1">05 · Accessibility</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <div id="content">
+    <div id="wTitle" class="abs t">Notes</div>
+    <div id="lblTitle" class="abs">Title</div>
+    <div id="field" class="abs">
+      <span id="tPh" class="fv">Note title</span>
+      <span id="tHi" class="fv">Hi</span>
+      <span id="tHello" class="fv">Hello</span>
+    </div>
+    <div id="save" class="abs">Save</div>
+    <div id="generic" class="abs">Something went wrong.</div>
+    <div id="msgErr" class="abs">Title must be at least 3 characters.</div>
+    <div id="msgHelp" class="abs">At least 3 characters</div>
+
+    <div id="row1" class="row abs"><span class="nm">Groceries</span><span class="dl">Delete</span></div>
+    <div id="row2" class="row abs"><span class="nm">Trip ideas</span><span class="dl">Delete</span></div>
+    <div id="row3" class="row abs"><span class="nm">Meeting notes</span><span class="dl">Delete</span></div>
+
+    <div id="chk1" class="chk abs"><span class="tick"></span><span class="nm">Visible labels</span></div>
+    <div id="chk2" class="chk abs"><span class="tick"></span><span class="nm">Clear focus ring</span></div>
+    <div id="chk3" class="chk abs"><span class="tick"></span><span class="nm">Real buttons</span></div>
+  </div>
+
+  <div id="overlay">
+    <div id="dim" class="abs"></div>
+    <div id="dlg" class="abs">
+      <div class="h">Delete this note?</div>
+      <div class="p">This can't be undone.</div>
+      <div id="esc">Esc</div>
+      <div id="cancel">Cancel</div>
+      <div id="delBtn">Delete</div>
+    </div>
+  </div>
+
+  <div id="toast" class="abs"><span class="ok"></span><span class="t2">Note created</span></div>
+
+  <div id="big" class="abs"><span>Small details.</span><span style="color: #8fa8ff;">Big difference.</span></div>
+  <div id="q" class="abs">Which one is missing?</div>
+</div>
+
+<script>
+  // Hook: card and form arrive in their plain state.
+  tl.from("#win", { opacity: 0, y: 24, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 1. Errors: a generic message, then a field-level error that clears once fixed.
+  tl.set("#tPh", { opacity: 0 }, 7.5);
+  tl.set("#tHi", { opacity: 1 }, 7.5);
+  tl.fromTo("#generic", { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.3 }, 7.9);
+  tl.to("#generic", { opacity: 0, duration: 0.3 }, 10.0);
+  tl.to("#field", { borderColor: "#ff6b6b", duration: 0.3 }, 10.3);
+  tl.to("#msgErr", { opacity: 1, duration: 0.3 }, 10.3);
+  tl.set("#tHi", { opacity: 0 }, 12.2);
+  tl.set("#tHello", { opacity: 1 }, 12.2);
+  tl.to("#msgErr", { opacity: 0, duration: 0.25 }, 12.2);
+  tl.to("#field", { borderColor: "#2b2b3b", duration: 0.25 }, 12.2);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.4);
+
+  // 2. Delete: dialog opens, Cancel is focused, Escape hint, then the red button deletes.
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.5);
+  tl.to("#dim", { opacity: 1, duration: 0.35 }, 14.9);
+  tl.fromTo("#dlg", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 14.9);
+  tl.to("#cancel", { boxShadow: "0 0 0 3px #13131b, 0 0 0 6px #8fa8ff", duration: 0.3 }, 15.3);
+  tl.to("#esc", { opacity: 1, duration: 0.3 }, 16.5);
+  tl.to("#delBtn", { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 }, 18.6);
+  tl.to(["#dim", "#dlg"], { opacity: 0, duration: 0.3 }, 19.1);
+  tl.to("#row2", { opacity: 0, duration: 0.3 }, 19.1);
+
+  // 3. Feedback: save, a toast confirms it, and the new note appears.
+  tl.to("#save", { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 }, 22.1);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 22.0);
+  tl.to("#row3", { opacity: 1, duration: 0.4 }, 22.3);
+  tl.fromTo("#toast", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 22.5);
+  tl.to("#toast", { opacity: 0, duration: 0.35 }, 25.8);
+
+  // 4. Helper text: rules shown before the user breaks them.
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 28.3);
+  tl.to("#field", { borderColor: "#8fa8ff", duration: 0.3 }, 28.3);
+  tl.to("#msgHelp", { opacity: 1, duration: 0.3 }, 28.5);
+
+  // 5. Accessibility: visible label, focus ring on Save, real button.
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.1);
+  tl.to(["#row1", "#row2", "#row3", "#msgHelp"], { opacity: 0, duration: 0.3 }, 34.0);
+  tl.to("#field", { borderColor: "#2b2b3b", duration: 0.3 }, 34.0);
+  tl.to("#save", { boxShadow: "0 0 0 4px #13131b, 0 0 0 7px #8fa8ff", duration: 0.3 }, 34.6);
+  tl.fromTo("#chk1", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 35.2);
+  tl.fromTo("#chk2", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 36.0);
+  tl.fromTo("#chk3", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out" }, 36.8);
+
+  // 6. Takeaway.
+  tl.to(["#content"], { opacity: 0, duration: 0.4 }, 40.6);
+  tl.fromTo("#big", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 41.0);
+  tl.to("#big", { opacity: 0, duration: 0.3 }, 44.0);
+
+  // 7. Question.
+  tl.fromTo("#q", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.1);
+</script>

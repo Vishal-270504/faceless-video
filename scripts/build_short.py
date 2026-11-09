@@ -5,6 +5,8 @@ Reads:  output\\timings\\<name>.json, output\\audio\\<name>.wav
 Writes: video-project\\<name>\\index.html  (then: cd video-project\\<name> && npx hyperframes render)
 """
 import json
+import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -22,9 +24,9 @@ HTML = """<!doctype html>
     :root {{ --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }}
     * {{ margin: 0; padding: 0; box-sizing: border-box; }}
     html, body {{ width: {W}px; height: {H}px; overflow: hidden; background: var(--ground); }}
-    #root {{ position: relative; width: {W}px; height: {H}px; font-family: "Arial Black", Impact, sans-serif; }}
+    #root {{ position: relative; width: {W}px; height: {H}px; font-family: Arial, Helvetica, sans-serif; }}
     .caption {{
-      position: absolute; left: 60px; right: 60px; top: 1180px; text-align: center;
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
       color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
       text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
     }}
@@ -32,18 +34,21 @@ HTML = """<!doctype html>
       position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
       color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
     }}
+{visual_style}
   </style>
 </head>
 <body>
   <div id="root" data-composition-id="main" data-start="0" data-duration="{duration:.2f}"
        data-width="{W}" data-height="{H}">
+{visual_markup}
 {title_el}
 {caption_els}
-    <audio data-start="0" data-duration="{duration:.2f}" data-track-index="2" data-volume="1"
-           src="../../output/audio/{name}.wav"></audio>
+    <audio id="narration" data-start="0" data-duration="{duration:.2f}" data-track-index="2" data-volume="1"
+           src="assets/{name}.wav"></audio>
   </div>
   <script>
     const tl = gsap.timeline({{ paused: true }});
+{visual_js}
 {title_js}
 {caption_js}
     window.__timelines["main"] = tl;
@@ -101,12 +106,23 @@ def main() -> None:
         )
 
     out_dir = ROOT / "video-project" / name
-    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "assets").mkdir(parents=True, exist_ok=True)
+    # Optional visuals.html per video: <style>, markup and <script> (adds to tl) for the background scenes.
+    vis_style = vis_markup = vis_js = ""
+    vis_file = out_dir / "visuals.html"
+    if vis_file.exists():
+        vis = vis_file.read_text(encoding="utf-8")
+        vis_style = "\n".join(re.findall(r"<style>(.*?)</style>", vis, re.S))
+        vis_js = "\n".join(re.findall(r"<script>(.*?)</script>", vis, re.S))
+        vis_markup = re.sub(r"<(style|script)>.*?</\1>", "", vis, flags=re.S)
+    # Renderer only reads files inside the project folder, so copy the narration in.
+    shutil.copy(ROOT / "output" / "audio" / f"{name}.wav", out_dir / "assets" / f"{name}.wav")
     (out_dir / "index.html").write_text(
         HTML.format(
             W=W, H=H, duration=duration, name=name,
             title_el=title_el, caption_els="\n".join(caption_els),
             title_js=title_js, caption_js="\n".join(caption_js),
+            visual_style=vis_style, visual_markup=vis_markup, visual_js=vis_js,
         ),
         encoding="utf-8",
     )
