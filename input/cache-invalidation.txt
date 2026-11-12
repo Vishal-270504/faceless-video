@@ -1,0 +1,15 @@
+You create a note. But the list doesn't show it. You refresh, and it's still missing for up to a minute.
+
+Why? Your API caches the list to stay fast. The server answers from that cache, and the cache is out of date.
+
+Check the response header X-Cache. If it says HIT, you got the old copy.
+
+The fix: give each user a version number, and put it in the cache key.
+
+When a note is created or deleted, bump the version. The old cache is ignored, and the next request fetches fresh data.
+
+Only that user's cache changes. Everyone else keeps their speed.
+
+The takeaway: a cache is only correct if every write knows what it invalidates.
+
+Did your last write update the cache, or just the database?

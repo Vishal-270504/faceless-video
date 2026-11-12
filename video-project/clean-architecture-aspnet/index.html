@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 60px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .chip { position: absolute; border-radius: 12px; font: 700 26px Inter, sans-serif; padding: 10px 18px; }
+  .red { color: #ff8a8a; }
+  .grn { color: #5fd39a; }
+  .accent { color: #8fa8ff; }
+  .hl { position: absolute; border: 3px solid #8fa8ff; border-radius: 20px; opacity: 0; }
+  .vline { position: absolute; width: 4px; background: #8fa8ff; border-radius: 2px; }
+  .hline { position: absolute; height: 4px; background: #8fa8ff; border-radius: 2px; }
+  .role { position: absolute; left: 56px; top: 588px; font: 700 30px Inter, sans-serif; color: #e9e9f1; opacity: 0; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="50.66"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="10.6" data-track-index="1">The conflict</div>
+  <div id="k1" class="kick clip" data-start="10.7" data-duration="5.3" data-track-index="1">01 · Why</div>
+  <div id="k2" class="kick clip" data-start="16.1" data-duration="3.3" data-track-index="1">02 · The split</div>
+  <div id="k3" class="kick clip" data-start="19.5" data-duration="4.4" data-track-index="1">03 · Controller</div>
+  <div id="k4" class="kick clip" data-start="24.1" data-duration="4.0" data-track-index="1">04 · Service</div>
+  <div id="k5" class="kick clip" data-start="28.2" data-duration="4.1" data-track-index="1">05 · Repository</div>
+  <div id="k6" class="kick clip" data-start="32.4" data-duration="4.0" data-track-index="1">06 · Every write</div>
+  <div id="k7" class="kick clip" data-start="36.5" data-duration="6.8" data-track-index="1">07 · Swap</div>
+  <div id="k8" class="kick clip" data-start="43.4" data-duration="4.7" data-track-index="1">Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the conflict: same title, two answers -->
+  <div id="g0" class="g">
+    <div class="lbl" style="left: 56px; top: 176px;">Title</div>
+    <div class="box" style="left: 56px; top: 214px; width: 788px; height: 84px;">
+      <div class="txt" style="left: 28px; top: 24px; font-size: 36px;">Milk</div>
+    </div>
+    <div class="box" style="left: 56px; top: 330px; width: 788px; height: 110px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Controller · min 5 characters</div>
+      <div id="rej" class="chip red" style="left: 28px; top: 60px; background: rgba(255,107,107,0.12); opacity: 0;">Rejected</div>
+    </div>
+    <div class="box" style="left: 56px; top: 460px; width: 788px; height: 110px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Service · min 3 characters</div>
+      <div id="acc" class="chip grn" style="left: 28px; top: 60px; background: rgba(95,211,154,0.12); opacity: 0;">Accepted</div>
+    </div>
+    <div id="same" class="txt" style="left: 56px; top: 596px; font-size: 28px; opacity: 0;">Same rule. Two answers.</div>
+  </div>
+
+  <!-- 1: the two copies drift -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 210px; width: 380px; height: 220px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Copy in controller</div>
+      <div class="txt" style="left: 28px; top: 100px; font-size: 64px;">5</div>
+    </div>
+    <div class="box" style="left: 464px; top: 210px; width: 380px; height: 220px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Copy in service</div>
+      <div class="txt" style="left: 28px; top: 100px; font-size: 64px;">3</div>
+    </div>
+    <div class="txt red" style="left: 56px; top: 480px; font-size: 40px;">They drift apart.</div>
+    <div class="lbl" style="left: 56px; top: 550px; font-size: 28px; color: #e9e9f1;">Every copy you add is one more place to forget.</div>
+  </div>
+
+  <!-- 2 to 6: the layered stack, with a highlight per layer -->
+  <div id="stack" class="g">
+    <div class="box" style="left: 56px; top: 180px; width: 788px; height: 104px;">
+      <div class="txt" style="left: 28px; top: 20px; font-size: 34px;">Controller</div>
+      <div class="lbl" style="left: 28px; top: 66px;">Reads the request. Returns the answer.</div>
+    </div>
+    <div class="vline" style="left: 448px; top: 290px; height: 24px;"></div>
+    <div class="box" style="left: 56px; top: 320px; width: 788px; height: 104px;">
+      <div class="txt" style="left: 28px; top: 20px; font-size: 34px;">Service</div>
+      <div class="lbl" style="left: 28px; top: 66px;">Holds the rules: validation, ownership, cache.</div>
+    </div>
+    <div class="vline" style="left: 448px; top: 430px; height: 24px;"></div>
+    <div class="box" style="left: 56px; top: 460px; width: 788px; height: 104px;">
+      <div class="txt" style="left: 28px; top: 20px; font-size: 34px;">Repository</div>
+      <div class="lbl" style="left: 28px; top: 66px;">Stores and finds data. Nothing more.</div>
+    </div>
+    <div id="hlC" class="hl" style="left: 52px; top: 176px; width: 796px; height: 112px;"></div>
+    <div id="hlS" class="hl" style="left: 52px; top: 316px; width: 796px; height: 112px;"></div>
+    <div id="hlR" class="hl" style="left: 52px; top: 456px; width: 796px; height: 112px;"></div>
+    <div id="roleC" class="role">The controller only talks HTTP.</div>
+    <div id="roleS" class="role">The service is where the rules live.</div>
+    <div id="roleR" class="role">The repository is just storage.</div>
+  </div>
+
+  <!-- 6: every write goes through the service; the bypass is crossed out -->
+  <div id="flow" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 160px; height: 120px;"><div class="lbl" style="left: 20px; top: 44px; color: #e9e9f1;">Write</div></div>
+    <div class="hline" style="left: 220px; top: 260px; width: 30px;"></div>
+    <div class="box" style="left: 254px; top: 200px; width: 180px; height: 120px;"><div class="lbl" style="left: 18px; top: 44px; color: #e9e9f1;">Controller</div></div>
+    <div class="hline" style="left: 438px; top: 260px; width: 30px;"></div>
+    <div class="box" style="left: 472px; top: 200px; width: 180px; height: 120px; border-color: #5fd39a;"><div class="lbl" style="left: 18px; top: 44px; color: #e9e9f1;">Service</div></div>
+    <div class="hline" style="left: 656px; top: 260px; width: 30px;"></div>
+    <div class="box" style="left: 690px; top: 200px; width: 160px; height: 120px;"><div class="lbl" style="left: 18px; top: 44px; color: #e9e9f1;">Repo</div></div>
+    <div id="rule" class="chip grn" style="left: 472px; top: 340px; background: rgba(95,211,154,0.12); opacity: 0;">Rules and cache run</div>
+    <div id="bypass" style="position: absolute; left: 254px; top: 420px; width: 596px; height: 96px; border: 2px dashed #ff6b6b; border-radius: 16px; opacity: 0;">
+      <div class="lbl red" style="left: 24px; top: 26px; font-size: 26px;">Bypass: skips the rules and the cache</div>
+    </div>
+  </div>
+
+  <!-- 7: swap the storage: one line changes -->
+  <div id="swap" class="g">
+    <div class="box" style="left: 56px; top: 180px; width: 788px; height: 230px; background: #08080c;">
+      <div class="mono" style="left: 32px; top: 36px; font-size: 26px; color: #6b6f85;">Program.cs</div>
+      <div class="mono" style="left: 32px; top: 92px; font-size: 26px; color: #6b6f85;">builder.Services</div>
+      <div id="swapLine" style="position: absolute; left: 24px; top: 140px; width: 740px; height: 60px; background: rgba(143,168,255,0.14); border-radius: 10px;"></div>
+      <div class="mono accent" style="left: 32px; top: 146px; font-size: 26px;">  .AddScoped&lt;INoteRepo, NewStore&gt;();</div>
+    </div>
+    <div class="chip grn" style="left: 56px; top: 450px; background: rgba(95,211,154,0.12);">Controller: unchanged</div>
+    <div class="chip grn" style="left: 56px; top: 514px; background: rgba(95,211,154,0.12);">Service: unchanged</div>
+    <div class="txt" style="left: 56px; top: 580px; font-size: 30px;">One line changes. Nothing else.</div>
+  </div>
+
+  <!-- 8: takeaway -->
+  <div id="g8" class="g">
+    <div class="bigc" style="top: 230px; font-size: 66px;">One rule.<br><span class="accent">One place.</span></div>
+  </div>
+
+  <!-- 9: question -->
+  <div id="g9" class="g">
+    <div class="bigc" style="top: 260px; font-size: 52px;">Which layer does your controller talk to?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="1.22" data-track-index="1">Your API has</div>
+    <div id="c1" class="caption clip" data-start="1.22" data-duration="0.36" data-track-index="1">a rule,</div>
+    <div id="c2" class="caption clip" data-start="1.96" data-duration="0.78" data-track-index="1">titles need at</div>
+    <div id="c3" class="caption clip" data-start="2.74" data-duration="0.74" data-track-index="1">least three characters,</div>
+    <div id="c4" class="caption clip" data-start="4.30" data-duration="0.58" data-track-index="1">but the controller</div>
+    <div id="c5" class="caption clip" data-start="4.88" data-duration="0.94" data-track-index="1">checks for five.</div>
+    <div id="c6" class="caption clip" data-start="6.68" data-duration="0.50" data-track-index="1">Now a four</div>
+    <div id="c7" class="caption clip" data-start="7.18" data-duration="1.02" data-track-index="1">-letter title passes</div>
+    <div id="c8" class="caption clip" data-start="8.20" data-duration="0.88" data-track-index="1">one check and</div>
+    <div id="c9" class="caption clip" data-start="9.08" data-duration="0.72" data-track-index="1">fails the other.</div>
+    <div id="c10" class="caption clip" data-start="10.68" data-duration="0.78" data-track-index="1">Why? The rule</div>
+    <div id="c11" class="caption clip" data-start="11.46" data-duration="0.66" data-track-index="1">lives in two</div>
+    <div id="c12" class="caption clip" data-start="12.12" data-duration="0.30" data-track-index="1">places.</div>
+    <div id="c13" class="caption clip" data-start="13.30" data-duration="0.54" data-track-index="1">Two copies of</div>
+    <div id="c14" class="caption clip" data-start="13.84" data-duration="0.74" data-track-index="1">a rule always</div>
+    <div id="c15" class="caption clip" data-start="14.58" data-duration="0.54" data-track-index="1">drift apart.</div>
+    <div id="c16" class="caption clip" data-start="16.12" data-duration="0.40" data-track-index="1">Here's a clean</div>
+    <div id="c17" class="caption clip" data-start="16.52" data-duration="0.32" data-track-index="1">split.</div>
+    <div id="c18" class="caption clip" data-start="17.48" data-duration="0.58" data-track-index="1">Each layer has</div>
+    <div id="c19" class="caption clip" data-start="18.06" data-duration="0.48" data-track-index="1">one job.</div>
+    <div id="c20" class="caption clip" data-start="19.48" data-duration="0.84" data-track-index="1">The controller reads</div>
+    <div id="c21" class="caption clip" data-start="20.32" data-duration="0.96" data-track-index="1">the request and</div>
+    <div id="c22" class="caption clip" data-start="21.28" data-duration="0.80" data-track-index="1">returns the answer.</div>
+    <div id="c23" class="caption clip" data-start="22.80" data-duration="0.50" data-track-index="1">Nothing else.</div>
+    <div id="c24" class="caption clip" data-start="24.06" data-duration="0.86" data-track-index="1">The service holds</div>
+    <div id="c25" class="caption clip" data-start="24.92" data-duration="0.42" data-track-index="1">the rules,</div>
+    <div id="c26" class="caption clip" data-start="26.02" data-duration="0.32" data-track-index="1">validation,</div>
+    <div id="c27" class="caption clip" data-start="26.94" data-duration="0.30" data-track-index="1">ownership,</div>
+    <div id="c28" class="caption clip" data-start="27.50" data-duration="0.70" data-track-index="1">and cache updates.</div>
+    <div id="c29" class="caption clip" data-start="28.20" data-duration="2.02" data-track-index="1">The repository only</div>
+    <div id="c30" class="caption clip" data-start="30.22" data-duration="1.00" data-track-index="1">stores and finds</div>
+    <div id="c31" class="caption clip" data-start="31.22" data-duration="0.30" data-track-index="1">data.</div>
+    <div id="c32" class="caption clip" data-start="32.34" data-duration="0.84" data-track-index="1">Every right goes</div>
+    <div id="c33" class="caption clip" data-start="33.18" data-duration="0.70" data-track-index="1">through the service,</div>
+    <div id="c34" class="caption clip" data-start="34.30" data-duration="0.50" data-track-index="1">so the rule</div>
+    <div id="c35" class="caption clip" data-start="34.80" data-duration="0.72" data-track-index="1">always runs.</div>
+    <div id="c36" class="caption clip" data-start="36.48" data-duration="0.52" data-track-index="1">Want a different</div>
+    <div id="c37" class="caption clip" data-start="37.00" data-duration="0.32" data-track-index="1">database?</div>
+    <div id="c38" class="caption clip" data-start="38.16" data-duration="0.64" data-track-index="1">Change one line</div>
+    <div id="c39" class="caption clip" data-start="38.80" data-duration="0.38" data-track-index="1">in program,</div>
+    <div id="c40" class="caption clip" data-start="39.78" data-duration="0.30" data-track-index="1">CS.</div>
+    <div id="c41" class="caption clip" data-start="40.58" data-duration="0.76" data-track-index="1">The controller and</div>
+    <div id="c42" class="caption clip" data-start="41.34" data-duration="0.88" data-track-index="1">service stay the</div>
+    <div id="c43" class="caption clip" data-start="42.22" data-duration="0.30" data-track-index="1">same.</div>
+    <div id="c44" class="caption clip" data-start="43.38" data-duration="0.30" data-track-index="1">The takeaway,</div>
+    <div id="c45" class="caption clip" data-start="44.22" data-duration="0.44" data-track-index="1">a rule in</div>
+    <div id="c46" class="caption clip" data-start="44.66" data-duration="0.80" data-track-index="1">two places will</div>
+    <div id="c47" class="caption clip" data-start="45.46" data-duration="0.48" data-track-index="1">drift apart.</div>
+    <div id="c48" class="caption clip" data-start="46.58" data-duration="0.36" data-track-index="1">Keep it in</div>
+    <div id="c49" class="caption clip" data-start="46.94" data-duration="0.30" data-track-index="1">one.</div>
+    <div id="c50" class="caption clip" data-start="48.06" data-duration="0.72" data-track-index="1">Which layer does</div>
+    <div id="c51" class="caption clip" data-start="48.78" data-duration="0.86" data-track-index="1">your controller talk</div>
+    <div id="c52" class="caption clip" data-start="49.64" data-duration="0.42" data-track-index="1">to directly?</div>
+    <audio id="narration" data-start="0" data-duration="50.66" data-track-index="2" data-volume="1"
+           src="assets/clean-architecture-aspnet.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the conflict.
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#rej", { opacity: 1, duration: 0.3 }, 3.5);
+  tl.to("#acc", { opacity: 1, duration: 0.3 }, 6.0);
+  tl.to("#same", { opacity: 1, duration: 0.4 }, 7.6);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 10.3);
+
+  // 1: the two copies.
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 10.7);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 10.7);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 15.8);
+
+  // 2-5: the stack, one layer at a time.
+  tl.to("#stack", { opacity: 1, duration: 0.4 }, 16.1);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 16.1);
+  tl.to("#hlC", { opacity: 1, duration: 0.3 }, 19.5);
+  tl.to("#roleC", { opacity: 1, duration: 0.3 }, 19.5);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 19.5);
+  tl.to("#hlC", { opacity: 0, duration: 0.3 }, 23.9);
+  tl.to("#roleC", { opacity: 0, duration: 0.3 }, 23.9);
+  tl.to("#hlS", { opacity: 1, duration: 0.3 }, 24.1);
+  tl.to("#roleS", { opacity: 1, duration: 0.3 }, 24.1);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 24.1);
+  tl.to("#hlS", { opacity: 0, duration: 0.3 }, 28.0);
+  tl.to("#roleS", { opacity: 0, duration: 0.3 }, 28.0);
+  tl.to("#hlR", { opacity: 1, duration: 0.3 }, 28.2);
+  tl.to("#roleR", { opacity: 1, duration: 0.3 }, 28.2);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 28.2);
+  tl.to("#hlR", { opacity: 0, duration: 0.3 }, 32.0);
+  tl.to("#roleR", { opacity: 0, duration: 0.3 }, 32.0);
+  tl.to("#stack", { opacity: 0, duration: 0.3 }, 32.3);
+
+  // 6: every write goes through the service; the bypass is ruled out.
+  tl.to("#flow", { opacity: 1, duration: 0.4 }, 32.4);
+  tl.to("#rule", { opacity: 1, duration: 0.3 }, 33.2);
+  tl.to("#bypass", { opacity: 1, duration: 0.4 }, 34.6);
+  tl.to("#flow", { opacity: 0, duration: 0.3 }, 36.3);
+
+  // 7: swap storage, one line changes.
+  tl.to("#swap", { opacity: 1, duration: 0.4 }, 36.5);
+  tl.fromTo("#swapLine", { scaleX: 0.2, transformOrigin: "left center" }, { scaleX: 1, duration: 0.5, ease: "power2.out" }, 37.0);
+  tl.to("#swap", { opacity: 0, duration: 0.3 }, 43.2);
+
+  // 8: takeaway.
+  tl.fromTo("#g8", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 43.4);
+  tl.to("#g8", { opacity: 0, duration: 0.3 }, 47.9);
+
+  // 9: question.
+  tl.fromTo("#g9", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 48.3);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 1.22);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 1.22); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.22); tl.set("#c1", { opacity: 0 }, 1.58);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.96); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.96); tl.set("#c2", { opacity: 0 }, 2.74);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.74); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.74); tl.set("#c3", { opacity: 0 }, 3.48);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 4.30); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.30); tl.set("#c4", { opacity: 0 }, 4.88);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 4.88); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.88); tl.set("#c5", { opacity: 0 }, 5.82);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 6.68); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.68); tl.set("#c6", { opacity: 0 }, 7.18);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 7.18); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.18); tl.set("#c7", { opacity: 0 }, 8.20);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 8.20); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.20); tl.set("#c8", { opacity: 0 }, 9.08);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 9.08); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.08); tl.set("#c9", { opacity: 0 }, 9.80);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 10.68); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.68); tl.set("#c10", { opacity: 0 }, 11.46);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 11.46); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.46); tl.set("#c11", { opacity: 0 }, 12.12);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 12.12); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.12); tl.set("#c12", { opacity: 0 }, 12.42);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 13.30); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.30); tl.set("#c13", { opacity: 0 }, 13.84);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 13.84); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.84); tl.set("#c14", { opacity: 0 }, 14.58);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 14.58); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.58); tl.set("#c15", { opacity: 0 }, 15.12);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 16.12); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.12); tl.set("#c16", { opacity: 0 }, 16.52);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 16.52); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.52); tl.set("#c17", { opacity: 0 }, 16.84);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 17.48); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.48); tl.set("#c18", { opacity: 0 }, 18.06);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 18.06); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.06); tl.set("#c19", { opacity: 0 }, 18.54);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 19.48); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.48); tl.set("#c20", { opacity: 0 }, 20.32);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 20.32); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.32); tl.set("#c21", { opacity: 0 }, 21.28);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 21.28); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.28); tl.set("#c22", { opacity: 0 }, 22.08);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 22.80); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.80); tl.set("#c23", { opacity: 0 }, 23.30);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 24.06); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.06); tl.set("#c24", { opacity: 0 }, 24.92);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 24.92); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.92); tl.set("#c25", { opacity: 0 }, 25.34);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 26.02); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.02); tl.set("#c26", { opacity: 0 }, 26.34);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 26.94); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.94); tl.set("#c27", { opacity: 0 }, 27.24);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 27.50); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.50); tl.set("#c28", { opacity: 0 }, 28.20);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 28.20); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.20); tl.set("#c29", { opacity: 0 }, 30.22);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 30.22); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.22); tl.set("#c30", { opacity: 0 }, 31.22);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 31.22); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.22); tl.set("#c31", { opacity: 0 }, 31.52);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 32.34); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.34); tl.set("#c32", { opacity: 0 }, 33.18);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 33.18); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.18); tl.set("#c33", { opacity: 0 }, 33.88);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 34.30); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.30); tl.set("#c34", { opacity: 0 }, 34.80);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 34.80); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.80); tl.set("#c35", { opacity: 0 }, 35.52);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 36.48); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.48); tl.set("#c36", { opacity: 0 }, 37.00);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 37.00); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.00); tl.set("#c37", { opacity: 0 }, 37.32);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 38.16); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.16); tl.set("#c38", { opacity: 0 }, 38.80);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 38.80); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.80); tl.set("#c39", { opacity: 0 }, 39.18);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 39.78); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.78); tl.set("#c40", { opacity: 0 }, 40.08);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 40.58); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.58); tl.set("#c41", { opacity: 0 }, 41.34);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 41.34); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.34); tl.set("#c42", { opacity: 0 }, 42.22);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 42.22); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.22); tl.set("#c43", { opacity: 0 }, 42.52);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 43.38); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.38); tl.set("#c44", { opacity: 0 }, 43.68);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 44.22); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.22); tl.set("#c45", { opacity: 0 }, 44.66);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 44.66); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.66); tl.set("#c46", { opacity: 0 }, 45.46);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 45.46); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.46); tl.set("#c47", { opacity: 0 }, 45.94);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 46.58); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.58); tl.set("#c48", { opacity: 0 }, 46.94);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 46.94); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.94); tl.set("#c49", { opacity: 0 }, 47.24);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 48.06); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.06); tl.set("#c50", { opacity: 0 }, 48.78);
+    tl.set("#c51", { opacity: 1, scale: 0.92 }, 48.78); tl.to("#c51", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.78); tl.set("#c51", { opacity: 0 }, 49.64);
+    tl.set("#c52", { opacity: 1, scale: 0.92 }, 49.64); tl.to("#c52", { scale: 1, duration: 0.12, ease: "power2.out" }, 49.64); tl.set("#c52", { opacity: 0 }, 50.06);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

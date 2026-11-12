@@ -1,0 +1,179 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 30px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .row { position: absolute; left: 56px; width: 788px; height: 76px; background: #1a1a25; border: 1px solid #262636; border-radius: 16px; }
+  .row .nm { position: absolute; left: 26px; top: 0; line-height: 74px; font: 700 28px Inter, sans-serif; color: #e9e9f1; }
+  .redtxt { color: #ff8a8a; }
+  .grn { color: #5fd39a; }
+  .accent { color: #8fa8ff; }
+  .chip { position: absolute; border-radius: 12px; font: 700 24px Inter, sans-serif; padding: 10px 18px; }
+</style>
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="6.0" data-track-index="1">The problem</div>
+  <div id="k1" class="kick clip" data-start="6.2" data-duration="7.2" data-track-index="1">01 · The cache</div>
+  <div id="k2" class="kick clip" data-start="13.5" data-duration="4.9" data-track-index="1">02 · The header</div>
+  <div id="k3" class="kick clip" data-start="18.5" data-duration="4.3" data-track-index="1">03 · The key</div>
+  <div id="k4" class="kick clip" data-start="22.9" data-duration="7.6" data-track-index="1">04 · Bump on write</div>
+  <div id="k5" class="kick clip" data-start="30.6" data-duration="4.4" data-track-index="1">05 · Scoped</div>
+  <div id="k6" class="kick clip" data-start="35.0" data-duration="5.0" data-track-index="1">Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the hook: the new note saves, the list stays the same -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 540px; height: 80px;">
+      <div class="txt" style="left: 26px; top: 22px; font-size: 30px;">Pick up groceries</div>
+    </div>
+    <div id="saveBtn" style="position: absolute; left: 616px; top: 200px; width: 228px; height: 80px; background: #f2f2f7; color: #0d0d13; border-radius: 16px; font: 700 28px Inter, sans-serif; text-align: center; line-height: 80px;">Save</div>
+    <div class="row" style="top: 310px;"><span class="nm">Gym</span></div>
+    <div class="row" style="top: 402px;"><span class="nm">Dentist</span></div>
+    <div class="row" style="top: 494px;"><span class="nm">Call mum</span></div>
+    <div id="still" class="txt redtxt" style="left: 56px; top: 596px; font-size: 28px; opacity: 0;">Still missing.</div>
+  </div>
+
+  <!-- 1: cache vs database disagree -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Cache</div>
+      <div class="txt" style="left: 28px; top: 84px; font-size: 28px;">Gym</div>
+      <div class="txt" style="left: 28px; top: 136px; font-size: 28px;">Dentist</div>
+      <div class="txt" style="left: 28px; top: 188px; font-size: 28px;">Call mum</div>
+      <div class="lbl" style="left: 28px; top: 268px; color: #ff8a8a;">3 notes</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Database</div>
+      <div class="txt" style="left: 28px; top: 84px; font-size: 28px;">Gym</div>
+      <div class="txt" style="left: 28px; top: 136px; font-size: 28px;">Dentist</div>
+      <div class="txt" style="left: 28px; top: 188px; font-size: 28px;">Call mum</div>
+      <div class="txt accent" style="left: 28px; top: 240px; font-size: 28px;">Pick up groceries</div>
+      <div class="lbl" style="left: 28px; top: 300px; color: #5fd39a;">4 notes</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 570px; font-size: 36px;">They disagree.</div>
+  </div>
+
+  <!-- 2: the header that gives it away -->
+  <div id="g2" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 300px;">
+      <div class="mono" style="left: 36px; top: 40px; font-size: 34px;">HTTP 200 OK</div>
+      <div class="mono redtxt" style="left: 36px; top: 110px; font-size: 34px;">X-Cache: HIT</div>
+      <div class="lbl" style="left: 36px; top: 200px; font-size: 26px;">Served from the cache, not the database.</div>
+    </div>
+    <div class="chip redtxt" style="left: 56px; top: 540px; background: rgba(255,107,107,0.12);">HIT means the old copy.</div>
+  </div>
+
+  <!-- 3: the cache key -->
+  <div id="g3" class="g">
+    <div class="lbl" style="left: 56px; top: 190px;">Cache key</div>
+    <div class="box" style="left: 56px; top: 230px; width: 788px; height: 150px;">
+      <div class="mono" style="left: 36px; top: 42px; font-size: 36px;">notes · user 42 · <span class="accent" style="background: rgba(143,168,255,0.16); border-radius: 8px; padding: 0 8px;">v7</span></div>
+    </div>
+    <div class="txt" style="left: 56px; top: 440px; font-size: 36px; line-height: 1.3;">Put the version<br>in the key.</div>
+  </div>
+
+  <!-- 4: a write bumps the version; the list refreshes -->
+  <div id="g4" class="g">
+    <div id="oldKey" class="box" style="left: 56px; top: 200px; width: 788px; height: 84px;">
+      <div class="mono" style="left: 36px; top: 22px; font-size: 28px; color: #5d6072; text-decoration: line-through;">notes · user 42 · v7</div>
+    </div>
+    <div id="newKey" class="box" style="left: 56px; top: 300px; width: 788px; height: 84px; border-color: #8fa8ff; opacity: 0;">
+      <div class="mono accent" style="left: 36px; top: 22px; font-size: 28px;">notes · user 42 · v8</div>
+    </div>
+    <div class="row" style="top: 410px; height: 44px;"><span class="nm" style="line-height: 42px; font-size: 24px;">Gym</span></div>
+    <div class="row" style="top: 462px; height: 44px;"><span class="nm" style="line-height: 42px; font-size: 24px;">Dentist</span></div>
+    <div class="row" style="top: 514px; height: 44px;"><span class="nm" style="line-height: 42px; font-size: 24px;">Call mum</span></div>
+    <div id="newRow" class="row" style="top: 566px; height: 44px; border-color: #8fa8ff; opacity: 0;"><span class="nm" style="line-height: 42px; font-size: 24px;">Pick up groceries</span></div>
+  </div>
+
+  <!-- 5: scoped: only user 42 refetches -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 280px;">
+      <div class="lbl" style="left: 28px; top: 26px;">User 42</div>
+      <div class="mono" style="left: 28px; top: 92px; font-size: 28px;">v8</div>
+      <div class="chip redtxt" style="left: 28px; top: 170px; background: rgba(255,107,107,0.12);">MISS: fresh</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 280px;">
+      <div class="lbl" style="left: 28px; top: 26px;">User 7</div>
+      <div class="mono" style="left: 28px; top: 92px; font-size: 28px;">v3</div>
+      <div class="chip grn" style="left: 28px; top: 170px; background: rgba(95,211,154,0.12);">HIT: still fast</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 530px; font-size: 34px; line-height: 1.3;">Only that user's cache changes.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 190px; font-size: 50px;">A cache is only correct if every write knows what it invalidates.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 270px; font-size: 52px;">Did the write update the cache?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the hook: save, then the list stays the same.
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#saveBtn", { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 }, 2.4);
+  tl.to("#still", { opacity: 1, duration: 0.4 }, 3.5);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.4);
+
+  // 1: cache vs database.
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 6.2);
+  tl.fromTo("#g1 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.4, ease: "power2.out" }, 6.4);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 6.2);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.2);
+
+  // 2: the header.
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.5);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 13.5);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 18.2);
+
+  // 3: the key with a version.
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 18.5);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 18.5);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 22.6);
+
+  // 4: the write bumps v7 to v8 and the new note appears.
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 22.9);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 22.9);
+  tl.to("#oldKey", { opacity: 0.45, duration: 0.4 }, 24.0);
+  tl.fromTo("#newKey", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 24.6);
+  tl.fromTo("#newRow", { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 26.2);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 30.3);
+
+  // 5: scoped to one user.
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 30.6);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.6);
+  tl.fromTo("#g5 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.3, ease: "power2.out" }, 30.8);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 34.7);
+
+  // 6: takeaway.
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 35.0);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 39.9);
+
+  // 7: question.
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.4);
+</script>

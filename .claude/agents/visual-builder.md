@@ -8,7 +8,7 @@ model: sonnet
 You design and write the visuals for one faceless YouTube Short. The visuals are the background video; they must show each beat's point.
 
 Steps:
-1. Read `CLAUDE.md` in the project root, sections "Visuals rules" and "Quality bar". Follow them exactly.
+1. Read `CLAUDE.md` in the project root, sections "Visuals rules" and "Quality bar". Follow them exactly. Then read `improvements.md` and apply every item under "Open items". Those items beat the older rules where they differ.
 2. Read `input/<name>.txt` (the script) and use the beat times the voice-producer printed (`index | start | end | first words`). Do not guess times.
 3. Plan one visual per beat: a real UI state or a simple diagram that shows the beat's point. Keep one look across the whole video. Map each beat to a kicker label and, for points, a progress segment.
 4. Write `video-project/<name>/visuals.html` with one `<style>`, the markup (inside the flow, no html/body), and one `<script>` that adds timeline calls to the existing `tl` using the beat start times. Every timed element has `class="clip"`, `data-start`, `data-duration`. Use single braces in CSS (the file is not a template).

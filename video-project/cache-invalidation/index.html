@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 30px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .row { position: absolute; left: 56px; width: 788px; height: 76px; background: #1a1a25; border: 1px solid #262636; border-radius: 16px; }
+  .row .nm { position: absolute; left: 26px; top: 0; line-height: 74px; font: 700 28px Inter, sans-serif; color: #e9e9f1; }
+  .redtxt { color: #ff8a8a; }
+  .grn { color: #5fd39a; }
+  .accent { color: #8fa8ff; }
+  .chip { position: absolute; border-radius: 12px; font: 700 24px Inter, sans-serif; padding: 10px 18px; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="43.44"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="6.0" data-track-index="1">The problem</div>
+  <div id="k1" class="kick clip" data-start="6.2" data-duration="7.2" data-track-index="1">01 · The cache</div>
+  <div id="k2" class="kick clip" data-start="13.5" data-duration="4.9" data-track-index="1">02 · The header</div>
+  <div id="k3" class="kick clip" data-start="18.5" data-duration="4.3" data-track-index="1">03 · The key</div>
+  <div id="k4" class="kick clip" data-start="22.9" data-duration="7.6" data-track-index="1">04 · Bump on write</div>
+  <div id="k5" class="kick clip" data-start="30.6" data-duration="4.4" data-track-index="1">05 · Scoped</div>
+  <div id="k6" class="kick clip" data-start="35.0" data-duration="5.0" data-track-index="1">Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the hook: the new note saves, the list stays the same -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 540px; height: 80px;">
+      <div class="txt" style="left: 26px; top: 22px; font-size: 30px;">Pick up groceries</div>
+    </div>
+    <div id="saveBtn" style="position: absolute; left: 616px; top: 200px; width: 228px; height: 80px; background: #f2f2f7; color: #0d0d13; border-radius: 16px; font: 700 28px Inter, sans-serif; text-align: center; line-height: 80px;">Save</div>
+    <div class="row" style="top: 310px;"><span class="nm">Gym</span></div>
+    <div class="row" style="top: 402px;"><span class="nm">Dentist</span></div>
+    <div class="row" style="top: 494px;"><span class="nm">Call mum</span></div>
+    <div id="still" class="txt redtxt" style="left: 56px; top: 596px; font-size: 28px; opacity: 0;">Still missing.</div>
+  </div>
+
+  <!-- 1: cache vs database disagree -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Cache</div>
+      <div class="txt" style="left: 28px; top: 84px; font-size: 28px;">Gym</div>
+      <div class="txt" style="left: 28px; top: 136px; font-size: 28px;">Dentist</div>
+      <div class="txt" style="left: 28px; top: 188px; font-size: 28px;">Call mum</div>
+      <div class="lbl" style="left: 28px; top: 268px; color: #ff8a8a;">3 notes</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Database</div>
+      <div class="txt" style="left: 28px; top: 84px; font-size: 28px;">Gym</div>
+      <div class="txt" style="left: 28px; top: 136px; font-size: 28px;">Dentist</div>
+      <div class="txt" style="left: 28px; top: 188px; font-size: 28px;">Call mum</div>
+      <div class="txt accent" style="left: 28px; top: 240px; font-size: 28px;">Pick up groceries</div>
+      <div class="lbl" style="left: 28px; top: 300px; color: #5fd39a;">4 notes</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 570px; font-size: 36px;">They disagree.</div>
+  </div>
+
+  <!-- 2: the header that gives it away -->
+  <div id="g2" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 300px;">
+      <div class="mono" style="left: 36px; top: 40px; font-size: 34px;">HTTP 200 OK</div>
+      <div class="mono redtxt" style="left: 36px; top: 110px; font-size: 34px;">X-Cache: HIT</div>
+      <div class="lbl" style="left: 36px; top: 200px; font-size: 26px;">Served from the cache, not the database.</div>
+    </div>
+    <div class="chip redtxt" style="left: 56px; top: 540px; background: rgba(255,107,107,0.12);">HIT means the old copy.</div>
+  </div>
+
+  <!-- 3: the cache key -->
+  <div id="g3" class="g">
+    <div class="lbl" style="left: 56px; top: 190px;">Cache key</div>
+    <div class="box" style="left: 56px; top: 230px; width: 788px; height: 150px;">
+      <div class="mono" style="left: 36px; top: 42px; font-size: 36px;">notes · user 42 · <span class="accent" style="background: rgba(143,168,255,0.16); border-radius: 8px; padding: 0 8px;">v7</span></div>
+    </div>
+    <div class="txt" style="left: 56px; top: 440px; font-size: 36px; line-height: 1.3;">Put the version<br>in the key.</div>
+  </div>
+
+  <!-- 4: a write bumps the version; the list refreshes -->
+  <div id="g4" class="g">
+    <div id="oldKey" class="box" style="left: 56px; top: 200px; width: 788px; height: 84px;">
+      <div class="mono" style="left: 36px; top: 22px; font-size: 28px; color: #5d6072; text-decoration: line-through;">notes · user 42 · v7</div>
+    </div>
+    <div id="newKey" class="box" style="left: 56px; top: 300px; width: 788px; height: 84px; border-color: #8fa8ff; opacity: 0;">
+      <div class="mono accent" style="left: 36px; top: 22px; font-size: 28px;">notes · user 42 · v8</div>
+    </div>
+    <div class="row" style="top: 410px; height: 44px;"><span class="nm" style="line-height: 42px; font-size: 24px;">Gym</span></div>
+    <div class="row" style="top: 462px; height: 44px;"><span class="nm" style="line-height: 42px; font-size: 24px;">Dentist</span></div>
+    <div class="row" style="top: 514px; height: 44px;"><span class="nm" style="line-height: 42px; font-size: 24px;">Call mum</span></div>
+    <div id="newRow" class="row" style="top: 566px; height: 44px; border-color: #8fa8ff; opacity: 0;"><span class="nm" style="line-height: 42px; font-size: 24px;">Pick up groceries</span></div>
+  </div>
+
+  <!-- 5: scoped: only user 42 refetches -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 280px;">
+      <div class="lbl" style="left: 28px; top: 26px;">User 42</div>
+      <div class="mono" style="left: 28px; top: 92px; font-size: 28px;">v8</div>
+      <div class="chip redtxt" style="left: 28px; top: 170px; background: rgba(255,107,107,0.12);">MISS: fresh</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 280px;">
+      <div class="lbl" style="left: 28px; top: 26px;">User 7</div>
+      <div class="mono" style="left: 28px; top: 92px; font-size: 28px;">v3</div>
+      <div class="chip grn" style="left: 28px; top: 170px; background: rgba(95,211,154,0.12);">HIT: still fast</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 530px; font-size: 34px; line-height: 1.3;">Only that user's cache changes.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 190px; font-size: 50px;">A cache is only correct if every write knows what it invalidates.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 270px; font-size: 52px;">Did the write update the cache?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.80" data-track-index="1">You create a</div>
+    <div id="c1" class="caption clip" data-start="0.80" data-duration="0.30" data-track-index="1">note,</div>
+    <div id="c2" class="caption clip" data-start="1.50" data-duration="0.42" data-track-index="1">but the list</div>
+    <div id="c3" class="caption clip" data-start="1.92" data-duration="0.74" data-track-index="1">doesn't show it.</div>
+    <div id="c4" class="caption clip" data-start="3.06" data-duration="0.30" data-track-index="1">You refresh,</div>
+    <div id="c5" class="caption clip" data-start="3.86" data-duration="0.40" data-track-index="1">and it's still</div>
+    <div id="c6" class="caption clip" data-start="4.26" data-duration="0.62" data-track-index="1">missing for up</div>
+    <div id="c7" class="caption clip" data-start="4.88" data-duration="0.42" data-track-index="1">to a minute.</div>
+    <div id="c8" class="caption clip" data-start="6.16" data-duration="0.94" data-track-index="1">Why? Your API</div>
+    <div id="c9" class="caption clip" data-start="7.10" data-duration="1.00" data-track-index="1">caches the list</div>
+    <div id="c10" class="caption clip" data-start="8.10" data-duration="0.64" data-track-index="1">to stay fast.</div>
+    <div id="c11" class="caption clip" data-start="9.56" data-duration="0.64" data-track-index="1">The server answers</div>
+    <div id="c12" class="caption clip" data-start="10.20" data-duration="0.78" data-track-index="1">from that cache,</div>
+    <div id="c13" class="caption clip" data-start="11.46" data-duration="0.42" data-track-index="1">and the cache</div>
+    <div id="c14" class="caption clip" data-start="11.88" data-duration="0.58" data-track-index="1">is out of</div>
+    <div id="c15" class="caption clip" data-start="12.46" data-duration="0.30" data-track-index="1">date.</div>
+    <div id="c16" class="caption clip" data-start="13.52" data-duration="0.68" data-track-index="1">Check the response</div>
+    <div id="c17" class="caption clip" data-start="14.20" data-duration="0.84" data-track-index="1">header xcache.</div>
+    <div id="c18" class="caption clip" data-start="15.66" data-duration="0.44" data-track-index="1">If it says</div>
+    <div id="c19" class="caption clip" data-start="16.10" data-duration="0.78" data-track-index="1">hit, you got</div>
+    <div id="c20" class="caption clip" data-start="16.88" data-duration="0.56" data-track-index="1">the old copy.</div>
+    <div id="c21" class="caption clip" data-start="18.54" data-duration="0.30" data-track-index="1">The fix,</div>
+    <div id="c22" class="caption clip" data-start="19.20" data-duration="0.60" data-track-index="1">give each user</div>
+    <div id="c23" class="caption clip" data-start="19.80" data-duration="0.78" data-track-index="1">a version number,</div>
+    <div id="c24" class="caption clip" data-start="20.94" data-duration="0.40" data-track-index="1">and put it</div>
+    <div id="c25" class="caption clip" data-start="21.34" data-duration="0.32" data-track-index="1">in the cache</div>
+    <div id="c26" class="caption clip" data-start="21.66" data-duration="0.34" data-track-index="1">key.</div>
+    <div id="c27" class="caption clip" data-start="22.86" data-duration="0.36" data-track-index="1">When a note</div>
+    <div id="c28" class="caption clip" data-start="23.22" data-duration="0.76" data-track-index="1">is created or</div>
+    <div id="c29" class="caption clip" data-start="23.98" data-duration="0.30" data-track-index="1">deleted,</div>
+    <div id="c30" class="caption clip" data-start="24.80" data-duration="0.54" data-track-index="1">bump the version.</div>
+    <div id="c31" class="caption clip" data-start="25.34" data-duration="1.30" data-track-index="1">The old cache</div>
+    <div id="c32" class="caption clip" data-start="26.64" data-duration="0.62" data-track-index="1">is ignored,</div>
+    <div id="c33" class="caption clip" data-start="27.76" data-duration="0.34" data-track-index="1">and the next</div>
+    <div id="c34" class="caption clip" data-start="28.10" data-duration="1.20" data-track-index="1">request fetches fresh</div>
+    <div id="c35" class="caption clip" data-start="29.30" data-duration="0.36" data-track-index="1">data.</div>
+    <div id="c36" class="caption clip" data-start="30.56" data-duration="0.98" data-track-index="1">Only that user's</div>
+    <div id="c37" class="caption clip" data-start="31.54" data-duration="0.60" data-track-index="1">cache changes,</div>
+    <div id="c38" class="caption clip" data-start="32.64" data-duration="0.86" data-track-index="1">everyone else keeps</div>
+    <div id="c39" class="caption clip" data-start="33.50" data-duration="0.50" data-track-index="1">their speed.</div>
+    <div id="c40" class="caption clip" data-start="34.98" data-duration="0.30" data-track-index="1">The takeaway,</div>
+    <div id="c41" class="caption clip" data-start="36.00" data-duration="0.56" data-track-index="1">a cache is</div>
+    <div id="c42" class="caption clip" data-start="36.56" data-duration="0.86" data-track-index="1">only correct if</div>
+    <div id="c43" class="caption clip" data-start="37.42" data-duration="0.80" data-track-index="1">every write knows</div>
+    <div id="c44" class="caption clip" data-start="38.22" data-duration="1.16" data-track-index="1">what it invalidates.</div>
+    <div id="c45" class="caption clip" data-start="40.10" data-duration="0.52" data-track-index="1">Did your last</div>
+    <div id="c46" class="caption clip" data-start="40.62" data-duration="0.80" data-track-index="1">write update the</div>
+    <div id="c47" class="caption clip" data-start="41.42" data-duration="0.30" data-track-index="1">cache,</div>
+    <div id="c48" class="caption clip" data-start="42.04" data-duration="0.46" data-track-index="1">or just the</div>
+    <div id="c49" class="caption clip" data-start="42.50" data-duration="0.34" data-track-index="1">database?</div>
+    <audio id="narration" data-start="0" data-duration="43.44" data-track-index="2" data-volume="1"
+           src="assets/cache-invalidation.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the hook: save, then the list stays the same.
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#saveBtn", { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 }, 2.4);
+  tl.to("#still", { opacity: 1, duration: 0.4 }, 3.5);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.4);
+
+  // 1: cache vs database.
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 6.2);
+  tl.fromTo("#g1 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.4, ease: "power2.out" }, 6.4);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 6.2);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.2);
+
+  // 2: the header.
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.5);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 13.5);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 18.2);
+
+  // 3: the key with a version.
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 18.5);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 18.5);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 22.6);
+
+  // 4: the write bumps v7 to v8 and the new note appears.
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 22.9);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 22.9);
+  tl.to("#oldKey", { opacity: 0.45, duration: 0.4 }, 24.0);
+  tl.fromTo("#newKey", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 24.6);
+  tl.fromTo("#newRow", { opacity: 0, x: -12 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 26.2);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 30.3);
+
+  // 5: scoped to one user.
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 30.6);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.6);
+  tl.fromTo("#g5 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.3, ease: "power2.out" }, 30.8);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 34.7);
+
+  // 6: takeaway.
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 35.0);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 39.9);
+
+  // 7: question.
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.4);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.80);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.80); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.80); tl.set("#c1", { opacity: 0 }, 1.10);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.50); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.50); tl.set("#c2", { opacity: 0 }, 1.92);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 1.92); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.92); tl.set("#c3", { opacity: 0 }, 2.66);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.06); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.06); tl.set("#c4", { opacity: 0 }, 3.36);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.86); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.86); tl.set("#c5", { opacity: 0 }, 4.26);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 4.26); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.26); tl.set("#c6", { opacity: 0 }, 4.88);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 4.88); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.88); tl.set("#c7", { opacity: 0 }, 5.30);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 6.16); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.16); tl.set("#c8", { opacity: 0 }, 7.10);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 7.10); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.10); tl.set("#c9", { opacity: 0 }, 8.10);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 8.10); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.10); tl.set("#c10", { opacity: 0 }, 8.74);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.56); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.56); tl.set("#c11", { opacity: 0 }, 10.20);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.20); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.20); tl.set("#c12", { opacity: 0 }, 10.98);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 11.46); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.46); tl.set("#c13", { opacity: 0 }, 11.88);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 11.88); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.88); tl.set("#c14", { opacity: 0 }, 12.46);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 12.46); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.46); tl.set("#c15", { opacity: 0 }, 12.76);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 13.52); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.52); tl.set("#c16", { opacity: 0 }, 14.20);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 14.20); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.20); tl.set("#c17", { opacity: 0 }, 15.04);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 15.66); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.66); tl.set("#c18", { opacity: 0 }, 16.10);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 16.10); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.10); tl.set("#c19", { opacity: 0 }, 16.88);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 16.88); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.88); tl.set("#c20", { opacity: 0 }, 17.44);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 18.54); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.54); tl.set("#c21", { opacity: 0 }, 18.84);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 19.20); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.20); tl.set("#c22", { opacity: 0 }, 19.80);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 19.80); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.80); tl.set("#c23", { opacity: 0 }, 20.58);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 20.94); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.94); tl.set("#c24", { opacity: 0 }, 21.34);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 21.34); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.34); tl.set("#c25", { opacity: 0 }, 21.66);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 21.66); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.66); tl.set("#c26", { opacity: 0 }, 22.00);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 22.86); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.86); tl.set("#c27", { opacity: 0 }, 23.22);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 23.22); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.22); tl.set("#c28", { opacity: 0 }, 23.98);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 23.98); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.98); tl.set("#c29", { opacity: 0 }, 24.28);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 24.80); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.80); tl.set("#c30", { opacity: 0 }, 25.34);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 25.34); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.34); tl.set("#c31", { opacity: 0 }, 26.64);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 26.64); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.64); tl.set("#c32", { opacity: 0 }, 27.26);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 27.76); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.76); tl.set("#c33", { opacity: 0 }, 28.10);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 28.10); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.10); tl.set("#c34", { opacity: 0 }, 29.30);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 29.30); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.30); tl.set("#c35", { opacity: 0 }, 29.66);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 30.56); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.56); tl.set("#c36", { opacity: 0 }, 31.54);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 31.54); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.54); tl.set("#c37", { opacity: 0 }, 32.14);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 32.64); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.64); tl.set("#c38", { opacity: 0 }, 33.50);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 33.50); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.50); tl.set("#c39", { opacity: 0 }, 34.00);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 34.98); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.98); tl.set("#c40", { opacity: 0 }, 35.28);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 36.00); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.00); tl.set("#c41", { opacity: 0 }, 36.56);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 36.56); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.56); tl.set("#c42", { opacity: 0 }, 37.42);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 37.42); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.42); tl.set("#c43", { opacity: 0 }, 38.22);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 38.22); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.22); tl.set("#c44", { opacity: 0 }, 39.38);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 40.10); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.10); tl.set("#c45", { opacity: 0 }, 40.62);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 40.62); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.62); tl.set("#c46", { opacity: 0 }, 41.42);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 41.42); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.42); tl.set("#c47", { opacity: 0 }, 41.72);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 42.04); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.04); tl.set("#c48", { opacity: 0 }, 42.50);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 42.50); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.50); tl.set("#c49", { opacity: 0 }, 42.84);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

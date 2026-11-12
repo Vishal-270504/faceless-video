@@ -1,0 +1,11 @@
+You log in to your app. What if someone changes a number in the URL?
+
+Here's the risk. Each note has an ID. User B takes the ID of User A's note and asks the server for it. If the server doesn't check the owner, User B reads the note. That's called an IDOR.
+
+Deleting works the same way.
+
+The fix has three parts. Check the owner in your service layer, for both read and delete. Return 404 for notes that belong to someone else, not 403. A 403 tells the attacker the note exists. And filter by user in the database query too, as a second lock.
+
+The takeaway: authentication says who you are. Authorization says what you can touch.
+
+Have you checked the owner on your last endpoint?

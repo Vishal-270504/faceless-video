@@ -8,3 +8,4 @@ video-project/*/node_modules/
 .DS_Store
 Thumbs.db
 video-project/*/assets/
+output/qa/

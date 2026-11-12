@@ -18,7 +18,7 @@ Topic source (outside the repo, the user's file): `C:\Users\Visha\OneDrive\Deskt
 - `input/<name>.txt` - the narration script (committed).
 - `output/audio/`, `output/timings/`, `output/video/` - committed artifacts for each video.
 - `video-project/<name>/` - `index.html` (generated), `visuals.html` (hand-written, committed). `assets/` and `renders/` are generated and not committed.
-- `metadata/<name>.md` - title, description and thumbnail prompt for each video (committed).
+- `metadata/all-videos.md` - title, description and thumbnail prompt for every video, one entry per video (committed). Add a new entry for each new video.
 - `assets/music/`, `assets/broll/` - optional user-supplied files. Empty now.
 - `.venv/` - local Python env. Not committed.
 
@@ -28,8 +28,14 @@ Topic source (outside the repo, the user's file): `C:\Users\Visha\OneDrive\Deskt
 - HyperFrames plugin is installed (`hyperframes@hyperframes`). CLI is always run as `npx --yes hyperframes@0.9.26 <cmd>`.
 - If `.venv` is missing: `python -m venv .venv` then `.venv\Scripts\python -m pip install torch --index-url https://download.pytorch.org/whl/cpu kokoro soundfile faster-whisper numpy`. First run downloads Kokoro (~330 MB) and Whisper `base.en` (~150 MB) once.
 
+## Improvement loop (read first, every video)
+- Read `improvements.md` before writing any script or visual. Apply every open item.
+- After each video: read its contact sheet, add 2-3 concrete items to the log, update the open items.
+- Each video must be better than the last in story, explanation and visuals. If nothing improved, say why in the log.
+- Mechanical steps run in one command: `.venv\Scripts\python scripts\pipeline.py <name>` (narration, beat times, build, lint, render, copy, QA). It needs `input/<name>.txt` and `video-project/<name>/visuals.html` first.
+
 ## Full workflow for one video (`<name>` = kebab-case slug, e.g. `ux-5-states`)
-1. **Pick the topic** from the brief (the next one whose status is not Recorded/Uploaded). Skip topics already in `metadata/`.
+1. **Pick the topic** from the brief (the next one whose status is not Recorded/Uploaded). Skip topics already in the status list below.
 2. **Write the script** `input/<name>.txt` following the Script rules below.
 3. **Narration:** `./.venv/Scripts/python.exe scripts/make_voice.py input/<name>.txt`
    - Must print `OK`. If `TOO LONG` or the word count is off, shorten the script and rerun.
@@ -44,7 +50,7 @@ Topic source (outside the repo, the user's file): `C:\Users\Visha\OneDrive\Deskt
 8. **Render:** in the same folder, `npx --yes hyperframes@0.9.26 render` (about 2-6 min). The MP4 goes to `video-project/<name>/renders/`.
 9. **Publish locally:** copy the newest `renders/*.mp4` to `output/video/<name>.mp4`, then delete `video-project/<name>/renders/`.
 10. **Check the result:** use ffmpeg to pull one frame per beat (`ffmpeg -ss <mid-beat> -i output/video/<name>.mp4 -frames:v 1 -vf scale=360:-1 <png>`). Put them in a contact sheet with `hstack`, read it, and confirm each visual matches its beat and captions are readable. Fix and re-render if not. Check that the video has an audio stream with ffprobe.
-11. **Metadata:** write `metadata/<name>.md` (format below).
+11. **Metadata:** add an entry to `metadata/all-videos.md` (format below).
 12. **Commit and push only when the user asks.** Then delete local media (see Local cleanup).
 
 ## Script rules
@@ -79,8 +85,8 @@ This file is inserted into the composition. Format:
 - The viewer should understand the topic from the visuals even muted (captions cover the words).
 - Before calling a video done: lint 0 errors, render complete, contact sheet checked, audio present.
 
-## Metadata (`metadata/<name>.md`)
-Write this for every finished video:
+## Metadata (`metadata/all-videos.md`)
+Write this for every finished video, as one entry in `metadata/all-videos.md`:
 ```
 # <Title>
 **Title:** <max 60 characters, plain, no clickbait lies>
@@ -130,10 +136,16 @@ The main session still does the visual QA (contact sheet) and metadata.
 - The HyperFrames plugin marketplace needed `git -C <plugins/marketplaces/hyperframes> lfs pull` on this PC; already done.
 - `build_short.py` output is 1080x1920; the sample `sample-hello` has no visuals and its audio was silent in an early render (its repo copy still has that bug).
 
-## Video status (completed = metadata file exists)
-- 1 `ux-5-states` - The 5 UX states every app needs. Done (visuals v2).
-- 2 `ux-details` - 5 small UX details that make an app feel professional. Done.
-- 3-8: not started. Next: topic 3 "Failed to fetch" is CORS (status Uploaded on the brief; check whether the user wants a new video for it).
+## Video status (completed = video rendered in output/video; metadata written when asked)
+- 1 `ux-5-states` - The 5 UX states every app needs. Rendered. Metadata in `metadata/all-videos.md`.
+- 2 `ux-details` - 5 small UX details that make an app feel professional. Rendered. Metadata in `metadata/all-videos.md`.
+- 3 `cors-failed-to-fetch` - "Failed to fetch" is probably CORS. Rendered. Metadata in `metadata/all-videos.md`.
+- 4 `react-typing-lag` - Why your React app gets slow when you type. Rendered. Metadata in `metadata/all-videos.md`.
+- 5 `dark-mode-react` - Dark mode in React in 5 minutes (done right). Rendered. Metadata in `metadata/all-videos.md`.
+- 6 `idor-notes-app` - API leaks other users' data (IDOR). Rendered. Metadata in `metadata/all-videos.md`.
+- 7 `cache-invalidation` - Why your API returns old data. Rendered. Metadata in `metadata/all-videos.md`.
+- 8 `clean-architecture-aspnet` - Clean architecture in ASP.NET Core. Rendered. Metadata in `metadata/all-videos.md`.
+All eight topics on the brief have a rendered video and an entry in metadata/all-videos.md.
 
 ## Install check (fresh PC)
 Node 22+, FFmpeg on PATH, Python 3.12, the venv above, then `npx --yes hyperframes@0.9.26 --version` must work.
