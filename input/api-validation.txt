@@ -1,0 +1,15 @@
+Someone sends a note with no title. Your API saves it anyway. Now your database holds garbage.
+
+Validation is the check at the door. Before any data reaches the database, the API asks: is this request valid?
+
+Here's the rule. The title needs at least 3 characters. The body can't be empty.
+
+A bad request gets a 400 response, which means Bad Request. The response says which field is wrong, and why.
+
+Put the check at the edge of the API, before the service runs. Then the rule lives in one place.
+
+Without validation, your database collects junk. With it, every row follows the rules.
+
+The takeaway: check every request at the door, and reject bad data with a clear 400.
+
+What's the last bad value that got into your database?

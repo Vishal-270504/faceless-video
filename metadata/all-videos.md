@@ -113,3 +113,59 @@ Your controller checks for 5 characters while your service checks for 3, and now
 
 **Thumbnail prompt for ChatGPT:**
 > Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "ONE RULE. ONE PLACE." with "ONE PLACE." in blue. Centre: three flat stacked boxes labelled "CONTROLLER", "SERVICE" and "REPOSITORY", with arrows between them and a dashed red bypass arrow that is crossed out. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 9. api-pagination: Pagination in a Notes API
+
+**Title:** Pagination in APIs: Stop Sending Every Row
+
+**Description:**
+Your notes API sends every note in one response. It works with ten notes, then the app freezes at ten thousand. Pagination sends one page at a time, with a cap on the page size and a check on the numbers. Code: https://github.com/Vishal-270504/notes-app
+
+#api #backend #typescript #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "TOO MUCH DATA?" with "DATA?" in yellow. Centre: a flat tall stack of thin grey rows that runs off the top of the frame, with a clean block of three rows highlighted in blue beneath it labelled "PAGE 1". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 10. api-validation: Validation in a Notes API
+
+**Title:** API Validation: Stop Garbage at the Door
+
+**Description:**
+Someone sends a note with no title, and your API saves it anyway. Validation checks every request before it reaches the database, and rejects bad data with a clear 400 Bad Request. Code: https://github.com/Vishal-270504/notes-app
+
+#api #backend #validation #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "GARBAGE IN?" with "IN?" in red. Centre: a flat door-shaped checkpoint in blue, with a red rejected box on one side and three clean green rows on the other, labelled "400". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 11. api-rate-limiting: Rate limiting in an API
+
+**Title:** Rate Limiting: Stop One Client Taking Down Your API
+
+**Description:**
+One script can send a thousand requests a second, and your server slows down for everyone. Rate limiting gives each client a fixed number of requests per minute. Extra requests get a 429 Too Many Requests, so the rest of your users keep working. Code: https://github.com/Vishal-270504/notes-app
+
+#api #backend #ratelimiting #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "429" in red with "TOO MANY" in white below it. Centre: a flat counter bar almost full in blue labelled "60 / minute", with a single red dot flying past it. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 12. api-error-handling: Error handling in an API
+
+**Title:** API Error Handling: One Place, One Response
+
+**Description:**
+When something breaks, your API shouldn't show a wall of stack trace to the user. One central error handler turns every failure into one response shape: a clear status code and a short message. The full details stay in the server logs. Code: https://github.com/Vishal-270504/notes-app
+
+#api #backend #errorhandling #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "SHOWING STACK TRACES?" with "STACK TRACES?" in red. Centre: a flat dark panel with three faint red error lines on the left, a single blue funnel in the middle, and one clean white card on the right labelled "404 Not found". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.

@@ -1,0 +1,166 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 26px 'JetBrains Mono', monospace; color: #ff8a8a; line-height: 1.5; white-space: nowrap; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .chip { position: absolute; border-radius: 12px; font: 700 26px Inter, sans-serif; padding: 10px 18px; }
+  .resp { position: absolute; left: 56px; width: 788px; height: 96px; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 16px; }
+  .resp .k { position: absolute; left: 24px; top: 12px; font: 700 22px Inter, sans-serif; color: #9a9db0; }
+  .resp .v { position: absolute; left: 24px; top: 44px; font: 400 26px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .hop { position: absolute; height: 4px; background: #8fa8ff; border-radius: 2px; }
+  .red { color: #ff8a8a; }
+  .grn { color: #5fd39a; }
+  .accent { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="7.8" data-track-index="1">The crash</div>
+  <div id="k1" class="kick clip" data-start="7.9" data-duration="9.8" data-track-index="1">01 · Two kinds</div>
+  <div id="k2" class="kick clip" data-start="17.8" data-duration="5.6" data-track-index="1">02 · No plan</div>
+  <div id="k3" class="kick clip" data-start="23.5" data-duration="4.2" data-track-index="1">03 · One handler</div>
+  <div id="k4" class="kick clip" data-start="27.8" data-duration="6.2" data-track-index="1">04 · One shape</div>
+  <div id="k5" class="kick clip" data-start="34.1" data-duration="6.6" data-track-index="1">05 · Logs</div>
+  <div id="k6" class="kick clip" data-start="40.8" data-duration="3.7" data-track-index="1">Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the crash: raw internals on screen -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 190px; width: 788px; height: 400px; background: #08080c;">
+      <div class="mono" style="left: 28px; top: 36px; font-size: 26px;">Error: connection timeout</div>
+      <div class="mono" style="left: 28px; top: 90px;">at notes_db:5432</div>
+      <div class="mono" style="left: 28px; top: 144px;">at NotesService.get (line 42)</div>
+      <div class="mono" style="left: 28px; top: 198px;">at Router.handle (line 17)</div>
+      <div class="mono" style="left: 28px; top: 252px;">at Layer.process (line 9)</div>
+      <div class="mono" style="left: 28px; top: 306px;">...</div>
+    </div>
+    <div class="txt red" style="left: 56px; top: 620px; font-size: 26px; display: none;"></div>
+  </div>
+
+  <!-- 1: two kinds of mistakes -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 190px; width: 788px; height: 160px;">
+      <div class="lbl" style="left: 32px; top: 22px;">Validation</div>
+      <div class="txt" style="left: 32px; top: 64px; font-size: 32px;">Catches the mistakes you planned for</div>
+    </div>
+    <div class="box" style="left: 56px; top: 370px; width: 788px; height: 230px;">
+      <div class="lbl" style="left: 32px; top: 22px;">Error handling</div>
+      <div class="txt" style="left: 32px; top: 64px; font-size: 32px;">Catches what you didn't plan for</div>
+      <div class="chip" style="left: 32px; top: 128px; background: #252534; color: #e9e9f1;">A missing note</div>
+      <div class="chip" style="left: 262px; top: 128px; background: #252534; color: #e9e9f1;">A database timeout</div>
+      <div class="chip" style="left: 32px; top: 180px; background: #252534; color: #e9e9f1;">A bug in your code</div>
+    </div>
+  </div>
+
+  <!-- 2: without a plan, every route answers differently -->
+  <div id="g2" class="g">
+    <div class="resp" style="top: 190px;"><span class="k">GET /notes</span><span class="v">plain text, stack trace</span></div>
+    <div class="resp" style="top: 306px;"><span class="k">POST /notes</span><span class="v">HTML error page</span></div>
+    <div class="resp" style="top: 422px;"><span class="k">DELETE /notes/42</span><span class="v">500, no message</span></div>
+    <div class="txt" style="left: 56px; top: 550px; font-size: 30px; color: #e9e9f1;">Three routes. Three answers.</div>
+  </div>
+
+  <!-- 3: one handler at the end of every route -->
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 190px; width: 230px; height: 76px;"><div class="lbl" style="left: 20px; top: 24px; color: #e9e9f1;">GET</div></div>
+    <div class="box" style="left: 329px; top: 190px; width: 230px; height: 76px;"><div class="lbl" style="left: 20px; top: 24px; color: #e9e9f1;">POST</div></div>
+    <div class="box" style="left: 602px; top: 190px; width: 242px; height: 76px;"><div class="lbl" style="left: 20px; top: 24px; color: #e9e9f1;">DELETE</div></div>
+    <div class="hop" style="left: 400px; top: 280px; width: 4px; height: 50px;"></div>
+    <div class="box" style="left: 250px; top: 340px; width: 400px; height: 110px; border-color: #8fa8ff;"><div class="txt accent" style="left: 24px; top: 34px; font-size: 32px;">One error handler</div></div>
+    <div class="txt" style="left: 56px; top: 520px; font-size: 32px; color: #e9e9f1;">Every failure lands in one place.</div>
+  </div>
+
+  <!-- 4: one response shape -->
+  <div id="g4" class="g">
+    <div class="resp" style="top: 200px; height: 96px;"><span class="k">status</span><span class="v">404</span></div>
+    <div class="resp" style="top: 316px; height: 96px;"><span class="k">message</span><span class="v">Note not found</span></div>
+    <div class="txt" style="left: 56px; top: 460px; font-size: 34px; line-height: 1.3;">The same shape for every error.</div>
+    <div class="lbl" style="left: 56px; top: 540px; font-size: 26px; color: #e9e9f1;">Clear status. Short message.</div>
+  </div>
+
+  <!-- 5: the details go to the log -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 300px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Client sees</div>
+      <div class="txt grn" style="left: 28px; top: 90px; font-size: 30px; line-height: 1.4;">404<br>Note not found</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 300px; border-color: #8fa8ff;">
+      <div class="lbl accent" style="left: 28px; top: 26px;">Server log</div>
+      <div class="txt" style="left: 28px; top: 90px; font-size: 28px; line-height: 1.5;">Full error<br>Stack trace<br>Time and route</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 560px; font-size: 30px; color: #e9e9f1;">Details stay on the server.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 230px;">Fail in one place.<br><span class="accent">Respond in one shape.</span></div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 260px; font-size: 50px;">Which error does your API show users?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the crash.
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.4);
+
+  // 1: two kinds of mistakes.
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.9);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.9);
+  tl.fromTo("#g1 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.8, ease: "power2.out" }, 8.1);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 17.4);
+
+  // 2: no plan.
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 17.8);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 17.8);
+  tl.fromTo("#g2 .resp", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3, stagger: 0.7, ease: "power2.out" }, 18.0);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 23.1);
+
+  // 3: one handler.
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 23.5);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 23.5);
+  tl.fromTo("#g3 .hop", { scaleX: 0, transformOrigin: "top center" }, { scaleX: 1, duration: 0.4, ease: "power2.out" }, 24.4);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 27.4);
+
+  // 4: one shape.
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 27.8);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 27.8);
+  tl.fromTo("#g4 .resp", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.5, ease: "power2.out" }, 28.0);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 33.8);
+
+  // 5: details to the log.
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 34.1);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.1);
+  tl.fromTo("#g5 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.6, ease: "power2.out" }, 34.3);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 40.5);
+
+  // 6: takeaway.
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.8);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 44.4);
+
+  // 7: question.
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 44.8);
+</script>

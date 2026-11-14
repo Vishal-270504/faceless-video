@@ -1,0 +1,15 @@
+One script can send a thousand requests a second. Your server tries to answer every one. Then it slows down, and real users get locked out.
+
+Rate limiting sets a limit for each client. For example, 60 requests per minute.
+
+The server counts each client's requests. When a client hits the limit, the server says no.
+
+That no is a 429 response, which means Too Many Requests. A Retry-After header tells the client how long to wait.
+
+The idea works in any language or framework. Only the syntax changes.
+
+Without a limit, one bad client can take the whole API down. With one, the extra requests get a clear no, and everyone else keeps working.
+
+The takeaway: limit each client, not the whole server.
+
+Would your API survive one script running all night?

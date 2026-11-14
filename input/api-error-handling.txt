@@ -1,0 +1,15 @@
+Your API crashes. The user sees a wall of error text, including database details. That's a bug, and a leak.
+
+Validation catches the mistakes you planned for. Error handling catches the ones you didn't. A missing note. A database timeout. A bug in your code.
+
+Without a plan, every route handles errors on its own, and each one answers differently.
+
+The fix: one central error handler. Every failure goes to that one place.
+
+The client gets one shape every time: a clear status code and a short message.
+
+The full details go to the server log, where they belong. Never show internal details to the user.
+
+The takeaway: fail in one place, respond in one shape.
+
+Which error does your API show users right now?

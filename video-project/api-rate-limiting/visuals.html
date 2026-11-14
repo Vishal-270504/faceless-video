@@ -1,0 +1,172 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .dot { position: absolute; width: 26px; height: 26px; border-radius: 6px; background: #8fa8ff; opacity: 0; }
+  .big { position: absolute; font: 900 120px Inter, sans-serif; color: #f2f2f7; line-height: 1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .chip { position: absolute; border-radius: 12px; font: 700 26px Inter, sans-serif; padding: 10px 18px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bar { position: absolute; left: 56px; width: 788px; height: 26px; background: #252534; border-radius: 13px; overflow: hidden; }
+  .bar i { position: absolute; left: 0; top: 0; height: 26px; width: 100%; transform: scaleX(0); transform-origin: left center; border-radius: 13px; }
+  .red { color: #ff8a8a; }
+  .grn { color: #5fd39a; }
+  .accent { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="9.4" data-track-index="1">The flood</div>
+  <div id="k1" class="kick clip" data-start="9.5" data-duration="5.6" data-track-index="1">01 · The limit</div>
+  <div id="k2" class="kick clip" data-start="15.2" data-duration="5.8" data-track-index="1">02 · Counting</div>
+  <div id="k3" class="kick clip" data-start="21.1" data-duration="8.8" data-track-index="1">03 · The 429</div>
+  <div id="k4" class="kick clip" data-start="30.0" data-duration="4.8" data-track-index="1">04 · Any stack</div>
+  <div id="k5" class="kick clip" data-start="34.9" data-duration="9.2" data-track-index="1">05 · Per client</div>
+  <div id="k6" class="kick clip" data-start="44.2" data-duration="3.5" data-track-index="1">Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the hook: a flood of requests -->
+  <div id="g0" class="g">
+    <div class="lbl" style="left: 56px; top: 40px;">One script · 1,000 requests a second</div>
+    <div id="dots"></div>
+    <div class="lbl red" style="left: 56px; top: 560px; font-size: 26px;">Server load</div>
+    <div class="bar" style="top: 596px;"><i id="load" style="background: #ff6b6b;"></i></div>
+  </div>
+
+  <!-- 1: the limit is per client -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 200px;">
+      <div class="lbl" style="left: 32px; top: 26px;">Client A</div>
+      <div class="big" style="left: 32px; top: 62px; font-size: 96px;">60</div>
+      <div class="txt" style="left: 260px; top: 110px; font-size: 34px;">requests per minute</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 460px; font-size: 36px; line-height: 1.3;">One limit for each client.<br><span class="accent">Not one for the whole server.</span></div>
+  </div>
+
+  <!-- 2: the counter -->
+  <div id="g2" class="g">
+    <div class="lbl" style="left: 56px; top: 200px;">Requests counted for Client A</div>
+    <div class="bar" style="top: 250px;"><i id="count" style="background: #8fa8ff;"></i></div>
+    <div id="countTxt" class="txt" style="left: 56px; top: 300px; font-size: 44px;">58 of 60</div>
+    <div class="txt" style="left: 56px; top: 400px; font-size: 32px; line-height: 1.3; color: #e9e9f1;">The server counts each client.<br>Each request adds one.</div>
+  </div>
+
+  <!-- 3: the 429 and the retry time -->
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 120px; border-color: #ff6b6b;">
+      <div class="mono" style="left: 32px; top: 40px; font-size: 30px;">Request 61</div>
+    </div>
+    <div class="chip red" style="left: 56px; top: 350px; font-size: 40px; padding: 16px 26px; background: rgba(255,107,107,0.12);">429 Too Many Requests</div>
+    <div class="box" style="left: 56px; top: 480px; width: 788px; height: 110px;">
+      <div class="lbl" style="left: 32px; top: 22px;">Retry-After</div>
+      <div class="txt" style="left: 32px; top: 58px; font-size: 32px;">Wait 12 seconds, then try again</div>
+    </div>
+  </div>
+
+  <!-- 4: same idea, any stack -->
+  <div id="g4" class="g">
+    <div class="chip" style="left: 56px; top: 220px; width: 240px; text-align: center; background: #1a1a25; border: 1px solid #2b2b3c; color: #e9e9f1;">Node</div>
+    <div class="chip" style="left: 330px; top: 220px; width: 240px; text-align: center; background: #1a1a25; border: 1px solid #2b2b3c; color: #e9e9f1;">Python</div>
+    <div class="chip" style="left: 604px; top: 220px; width: 240px; text-align: center; background: #1a1a25; border: 1px solid #2b2b3c; color: #e9e9f1;">C#</div>
+    <div class="txt" style="left: 56px; top: 380px; font-size: 40px;">Same idea. Same 429.</div>
+    <div class="txt" style="left: 56px; top: 450px; font-size: 32px; color: #9a9db0;">Only the syntax changes.</div>
+  </div>
+
+  <!-- 5: one bad client vs the limit -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">No limit</div>
+      <div class="txt red" style="left: 28px; top: 90px; font-size: 40px;">Server down</div>
+      <div class="txt" style="left: 28px; top: 160px; font-size: 26px; color: #9a9db0;">Real users locked out</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">With a limit</div>
+      <div class="txt grn" style="left: 28px; top: 90px; font-size: 40px;">Still up</div>
+      <div class="txt" style="left: 28px; top: 160px; font-size: 26px; color: #9a9db0;">Extra requests get a no</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 570px; font-size: 30px; color: #e9e9f1;">Everyone else keeps working.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 230px;">Limit each client,<br><span class="accent">not the whole server.</span></div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 250px; font-size: 50px;">Would your API survive one script all night?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // Build the flood: 60 dots on a grid, switched on one by one.
+  var dotsHtml = "";
+  for (var i = 0; i < 60; i++) {
+    var x = 56 + (i % 12) * 64;
+    var y = 100 + Math.floor(i / 12) * 72;
+    dotsHtml += '<div class="dot" id="d' + i + '" style="left:' + x + 'px; top:' + y + 'px;"></div>';
+  }
+  document.getElementById("dots").innerHTML = dotsHtml;
+  for (var j = 0; j < 60; j++) {
+    tl.to("#d" + j, { opacity: 1, duration: 0.15 }, 0.3 + j * 0.07);
+  }
+
+  // 0: the hook: the server load bar fills.
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#load", { scaleX: 1, duration: 4.0, ease: "power1.in" }, 3.0);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 8.9);
+
+  // 1: the limit is per client.
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 9.5);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 9.5);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.8);
+
+  // 2: counting up to the limit.
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 15.2);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 15.2);
+  tl.to("#count", { scaleX: 0.967, duration: 3.6, ease: "power1.inOut" }, 15.6);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.5);
+
+  // 3: request 61 gets a 429 and a retry time.
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.1);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 21.1);
+  tl.fromTo("#g3 .box, #g3 .chip", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.8, ease: "power2.out" }, 21.4);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 29.5);
+
+  // 4: any stack.
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 30.0);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.0);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 34.5);
+
+  // 5: per client, two outcomes.
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 34.9);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.9);
+  tl.fromTo("#g5 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.5, ease: "power2.out" }, 35.1);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 43.8);
+
+  // 6: takeaway.
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 44.2);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 47.2);
+
+  // 7: question.
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 47.8);
+</script>

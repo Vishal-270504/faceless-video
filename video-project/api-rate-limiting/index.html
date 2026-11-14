@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .dot { position: absolute; width: 26px; height: 26px; border-radius: 6px; background: #8fa8ff; opacity: 0; }
+  .big { position: absolute; font: 900 120px Inter, sans-serif; color: #f2f2f7; line-height: 1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .chip { position: absolute; border-radius: 12px; font: 700 26px Inter, sans-serif; padding: 10px 18px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bar { position: absolute; left: 56px; width: 788px; height: 26px; background: #252534; border-radius: 13px; overflow: hidden; }
+  .bar i { position: absolute; left: 0; top: 0; height: 26px; width: 100%; transform: scaleX(0); transform-origin: left center; border-radius: 13px; }
+  .red { color: #ff8a8a; }
+  .grn { color: #5fd39a; }
+  .accent { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="51.00"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="9.4" data-track-index="1">The flood</div>
+  <div id="k1" class="kick clip" data-start="9.5" data-duration="5.6" data-track-index="1">01 · The limit</div>
+  <div id="k2" class="kick clip" data-start="15.2" data-duration="5.8" data-track-index="1">02 · Counting</div>
+  <div id="k3" class="kick clip" data-start="21.1" data-duration="8.8" data-track-index="1">03 · The 429</div>
+  <div id="k4" class="kick clip" data-start="30.0" data-duration="4.8" data-track-index="1">04 · Any stack</div>
+  <div id="k5" class="kick clip" data-start="34.9" data-duration="9.2" data-track-index="1">05 · Per client</div>
+  <div id="k6" class="kick clip" data-start="44.2" data-duration="3.5" data-track-index="1">Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the hook: a flood of requests -->
+  <div id="g0" class="g">
+    <div class="lbl" style="left: 56px; top: 40px;">One script · 1,000 requests a second</div>
+    <div id="dots"></div>
+    <div class="lbl red" style="left: 56px; top: 560px; font-size: 26px;">Server load</div>
+    <div class="bar" style="top: 596px;"><i id="load" style="background: #ff6b6b;"></i></div>
+  </div>
+
+  <!-- 1: the limit is per client -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 200px;">
+      <div class="lbl" style="left: 32px; top: 26px;">Client A</div>
+      <div class="big" style="left: 32px; top: 62px; font-size: 96px;">60</div>
+      <div class="txt" style="left: 260px; top: 110px; font-size: 34px;">requests per minute</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 460px; font-size: 36px; line-height: 1.3;">One limit for each client.<br><span class="accent">Not one for the whole server.</span></div>
+  </div>
+
+  <!-- 2: the counter -->
+  <div id="g2" class="g">
+    <div class="lbl" style="left: 56px; top: 200px;">Requests counted for Client A</div>
+    <div class="bar" style="top: 250px;"><i id="count" style="background: #8fa8ff;"></i></div>
+    <div id="countTxt" class="txt" style="left: 56px; top: 300px; font-size: 44px;">58 of 60</div>
+    <div class="txt" style="left: 56px; top: 400px; font-size: 32px; line-height: 1.3; color: #e9e9f1;">The server counts each client.<br>Each request adds one.</div>
+  </div>
+
+  <!-- 3: the 429 and the retry time -->
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 120px; border-color: #ff6b6b;">
+      <div class="mono" style="left: 32px; top: 40px; font-size: 30px;">Request 61</div>
+    </div>
+    <div class="chip red" style="left: 56px; top: 350px; font-size: 40px; padding: 16px 26px; background: rgba(255,107,107,0.12);">429 Too Many Requests</div>
+    <div class="box" style="left: 56px; top: 480px; width: 788px; height: 110px;">
+      <div class="lbl" style="left: 32px; top: 22px;">Retry-After</div>
+      <div class="txt" style="left: 32px; top: 58px; font-size: 32px;">Wait 12 seconds, then try again</div>
+    </div>
+  </div>
+
+  <!-- 4: same idea, any stack -->
+  <div id="g4" class="g">
+    <div class="chip" style="left: 56px; top: 220px; width: 240px; text-align: center; background: #1a1a25; border: 1px solid #2b2b3c; color: #e9e9f1;">Node</div>
+    <div class="chip" style="left: 330px; top: 220px; width: 240px; text-align: center; background: #1a1a25; border: 1px solid #2b2b3c; color: #e9e9f1;">Python</div>
+    <div class="chip" style="left: 604px; top: 220px; width: 240px; text-align: center; background: #1a1a25; border: 1px solid #2b2b3c; color: #e9e9f1;">C#</div>
+    <div class="txt" style="left: 56px; top: 380px; font-size: 40px;">Same idea. Same 429.</div>
+    <div class="txt" style="left: 56px; top: 450px; font-size: 32px; color: #9a9db0;">Only the syntax changes.</div>
+  </div>
+
+  <!-- 5: one bad client vs the limit -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">No limit</div>
+      <div class="txt red" style="left: 28px; top: 90px; font-size: 40px;">Server down</div>
+      <div class="txt" style="left: 28px; top: 160px; font-size: 26px; color: #9a9db0;">Real users locked out</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 330px;">
+      <div class="lbl" style="left: 28px; top: 26px;">With a limit</div>
+      <div class="txt grn" style="left: 28px; top: 90px; font-size: 40px;">Still up</div>
+      <div class="txt" style="left: 28px; top: 160px; font-size: 26px; color: #9a9db0;">Extra requests get a no</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 570px; font-size: 30px; color: #e9e9f1;">Everyone else keeps working.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 230px;">Limit each client,<br><span class="accent">not the whole server.</span></div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 250px; font-size: 50px;">Would your API survive one script all night?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="1.10" data-track-index="1">One script can</div>
+    <div id="c1" class="caption clip" data-start="1.10" data-duration="0.86" data-track-index="1">send a thousand</div>
+    <div id="c2" class="caption clip" data-start="1.96" data-duration="0.86" data-track-index="1">requests a second,</div>
+    <div id="c3" class="caption clip" data-start="3.58" data-duration="0.74" data-track-index="1">your server tries</div>
+    <div id="c4" class="caption clip" data-start="4.32" data-duration="1.00" data-track-index="1">to answer everyone,</div>
+    <div id="c5" class="caption clip" data-start="6.04" data-duration="0.40" data-track-index="1">then it slows</div>
+    <div id="c6" class="caption clip" data-start="6.44" data-duration="0.46" data-track-index="1">down,</div>
+    <div id="c7" class="caption clip" data-start="7.26" data-duration="0.66" data-track-index="1">and real users</div>
+    <div id="c8" class="caption clip" data-start="7.92" data-duration="0.76" data-track-index="1">get locked out.</div>
+    <div id="c9" class="caption clip" data-start="9.50" data-duration="1.04" data-track-index="1">Rate limiting sets</div>
+    <div id="c10" class="caption clip" data-start="10.54" data-duration="0.58" data-track-index="1">a limit for</div>
+    <div id="c11" class="caption clip" data-start="11.12" data-duration="0.46" data-track-index="1">each client.</div>
+    <div id="c12" class="caption clip" data-start="12.30" data-duration="0.34" data-track-index="1">For example,</div>
+    <div id="c13" class="caption clip" data-start="13.18" data-duration="0.88" data-track-index="1">60 requests per</div>
+    <div id="c14" class="caption clip" data-start="14.06" data-duration="0.30" data-track-index="1">minute.</div>
+    <div id="c15" class="caption clip" data-start="15.18" data-duration="0.68" data-track-index="1">The server counts</div>
+    <div id="c16" class="caption clip" data-start="15.86" data-duration="1.08" data-track-index="1">each client's requests.</div>
+    <div id="c17" class="caption clip" data-start="17.74" data-duration="0.50" data-track-index="1">When a client</div>
+    <div id="c18" class="caption clip" data-start="18.24" data-duration="0.68" data-track-index="1">hits the limit,</div>
+    <div id="c19" class="caption clip" data-start="19.28" data-duration="0.62" data-track-index="1">the server says</div>
+    <div id="c20" class="caption clip" data-start="19.90" data-duration="0.30" data-track-index="1">no.</div>
+    <div id="c21" class="caption clip" data-start="21.14" data-duration="0.60" data-track-index="1">That no is</div>
+    <div id="c22" class="caption clip" data-start="21.74" data-duration="1.56" data-track-index="1">a 429 response,</div>
+    <div id="c23" class="caption clip" data-start="23.98" data-duration="0.70" data-track-index="1">which means too</div>
+    <div id="c24" class="caption clip" data-start="24.68" data-duration="0.56" data-track-index="1">many requests.</div>
+    <div id="c25" class="caption clip" data-start="25.76" data-duration="1.14" data-track-index="1">A retry after</div>
+    <div id="c26" class="caption clip" data-start="26.90" data-duration="0.88" data-track-index="1">header tells the</div>
+    <div id="c27" class="caption clip" data-start="27.78" data-duration="0.90" data-track-index="1">client how long</div>
+    <div id="c28" class="caption clip" data-start="28.68" data-duration="0.42" data-track-index="1">to wait.</div>
+    <div id="c29" class="caption clip" data-start="29.96" data-duration="0.72" data-track-index="1">The idea works</div>
+    <div id="c30" class="caption clip" data-start="30.68" data-duration="0.82" data-track-index="1">in any language</div>
+    <div id="c31" class="caption clip" data-start="31.50" data-duration="0.50" data-track-index="1">or framework.</div>
+    <div id="c32" class="caption clip" data-start="32.66" data-duration="0.58" data-track-index="1">Only the syntax</div>
+    <div id="c33" class="caption clip" data-start="33.24" data-duration="0.58" data-track-index="1">changes.</div>
+    <div id="c34" class="caption clip" data-start="34.84" data-duration="0.64" data-track-index="1">Without a limit,</div>
+    <div id="c35" class="caption clip" data-start="35.76" data-duration="0.86" data-track-index="1">one bad client</div>
+    <div id="c36" class="caption clip" data-start="36.62" data-duration="0.58" data-track-index="1">can take the</div>
+    <div id="c37" class="caption clip" data-start="37.20" data-duration="1.10" data-track-index="1">whole API down.</div>
+    <div id="c38" class="caption clip" data-start="39.04" data-duration="0.38" data-track-index="1">With one,</div>
+    <div id="c39" class="caption clip" data-start="39.80" data-duration="0.80" data-track-index="1">the extra requests</div>
+    <div id="c40" class="caption clip" data-start="40.60" data-duration="0.62" data-track-index="1">get a clear</div>
+    <div id="c41" class="caption clip" data-start="41.22" data-duration="1.14" data-track-index="1">no, and everyone</div>
+    <div id="c42" class="caption clip" data-start="42.36" data-duration="0.82" data-track-index="1">else keeps working.</div>
+    <div id="c43" class="caption clip" data-start="44.16" data-duration="0.32" data-track-index="1">The takeaway,</div>
+    <div id="c44" class="caption clip" data-start="45.04" data-duration="0.78" data-track-index="1">limit each client</div>
+    <div id="c45" class="caption clip" data-start="45.82" data-duration="0.68" data-track-index="1">not the whole</div>
+    <div id="c46" class="caption clip" data-start="46.50" data-duration="0.32" data-track-index="1">server.</div>
+    <div id="c47" class="caption clip" data-start="47.76" data-duration="0.48" data-track-index="1">Would your API</div>
+    <div id="c48" class="caption clip" data-start="48.24" data-duration="1.34" data-track-index="1">survive one script</div>
+    <div id="c49" class="caption clip" data-start="49.58" data-duration="0.82" data-track-index="1">running all night?</div>
+    <audio id="narration" data-start="0" data-duration="51.00" data-track-index="2" data-volume="1"
+           src="assets/api-rate-limiting.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // Build the flood: 60 dots on a grid, switched on one by one.
+  var dotsHtml = "";
+  for (var i = 0; i < 60; i++) {
+    var x = 56 + (i % 12) * 64;
+    var y = 100 + Math.floor(i / 12) * 72;
+    dotsHtml += '<div class="dot" id="d' + i + '" style="left:' + x + 'px; top:' + y + 'px;"></div>';
+  }
+  document.getElementById("dots").innerHTML = dotsHtml;
+  for (var j = 0; j < 60; j++) {
+    tl.to("#d" + j, { opacity: 1, duration: 0.15 }, 0.3 + j * 0.07);
+  }
+
+  // 0: the hook: the server load bar fills.
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#load", { scaleX: 1, duration: 4.0, ease: "power1.in" }, 3.0);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 8.9);
+
+  // 1: the limit is per client.
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 9.5);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 9.5);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.8);
+
+  // 2: counting up to the limit.
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 15.2);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 15.2);
+  tl.to("#count", { scaleX: 0.967, duration: 3.6, ease: "power1.inOut" }, 15.6);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.5);
+
+  // 3: request 61 gets a 429 and a retry time.
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.1);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 21.1);
+  tl.fromTo("#g3 .box, #g3 .chip", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.8, ease: "power2.out" }, 21.4);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 29.5);
+
+  // 4: any stack.
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 30.0);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.0);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 34.5);
+
+  // 5: per client, two outcomes.
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 34.9);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.9);
+  tl.fromTo("#g5 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.5, ease: "power2.out" }, 35.1);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 43.8);
+
+  // 6: takeaway.
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 44.2);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 47.2);
+
+  // 7: question.
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 47.8);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 1.10);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 1.10); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.10); tl.set("#c1", { opacity: 0 }, 1.96);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.96); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.96); tl.set("#c2", { opacity: 0 }, 2.82);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 3.58); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.58); tl.set("#c3", { opacity: 0 }, 4.32);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 4.32); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.32); tl.set("#c4", { opacity: 0 }, 5.32);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 6.04); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.04); tl.set("#c5", { opacity: 0 }, 6.44);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 6.44); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.44); tl.set("#c6", { opacity: 0 }, 6.90);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 7.26); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.26); tl.set("#c7", { opacity: 0 }, 7.92);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 7.92); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.92); tl.set("#c8", { opacity: 0 }, 8.68);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 9.50); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.50); tl.set("#c9", { opacity: 0 }, 10.54);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 10.54); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.54); tl.set("#c10", { opacity: 0 }, 11.12);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 11.12); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.12); tl.set("#c11", { opacity: 0 }, 11.58);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 12.30); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.30); tl.set("#c12", { opacity: 0 }, 12.64);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 13.18); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.18); tl.set("#c13", { opacity: 0 }, 14.06);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 14.06); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.06); tl.set("#c14", { opacity: 0 }, 14.36);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 15.18); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.18); tl.set("#c15", { opacity: 0 }, 15.86);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 15.86); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.86); tl.set("#c16", { opacity: 0 }, 16.94);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 17.74); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.74); tl.set("#c17", { opacity: 0 }, 18.24);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 18.24); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.24); tl.set("#c18", { opacity: 0 }, 18.92);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 19.28); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.28); tl.set("#c19", { opacity: 0 }, 19.90);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 19.90); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.90); tl.set("#c20", { opacity: 0 }, 20.20);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 21.14); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.14); tl.set("#c21", { opacity: 0 }, 21.74);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 21.74); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.74); tl.set("#c22", { opacity: 0 }, 23.30);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 23.98); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.98); tl.set("#c23", { opacity: 0 }, 24.68);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 24.68); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.68); tl.set("#c24", { opacity: 0 }, 25.24);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 25.76); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.76); tl.set("#c25", { opacity: 0 }, 26.90);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 26.90); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.90); tl.set("#c26", { opacity: 0 }, 27.78);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 27.78); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.78); tl.set("#c27", { opacity: 0 }, 28.68);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 28.68); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.68); tl.set("#c28", { opacity: 0 }, 29.10);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 29.96); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.96); tl.set("#c29", { opacity: 0 }, 30.68);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 30.68); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.68); tl.set("#c30", { opacity: 0 }, 31.50);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 31.50); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.50); tl.set("#c31", { opacity: 0 }, 32.00);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 32.66); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.66); tl.set("#c32", { opacity: 0 }, 33.24);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 33.24); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.24); tl.set("#c33", { opacity: 0 }, 33.82);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 34.84); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.84); tl.set("#c34", { opacity: 0 }, 35.48);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 35.76); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.76); tl.set("#c35", { opacity: 0 }, 36.62);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 36.62); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.62); tl.set("#c36", { opacity: 0 }, 37.20);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 37.20); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.20); tl.set("#c37", { opacity: 0 }, 38.30);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 39.04); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.04); tl.set("#c38", { opacity: 0 }, 39.42);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 39.80); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.80); tl.set("#c39", { opacity: 0 }, 40.60);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 40.60); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.60); tl.set("#c40", { opacity: 0 }, 41.22);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 41.22); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.22); tl.set("#c41", { opacity: 0 }, 42.36);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 42.36); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.36); tl.set("#c42", { opacity: 0 }, 43.18);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 44.16); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.16); tl.set("#c43", { opacity: 0 }, 44.48);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 45.04); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.04); tl.set("#c44", { opacity: 0 }, 45.82);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 45.82); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.82); tl.set("#c45", { opacity: 0 }, 46.50);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 46.50); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.50); tl.set("#c46", { opacity: 0 }, 46.82);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 47.76); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.76); tl.set("#c47", { opacity: 0 }, 48.24);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 48.24); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.24); tl.set("#c48", { opacity: 0 }, 49.58);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 49.58); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 49.58); tl.set("#c49", { opacity: 0 }, 50.40);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

@@ -146,6 +146,10 @@ The main session still does the visual QA (contact sheet) and metadata.
 - 7 `cache-invalidation` - Why your API returns old data. Rendered. Metadata in `metadata/all-videos.md`.
 - 8 `clean-architecture-aspnet` - Clean architecture in ASP.NET Core. Rendered. Metadata in `metadata/all-videos.md`.
 All eight topics on the brief have a rendered video and an entry in metadata/all-videos.md.
+- 9 `api-pagination` - Pagination in a Notes API (user's older video, rebuilt). Rendered. Metadata in `metadata/all-videos.md`.
+- 10 `api-validation` - Validation in a Notes API (user's older video, rebuilt). Rendered. Metadata in `metadata/all-videos.md`.
+- 11 `api-rate-limiting` - Rate limiting in an API (user's older video, rebuilt). Rendered. Metadata in `metadata/all-videos.md`.
+- 12 `api-error-handling` - Error handling in an API (user's older video, rebuilt). Rendered. Metadata in `metadata/all-videos.md`.
 
 ## Install check (fresh PC)
 Node 22+, FFmpeg on PATH, Python 3.12, the venv above, then `npx --yes hyperframes@0.9.26 --version` must work.

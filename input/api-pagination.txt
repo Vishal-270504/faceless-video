@@ -1,0 +1,13 @@
+Your notes API sends every note in one response. With ten notes, nobody notices. With ten thousand, the app freezes.
+
+Here's what happens. The server loads every row. The database slows down. The app waits, and then times out.
+
+Pagination fixes it. The app asks for one page at a time, like page 1 with 20 notes.
+
+The response carries just that slice, plus the total count. So the app knows when it has reached the end.
+
+Two rules keep it safe. Cap the page size, so nobody asks for a million rows. And check the numbers, so a page of minus three never reaches the database.
+
+The takeaway: never send more than the user can see.
+
+Which endpoint in your app sends the most data right now?
