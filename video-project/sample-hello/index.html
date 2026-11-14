@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: "Arial Black", Impact, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1180px; text-align: center;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="14.36"
+       data-width="1080" data-height="1920">
+    <div id="title" class="title clip" data-start="0" data-duration="2.5" data-track-index="0">AI video on your PC</div>
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="1.16" data-track-index="1">Most people think</div>
+    <div id="c1" class="caption clip" data-start="1.16" data-duration="0.96" data-track-index="1">AI video needs</div>
+    <div id="c2" class="caption clip" data-start="2.12" data-duration="0.38" data-track-index="1">a studio.</div>
+    <div id="c3" class="caption clip" data-start="3.36" data-duration="0.40" data-track-index="1">It doesn't.</div>
+    <div id="c4" class="caption clip" data-start="4.22" data-duration="0.42" data-track-index="1">You can make</div>
+    <div id="c5" class="caption clip" data-start="4.64" data-duration="0.62" data-track-index="1">a full short</div>
+    <div id="c6" class="caption clip" data-start="5.26" data-duration="0.62" data-track-index="1">on your own</div>
+    <div id="c7" class="caption clip" data-start="5.88" data-duration="1.28" data-track-index="1">PC for free</div>
+    <div id="c8" class="caption clip" data-start="7.16" data-duration="0.84" data-track-index="1">with one script</div>
+    <div id="c9" class="caption clip" data-start="8.00" data-duration="0.60" data-track-index="1">and a few</div>
+    <div id="c10" class="caption clip" data-start="8.60" data-duration="0.38" data-track-index="1">commands.</div>
+    <div id="c11" class="caption clip" data-start="9.90" data-duration="0.50" data-track-index="1">Write the words,</div>
+    <div id="c12" class="caption clip" data-start="10.40" data-duration="1.16" data-track-index="1">generate the voice,</div>
+    <div id="c13" class="caption clip" data-start="12.00" data-duration="0.32" data-track-index="1">and let the</div>
+    <div id="c14" class="caption clip" data-start="12.32" data-duration="0.98" data-track-index="1">captions line up</div>
+    <div id="c15" class="caption clip" data-start="13.30" data-duration="0.46" data-track-index="1">on their own.</div>
+    <audio data-start="0" data-duration="14.36" data-track-index="2" data-volume="1"
+           src="../../output/audio/sample-hello.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.set("#title", { opacity: 1 }, 0); tl.to("#title", { opacity: 0, duration: 0.4 }, 2.1);
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 1.16);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 1.16); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.16); tl.set("#c1", { opacity: 0 }, 2.12);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 2.12); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.12); tl.set("#c2", { opacity: 0 }, 2.50);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 3.36); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.36); tl.set("#c3", { opacity: 0 }, 3.76);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 4.22); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.22); tl.set("#c4", { opacity: 0 }, 4.64);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 4.64); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.64); tl.set("#c5", { opacity: 0 }, 5.26);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.26); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.26); tl.set("#c6", { opacity: 0 }, 5.88);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 5.88); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.88); tl.set("#c7", { opacity: 0 }, 7.16);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 7.16); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.16); tl.set("#c8", { opacity: 0 }, 8.00);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 8.00); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.00); tl.set("#c9", { opacity: 0 }, 8.60);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 8.60); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.60); tl.set("#c10", { opacity: 0 }, 8.98);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.90); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.90); tl.set("#c11", { opacity: 0 }, 10.40);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.40); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.40); tl.set("#c12", { opacity: 0 }, 11.56);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 12.00); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.00); tl.set("#c13", { opacity: 0 }, 12.32);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 12.32); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.32); tl.set("#c14", { opacity: 0 }, 13.30);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 13.30); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.30); tl.set("#c15", { opacity: 0 }, 13.76);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

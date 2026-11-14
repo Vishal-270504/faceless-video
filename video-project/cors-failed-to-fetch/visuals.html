@@ -1,0 +1,157 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 22px Inter, sans-serif; color: #8b8fa3; }
+  .txt { position: absolute; font: 700 30px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 26px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .arrow { position: absolute; height: 4px; background: #8fa8ff; border-radius: 2px; }
+  .field { position: absolute; left: 56px; width: 788px; height: 80px; background: #0d0d13; border: 2px solid #2b2b3b; border-radius: 16px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.12); color: #ff8a8a; font: 700 26px Inter, sans-serif; border-radius: 14px; }
+  #panel { left: 56px; top: 180px; width: 788px; height: 320px; background: #08080c; border: 1px solid #242433; border-radius: 18px; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 66px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+</style>
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="3.5" data-track-index="1">The error</div>
+  <div id="k1" class="kick clip" data-start="4.0" data-duration="10.9" data-track-index="1">01 · The browser</div>
+  <div id="k2" class="kick clip" data-start="14.9" data-duration="5.2" data-track-index="1">02 · The console</div>
+  <div id="k3" class="kick clip" data-start="20.1" data-duration="7.8" data-track-index="1">03 · The cause</div>
+  <div id="k4" class="kick clip" data-start="27.9" data-duration="9.1" data-track-index="1">04 · The fix</div>
+  <div id="k5" class="kick clip" data-start="37.0" data-duration="4.8" data-track-index="1">05 · Config</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <div id="g0" class="g">
+    <div class="txt" style="left: 56px; top: 44px; font-size: 40px;">Log in</div>
+    <div class="lbl" style="left: 56px; top: 124px;">Email</div>
+    <div class="field" style="top: 164px;"><span class="mono" style="left: 24px; top: 24px; color: #5d6072;">you@example.com</span></div>
+    <div style="position: absolute; left: 56px; top: 280px; width: 788px; height: 80px; background: #f2f2f7; color: #0d0d13; border-radius: 16px; text-align: center; line-height: 80px; font: 700 28px Inter, sans-serif;">Log in</div>
+    <div class="redbox" style="left: 56px; top: 396px; width: 788px; height: 64px; line-height: 64px; padding: 0 22px;">Failed to fetch</div>
+  </div>
+
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 190px; width: 230px; height: 200px; padding: 26px;">
+      <div class="lbl" style="left: 26px; top: 26px;">Your app</div>
+      <div class="mono" style="left: 26px; top: 80px; font-size: 24px;">localhost:5173</div>
+    </div>
+    <div class="box" style="left: 335px; top: 190px; width: 230px; height: 200px; padding: 26px;">
+      <div class="lbl" style="left: 26px; top: 26px;">Browser</div>
+      <div class="txt" style="left: 26px; top: 80px; font-size: 26px;">Checks the origin</div>
+    </div>
+    <div class="box" style="left: 614px; top: 190px; width: 230px; height: 200px; padding: 26px;">
+      <div class="lbl" style="left: 26px; top: 26px;">Your API</div>
+      <div class="mono" style="left: 26px; top: 80px; font-size: 24px;">localhost:3000</div>
+    </div>
+    <div class="arrow" style="left: 286px; top: 288px; width: 49px; background: #5fd39a;"></div>
+    <div class="arrow" style="left: 565px; top: 288px; width: 49px; background: #ff6b6b;"></div>
+    <div style="position: absolute; left: 578px; top: 270px; width: 36px; height: 36px; border: 2px solid #ff6b6b; border-radius: 50%; color: #ff6b6b; font: 700 24px Inter, sans-serif; text-align: center; line-height: 32px;">×</div>
+    <div class="txt" style="left: 56px; top: 460px; font-size: 32px; line-height: 1.3;">The request goes out.<br>The answer is blocked on the way back.</div>
+  </div>
+
+  <div id="g2" class="g">
+    <div id="panel" class="box" style="background: #08080c;">
+      <div style="position: absolute; left: 0; top: 0; width: 786px; height: 56px; background: #0f0f16; border-radius: 18px 18px 0 0;"></div>
+      <div class="lbl" style="left: 28px; top: 16px;">Console</div>
+      <div class="mono" style="left: 28px; top: 84px; width: 730px; white-space: normal; color: #ff8a8a; line-height: 1.5; font-size: 24px;">Access to fetch at 'http://localhost:3000/login' from origin 'http://localhost:5173' has been blocked by CORS policy</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 548px; font-size: 40px;">That's the real reason.</div>
+  </div>
+
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 110px;">
+      <div class="lbl" style="left: 32px; top: 22px;">Your app runs on</div>
+      <div class="mono" style="left: 32px; top: 56px; font-size: 34px;">localhost:5173</div>
+    </div>
+    <div class="box" style="left: 56px; top: 340px; width: 788px; height: 110px;">
+      <div class="lbl" style="left: 32px; top: 22px;">Your API allows</div>
+      <div class="mono" style="left: 32px; top: 56px; font-size: 34px;">localhost:3000</div>
+    </div>
+    <div class="redbox" style="left: 56px; top: 480px; width: 788px; height: 80px; line-height: 80px; padding: 0 28px; font-size: 30px;">5173 is not on the list.</div>
+  </div>
+
+  <div id="g4" class="g">
+    <div class="box" style="left: 56px; top: 190px; width: 788px; height: 230px;">
+      <div class="lbl" style="left: 32px; top: 24px;">Allowed origins</div>
+      <div class="mono" style="left: 32px; top: 72px; font-size: 28px;">http://localhost:3000</div>
+      <div id="fixNew" style="position: absolute; left: 0; top: 124px; width: 786px; height: 70px;">
+        <div class="mono" style="left: 32px; top: 16px; font-size: 28px;">http://localhost:5173</div>
+        <div class="lbl" style="left: 520px; top: 24px; color: #5fd39a;">added</div>
+      </div>
+    </div>
+    <div id="msgOld" class="redbox" style="left: 56px; top: 470px; width: 788px; height: 70px; line-height: 70px; padding: 0 22px;">Failed to fetch</div>
+    <div id="msgNew" class="box" style="left: 56px; top: 470px; width: 788px; height: 70px; line-height: 70px; padding: 0 22px; font: 700 26px Inter, sans-serif; color: #f2f2f7; opacity: 0;">Can't reach the server. Check your connection.</div>
+  </div>
+
+  <div id="g5" class="g">
+    <div class="mono" style="left: 56px; top: 190px; font-size: 26px; color: #e9e9f1;">cors.config.json</div>
+    <div class="box" style="left: 56px; top: 240px; width: 788px; height: 260px; background: #08080c;">
+      <div class="mono" style="left: 32px; top: 30px; font-size: 26px; line-height: 1.7; white-space: pre; color: #cfd3ff;">{
+  "allowedOrigins": [
+    "http://localhost:5173"
+  ]
+}</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 548px; font-size: 36px;">One file. Not hard-coded.</div>
+  </div>
+
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 230px;">Open the console first.</div>
+  </div>
+
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 270px; font-size: 60px;">Lost an hour to this one?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 3.5);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 4.0);
+  tl.fromTo("#g1 .arrow", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out", transformOrigin: "left center" }, 5.0);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 4.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.6);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 14.9);
+  tl.fromTo("#panel", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, 15.0);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.9);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 19.7);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 20.1);
+  tl.fromTo("#g3 .box", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.3, ease: "power2.out" }, 20.3);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 20.1);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 27.5);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 27.9);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 27.9);
+  tl.fromTo("#fixNew", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.4, ease: "power2.out" }, 30.5);
+  tl.to("#msgOld", { opacity: 0, duration: 0.3 }, 33.8);
+  tl.to("#msgNew", { opacity: 1, duration: 0.3 }, 33.9);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 36.7);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 37.0);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 37.0);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 41.5);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 41.9);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.3);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 46.2);
+</script>

@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 60px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .arrow { position: absolute; height: 4px; background: #8fa8ff; border-radius: 2px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.12); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="46.98"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div id="k0" class="kick clip" data-start="0" data-duration="4.5" data-track-index="1">The URL</div>
+  <div id="k1" class="kick clip" data-start="4.6" data-duration="13.2" data-track-index="1">01 · The risk</div>
+  <div id="k2" class="kick clip" data-start="17.9" data-duration="2.1" data-track-index="1">02 · Delete</div>
+  <div id="k3" class="kick clip" data-start="20.1" data-duration="19.0" data-track-index="1">03 · The fix</div>
+  <div id="k4" class="kick clip" data-start="39.1" data-duration="5.4" data-track-index="1">04 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the URL with the number in it -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 96px;">
+      <div class="mono" style="left: 28px; top: 30px;">notes-app.com/notes/<span style="color: #8fa8ff; background: rgba(143,168,255,0.16); border-radius: 8px; padding: 0 6px;">42</span></div>
+    </div>
+    <div class="txt" style="left: 56px; top: 340px; font-size: 44px; line-height: 1.2;">Same app.<br>Same URL. One number.</div>
+    <div class="lbl" style="left: 56px; top: 480px; font-size: 28px; color: #e9e9f1;">What if the number is someone else's note?</div>
+  </div>
+
+  <!-- 1: user B asks for user A's note and gets it -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 190px; width: 320px; height: 330px; padding: 0;">
+      <div class="lbl" style="left: 28px; top: 26px;">User B</div>
+      <div class="mono" style="left: 28px; top: 74px; font-size: 24px; color: #8fa8ff;">GET /notes/42</div>
+      <div id="ok" class="mono grn" style="left: 28px; top: 120px; font-size: 24px; opacity: 0;">200 OK</div>
+      <div id="leak" class="txt" style="left: 28px; top: 180px; font-size: 30px; line-height: 1.3; opacity: 0;">Salary plans,<br>Q4</div>
+    </div>
+    <div class="arrow" style="left: 388px; top: 290px; width: 124px;"></div>
+    <div class="box" style="left: 524px; top: 190px; width: 320px; height: 330px; padding: 0;">
+      <div class="lbl" style="left: 28px; top: 26px;">Note 42 · User A</div>
+      <div class="txt" style="left: 28px; top: 90px; font-size: 34px; line-height: 1.3;">Salary plans,<br>Q4</div>
+    </div>
+    <div id="warn" class="redbox" style="left: 56px; top: 552px; width: 788px; height: 64px; line-height: 64px; padding: 0 22px; opacity: 0;">User B can read User A's note.</div>
+  </div>
+
+  <!-- 2: delete works the same way -->
+  <div id="g2" class="g">
+    <div class="box" style="left: 56px; top: 220px; width: 788px; height: 96px;">
+      <div class="mono" style="left: 28px; top: 30px; font-size: 26px;">DELETE /notes/42</div>
+    </div>
+    <div class="txt grn" style="left: 56px; top: 350px; font-size: 36px;">204 No Content</div>
+    <div class="txt red" style="left: 56px; top: 410px; font-size: 32px;">Their note is gone.</div>
+  </div>
+
+  <!-- 3a: where the checks go -->
+  <div id="g3a" class="g">
+    <div class="box" style="left: 56px; top: 210px; width: 252px; height: 200px;">
+      <div class="lbl" style="left: 24px; top: 26px;">Controller</div>
+      <div class="txt" style="left: 24px; top: 80px; font-size: 26px;">Reads the request</div>
+    </div>
+    <div class="arrow" style="left: 312px; top: 306px; width: 12px;"></div>
+    <div class="box" style="left: 328px; top: 210px; width: 252px; height: 200px; border-color: #5fd39a;">
+      <div class="lbl" style="left: 24px; top: 26px;">Service</div>
+      <div class="txt grn" style="left: 24px; top: 80px; font-size: 26px;">Owner check</div>
+    </div>
+    <div class="arrow" style="left: 584px; top: 306px; width: 12px;"></div>
+    <div class="box" style="left: 600px; top: 210px; width: 244px; height: 200px; border-color: #5fd39a;">
+      <div class="lbl" style="left: 24px; top: 26px;">Repository</div>
+      <div class="txt grn" style="left: 24px; top: 80px; font-size: 26px;">Filter by user</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 470px; font-size: 34px; line-height: 1.3;">Check in the service.<br>Filter in the query too.</div>
+  </div>
+
+  <!-- 3b: 404 not 403 -->
+  <div id="g3b" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 380px; height: 300px; border-color: #ff6b6b;">
+      <div class="mono red" style="left: 28px; top: 28px; font-size: 40px;">403</div>
+      <div class="txt" style="left: 28px; top: 110px; font-size: 28px;">Forbidden</div>
+      <div class="lbl" style="left: 28px; top: 190px; color: #ff8a8a; font-size: 26px;">Tells them the note exists.</div>
+    </div>
+    <div class="box" style="left: 464px; top: 200px; width: 380px; height: 300px; border-color: #5fd39a;">
+      <div class="mono grn" style="left: 28px; top: 28px; font-size: 40px;">404</div>
+      <div class="txt" style="left: 28px; top: 110px; font-size: 28px;">Not found</div>
+      <div class="lbl" style="left: 28px; top: 190px; color: #5fd39a; font-size: 26px;">Reveals nothing.</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 540px; font-size: 32px;">Use 404 for someone else's note.</div>
+  </div>
+
+  <!-- 3c: the second lock, a filter on owner -->
+  <div id="g3c" class="g">
+    <div class="lbl" style="left: 56px; top: 190px;">Your notes only</div>
+    <div class="box" style="left: 56px; top: 230px; width: 788px; height: 90px;">
+      <div class="mono" style="left: 28px; top: 28px; font-size: 26px;">owner = you</div>
+    </div>
+    <div class="box" style="left: 56px; top: 350px; width: 788px; height: 86px;">
+      <div class="txt" style="left: 28px; top: 24px; font-size: 30px;">Groceries</div>
+      <div class="lbl" style="left: 600px; top: 28px; color: #5fd39a; font-size: 26px;">shown</div>
+    </div>
+    <div class="box" style="left: 56px; top: 456px; width: 788px; height: 86px; opacity: 0.45;">
+      <div class="txt" style="left: 28px; top: 24px; font-size: 30px;">Salary plans, Q4</div>
+      <div class="lbl" style="left: 600px; top: 28px; color: #ff8a8a; font-size: 26px;">hidden</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 570px; font-size: 30px;">Even a leaked ID returns nothing.</div>
+  </div>
+
+  <!-- 4: takeaway -->
+  <div id="g4" class="g">
+    <div class="bigc" style="top: 190px; font-size: 52px;">Authentication:<br>who you are.</div>
+    <div class="bigc" style="top: 380px; font-size: 52px; color: #8fa8ff;">Authorization:<br>what you can touch.</div>
+  </div>
+
+  <!-- 5: question -->
+  <div id="g5" class="g">
+    <div class="bigc" style="top: 270px; font-size: 64px;">Checked the owner?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.82" data-track-index="1">You log into</div>
+    <div id="c1" class="caption clip" data-start="0.82" data-duration="0.46" data-track-index="1">your app.</div>
+    <div id="c2" class="caption clip" data-start="1.82" data-duration="0.46" data-track-index="1">What if someone</div>
+    <div id="c3" class="caption clip" data-start="2.28" data-duration="0.82" data-track-index="1">changes a number</div>
+    <div id="c4" class="caption clip" data-start="3.10" data-duration="0.46" data-track-index="1">in the URL?</div>
+    <div id="c5" class="caption clip" data-start="4.56" data-duration="0.80" data-track-index="1">Here's the risk.</div>
+    <div id="c6" class="caption clip" data-start="5.92" data-duration="0.70" data-track-index="1">Each note has</div>
+    <div id="c7" class="caption clip" data-start="6.62" data-duration="0.40" data-track-index="1">an ID.</div>
+    <div id="c8" class="caption clip" data-start="7.78" data-duration="0.66" data-track-index="1">User B takes</div>
+    <div id="c9" class="caption clip" data-start="8.44" data-duration="0.74" data-track-index="1">the ID of</div>
+    <div id="c10" class="caption clip" data-start="9.18" data-duration="0.82" data-track-index="1">user A's note</div>
+    <div id="c11" class="caption clip" data-start="10.00" data-duration="0.80" data-track-index="1">and asks the</div>
+    <div id="c12" class="caption clip" data-start="10.80" data-duration="0.72" data-track-index="1">server for it.</div>
+    <div id="c13" class="caption clip" data-start="11.98" data-duration="0.58" data-track-index="1">If the server</div>
+    <div id="c14" class="caption clip" data-start="12.56" data-duration="0.82" data-track-index="1">doesn't check the</div>
+    <div id="c15" class="caption clip" data-start="13.38" data-duration="0.30" data-track-index="1">owner,</div>
+    <div id="c16" class="caption clip" data-start="14.08" data-duration="0.70" data-track-index="1">user B reads</div>
+    <div id="c17" class="caption clip" data-start="14.78" data-duration="0.38" data-track-index="1">the note.</div>
+    <div id="c18" class="caption clip" data-start="15.80" data-duration="0.64" data-track-index="1">That's called an</div>
+    <div id="c19" class="caption clip" data-start="16.44" data-duration="0.58" data-track-index="1">IDOR.</div>
+    <div id="c20" class="caption clip" data-start="17.86" data-duration="0.94" data-track-index="1">Deleting works the</div>
+    <div id="c21" class="caption clip" data-start="18.80" data-duration="0.48" data-track-index="1">same way.</div>
+    <div id="c22" class="caption clip" data-start="20.14" data-duration="0.58" data-track-index="1">The fix has</div>
+    <div id="c23" class="caption clip" data-start="20.72" data-duration="0.60" data-track-index="1">three parts.</div>
+    <div id="c24" class="caption clip" data-start="22.14" data-duration="0.48" data-track-index="1">Check the owner</div>
+    <div id="c25" class="caption clip" data-start="22.62" data-duration="0.60" data-track-index="1">in your service</div>
+    <div id="c26" class="caption clip" data-start="23.22" data-duration="1.08" data-track-index="1">layer for both</div>
+    <div id="c27" class="caption clip" data-start="24.30" data-duration="1.10" data-track-index="1">read and delete.</div>
+    <div id="c28" class="caption clip" data-start="26.42" data-duration="1.16" data-track-index="1">Return 404 for</div>
+    <div id="c29" class="caption clip" data-start="27.58" data-duration="0.78" data-track-index="1">notes that belong</div>
+    <div id="c30" class="caption clip" data-start="28.36" data-duration="0.76" data-track-index="1">to someone else,</div>
+    <div id="c31" class="caption clip" data-start="29.12" data-duration="0.96" data-track-index="1">not 403.</div>
+    <div id="c32" class="caption clip" data-start="31.28" data-duration="1.34" data-track-index="1">A 403 tells</div>
+    <div id="c33" class="caption clip" data-start="32.62" data-duration="0.80" data-track-index="1">the attacker the</div>
+    <div id="c34" class="caption clip" data-start="33.42" data-duration="1.40" data-track-index="1">note exists and</div>
+    <div id="c35" class="caption clip" data-start="34.82" data-duration="0.82" data-track-index="1">filter by user</div>
+    <div id="c36" class="caption clip" data-start="35.64" data-duration="0.74" data-track-index="1">in the database</div>
+    <div id="c37" class="caption clip" data-start="36.38" data-duration="1.26" data-track-index="1">query two as</div>
+    <div id="c38" class="caption clip" data-start="37.64" data-duration="0.64" data-track-index="1">a second lock.</div>
+    <div id="c39" class="caption clip" data-start="39.14" data-duration="0.38" data-track-index="1">The takeaway,</div>
+    <div id="c40" class="caption clip" data-start="40.08" data-duration="1.10" data-track-index="1">authentication says who</div>
+    <div id="c41" class="caption clip" data-start="41.18" data-duration="0.36" data-track-index="1">you are.</div>
+    <div id="c42" class="caption clip" data-start="42.38" data-duration="0.88" data-track-index="1">Authorization says what</div>
+    <div id="c43" class="caption clip" data-start="43.26" data-duration="0.52" data-track-index="1">you can touch.</div>
+    <div id="c44" class="caption clip" data-start="44.64" data-duration="0.48" data-track-index="1">Have you checked</div>
+    <div id="c45" class="caption clip" data-start="45.12" data-duration="0.62" data-track-index="1">the owner on</div>
+    <div id="c46" class="caption clip" data-start="45.74" data-duration="0.64" data-track-index="1">your last endpoint?</div>
+    <audio id="narration" data-start="0" data-duration="46.98" data-track-index="2" data-volume="1"
+           src="assets/idor-notes-app.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the hook, held long enough to read.
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 4.2);
+
+  // 1: user B asks for note 42 and gets User A's text.
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 4.6);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 4.6);
+  tl.fromTo("#g1 .arrow", { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out", transformOrigin: "left center" }, 6.0);
+  tl.to("#ok", { opacity: 1, duration: 0.3 }, 11.0);
+  tl.to("#leak", { opacity: 1, duration: 0.4 }, 11.4);
+  tl.to("#warn", { opacity: 1, duration: 0.4 }, 14.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 17.4);
+
+  // 2: delete works the same way.
+  tl.to("#g2", { opacity: 1, duration: 0.3 }, 17.9);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 17.9);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.0);
+
+  // 3: the fix in three looks.
+  tl.to("#g3a", { opacity: 1, duration: 0.4 }, 20.1);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 20.1);
+  tl.fromTo("#g3a .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.3, ease: "power2.out" }, 20.3);
+  tl.to("#g3a", { opacity: 0, duration: 0.3 }, 26.2);
+
+  tl.to("#g3b", { opacity: 1, duration: 0.4 }, 26.5);
+  tl.fromTo("#g3b .box", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.4, ease: "power2.out" }, 26.7);
+  tl.to("#g3b", { opacity: 0, duration: 0.3 }, 32.4);
+
+  tl.to("#g3c", { opacity: 1, duration: 0.4 }, 32.8);
+  tl.to("#g3c", { opacity: 0, duration: 0.3 }, 38.8);
+
+  // 4: takeaway.
+  tl.fromTo("#g4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 39.1);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 39.1);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 44.2);
+
+  // 5: question.
+  tl.fromTo("#g5", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 44.6);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 44.6);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.82);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.82); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.82); tl.set("#c1", { opacity: 0 }, 1.28);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.82); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.82); tl.set("#c2", { opacity: 0 }, 2.28);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.28); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.28); tl.set("#c3", { opacity: 0 }, 3.10);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.10); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.10); tl.set("#c4", { opacity: 0 }, 3.56);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 4.56); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.56); tl.set("#c5", { opacity: 0 }, 5.36);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.92); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.92); tl.set("#c6", { opacity: 0 }, 6.62);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 6.62); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.62); tl.set("#c7", { opacity: 0 }, 7.02);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 7.78); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.78); tl.set("#c8", { opacity: 0 }, 8.44);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 8.44); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.44); tl.set("#c9", { opacity: 0 }, 9.18);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 9.18); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.18); tl.set("#c10", { opacity: 0 }, 10.00);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 10.00); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.00); tl.set("#c11", { opacity: 0 }, 10.80);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.80); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.80); tl.set("#c12", { opacity: 0 }, 11.52);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 11.98); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.98); tl.set("#c13", { opacity: 0 }, 12.56);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 12.56); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.56); tl.set("#c14", { opacity: 0 }, 13.38);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 13.38); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.38); tl.set("#c15", { opacity: 0 }, 13.68);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 14.08); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.08); tl.set("#c16", { opacity: 0 }, 14.78);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 14.78); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.78); tl.set("#c17", { opacity: 0 }, 15.16);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 15.80); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.80); tl.set("#c18", { opacity: 0 }, 16.44);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 16.44); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.44); tl.set("#c19", { opacity: 0 }, 17.02);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 17.86); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.86); tl.set("#c20", { opacity: 0 }, 18.80);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 18.80); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.80); tl.set("#c21", { opacity: 0 }, 19.28);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 20.14); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.14); tl.set("#c22", { opacity: 0 }, 20.72);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 20.72); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.72); tl.set("#c23", { opacity: 0 }, 21.32);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 22.14); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.14); tl.set("#c24", { opacity: 0 }, 22.62);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 22.62); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.62); tl.set("#c25", { opacity: 0 }, 23.22);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 23.22); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.22); tl.set("#c26", { opacity: 0 }, 24.30);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 24.30); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.30); tl.set("#c27", { opacity: 0 }, 25.40);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 26.42); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.42); tl.set("#c28", { opacity: 0 }, 27.58);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 27.58); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.58); tl.set("#c29", { opacity: 0 }, 28.36);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 28.36); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.36); tl.set("#c30", { opacity: 0 }, 29.12);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 29.12); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.12); tl.set("#c31", { opacity: 0 }, 30.08);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 31.28); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.28); tl.set("#c32", { opacity: 0 }, 32.62);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 32.62); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.62); tl.set("#c33", { opacity: 0 }, 33.42);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 33.42); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.42); tl.set("#c34", { opacity: 0 }, 34.82);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 34.82); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.82); tl.set("#c35", { opacity: 0 }, 35.64);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 35.64); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.64); tl.set("#c36", { opacity: 0 }, 36.38);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 36.38); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.38); tl.set("#c37", { opacity: 0 }, 37.64);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 37.64); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.64); tl.set("#c38", { opacity: 0 }, 38.28);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 39.14); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.14); tl.set("#c39", { opacity: 0 }, 39.52);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 40.08); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.08); tl.set("#c40", { opacity: 0 }, 41.18);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 41.18); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.18); tl.set("#c41", { opacity: 0 }, 41.54);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 42.38); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.38); tl.set("#c42", { opacity: 0 }, 43.26);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 43.26); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.26); tl.set("#c43", { opacity: 0 }, 43.78);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 44.64); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.64); tl.set("#c44", { opacity: 0 }, 45.12);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 45.12); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.12); tl.set("#c45", { opacity: 0 }, 45.74);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 45.74); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.74); tl.set("#c46", { opacity: 0 }, 46.38);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+Your app shows a blank screen. The code works, but the user thinks it's broken.
+
+Every screen needs five states. Loading. Empty. Error. Offline. Not found.
+
+Loading: show grey placeholder cards, so the user knows content is coming.
+
+Empty: don't show nothing. Say "No notes yet," with a button to add one.
+
+Error: don't hide it in the console. Say what went wrong, and add a Retry button.
+
+Offline: don't show "Failed to fetch." Show a banner, and reload when the internet comes back.
+
+Not found: a note was deleted in another tab? Say "This note no longer exists," and refresh the list.
+
+The rule is simple. The user should always know what's happening.
+
+Which of these does your app skip?

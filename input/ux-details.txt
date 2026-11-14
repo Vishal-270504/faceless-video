@@ -1,0 +1,15 @@
+Two apps can do the same job. One feels cheap. The other feels professional. The difference is small details.
+
+Errors: don't say "Something went wrong." Show the problem under the field that's wrong, and clear it when it's fixed.
+
+Delete: ask first. Cancel is focused by default, and Escape closes the dialog. Only the red button deletes.
+
+Feedback: after saving, show a short toast. "Note created." It disappears after three seconds.
+
+Helper text: tell people the rules before they break them. "At least 3 characters."
+
+Access: use visible labels, a clear focus ring, and real buttons. Keyboard users depend on them.
+
+Feedback and clarity are cheap. They change how the whole app feels.
+
+Which one is your app missing?

@@ -1,0 +1,13 @@
+Your React app lags every time you type. Why?
+
+Typing changes state. If that state lives in the parent, the whole page re-renders on every keystroke, including every note card.
+
+Here, each card does about 20 milliseconds of work. With 10 notes, every letter costs about 200 milliseconds.
+
+The fix has three parts. Move the form's state into its own component. Wrap the note cards in React.memo, so they skip work when their note hasn't changed. Keep the delete handler stable, so the memo works.
+
+Memo helps while you type. It doesn't stop the list from updating when the data changes.
+
+The rule: update only what changed. Measure before you memoize everything.
+
+Have you ever added memo everywhere and nothing got faster?
