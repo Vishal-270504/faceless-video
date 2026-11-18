@@ -1,0 +1,15 @@
+Your controller is doing too much. It reads the request, checks the rules, and talks to the database. Sound familiar?
+
+That works at first. Then the rules change, or you switch databases, and one class breaks everywhere.
+
+The fix: split it into three parts. The controller handles HTTP requests. The service holds the business rules.
+
+The repository is the only part that talks to the database, with all the database calls in one class. Each part has one job.
+
+Now a rule change only touches the service. A database change only touches the repository.
+
+From the outside, the API behaves exactly the same. Only the structure changes.
+
+The takeaway: give each class one job.
+
+Does your controller talk to the database directly?

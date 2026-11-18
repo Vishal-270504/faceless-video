@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 26px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 60px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .btn { position: absolute; background: #8fa8ff; color: #0b0b12; font: 900 28px Inter, sans-serif; text-align: center; border-radius: 14px; }
+  .tick { position: absolute; width: 26px; height: 46px; border-right: 7px solid #5fd39a; border-bottom: 7px solid #5fd39a; transform: rotate(45deg); }
+  .redbox { position: absolute; background: rgba(255,107,107,0.12); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="42.48"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="9.0" data-track-index="1">01 · The login</div>
+  <div class="kick clip" data-start="9.1" data-duration="8.6" data-track-index="1">02 · Passwords</div>
+  <div class="kick clip" data-start="17.7" data-duration="5.7" data-track-index="1">03 · The token</div>
+  <div class="kick clip" data-start="23.4" data-duration="10.9" data-track-index="1">04 · Every request</div>
+  <div class="kick clip" data-start="34.3" data-duration="7.6" data-track-index="1">05 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: a login form -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 400px;">
+      <div class="lbl" style="left: 40px; top: 36px;">Email</div>
+      <div class="box" style="left: 40px; top: 76px; width: 708px; height: 74px;">
+        <div class="mono" style="left: 24px; top: 22px;">you@example.com</div>
+      </div>
+      <div class="lbl" style="left: 40px; top: 186px;">Password</div>
+      <div class="box" style="left: 40px; top: 226px; width: 708px; height: 74px;">
+        <div class="mono" style="left: 24px; top: 22px; letter-spacing: 0.2em;">••••••••••</div>
+      </div>
+      <div class="btn" style="left: 40px; top: 326px; width: 708px; height: 56px; line-height: 56px;">Log in</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 580px; font-size: 40px;">Who is really typing?</div>
+  </div>
+
+  <!-- 1: the definition -->
+  <div id="g1" class="g">
+    <div class="bigc" style="top: 190px; font-size: 68px;">Authentication</div>
+    <div class="bigc" style="top: 300px; font-size: 40px; color: #8fa8ff;">answers one question:</div>
+    <div class="bigc" style="top: 380px; font-size: 56px;">Who are you?</div>
+  </div>
+
+  <!-- 2: passwords are hashed -->
+  <div id="g2" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 170px;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #ff8a8a;">Plain text</div>
+      <div class="mono" style="left: 28px; top: 80px; font-size: 34px;">password123</div>
+      <div class="redbox" style="left: 470px; top: 26px; width: 290px; height: 50px; line-height: 50px; padding: 0 16px;">Readable by anyone</div>
+    </div>
+    <div class="box" style="left: 56px; top: 350px; width: 788px; height: 170px; border-color: #5fd39a;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #5fd39a;">Stored as a hash</div>
+      <div class="mono" style="left: 28px; top: 80px; font-size: 30px;">$2b$12$Qx7mL0…f9Rk2</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 560px; font-size: 36px;">A hash cannot be turned back.</div>
+  </div>
+
+  <!-- 3: the token -->
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 230px;">
+      <div class="lbl" style="left: 28px; top: 26px;">Token: a signed ticket</div>
+      <div class="mono" style="left: 28px; top: 90px; font-size: 26px; color: #8fa8ff;">eyJhbGciOi…  . user: 42 .  sig</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 440px; font-size: 38px;">Sent back after<br>a correct password.</div>
+  </div>
+
+  <!-- 4: every request carries the token -->
+  <div id="g4" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 150px;">
+      <div class="mono" style="left: 28px; top: 26px; font-size: 30px;">GET /notes</div>
+      <div class="mono" style="left: 28px; top: 84px; font-size: 24px; color: #8fa8ff;">Authorization: Bearer eyJhbG…</div>
+    </div>
+    <div id="ok4" style="position: absolute; left: 56px; top: 340px; opacity: 0;">
+      <div class="tick" style="left: 6px; top: 0px;"></div>
+      <div class="txt grn" style="left: 56px; top: 4px; font-size: 32px;">Signature valid: user 42</div>
+    </div>
+    <div id="e4" class="box" style="left: 56px; top: 440px; width: 788px; height: 130px; border-color: #ff8a8a; opacity: 0;">
+      <div class="txt red" style="left: 28px; top: 22px; font-size: 40px;">401 Unauthorized</div>
+      <div class="lbl" style="left: 28px; top: 78px; font-size: 26px;">Token missing or invalid</div>
+    </div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g">
+    <div class="bigc" style="top: 180px; font-size: 52px;">Authentication:<br>who you are.</div>
+    <div class="bigc" style="top: 380px; font-size: 52px; color: #8fa8ff;">Hashing:<br>keeps passwords safe.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 230px; font-size: 60px;">Hashed,<br>or plain text?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.68" data-track-index="1">You type your</div>
+    <div id="c1" class="caption clip" data-start="0.68" data-duration="0.94" data-track-index="1">password and click</div>
+    <div id="c2" class="caption clip" data-start="1.62" data-duration="0.46" data-track-index="1">Log In.</div>
+    <div id="c3" class="caption clip" data-start="2.52" data-duration="0.46" data-track-index="1">How does the</div>
+    <div id="c4" class="caption clip" data-start="2.98" data-duration="0.78" data-track-index="1">server know it's</div>
+    <div id="c5" class="caption clip" data-start="3.76" data-duration="0.48" data-track-index="1">really you?</div>
+    <div id="c6" class="caption clip" data-start="5.00" data-duration="0.68" data-track-index="1">That's authentication.</div>
+    <div id="c7" class="caption clip" data-start="6.62" data-duration="0.58" data-track-index="1">It answers one</div>
+    <div id="c8" class="caption clip" data-start="7.20" data-duration="0.98" data-track-index="1">question, who are</div>
+    <div id="c9" class="caption clip" data-start="8.18" data-duration="0.30" data-track-index="1">you?</div>
+    <div id="c10" class="caption clip" data-start="9.08" data-duration="1.08" data-track-index="1">Passwords never get</div>
+    <div id="c11" class="caption clip" data-start="10.16" data-duration="0.78" data-track-index="1">stored as plain</div>
+    <div id="c12" class="caption clip" data-start="10.94" data-duration="0.36" data-track-index="1">text.</div>
+    <div id="c13" class="caption clip" data-start="12.10" data-duration="0.66" data-track-index="1">The server stores</div>
+    <div id="c14" class="caption clip" data-start="12.76" data-duration="0.42" data-track-index="1">a hash,</div>
+    <div id="c15" class="caption clip" data-start="13.72" data-duration="0.96" data-track-index="1">a scrambled version</div>
+    <div id="c16" class="caption clip" data-start="14.68" data-duration="0.72" data-track-index="1">that can't be</div>
+    <div id="c17" class="caption clip" data-start="15.40" data-duration="0.82" data-track-index="1">turned back into</div>
+    <div id="c18" class="caption clip" data-start="16.22" data-duration="0.46" data-track-index="1">your password.</div>
+    <div id="c19" class="caption clip" data-start="17.70" data-duration="0.62" data-track-index="1">Write password.</div>
+    <div id="c20" class="caption clip" data-start="19.06" data-duration="0.68" data-track-index="1">The server sends</div>
+    <div id="c21" class="caption clip" data-start="19.74" data-duration="0.58" data-track-index="1">back a token,</div>
+    <div id="c22" class="caption clip" data-start="20.78" data-duration="0.76" data-track-index="1">a signed ticket</div>
+    <div id="c23" class="caption clip" data-start="21.54" data-duration="0.62" data-track-index="1">with your identity</div>
+    <div id="c24" class="caption clip" data-start="22.16" data-duration="0.52" data-track-index="1">on it.</div>
+    <div id="c25" class="caption clip" data-start="23.44" data-duration="0.68" data-track-index="1">Your app sends</div>
+    <div id="c26" class="caption clip" data-start="24.12" data-duration="0.72" data-track-index="1">that token with</div>
+    <div id="c27" class="caption clip" data-start="24.84" data-duration="0.66" data-track-index="1">every request.</div>
+    <div id="c28" class="caption clip" data-start="26.18" data-duration="0.60" data-track-index="1">If it's missing</div>
+    <div id="c29" class="caption clip" data-start="26.78" data-duration="1.44" data-track-index="1">or invalid, the</div>
+    <div id="c30" class="caption clip" data-start="28.22" data-duration="1.24" data-track-index="1">server replies 401</div>
+    <div id="c31" class="caption clip" data-start="29.46" data-duration="0.96" data-track-index="1">unauthorized.</div>
+    <div id="c32" class="caption clip" data-start="31.48" data-duration="0.60" data-track-index="1">In plain words,</div>
+    <div id="c33" class="caption clip" data-start="32.54" data-duration="0.42" data-track-index="1">I don't know</div>
+    <div id="c34" class="caption clip" data-start="32.96" data-duration="0.52" data-track-index="1">who you are.</div>
+    <div id="c35" class="caption clip" data-start="34.34" data-duration="0.38" data-track-index="1">The takeaway,</div>
+    <div id="c36" class="caption clip" data-start="35.22" data-duration="1.20" data-track-index="1">authentication proves who</div>
+    <div id="c37" class="caption clip" data-start="36.42" data-duration="0.32" data-track-index="1">you are.</div>
+    <div id="c38" class="caption clip" data-start="37.32" data-duration="0.74" data-track-index="1">Hashing keeps your</div>
+    <div id="c39" class="caption clip" data-start="38.06" data-duration="0.70" data-track-index="1">password safe.</div>
+    <div id="c40" class="caption clip" data-start="39.68" data-duration="0.44" data-track-index="1">Are your passwords</div>
+    <div id="c41" class="caption clip" data-start="40.12" data-duration="1.12" data-track-index="1">stored hash or</div>
+    <div id="c42" class="caption clip" data-start="41.24" data-duration="0.64" data-track-index="1">in plain text?</div>
+    <audio id="narration" data-start="0" data-duration="42.48" data-track-index="2" data-volume="1"
+           src="assets/auth-authentication.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: login form
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 4.8);
+
+  // 1: definition
+  tl.fromTo("#g1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 5.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 8.8);
+
+  // 2: plain text vs hash
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 9.1);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 9.1);
+  tl.fromTo("#g2 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.5, ease: "power2.out" }, 9.4);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 17.4);
+
+  // 3: token
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 17.8);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 17.8);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 23.1);
+
+  // 4: request check, then 401 for a missing token
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 23.4);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 23.4);
+  tl.to("#ok4", { opacity: 1, duration: 0.4 }, 25.0);
+  tl.to("#e4", { opacity: 1, duration: 0.4 }, 29.5);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 34.0);
+
+  // 5: takeaway
+  tl.fromTo("#g5", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 34.3);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.3);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 39.4);
+
+  // 6: question
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 39.7);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.68);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.68); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.68); tl.set("#c1", { opacity: 0 }, 1.62);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.62); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.62); tl.set("#c2", { opacity: 0 }, 2.08);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.52); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.52); tl.set("#c3", { opacity: 0 }, 2.98);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 2.98); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.98); tl.set("#c4", { opacity: 0 }, 3.76);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.76); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.76); tl.set("#c5", { opacity: 0 }, 4.24);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.00); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.00); tl.set("#c6", { opacity: 0 }, 5.68);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 6.62); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.62); tl.set("#c7", { opacity: 0 }, 7.20);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 7.20); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.20); tl.set("#c8", { opacity: 0 }, 8.18);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 8.18); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.18); tl.set("#c9", { opacity: 0 }, 8.48);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 9.08); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.08); tl.set("#c10", { opacity: 0 }, 10.16);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 10.16); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.16); tl.set("#c11", { opacity: 0 }, 10.94);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.94); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.94); tl.set("#c12", { opacity: 0 }, 11.30);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 12.10); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.10); tl.set("#c13", { opacity: 0 }, 12.76);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 12.76); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.76); tl.set("#c14", { opacity: 0 }, 13.18);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 13.72); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.72); tl.set("#c15", { opacity: 0 }, 14.68);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 14.68); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.68); tl.set("#c16", { opacity: 0 }, 15.40);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 15.40); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.40); tl.set("#c17", { opacity: 0 }, 16.22);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 16.22); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.22); tl.set("#c18", { opacity: 0 }, 16.68);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 17.70); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.70); tl.set("#c19", { opacity: 0 }, 18.32);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 19.06); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.06); tl.set("#c20", { opacity: 0 }, 19.74);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 19.74); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.74); tl.set("#c21", { opacity: 0 }, 20.32);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 20.78); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.78); tl.set("#c22", { opacity: 0 }, 21.54);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 21.54); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.54); tl.set("#c23", { opacity: 0 }, 22.16);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 22.16); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.16); tl.set("#c24", { opacity: 0 }, 22.68);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 23.44); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.44); tl.set("#c25", { opacity: 0 }, 24.12);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 24.12); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.12); tl.set("#c26", { opacity: 0 }, 24.84);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 24.84); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.84); tl.set("#c27", { opacity: 0 }, 25.50);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 26.18); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.18); tl.set("#c28", { opacity: 0 }, 26.78);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 26.78); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.78); tl.set("#c29", { opacity: 0 }, 28.22);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 28.22); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.22); tl.set("#c30", { opacity: 0 }, 29.46);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 29.46); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.46); tl.set("#c31", { opacity: 0 }, 30.42);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 31.48); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.48); tl.set("#c32", { opacity: 0 }, 32.08);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 32.54); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.54); tl.set("#c33", { opacity: 0 }, 32.96);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 32.96); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.96); tl.set("#c34", { opacity: 0 }, 33.48);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 34.34); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.34); tl.set("#c35", { opacity: 0 }, 34.72);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 35.22); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.22); tl.set("#c36", { opacity: 0 }, 36.42);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 36.42); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.42); tl.set("#c37", { opacity: 0 }, 36.74);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 37.32); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.32); tl.set("#c38", { opacity: 0 }, 38.06);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 38.06); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.06); tl.set("#c39", { opacity: 0 }, 38.76);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 39.68); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.68); tl.set("#c40", { opacity: 0 }, 40.12);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 40.12); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.12); tl.set("#c41", { opacity: 0 }, 41.24);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 41.24); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.24); tl.set("#c42", { opacity: 0 }, 41.88);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

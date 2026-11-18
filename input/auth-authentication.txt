@@ -1,0 +1,13 @@
+You type your password and click login. How does the server know it's really you?
+
+That's authentication. It answers one question: who are you?
+
+Passwords never get stored as plain text. The server stores a hash, a scrambled version that can't be turned back into your password.
+
+Right password? The server sends back a token, a signed ticket with your identity on it.
+
+Your app sends that token with every request. If it's missing or invalid, the server replies 401 Unauthorized. In plain words: I don't know who you are.
+
+The takeaway: authentication proves who you are. Hashing keeps your password safe.
+
+Are your passwords stored hashed, or in plain text?

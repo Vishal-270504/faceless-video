@@ -150,6 +150,12 @@ All eight topics on the brief have a rendered video and an entry in metadata/all
 - 10 `api-validation` - Validation in a Notes API (user's older video, rebuilt). Rendered. Metadata in `metadata/all-videos.md`.
 - 11 `api-rate-limiting` - Rate limiting in an API (user's older video, rebuilt). Rendered. Metadata in `metadata/all-videos.md`.
 - 12 `api-error-handling` - Error handling in an API (user's older video, rebuilt). Rendered. Metadata in `metadata/all-videos.md`.
+- 13 `auth-authentication` - Authentication: how your API knows who you are. Rendered. Metadata in `metadata/all-videos.md`.
+- 14 `auth-authorization` - Logged in is not enough: check the owner. Rendered. Metadata in `metadata/all-videos.md`.
+- 15 `db-indexes` - Why your query is slow (add an index). Rendered. Metadata in `metadata/all-videos.md`.
+- 16 `aspnet-controller-service-repo` - Controller, service, repository in ASP.NET Core. Rendered. Metadata in `metadata/all-videos.md`.
+- 17 `api-never-trust-client` - Never trust the client: decide on the server. Rendered. Metadata in `metadata/all-videos.md`.
+- 18 `api-cache-per-user` - Cache a notes list for 60 seconds (MISS vs HIT). Rendered. Metadata in `metadata/all-videos.md`.
 
 ## Install check (fresh PC)
 Node 22+, FFmpeg on PATH, Python 3.12, the venv above, then `npx --yes hyperframes@0.9.26 --version` must work.

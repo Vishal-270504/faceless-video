@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 60px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .varrow { position: absolute; left: 442px; width: 4px; background: #8fa8ff; border-radius: 2px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.12); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="48.14"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="13.0" data-track-index="1">01 · One class</div>
+  <div class="kick clip" data-start="14.2" data-duration="15.7" data-track-index="1">02 · Three parts</div>
+  <div class="kick clip" data-start="30.1" data-duration="11.3" data-track-index="1">03 · Change safely</div>
+  <div class="kick clip" data-start="42.4" data-duration="5.2" data-track-index="1">04 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: everything in one class -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 380px; border-color: #ff8a8a;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #ff8a8a;">NotesController</div>
+      <div class="mono" style="left: 28px; top: 84px;">read the request</div>
+      <div class="mono" style="left: 28px; top: 146px;">check the rules</div>
+      <div class="mono" style="left: 28px; top: 208px;">run the SQL query</div>
+      <div class="mono" style="left: 28px; top: 270px;">build the response</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 560px; font-size: 34px;">All in one class.</div>
+  </div>
+
+  <!-- 1: one change breaks it -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 380px; border-color: #ff8a8a;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #ff8a8a;">NotesController</div>
+      <div class="redbox" style="left: 28px; top: 90px; width: 732px; height: 64px; line-height: 64px; padding: 0 22px;">New rule: notes need a title</div>
+      <div class="redbox" style="left: 28px; top: 190px; width: 732px; height: 64px; line-height: 64px; padding: 0 22px;">Switch database</div>
+      <div class="redbox" style="left: 28px; top: 290px; width: 732px; height: 64px; line-height: 64px; padding: 0 22px;">Change the response</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 560px; font-size: 34px;">One change breaks everything.</div>
+  </div>
+
+  <!-- 2: three parts -->
+  <div id="g2" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 120px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Controller</div>
+      <div class="txt" style="left: 28px; top: 62px; font-size: 30px;">Handles HTTP requests</div>
+    </div>
+    <div class="varrow" style="top: 252px; height: 28px;"></div>
+    <div class="box" style="left: 56px; top: 282px; width: 788px; height: 120px; border-color: #8fa8ff;">
+      <div class="lbl" style="left: 28px; top: 22px; color: #8fa8ff;">Service</div>
+      <div class="txt" style="left: 28px; top: 62px; font-size: 30px;">Holds the business rules</div>
+    </div>
+    <div class="varrow" style="top: 404px; height: 28px;"></div>
+    <div class="box" style="left: 56px; top: 434px; width: 788px; height: 120px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Repository</div>
+      <div class="txt" style="left: 28px; top: 62px; font-size: 30px;">Talks to the database</div>
+    </div>
+  </div>
+
+  <!-- 3: the repository -->
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 300px; border-color: #5fd39a;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #5fd39a;">Repository: the only database code</div>
+      <div class="mono" style="left: 28px; top: 84px;">FindByUser(userId)</div>
+      <div class="mono" style="left: 28px; top: 146px;">Save(note)</div>
+      <div class="mono" style="left: 28px; top: 208px;">Delete(id)</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 500px; font-size: 34px;">Each class: one job.</div>
+  </div>
+
+  <!-- 4: where each change lands -->
+  <div id="g4" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 110px; opacity: 0.5;">
+      <div class="lbl" style="left: 28px; top: 40px;">Controller</div>
+    </div>
+    <div class="box" style="left: 56px; top: 270px; width: 788px; height: 110px; border: 2px solid #8fa8ff;">
+      <div class="lbl" style="left: 28px; top: 16px; color: #8fa8ff;">Service</div>
+      <div class="redbox" style="left: 400px; top: 30px; width: 360px; height: 50px; line-height: 50px; padding: 0 14px; font-size: 24px;">Rule change</div>
+    </div>
+    <div class="box" style="left: 56px; top: 410px; width: 788px; height: 110px; border: 2px solid #5fd39a;">
+      <div class="lbl" style="left: 28px; top: 16px; color: #5fd39a;">Repository</div>
+      <div class="redbox" style="left: 400px; top: 30px; width: 360px; height: 50px; line-height: 50px; padding: 0 14px; font-size: 24px;">Database change</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 552px; font-size: 32px;">Each change touches one class.</div>
+  </div>
+
+  <!-- 5: same API from outside -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 130px;">
+      <div class="mono" style="left: 28px; top: 40px;">GET /notes</div>
+    </div>
+    <div class="txt grn" style="left: 56px; top: 330px; font-size: 40px;">200 OK, same answer</div>
+    <div class="txt" style="left: 56px; top: 420px; font-size: 34px;">Same URLs. Same responses.</div>
+    <div class="txt acc" style="left: 56px; top: 490px; font-size: 34px;">Only the structure changed.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 200px; font-size: 60px;">One class,</div>
+    <div class="bigc" style="top: 300px; font-size: 60px; color: #8fa8ff;">one job.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 230px; font-size: 56px;">Does your controller<br>talk to the database?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="1.08" data-track-index="1">Your controller is</div>
+    <div id="c1" class="caption clip" data-start="1.08" data-duration="0.66" data-track-index="1">doing too much.</div>
+    <div id="c2" class="caption clip" data-start="2.28" data-duration="0.42" data-track-index="1">It reads the</div>
+    <div id="c3" class="caption clip" data-start="2.70" data-duration="0.30" data-track-index="1">request,</div>
+    <div id="c4" class="caption clip" data-start="3.44" data-duration="0.70" data-track-index="1">checks the rules,</div>
+    <div id="c5" class="caption clip" data-start="4.30" data-duration="0.68" data-track-index="1">and talks to</div>
+    <div id="c6" class="caption clip" data-start="4.98" data-duration="0.36" data-track-index="1">the database.</div>
+    <div id="c7" class="caption clip" data-start="6.06" data-duration="0.58" data-track-index="1">Sound familiar?</div>
+    <div id="c8" class="caption clip" data-start="7.72" data-duration="0.50" data-track-index="1">That works at</div>
+    <div id="c9" class="caption clip" data-start="8.22" data-duration="0.30" data-track-index="1">first.</div>
+    <div id="c10" class="caption clip" data-start="9.08" data-duration="0.46" data-track-index="1">Then the rules</div>
+    <div id="c11" class="caption clip" data-start="9.54" data-duration="0.98" data-track-index="1">change, or you</div>
+    <div id="c12" class="caption clip" data-start="10.52" data-duration="1.38" data-track-index="1">switch databases, and</div>
+    <div id="c13" class="caption clip" data-start="11.90" data-duration="0.72" data-track-index="1">one class breaks</div>
+    <div id="c14" class="caption clip" data-start="12.62" data-duration="0.42" data-track-index="1">everywhere.</div>
+    <div id="c15" class="caption clip" data-start="14.20" data-duration="0.74" data-track-index="1">The fix, split</div>
+    <div id="c16" class="caption clip" data-start="14.94" data-duration="0.60" data-track-index="1">it into three</div>
+    <div id="c17" class="caption clip" data-start="15.54" data-duration="0.30" data-track-index="1">parts.</div>
+    <div id="c18" class="caption clip" data-start="16.46" data-duration="0.88" data-track-index="1">The controller handles</div>
+    <div id="c19" class="caption clip" data-start="17.34" data-duration="1.18" data-track-index="1">HTTP requests.</div>
+    <div id="c20" class="caption clip" data-start="19.42" data-duration="0.66" data-track-index="1">The service holds</div>
+    <div id="c21" class="caption clip" data-start="20.08" data-duration="0.76" data-track-index="1">the business rules.</div>
+    <div id="c22" class="caption clip" data-start="21.94" data-duration="0.96" data-track-index="1">The repository is</div>
+    <div id="c23" class="caption clip" data-start="22.90" data-duration="0.64" data-track-index="1">the only part</div>
+    <div id="c24" class="caption clip" data-start="23.54" data-duration="0.66" data-track-index="1">that talks to</div>
+    <div id="c25" class="caption clip" data-start="24.20" data-duration="0.38" data-track-index="1">the database,</div>
+    <div id="c26" class="caption clip" data-start="25.04" data-duration="0.52" data-track-index="1">with all the</div>
+    <div id="c27" class="caption clip" data-start="25.56" data-duration="1.04" data-track-index="1">database calls in</div>
+    <div id="c28" class="caption clip" data-start="26.60" data-duration="1.44" data-track-index="1">one class. Each</div>
+    <div id="c29" class="caption clip" data-start="28.04" data-duration="0.78" data-track-index="1">part has one</div>
+    <div id="c30" class="caption clip" data-start="28.82" data-duration="0.30" data-track-index="1">job.</div>
+    <div id="c31" class="caption clip" data-start="30.04" data-duration="0.64" data-track-index="1">Now a rule</div>
+    <div id="c32" class="caption clip" data-start="30.68" data-duration="1.16" data-track-index="1">change only touches</div>
+    <div id="c33" class="caption clip" data-start="31.84" data-duration="0.52" data-track-index="1">the service.</div>
+    <div id="c34" class="caption clip" data-start="33.14" data-duration="0.80" data-track-index="1">A database change</div>
+    <div id="c35" class="caption clip" data-start="33.94" data-duration="1.12" data-track-index="1">only touches the</div>
+    <div id="c36" class="caption clip" data-start="35.06" data-duration="0.30" data-track-index="1">repository.</div>
+    <div id="c37" class="caption clip" data-start="36.58" data-duration="0.48" data-track-index="1">From the outside,</div>
+    <div id="c38" class="caption clip" data-start="37.64" data-duration="1.04" data-track-index="1">the API behaves</div>
+    <div id="c39" class="caption clip" data-start="38.68" data-duration="0.90" data-track-index="1">exactly the same.</div>
+    <div id="c40" class="caption clip" data-start="40.46" data-duration="0.34" data-track-index="1">Only the structure</div>
+    <div id="c41" class="caption clip" data-start="40.80" data-duration="0.46" data-track-index="1">changes.</div>
+    <div id="c42" class="caption clip" data-start="42.42" data-duration="0.30" data-track-index="1">The takeaway,</div>
+    <div id="c43" class="caption clip" data-start="43.18" data-duration="0.50" data-track-index="1">give each class</div>
+    <div id="c44" class="caption clip" data-start="43.68" data-duration="0.60" data-track-index="1">one job.</div>
+    <div id="c45" class="caption clip" data-start="45.20" data-duration="0.76" data-track-index="1">Does your controller</div>
+    <div id="c46" class="caption clip" data-start="45.96" data-duration="0.76" data-track-index="1">talk to the</div>
+    <div id="c47" class="caption clip" data-start="46.72" data-duration="0.82" data-track-index="1">database directly?</div>
+    <audio id="narration" data-start="0" data-duration="48.14" data-track-index="2" data-volume="1"
+           src="assets/aspnet-controller-service-repo.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: one class
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.fromTo("#g0 .mono", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.7, ease: "power2.out" }, 0.6);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.5);
+
+  // 1: one change breaks it
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.4);
+
+  // 2: three parts
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 14.2);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.2);
+  tl.fromTo("#g2 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 1.2, ease: "power2.out" }, 14.5);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 21.3);
+
+  // 3: repository
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.9);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 29.4);
+
+  // 4: where changes land
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.1);
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 30.1);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 36.2);
+
+  // 5: same from outside
+  tl.fromTo("#g5", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 36.6);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 41.9);
+
+  // 6: takeaway
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 42.4);
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 42.4);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.0);
+
+  // 7: question
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 45.2);
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.4);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 1.08);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 1.08); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.08); tl.set("#c1", { opacity: 0 }, 1.74);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 2.28); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.28); tl.set("#c2", { opacity: 0 }, 2.70);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.70); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.70); tl.set("#c3", { opacity: 0 }, 3.00);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.44); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.44); tl.set("#c4", { opacity: 0 }, 4.14);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 4.30); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.30); tl.set("#c5", { opacity: 0 }, 4.98);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 4.98); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.98); tl.set("#c6", { opacity: 0 }, 5.34);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 6.06); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.06); tl.set("#c7", { opacity: 0 }, 6.64);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 7.72); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.72); tl.set("#c8", { opacity: 0 }, 8.22);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 8.22); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.22); tl.set("#c9", { opacity: 0 }, 8.52);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 9.08); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.08); tl.set("#c10", { opacity: 0 }, 9.54);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.54); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.54); tl.set("#c11", { opacity: 0 }, 10.52);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.52); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.52); tl.set("#c12", { opacity: 0 }, 11.90);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 11.90); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.90); tl.set("#c13", { opacity: 0 }, 12.62);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 12.62); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.62); tl.set("#c14", { opacity: 0 }, 13.04);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 14.20); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.20); tl.set("#c15", { opacity: 0 }, 14.94);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 14.94); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.94); tl.set("#c16", { opacity: 0 }, 15.54);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 15.54); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.54); tl.set("#c17", { opacity: 0 }, 15.84);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 16.46); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.46); tl.set("#c18", { opacity: 0 }, 17.34);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 17.34); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.34); tl.set("#c19", { opacity: 0 }, 18.52);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 19.42); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.42); tl.set("#c20", { opacity: 0 }, 20.08);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 20.08); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.08); tl.set("#c21", { opacity: 0 }, 20.84);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 21.94); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.94); tl.set("#c22", { opacity: 0 }, 22.90);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 22.90); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.90); tl.set("#c23", { opacity: 0 }, 23.54);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 23.54); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.54); tl.set("#c24", { opacity: 0 }, 24.20);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 24.20); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.20); tl.set("#c25", { opacity: 0 }, 24.58);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 25.04); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.04); tl.set("#c26", { opacity: 0 }, 25.56);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 25.56); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.56); tl.set("#c27", { opacity: 0 }, 26.60);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 26.60); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.60); tl.set("#c28", { opacity: 0 }, 28.04);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 28.04); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.04); tl.set("#c29", { opacity: 0 }, 28.82);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 28.82); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.82); tl.set("#c30", { opacity: 0 }, 29.12);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 30.04); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.04); tl.set("#c31", { opacity: 0 }, 30.68);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 30.68); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.68); tl.set("#c32", { opacity: 0 }, 31.84);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 31.84); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.84); tl.set("#c33", { opacity: 0 }, 32.36);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 33.14); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.14); tl.set("#c34", { opacity: 0 }, 33.94);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 33.94); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.94); tl.set("#c35", { opacity: 0 }, 35.06);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 35.06); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.06); tl.set("#c36", { opacity: 0 }, 35.36);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 36.58); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.58); tl.set("#c37", { opacity: 0 }, 37.06);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 37.64); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.64); tl.set("#c38", { opacity: 0 }, 38.68);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 38.68); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.68); tl.set("#c39", { opacity: 0 }, 39.58);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 40.46); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.46); tl.set("#c40", { opacity: 0 }, 40.80);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 40.80); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.80); tl.set("#c41", { opacity: 0 }, 41.26);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 42.42); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.42); tl.set("#c42", { opacity: 0 }, 42.72);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 43.18); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.18); tl.set("#c43", { opacity: 0 }, 43.68);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 43.68); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.68); tl.set("#c44", { opacity: 0 }, 44.28);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 45.20); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.20); tl.set("#c45", { opacity: 0 }, 45.96);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 45.96); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.96); tl.set("#c46", { opacity: 0 }, 46.72);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 46.72); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.72); tl.set("#c47", { opacity: 0 }, 47.54);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

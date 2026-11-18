@@ -1,0 +1,156 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 60px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .arrow { position: absolute; height: 4px; background: #8fa8ff; border-radius: 2px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.12); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .tick { position: absolute; width: 26px; height: 46px; border-right: 7px solid #5fd39a; border-bottom: 7px solid #5fd39a; transform: rotate(45deg); }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="6.2" data-track-index="1">The URL</div>
+  <div class="kick clip" data-start="6.3" data-duration="11.9" data-track-index="1">01 · Authorization</div>
+  <div class="kick clip" data-start="18.8" data-duration="5.7" data-track-index="1">02 · The mistake</div>
+  <div class="kick clip" data-start="25.6" data-duration="12.9" data-track-index="1">03 · The fix</div>
+  <div class="kick clip" data-start="38.9" data-duration="9.2" data-track-index="1">04 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the URL with a number in it -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 200px; width: 788px; height: 96px;">
+      <div class="mono" style="left: 28px; top: 30px;">notes-app.com/notes/<span class="acc" style="background: rgba(143,168,255,0.16); border-radius: 8px; padding: 0 6px;">42</span></div>
+    </div>
+    <div class="txt" style="left: 56px; top: 340px; font-size: 44px; line-height: 1.2;">Logged in.<br>Now change one number.</div>
+    <div class="lbl" style="left: 56px; top: 480px; font-size: 28px; color: #e9e9f1;">Whose note is 42?</div>
+  </div>
+
+  <!-- 1: two questions -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 150px;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #5fd39a;">Authentication</div>
+      <div class="txt" style="left: 28px; top: 70px; font-size: 34px;">Who are you?</div>
+    </div>
+    <div class="box" style="left: 56px; top: 330px; width: 788px; height: 150px; border-color: #8fa8ff;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #8fa8ff;">Authorization</div>
+      <div class="txt" style="left: 28px; top: 70px; font-size: 34px;">What are you allowed to do?</div>
+    </div>
+  </div>
+
+  <!-- 2: two checks on each request -->
+  <div id="g2" class="g">
+    <div class="box" style="left: 56px; top: 170px; width: 252px; height: 200px;">
+      <div class="lbl" style="left: 24px; top: 26px;">Check 1</div>
+      <div class="txt" style="left: 24px; top: 80px; font-size: 30px;">Who sent the token?</div>
+    </div>
+    <div class="arrow" style="left: 312px; top: 270px; width: 40px;"></div>
+    <div class="box" style="left: 356px; top: 170px; width: 488px; height: 200px; border-color: #8fa8ff;">
+      <div class="lbl" style="left: 24px; top: 26px; color: #8fa8ff;">Check 2</div>
+      <div class="txt" style="left: 24px; top: 80px; font-size: 30px;">Does this note<br>belong to them?</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 440px; font-size: 36px;">Both checks, every time.</div>
+  </div>
+
+  <!-- 3: the mistake: only the login check -->
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 170px; width: 788px; height: 180px;">
+      <div class="lbl" style="left: 28px; top: 24px;">User B, logged in</div>
+      <div class="mono" style="left: 28px; top: 80px; font-size: 26px;">GET /notes/42</div>
+      <div class="mono grn" style="left: 28px; top: 124px; font-size: 26px;">200 OK</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 390px; font-size: 36px;">The server checked the login.</div>
+    <div class="redbox" style="left: 56px; top: 470px; width: 788px; height: 70px; line-height: 70px; padding: 0 22px;">It never checked the owner.</div>
+  </div>
+
+  <!-- 4: the fix: compare owner with token user -->
+  <div id="g4" class="g">
+    <div class="box" style="left: 56px; top: 170px; width: 788px; height: 230px;">
+      <div class="mono" style="left: 28px; top: 26px; font-size: 26px;">note.ownerId  ===  token.userId ?</div>
+      <div class="mono" style="left: 28px; top: 84px; font-size: 26px; color: #8fa8ff;">note.ownerId: 7</div>
+      <div class="mono" style="left: 28px; top: 130px; font-size: 26px; color: #8fa8ff;">token.userId: 42</div>
+    </div>
+    <div class="txt red" style="left: 56px; top: 440px; font-size: 40px;">Not equal: refuse.</div>
+    <div class="txt" style="left: 56px; top: 510px; font-size: 30px;">Load the note, compare, then decide.</div>
+  </div>
+
+  <!-- 5: 403 -->
+  <div id="g5" class="g">
+    <div class="bigc" style="top: 170px; font-size: 96px; color: #ff8a8a;">403</div>
+    <div class="bigc" style="top: 320px; font-size: 40px;">Forbidden</div>
+    <div class="txt" style="left: 56px; top: 440px; width: 788px; text-align: center; font-size: 32px;">I know who you are.<br>You're not allowed.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 180px; font-size: 52px;">Authentication:<br>checks identity.</div>
+    <div class="bigc" style="top: 380px; font-size: 52px; color: #8fa8ff;">Authorization:<br>checks ownership.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 230px; font-size: 60px;">Checked the<br>owner?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: URL with a number
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.9);
+
+  // 1: two questions
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 6.3);
+  tl.fromTo("#g1 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.6, ease: "power2.out" }, 6.5);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 10.5);
+
+  // 2: two checks
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 10.9);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 10.9);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 18.5);
+
+  // 3: the mistake
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 18.9);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 18.9);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 25.2);
+
+  // 4: the fix
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 25.6);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 25.6);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 31.2);
+
+  // 5: 403
+  tl.fromTo("#g5", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 31.7);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 38.2);
+
+  // 6: takeaway
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 38.9);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 38.9);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.2);
+
+  // 7: question
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.5);
+</script>

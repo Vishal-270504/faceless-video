@@ -39,3 +39,16 @@ Categories: STORY (how the script hooks, explains and ends), EXPLAIN (how simple
 4. Run `.venv\Scripts\python scripts\pipeline.py <name>` (narration, beat times, build, lint, render, copy, QA sheet).
 5. Read the sheet in `output\qa\<name>-sheet.png`. List what is wrong, what is weak, what is good.
 6. Add 2-3 items to the video log and update the open items above. Then the next video starts from step 1.
+
+## Videos 13-18 (added 2026-11-18)
+- 13 auth-authentication: hook names the viewer's own moment (you type your password). First script was 133 words, cut to 111 so it sits in the 110-125 band. Lesson: check the word count before writing visuals.
+- 14 auth-authorization: split from the auth video. Uses 403 per the source talk, but video 6 says 404 for other users' notes. Lesson: one consistent rule across videos; the note above is an open decision.
+- 15 db-indexes: highlight bar scans six rows, then an index card, then before/after bars. Lesson: no invented timings; say "far faster" unless measured.
+- 16 aspnet-controller-service-repo: one-box-to-three-box stack. Lesson: about 0.8 s with no card between two cards; chain the cards.
+- 17 api-never-trust-client: the teller diagram's 28 px labels wrap in 230 px boxes. Lesson: give small diagram boxes 24 px text or fewer words.
+- 18 api-cache-per-user: MISS and HIT flows side by side. Lesson: overlaps video 7 (cache-invalidation); decide whether to keep both.
+
+## Open items from videos 13-18 (apply next)
+- VISUAL: no blank gap longer than 0.5 s between cards; fade the next card in while the last one fades out.
+- CRAFT: check the word count (110-125) from make_voice before writing visuals.
+- STORY: one rule for status codes across the series (401 missing token, 403 or 404 for other users' data).

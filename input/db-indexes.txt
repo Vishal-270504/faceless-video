@@ -1,0 +1,15 @@
+Your API works fine with ten notes. With a hundred thousand, it crawls. Is the code slow, or the database?
+
+To find one user's notes, the database checks every row, one by one.
+
+An index works like the index at the back of a book. It lets the database jump straight to the right rows.
+
+Here's the test. Fill a notes table with lots of fake data, then time a slow query.
+
+Add an index on the column you filter by, like user ID, and run it again. It finishes far faster.
+
+The cost: every insert and update must also update the index, so writes get slower.
+
+The rule: index the columns you filter and sort by. Measure before you add anything.
+
+Which column do your queries filter by most?

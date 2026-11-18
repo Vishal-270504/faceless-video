@@ -1,0 +1,169 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #e9e9f1; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 60px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .varrow { position: absolute; left: 442px; width: 4px; background: #8fa8ff; border-radius: 2px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.12); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="13.0" data-track-index="1">01 · One class</div>
+  <div class="kick clip" data-start="14.2" data-duration="15.7" data-track-index="1">02 · Three parts</div>
+  <div class="kick clip" data-start="30.1" data-duration="11.3" data-track-index="1">03 · Change safely</div>
+  <div class="kick clip" data-start="42.4" data-duration="5.2" data-track-index="1">04 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: everything in one class -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 380px; border-color: #ff8a8a;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #ff8a8a;">NotesController</div>
+      <div class="mono" style="left: 28px; top: 84px;">read the request</div>
+      <div class="mono" style="left: 28px; top: 146px;">check the rules</div>
+      <div class="mono" style="left: 28px; top: 208px;">run the SQL query</div>
+      <div class="mono" style="left: 28px; top: 270px;">build the response</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 560px; font-size: 34px;">All in one class.</div>
+  </div>
+
+  <!-- 1: one change breaks it -->
+  <div id="g1" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 380px; border-color: #ff8a8a;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #ff8a8a;">NotesController</div>
+      <div class="redbox" style="left: 28px; top: 90px; width: 732px; height: 64px; line-height: 64px; padding: 0 22px;">New rule: notes need a title</div>
+      <div class="redbox" style="left: 28px; top: 190px; width: 732px; height: 64px; line-height: 64px; padding: 0 22px;">Switch database</div>
+      <div class="redbox" style="left: 28px; top: 290px; width: 732px; height: 64px; line-height: 64px; padding: 0 22px;">Change the response</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 560px; font-size: 34px;">One change breaks everything.</div>
+  </div>
+
+  <!-- 2: three parts -->
+  <div id="g2" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 120px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Controller</div>
+      <div class="txt" style="left: 28px; top: 62px; font-size: 30px;">Handles HTTP requests</div>
+    </div>
+    <div class="varrow" style="top: 252px; height: 28px;"></div>
+    <div class="box" style="left: 56px; top: 282px; width: 788px; height: 120px; border-color: #8fa8ff;">
+      <div class="lbl" style="left: 28px; top: 22px; color: #8fa8ff;">Service</div>
+      <div class="txt" style="left: 28px; top: 62px; font-size: 30px;">Holds the business rules</div>
+    </div>
+    <div class="varrow" style="top: 404px; height: 28px;"></div>
+    <div class="box" style="left: 56px; top: 434px; width: 788px; height: 120px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Repository</div>
+      <div class="txt" style="left: 28px; top: 62px; font-size: 30px;">Talks to the database</div>
+    </div>
+  </div>
+
+  <!-- 3: the repository -->
+  <div id="g3" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 300px; border-color: #5fd39a;">
+      <div class="lbl" style="left: 28px; top: 24px; color: #5fd39a;">Repository: the only database code</div>
+      <div class="mono" style="left: 28px; top: 84px;">FindByUser(userId)</div>
+      <div class="mono" style="left: 28px; top: 146px;">Save(note)</div>
+      <div class="mono" style="left: 28px; top: 208px;">Delete(id)</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 500px; font-size: 34px;">Each class: one job.</div>
+  </div>
+
+  <!-- 4: where each change lands -->
+  <div id="g4" class="g">
+    <div class="box" style="left: 56px; top: 130px; width: 788px; height: 110px; opacity: 0.5;">
+      <div class="lbl" style="left: 28px; top: 40px;">Controller</div>
+    </div>
+    <div class="box" style="left: 56px; top: 270px; width: 788px; height: 110px; border: 2px solid #8fa8ff;">
+      <div class="lbl" style="left: 28px; top: 16px; color: #8fa8ff;">Service</div>
+      <div class="redbox" style="left: 400px; top: 30px; width: 360px; height: 50px; line-height: 50px; padding: 0 14px; font-size: 24px;">Rule change</div>
+    </div>
+    <div class="box" style="left: 56px; top: 410px; width: 788px; height: 110px; border: 2px solid #5fd39a;">
+      <div class="lbl" style="left: 28px; top: 16px; color: #5fd39a;">Repository</div>
+      <div class="redbox" style="left: 400px; top: 30px; width: 360px; height: 50px; line-height: 50px; padding: 0 14px; font-size: 24px;">Database change</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 552px; font-size: 32px;">Each change touches one class.</div>
+  </div>
+
+  <!-- 5: same API from outside -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 56px; top: 150px; width: 788px; height: 130px;">
+      <div class="mono" style="left: 28px; top: 40px;">GET /notes</div>
+    </div>
+    <div class="txt grn" style="left: 56px; top: 330px; font-size: 40px;">200 OK, same answer</div>
+    <div class="txt" style="left: 56px; top: 420px; font-size: 34px;">Same URLs. Same responses.</div>
+    <div class="txt acc" style="left: 56px; top: 490px; font-size: 34px;">Only the structure changed.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="bigc" style="top: 200px; font-size: 60px;">One class,</div>
+    <div class="bigc" style="top: 300px; font-size: 60px; color: #8fa8ff;">one job.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="bigc" style="top: 230px; font-size: 56px;">Does your controller<br>talk to the database?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: one class
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.fromTo("#g0 .mono", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.7, ease: "power2.out" }, 0.6);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.5);
+
+  // 1: one change breaks it
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.4);
+
+  // 2: three parts
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 14.2);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.2);
+  tl.fromTo("#g2 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, stagger: 1.2, ease: "power2.out" }, 14.5);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 21.3);
+
+  // 3: repository
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.9);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 29.4);
+
+  // 4: where changes land
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.1);
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 30.1);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 36.2);
+
+  // 5: same from outside
+  tl.fromTo("#g5", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 36.6);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 41.9);
+
+  // 6: takeaway
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 42.4);
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 42.4);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.0);
+
+  // 7: question
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 45.2);
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.4);
+</script>

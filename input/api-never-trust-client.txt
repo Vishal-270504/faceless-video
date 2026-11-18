@@ -1,0 +1,15 @@
+Anyone can change what your app sends. They can open the browser tools and send any request they like. Would your API notice?
+
+Think of a bank teller. The teller checks every request against your account. You never walk into the vault yourself.
+
+Your API works the same way. Never trust the client, even if it's your own app.
+
+So the server decides what matters: who owns a note, its ID, and its timestamps.
+
+If a request claims someone else as the owner, the server ignores it and sets the owner from the logged-in user.
+
+On every read, update and delete, the server checks ownership again. Someone else's note gets a refusal.
+
+The takeaway: never trust what the client sends. Decide on the server.
+
+Which fields does your client set that it should never set?

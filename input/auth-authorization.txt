@@ -1,0 +1,15 @@
+You're logged in, but you change a number in the URL and open someone else's note. How?
+
+Authorization answers the question after login: what are you allowed to do?
+
+Every request needs two checks. The token proves who you are. Then the server checks ownership: does this note belong to you?
+
+The mistake: the server checks you're logged in, but never checks the owner. So any account can read any note.
+
+The fix: load the note, compare its owner with the user in the token, and refuse if they differ.
+
+Someone else's data gets a 403 Forbidden. In plain words: I know who you are, and you're not allowed.
+
+The takeaway: authentication checks identity. Authorization checks ownership on every action.
+
+Did you check the owner on your last update or delete endpoint?

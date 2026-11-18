@@ -169,3 +169,87 @@ When something breaks, your API shouldn't show a wall of stack trace to the user
 
 **Thumbnail prompt for ChatGPT:**
 > Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "SHOWING STACK TRACES?" with "STACK TRACES?" in red. Centre: a flat dark panel with three faint red error lines on the left, a single blue funnel in the middle, and one clean white card on the right labelled "404 Not found". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 13. auth-authentication: Authentication: How Your API Knows Who You Are
+
+**Title:** Authentication: How Your API Knows Who You Are
+
+**Description:**
+Before your API does anything, it has to know who is calling. Passwords are stored as hashes, a correct login returns a signed token, and a missing or invalid token gets a 401. Here's the flow in plain words.
+
+#api #backend #authentication #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "WHO ARE YOU?" with "YOU?" in yellow. Centre: a flat closed padlock above a small signed ticket card with a blue edge. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 14. auth-authorization: Authentication vs Authorization: Who Can Touch It?
+
+**Title:** Logged In Isn't Enough: Check the Owner
+
+**Description:**
+Logging in proves who you are. It doesn't prove you may open someone else's note. Every action on user data needs an ownership check, and a request for someone else's data gets a 403.
+
+#api #backend #authorization #security #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "CAN YOU TOUCH IT?" with "TOUCH" in yellow. Centre: a flat door with a padlock on it and a small red tag beside it labelled "403". Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 15. db-indexes: Why Your Query Is Slow (and How an Index Fixes It)
+
+**Title:** Why Your Query Is Slow (Add an Index)
+
+**Description:**
+Your API can feel fast with ten rows and crawl with a hundred thousand. The database checks every row unless you tell it otherwise. You'll see how to measure a slow query, add an index, and what that index costs on writes.
+
+#api #database #sql #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "SLOW QUERY?" with "SLOW" in yellow. Centre: a flat open book with small index tabs along its edge, one tab highlighted blue. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 16. aspnet-controller-service-repo: Controller, Service, Repository in ASP.NET Core
+
+**Title:** Controller, Service, Repository in ASP.NET Core
+
+**Description:**
+A controller that handles routing, rules and database calls is hard to change. Split it into a controller, a service and a repository, and the API behaves exactly the same from the outside. Only the structure changes.
+
+#aspnet #dotnet #csharp #cleancode #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "ONE CLASS DOES ALL?" with "ALL?" in yellow. Centre: three flat stacked boxes in blue, white and grey, joined by thin arrows, with the bottom box marked by a small cylinder icon. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 17. api-never-trust-client: Never Trust the Client: Stop Users Changing Your Data
+
+**Title:** Never Trust the Client: Decide on the Server
+
+**Description:**
+Anyone can send any request to your API, even with your app's own tools. The server should choose the owner and the IDs, ignore what the client claims, and check ownership on every read, update and delete.
+
+#api #backend #security #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "NEVER TRUST" with "TRUST" in yellow. Centre: a flat bank vault door in grey with a blue keyhole, and a small red "X" card floating beside it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 18. api-cache-per-user: Cache a Notes List for 60 Seconds (MISS vs HIT)
+
+**Title:** Cache a Notes List: MISS vs HIT Explained
+
+**Description:**
+Your API answers the same question over and over. A per-user cache saves the list for 60 seconds, shows a MISS and then a HIT, and a version number clears it after every change. You trade a little freshness for speed.
+
+#api #backend #caching #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "MISS → HIT" with "HIT" in yellow. Centre: a flat white coffee cup on top of a stack of three blue cards, with a small clock icon beside it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.

@@ -1,0 +1,15 @@
+You refresh the page. Same list. The same database call, again and again. Why do it every time?
+
+A cache is like a coffee shop that keeps popular orders ready. Saved answers come out fast.
+
+The notes list is saved for 60 seconds, and each user gets their own copy.
+
+The first request is a MISS. The server builds the list from the database and saves it.
+
+The next request is a HIT. The saved copy comes back at once, with no database call.
+
+When you create, update or delete a note, a version number goes up. The old saved copy is ignored.
+
+The trade-off: answers are faster, but data can be up to a minute old. Pick the delay you can live with.
+
+How old can your data be before your users notice?
