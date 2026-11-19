@@ -1,0 +1,140 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #ffd166; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #ffd166; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(16,13,6,0.82); border: 1px solid rgba(255,209,102,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #e6d4a0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #fff9ec; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #fff9ec; line-height: 1.12; }
+  .mono { position: absolute; font: 400 25px 'JetBrains Mono', monospace; color: #fff9ec; }
+  .cell { position: absolute; border: 2px solid #5a4a22; border-radius: 14px; background: rgba(255,209,102,0.10); font: 700 26px Inter, sans-serif; color: #fff9ec; padding: 14px 18px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .acc { color: #ffd166; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.0" data-track-index="1">01 · The page</div>
+  <div class="kick clip" data-start="7.4" data-duration="5.9" data-track-index="1">02 · Grid</div>
+  <div class="kick clip" data-start="13.7" data-duration="7.3" data-track-index="1">03 · Overflow</div>
+  <div class="kick clip" data-start="21.0" data-duration="6.4" data-track-index="1">04 · Areas</div>
+  <div class="kick clip" data-start="27.4" data-duration="6.1" data-track-index="1">05 · Columns</div>
+  <div class="kick clip" data-start="34.4" data-duration="5.7" data-track-index="1">06 · Phone</div>
+  <div class="kick clip" data-start="40.1" data-duration="5.6" data-track-index="1">07 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the page we want -->
+  <div id="g0" class="g">
+    <div class="cell" style="left: 60px; top: 120px; width: 780px; height: 110px;">Header</div>
+    <div class="cell" style="left: 60px; top: 250px; width: 240px; height: 300px;">Sidebar</div>
+    <div class="cell" style="left: 320px; top: 250px; width: 520px; height: 300px;">Main</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 36px;">Header, sidebar, main.</div>
+  </div>
+
+  <!-- 1: grid = rows and columns -->
+  <div id="g1" class="g">
+    <div class="cell" style="left: 60px; top: 120px; width: 240px; height: 120px;"></div>
+    <div class="cell" style="left: 320px; top: 120px; width: 260px; height: 120px;"></div>
+    <div class="cell" style="left: 600px; top: 120px; width: 240px; height: 120px;"></div>
+    <div class="cell" style="left: 60px; top: 260px; width: 240px; height: 120px;"></div>
+    <div class="cell" style="left: 320px; top: 260px; width: 260px; height: 120px;"></div>
+    <div class="cell" style="left: 600px; top: 260px; width: 240px; height: 120px;"></div>
+    <div class="lbl acc" style="left: 60px; top: 410px; font-size: 30px;">columns</div>
+    <div class="txt" style="left: 60px; top: 490px; font-size: 38px;">Rows and columns.</div>
+    <div class="txt" style="left: 60px; top: 550px; font-size: 30px; color: #e6d4a0;">Items fill the slots.</div>
+  </div>
+
+  <!-- 2: broken: fixed sidebar pushes content off -->
+  <div id="g2" class="g">
+    <div class="cell" style="left: 60px; top: 120px; width: 780px; height: 90px;">Header</div>
+    <div class="cell" style="left: 60px; top: 230px; width: 520px; height: 250px;">Sidebar (520px fixed)</div>
+    <div class="cell" style="left: 600px; top: 230px; width: 520px; height: 250px; border-color: #ff8a8a; background: rgba(255,107,107,0.08);">Main</div>
+    <div class="redbox" style="left: 60px; top: 510px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Main runs off the screen.</div>
+    <div class="txt" style="left: 60px; top: 596px; font-size: 28px; color: #e6d4a0;">Nested fixed widths break.</div>
+  </div>
+
+  <!-- 3: named grid areas -->
+  <div id="g3" class="g">
+    <div class="mono" style="left: 60px; top: 110px; font-size: 24px; color: #e6d4a0;">grid-template-areas:</div>
+    <div class="mono acc" style="left: 60px; top: 150px; font-size: 26px;">"header header"</div>
+    <div class="mono acc" style="left: 60px; top: 190px; font-size: 26px;">"sidebar main"</div>
+    <div class="cell" style="left: 60px; top: 260px; width: 780px; height: 90px; border-color: #ffd166;">header</div>
+    <div class="cell" style="left: 60px; top: 370px; width: 240px; height: 200px; border-color: #ffd166;">sidebar</div>
+    <div class="cell" style="left: 320px; top: 370px; width: 520px; height: 200px; border-color: #ffd166;">main</div>
+  </div>
+
+  <!-- 4: columns code -->
+  <div id="g4" class="g">
+    <div class="mono" style="left: 60px; top: 120px; font-size: 28px;">grid-template-columns:</div>
+    <div class="mono acc" style="left: 60px; top: 170px; font-size: 36px; font-weight: 700;">240px 1fr;</div>
+    <div class="cell" style="left: 60px; top: 260px; width: 240px; height: 200px;">240px</div>
+    <div class="cell" style="left: 320px; top: 260px; width: 520px; height: 200px; border-style: dashed;">1fr: the rest</div>
+    <div class="txt" style="left: 60px; top: 510px; font-size: 36px;">Fixed sidebar, flexible main.</div>
+  </div>
+
+  <!-- 5: phone: one column -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 300px; top: 60px; width: 300px; height: 540px; border: 3px solid #5a4a22; border-radius: 36px; background: rgba(255,255,255,0.02);">
+      <div class="cell" style="left: 20px; top: 24px; width: 260px; height: 70px; font-size: 22px; padding: 18px;">Header</div>
+      <div class="cell" style="left: 20px; top: 110px; width: 260px; height: 80px; font-size: 22px; padding: 18px;">Sidebar</div>
+      <div class="cell" style="left: 20px; top: 206px; width: 260px; height: 290px; font-size: 22px; padding: 18px;">Main</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 600px; font-size: 34px;">Same markup. One column.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 180px; font-size: 52px;">Grid for the whole page.</div>
+    <div class="big acc" style="top: 330px; font-size: 52px;">Flexbox for the pieces inside.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">What page would you<br>build with Grid first?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.9);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.4);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.4);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.0);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.7);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 13.7);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.7);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.0);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 21.0);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 27.1);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 27.38);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 27.38);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 33.7);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 34.42);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 39.8);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.1);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.3);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.7);
+</script>

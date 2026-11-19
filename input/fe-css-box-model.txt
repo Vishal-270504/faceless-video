@@ -1,0 +1,13 @@
+You set a box to 300 pixels wide. On screen it's 342 pixels. Nothing is broken. You just met the box model.
+
+Every element has four layers: content, padding, border and margin. Each layer adds to the total size.
+
+Broken version: width 300 pixels, padding 20 pixels on each side, and a border of 1 pixel. The box grows to 342.
+
+The fix: set box-sizing to border-box. Now the width you write includes padding and border.
+
+Put that one rule at the top of your stylesheet, and apply it to every element. Many frameworks do this for you.
+
+The takeaway: with border-box, the size you write is the size you get.
+
+Has a layout broken because a box was bigger than you expected?

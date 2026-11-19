@@ -1,0 +1,15 @@
+You need a page with a header, a sidebar and a main area. Flexbox can do it, but Grid was built for this job.
+
+CSS Grid lays out rows and columns. You define the tracks, and the items fill the slots.
+
+Broken version: nested divs with fixed widths. On a phone, the sidebar pushes the content off the screen.
+
+The fix: make the page a grid. Name the areas: header on top, sidebar on the left, main on the right.
+
+Then set grid template columns with a fixed width for the sidebar, and one flexible column for the content.
+
+On a phone, switch the columns to one. The same markup stacks with no extra code.
+
+The takeaway: use Grid for the whole page, and Flexbox for small pieces inside it.
+
+What page would you build with Grid first?

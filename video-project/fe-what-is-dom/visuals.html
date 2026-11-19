@@ -1,0 +1,143 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #2ec4b6; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #2ec4b6; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(9,12,16,0.82); border: 1px solid rgba(46,196,182,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #8fb8b4; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f4fbfa; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f4fbfa; line-height: 1.12; }
+  .node { position: absolute; height: 64px; line-height: 64px; padding: 0 22px; border-radius: 14px; border: 2px solid #2ec4b6; background: rgba(46,196,182,0.10); font: 700 26px 'JetBrains Mono', monospace; color: #d9fbf6; }
+  .edge { position: absolute; background: #2ec4b6; opacity: 0.6; }
+  .file { position: absolute; height: 150px; border: 2px solid #3a4a4f; border-radius: 16px; background: rgba(255,255,255,0.03); }
+  .mono { position: absolute; font: 400 26px 'JetBrains Mono', monospace; color: #d9fbf6; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .acc { color: #2ec4b6; }
+  .hl { color: #ffd166; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="4.8" data-track-index="1">01 · The page</div>
+  <div class="kick clip" data-start="5.4" data-duration="15.6" data-track-index="1">02 · The DOM</div>
+  <div class="kick clip" data-start="21.2" data-duration="5.5" data-track-index="1">03 · Live tree</div>
+  <div class="kick clip" data-start="26.5" data-duration="8.7" data-track-index="1">04 · Source vs live</div>
+  <div class="kick clip" data-start="41.8" data-duration="3.6" data-track-index="1">05 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: a web page in the browser -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 40px; top: 60px; width: 820px; height: 520px; border: 2px solid #2b3d42; border-radius: 22px; background: rgba(255,255,255,0.03);">
+      <div class="file" style="left: 24px; top: 20px; width: 772px; height: 64px; height: 64px; border-radius: 32px;"></div>
+      <div class="mono" style="left: 48px; top: 34px; font-size: 26px; color: #8fb8b4;">example.com</div>
+      <div class="txt" style="left: 56px; top: 130px; font-size: 56px;">Hello</div>
+      <div class="node" style="left: 56px; top: 240px;">Get started</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 40px;">The page appears.</div>
+  </div>
+
+  <!-- 1: DOM = a tree -->
+  <div id="g1" class="g">
+    <div class="big" style="top: 60px; font-size: 40px; color: #8fb8b4;">Document Object Model</div>
+    <div class="node" style="left: 350px; top: 150px;">html</div>
+    <div class="edge" style="left: 392px; top: 214px; width: 4px; height: 54px;"></div>
+    <div class="node" style="left: 350px; top: 268px;">body</div>
+    <div class="txt" style="left: 60px; top: 400px; font-size: 40px;">A tree of every element.</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 32px; color: #8fb8b4;">Each one is a node.</div>
+  </div>
+
+  <!-- 2: example tree -->
+  <div id="g2" class="g">
+    <div class="node" style="left: 350px; top: 60px;">body</div>
+    <div class="edge" style="left: 300px; top: 124px; width: 160px; height: 4px;"></div>
+    <div class="edge" style="left: 300px; top: 124px; width: 4px; height: 70px;"></div>
+    <div class="edge" style="left: 600px; top: 124px; width: 4px; height: 70px;"></div>
+    <div class="node" id="n-h1" style="left: 120px; top: 190px;">h1</div>
+    <div class="node" id="n-btn" style="left: 470px; top: 190px;">button</div>
+    <div class="txt" style="left: 60px; top: 340px; font-size: 36px;">Heading, button: nodes.</div>
+    <div class="txt" style="left: 60px; top: 410px; font-size: 32px; color: #8fb8b4;">A heading and a button.</div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px; background: rgba(46,196,182,0.14); color: #2ec4b6;">Every element is a node.</div>
+  </div>
+
+  <!-- 3: JavaScript changes the tree -->
+  <div id="g3" class="g">
+    <div class="node" style="left: 60px; top: 120px; border-color: #ffd166; color: #ffd166;">h1</div>
+    <div class="txt" id="head3a" style="left: 60px; top: 230px; font-size: 52px;">Hello</div>
+    <div class="txt" id="head3b" style="left: 60px; top: 230px; font-size: 52px; opacity: 0; color: #ffd166;">Welcome back</div>
+    <div class="mono" style="left: 60px; top: 340px; font-size: 26px; color: #8fb8b4;">document.querySelector('h1').textContent = ...</div>
+    <div class="txt acc" style="left: 60px; top: 470px; font-size: 40px;">Screen updates at once.</div>
+  </div>
+
+  <!-- 4: HTML file is the source, DOM is what you see -->
+  <div id="g4" class="g">
+    <div class="file" style="left: 60px; top: 120px; width: 360px; height: 180px;"></div>
+    <div class="lbl" style="left: 84px; top: 146px;">index.html</div>
+    <div class="mono" style="left: 84px; top: 200px; font-size: 24px; color: #8fb8b4;">source file</div>
+    <div class="file" style="left: 480px; top: 120px; width: 360px; height: 180px; border-color: #2ec4b6;"></div>
+    <div class="lbl" style="left: 504px; top: 146px; color: #2ec4b6;">The DOM</div>
+    <div class="mono" style="left: 504px; top: 200px; font-size: 24px; color: #d9fbf6;">live page</div>
+    <div class="redbox" style="left: 60px; top: 360px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Not the live page once loaded.</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 36px;">The DOM is what you see and touch.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g">
+    <div class="big" style="top: 180px; font-size: 52px;">HTML is the blueprint.</div>
+    <div class="big acc" style="top: 330px; font-size: 52px;">The DOM is the building.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">Have you changed a page<br>with inspect?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the page
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.1);
+
+  // 1: DOM defined
+  tl.fromTo("#g1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 5.4);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 5.4);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 12.8);
+
+  // 2: example tree
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.0);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.9);
+
+  // 3: JavaScript changes the tree
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.2);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 21.2);
+  tl.to("#head3a", { opacity: 0, duration: 0.3 }, 23.6);
+  tl.to("#head3b", { opacity: 1, duration: 0.4 }, 23.8);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 26.3);
+
+  // 4: source vs live
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 26.5);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 26.5);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 35.2);
+
+  // 5: takeaway
+  tl.fromTo("#g5", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 35.4);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 35.4);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 41.5);
+
+  // 6: question
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 41.84);
+</script>

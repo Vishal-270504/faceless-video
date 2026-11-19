@@ -1,0 +1,147 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #b388ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #b388ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(12,8,22,0.82); border: 1px solid rgba(179,136,255,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #c4aee6; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f6f1ff; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f6f1ff; line-height: 1.12; }
+  .mono { position: absolute; font: 400 26px 'JetBrains Mono', monospace; color: #f6f1ff; }
+  .scope-outer { position: absolute; border: 2px solid #b388ff; border-radius: 22px; background: rgba(179,136,255,0.07); }
+  .scope-inner { position: absolute; border: 2px dashed #d7c2ff; border-radius: 16px; background: rgba(255,255,255,0.03); }
+  .val { position: absolute; width: 150px; height: 84px; line-height: 84px; text-align: center; border-radius: 16px; background: #2a1d44; border: 2px solid #b388ff; font: 900 40px Inter, sans-serif; color: #f6f1ff; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .acc { color: #b388ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="6.9" data-track-index="1">01 · Remembers</div>
+  <div class="kick clip" data-start="7.1" data-duration="7.2" data-track-index="1">02 · Example</div>
+  <div class="kick clip" data-start="14.6" data-duration="9.6" data-track-index="1">03 · Not reset</div>
+  <div class="kick clip" data-start="24.2" data-duration="3.9" data-track-index="1">04 · Private</div>
+  <div class="kick clip" data-start="28.7" data-duration="7.4" data-track-index="1">05 · Real use</div>
+  <div class="kick clip" data-start="36.1" data-duration="4.6" data-track-index="1">06 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: a function remembers -->
+  <div id="g0" class="g">
+    <div class="scope-outer" style="left: 60px; top: 120px; width: 780px; height: 300px;">
+      <div class="lbl" style="left: 24px; top: 20px;">makeCounter</div>
+      <div class="val" style="left: 310px; top: 110px;">0</div>
+      <div class="mono" style="left: 290px; top: 220px; font-size: 22px; color: #c4aee6;">count</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 480px; font-size: 40px;">A function remembers its outer variables.</div>
+    <div class="txt" style="left: 60px; top: 560px; font-size: 30px; color: #c4aee6;">Even after the outer one finished.</div>
+  </div>
+
+  <!-- 1: the example -->
+  <div id="g1" class="g">
+    <div class="mono" style="left: 60px; top: 120px; font-size: 26px; color: #c4aee6;">function makeCounter() {</div>
+    <div class="mono acc" style="left: 100px; top: 170px; font-size: 26px; font-weight: 700;">let count = 0;</div>
+    <div class="mono" style="left: 100px; top: 220px; font-size: 26px;">return () =&gt; ++count;</div>
+    <div class="mono" style="left: 60px; top: 270px; font-size: 26px; color: #c4aee6;">}</div>
+    <div class="mono" style="left: 60px; top: 350px; font-size: 26px;">const counter = makeCounter();</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 38px;">The inner function keeps count.</div>
+  </div>
+
+  <!-- 2: broken idea: count resets -->
+  <div id="g2" class="g">
+    <div class="val" style="left: 60px; top: 150px;">1</div>
+    <div class="val" style="left: 240px; top: 150px;">2</div>
+    <div class="val" style="left: 420px; top: 150px;">3</div>
+    <div class="lbl" style="left: 60px; top: 260px;">counter() called three times</div>
+    <div class="redbox" style="left: 60px; top: 340px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Broken idea: it resets to 0.</div>
+    <div class="txt acc" style="left: 60px; top: 460px; font-size: 40px;">It does not reset.</div>
+    <div class="txt" style="left: 60px; top: 520px; font-size: 30px; color: #c4aee6;">The inner function keeps its copy.</div>
+  </div>
+
+  <!-- 3: private data -->
+  <div id="g3" class="g">
+    <div class="scope-outer" style="left: 60px; top: 130px; width: 780px; height: 240px;">
+      <div class="lbl" style="left: 24px; top: 20px;">inside the closure</div>
+      <div class="val" style="left: 310px; top: 70px;">count</div>
+    </div>
+    <div class="redbox" style="left: 60px; top: 410px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">No global variable needed.</div>
+    <div class="txt" style="left: 60px; top: 510px; font-size: 36px;">Private data, kept safe.</div>
+  </div>
+
+  <!-- 4: real use: a loop of buttons -->
+  <div id="g4" class="g">
+    <div class="mono" style="left: 60px; top: 110px; font-size: 26px; color: #c4aee6;">for each note:</div>
+    <div class="val" style="left: 60px; top: 170px; width: 240px; height: 80px; line-height: 76px; font-size: 30px;">Button 1</div>
+    <div class="txt" style="left: 330px; top: 192px; font-size: 30px;">opens note 1</div>
+    <div class="val" style="left: 60px; top: 280px; width: 240px; height: 80px; line-height: 76px; font-size: 30px;">Button 2</div>
+    <div class="txt" style="left: 330px; top: 302px; font-size: 30px;">opens note 2</div>
+    <div class="val" style="left: 60px; top: 390px; width: 240px; height: 80px; line-height: 76px; font-size: 30px;">Button 3</div>
+    <div class="txt" style="left: 330px; top: 412px; font-size: 30px;">opens note 3</div>
+    <div class="txt" style="left: 60px; top: 520px; font-size: 34px;">Each one remembers its own note.</div>
+  </div>
+
+  <!-- 5: tip: what can it see -->
+  <div id="g5" class="g">
+    <div class="scope-outer" style="left: 60px; top: 120px; width: 780px; height: 380px;">
+      <div class="lbl" style="left: 24px; top: 20px;">outer: count</div>
+      <div class="scope-inner" style="left: 120px; top: 110px; width: 540px; height: 230px;">
+        <div class="lbl" style="left: 24px; top: 20px; color: #d7c2ff;">inner: sees count</div>
+      </div>
+    </div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 36px;">Ask: what can this see?</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 210px; font-size: 52px;">An inner function</div>
+    <div class="big acc" style="top: 340px; font-size: 52px;">carries the outer variables with it.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">Where have you used a<br>function that remembers?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.6);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.1);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.1);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.2);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 14.6);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.6);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 23.9);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 24.2);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 24.2);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 28.4);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 28.7);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 28.7);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 36.0);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 36.1);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 40.5);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.82);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 44.9);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.16);
+</script>

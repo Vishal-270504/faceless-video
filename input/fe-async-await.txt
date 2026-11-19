@@ -1,0 +1,15 @@
+You fetch data, print it, and it says undefined. You're not crazy. Your code ran before the data arrived.
+
+Fetching data over the network takes time. JavaScript doesn't wait by default. It moves on to the next line.
+
+Broken version: you store the fetch result, then read the JSON on the very next line, before the response is back.
+
+The fix: await the answer. The line pauses until the response arrives, then continues.
+
+Put await inside an async function, then call that function to start the work.
+
+Check the response too. A fetch that gets a 404 still resolves, so check that response dot ok is true.
+
+The takeaway: if a value is undefined, ask whether it has arrived yet.
+
+Where did you last see undefined that should have been data?

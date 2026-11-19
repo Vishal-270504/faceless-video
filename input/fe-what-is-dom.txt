@@ -1,0 +1,13 @@
+You type a web address and the page appears. But what does your browser actually build?
+
+It builds the DOM. It stands for Document Object Model, and in plain words it's a tree of every element on the page.
+
+Here's a small example. A page has a body. Inside the body sit a heading and a button. Each one is a node in the tree.
+
+JavaScript reads and changes this tree. Change a node's text, and the screen updates straight away.
+
+Broken idea: thinking the HTML file is the live page. Once the browser loads it, the DOM is what you see and touch.
+
+The takeaway: HTML is the blueprint, and the DOM is the building JavaScript can rearrange.
+
+Have you ever changed a page with your browser's inspect tool?

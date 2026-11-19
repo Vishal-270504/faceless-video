@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
+    .bgvid { position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
+      filter: blur(18px) brightness(0.32) saturate(1.15); }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #a5b4fc; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #a5b4fc; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(8,9,22,0.84); border: 1px solid rgba(165,180,252,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #c7cdfb; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f1f3ff; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f1f3ff; line-height: 1.12; }
+  .mono { position: absolute; font: 400 25px 'JetBrains Mono', monospace; color: #f1f3ff; }
+  .grid { position: absolute; left: 60px; top: 100px; width: 780px; display: grid; grid-template-columns: repeat(8, 88px); gap: 10px; }
+  .tile { width: 88px; height: 88px; border-radius: 12px; background: #1d2044; border: 1px solid #3a3f78; }
+  .tile.ok { background: #a5b4fc; border-color: #a5b4fc; }
+  .tile.wait { background: transparent; border: 2px dashed #4a4f8a; }
+  .tile.busy { background: #3a3f78; }
+  .fold { position: absolute; left: 60px; width: 780px; height: 0; border-top: 3px dashed #a5b4fc; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .acc { color: #a5b4fc; }
+  .frame { position: absolute; left: 60px; top: 110px; width: 780px; height: 500px; border: 2px solid #2c3060; border-radius: 22px; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="51.14"
+       data-width="1080" data-height="1920">
+    <video id="bg" class="bgvid clip" src="assets/bg.mp4" muted loop playsinline data-start="0" data-duration="51.14" data-track-index="0"></video>
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="6.4" data-track-index="1">01 · Forty images</div>
+  <div class="kick clip" data-start="6.9" data-duration="6.1" data-track-index="1">02 · Off screen</div>
+  <div class="kick clip" data-start="13.7" data-duration="8.9" data-track-index="1">03 · Load all</div>
+  <div class="kick clip" data-start="23.4" data-duration="6.6" data-track-index="1">04 · Lazy</div>
+  <div class="kick clip" data-start="30.8" data-duration="6.5" data-track-index="1">05 · Hero</div>
+  <div class="kick clip" data-start="37.7" data-duration="4.7" data-track-index="1">06 · Size</div>
+  <div class="kick clip" data-start="43.1" data-duration="3.4" data-track-index="1">07 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: forty images -->
+  <div id="g0" class="g">
+    <div class="grid" id="gA"></div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 40px;">Forty images, one page.</div>
+  </div>
+
+  <!-- 1: below the fold waits -->
+  <div id="g1" class="g">
+    <div class="grid" id="gB"></div>
+    <div class="fold" style="top: 400px;"></div>
+    <div class="lbl acc" style="left: 60px; top: 412px; font-size: 22px;">screen edge</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 36px;">Below the fold: not needed yet.</div>
+  </div>
+
+  <!-- 2: broken: all at once -->
+  <div id="g2" class="g">
+    <div class="grid" id="gC"></div>
+    <div class="redbox" style="left: 60px; top: 580px; width: 780px; height: 50px; line-height: 50px; padding: 0 22px; font-size: 26px;">40 requests before the first scroll.</div>
+  </div>
+
+  <!-- 3: loading lazy -->
+  <div id="g3" class="g">
+    <div class="grid" id="gD"></div>
+    <div class="fold" style="top: 400px;"></div>
+    <div class="mono acc" style="left: 60px; top: 560px; font-size: 26px;">loading="lazy"</div>
+    <div class="txt grn" style="left: 60px; top: 606px; font-size: 26px;">Loads as it nears the screen.</div>
+  </div>
+
+  <!-- 4: hero stays eager -->
+  <div id="g4" class="g">
+    <div class="tile ok" style="position: absolute; left: 60px; top: 110px; width: 400px; height: 220px; border-radius: 18px;"></div>
+    <div class="mono acc" style="left: 80px; top: 124px; font-size: 24px;">hero: loading=eager</div>
+    <div class="grid" style="top: 370px;"><div class="tile wait"></div><div class="tile wait"></div><div class="tile wait"></div><div class="tile wait"></div><div class="tile wait"></div><div class="tile wait"></div><div class="tile wait"></div><div class="tile wait"></div></div>
+    <div class="txt" style="left: 60px; top: 560px; font-size: 34px;">Not the hero image.</div>
+    <div class="txt" style="left: 60px; top: 612px; font-size: 28px; color: #c7cdfb;">The first screen loads now.</div>
+  </div>
+
+  <!-- 5: width and height -->
+  <div id="g5" class="g">
+    <div class="tile wait" style="position: absolute; left: 60px; top: 120px; width: 380px; height: 240px; border-radius: 18px;"></div>
+    <div class="mono" style="left: 60px; top: 380px; font-size: 26px;">width="380" height="240"</div>
+    <div class="txt grn" style="left: 60px; top: 440px; font-size: 34px;">Space reserved: no jump.</div>
+    <div class="redbox" style="left: 60px; top: 530px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">No size: the text jumps down.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px; font-size: 52px;">Load what the user sees now,</div>
+    <div class="big acc" style="top: 340px; font-size: 52px;">and wait for the rest.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">How many images does your<br>slowest page load before scroll?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.88" data-track-index="1">Your page loads</div>
+    <div id="c1" class="caption clip" data-start="0.88" data-duration="1.16" data-track-index="1">40 images before</div>
+    <div id="c2" class="caption clip" data-start="2.04" data-duration="0.74" data-track-index="1">the user scrolls</div>
+    <div id="c3" class="caption clip" data-start="2.78" data-duration="0.30" data-track-index="1">once.</div>
+    <div id="c4" class="caption clip" data-start="3.84" data-duration="0.40" data-track-index="1">On a phone,</div>
+    <div id="c5" class="caption clip" data-start="4.70" data-duration="0.82" data-track-index="1">that download takes</div>
+    <div id="c6" class="caption clip" data-start="5.52" data-duration="0.40" data-track-index="1">seconds.</div>
+    <div id="c7" class="caption clip" data-start="6.86" data-duration="1.04" data-track-index="1">Images below the</div>
+    <div id="c8" class="caption clip" data-start="7.90" data-duration="0.82" data-track-index="1">screen don't need</div>
+    <div id="c9" class="caption clip" data-start="8.72" data-duration="0.56" data-track-index="1">to load yet.</div>
+    <div id="c10" class="caption clip" data-start="10.02" data-duration="0.80" data-track-index="1">Lazy loading waits</div>
+    <div id="c11" class="caption clip" data-start="10.82" data-duration="0.82" data-track-index="1">until they get</div>
+    <div id="c12" class="caption clip" data-start="11.64" data-duration="0.54" data-track-index="1">close to the</div>
+    <div id="c13" class="caption clip" data-start="12.18" data-duration="0.30" data-track-index="1">screen.</div>
+    <div id="c14" class="caption clip" data-start="13.68" data-duration="0.30" data-track-index="1">Broken version,</div>
+    <div id="c15" class="caption clip" data-start="14.42" data-duration="1.00" data-track-index="1">every image in</div>
+    <div id="c16" class="caption clip" data-start="15.42" data-duration="1.22" data-track-index="1">the HTML loads</div>
+    <div id="c17" class="caption clip" data-start="16.64" data-duration="0.62" data-track-index="1">as soon as</div>
+    <div id="c18" class="caption clip" data-start="17.26" data-duration="0.64" data-track-index="1">the page opens.</div>
+    <div id="c19" class="caption clip" data-start="18.90" data-duration="0.80" data-track-index="1">The browser fetches</div>
+    <div id="c20" class="caption clip" data-start="19.70" data-duration="1.14" data-track-index="1">all 40 files,</div>
+    <div id="c21" class="caption clip" data-start="21.24" data-duration="0.56" data-track-index="1">even for the</div>
+    <div id="c22" class="caption clip" data-start="21.80" data-duration="0.40" data-track-index="1">top of the</div>
+    <div id="c23" class="caption clip" data-start="22.20" data-duration="0.30" data-track-index="1">page.</div>
+    <div id="c24" class="caption clip" data-start="23.38" data-duration="0.30" data-track-index="1">The fix,</div>
+    <div id="c25" class="caption clip" data-start="24.18" data-duration="0.92" data-track-index="1">add loading equals</div>
+    <div id="c26" class="caption clip" data-start="25.10" data-duration="0.70" data-track-index="1">lazy to the</div>
+    <div id="c27" class="caption clip" data-start="25.80" data-duration="0.88" data-track-index="1">images below the</div>
+    <div id="c28" class="caption clip" data-start="26.68" data-duration="1.30" data-track-index="1">fold. The browser</div>
+    <div id="c29" class="caption clip" data-start="27.98" data-duration="0.92" data-track-index="1">loads each one</div>
+    <div id="c30" class="caption clip" data-start="28.90" data-duration="0.70" data-track-index="1">as it nears</div>
+    <div id="c31" class="caption clip" data-start="29.60" data-duration="0.38" data-track-index="1">the screen.</div>
+    <div id="c32" class="caption clip" data-start="30.84" data-duration="0.68" data-track-index="1">Keep the first</div>
+    <div id="c33" class="caption clip" data-start="31.52" data-duration="1.18" data-track-index="1">visible image eager.</div>
+    <div id="c34" class="caption clip" data-start="33.36" data-duration="0.80" data-track-index="1">Lazy loading the</div>
+    <div id="c35" class="caption clip" data-start="34.16" data-duration="1.02" data-track-index="1">hero image delays</div>
+    <div id="c36" class="caption clip" data-start="35.18" data-duration="0.96" data-track-index="1">the first thing</div>
+    <div id="c37" class="caption clip" data-start="36.14" data-duration="0.72" data-track-index="1">users want to</div>
+    <div id="c38" class="caption clip" data-start="36.86" data-duration="0.30" data-track-index="1">see.</div>
+    <div id="c39" class="caption clip" data-start="37.72" data-duration="0.96" data-track-index="1">Always set width</div>
+    <div id="c40" class="caption clip" data-start="38.68" data-duration="0.72" data-track-index="1">and height on</div>
+    <div id="c41" class="caption clip" data-start="39.40" data-duration="0.30" data-track-index="1">images.</div>
+    <div id="c42" class="caption clip" data-start="40.46" data-duration="0.54" data-track-index="1">The layout then</div>
+    <div id="c43" class="caption clip" data-start="41.00" data-duration="0.80" data-track-index="1">holds still while</div>
+    <div id="c44" class="caption clip" data-start="41.80" data-duration="0.36" data-track-index="1">they load.</div>
+    <div id="c45" class="caption clip" data-start="43.08" data-duration="0.34" data-track-index="1">The takeaway,</div>
+    <div id="c46" class="caption clip" data-start="44.04" data-duration="0.48" data-track-index="1">load what the</div>
+    <div id="c47" class="caption clip" data-start="44.52" data-duration="0.58" data-track-index="1">user can see</div>
+    <div id="c48" class="caption clip" data-start="45.10" data-duration="0.78" data-track-index="1">now and wait</div>
+    <div id="c49" class="caption clip" data-start="45.88" data-duration="0.46" data-track-index="1">for the rest.</div>
+    <div id="c50" class="caption clip" data-start="47.26" data-duration="0.72" data-track-index="1">How many images</div>
+    <div id="c51" class="caption clip" data-start="47.98" data-duration="0.98" data-track-index="1">does your slowest</div>
+    <div id="c52" class="caption clip" data-start="48.96" data-duration="0.94" data-track-index="1">page load before</div>
+    <div id="c53" class="caption clip" data-start="49.90" data-duration="0.64" data-track-index="1">anyone scrolls?</div>
+    <audio id="narration" data-start="0" data-duration="51.14" data-track-index="2" data-volume="1"
+           src="assets/fe-lazy-images.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  function tiles(id, cls) {
+    const g = document.getElementById(id);
+    for (let i = 0; i < 40; i++) {
+      const t = document.createElement("div");
+      t.className = "tile " + cls(i);
+      g.appendChild(t);
+    }
+  }
+  tiles("gA", () => "ok");
+  tiles("gB", (i) => (i < 24 ? "ok" : "wait"));
+  tiles("gC", () => "busy");
+  tiles("gD", (i) => (i < 24 ? "ok" : "wait"));
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.5);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 6.9);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 6.9);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.2);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.7);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 13.7);
+  tl.fromTo("#gC .tile", { opacity: 0.2 }, { opacity: 1, duration: 0.5, stagger: 0.03, repeat: 3, yoyo: true, ease: "power1.inOut" }, 14.2);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 22.9);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 23.4);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 23.4);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 30.5);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 30.84);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.8);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 37.4);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 37.72);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 42.8);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 43.08);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 46.9);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 47.26);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.88);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.88); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.88); tl.set("#c1", { opacity: 0 }, 2.04);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 2.04); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.04); tl.set("#c2", { opacity: 0 }, 2.78);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.78); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.78); tl.set("#c3", { opacity: 0 }, 3.08);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.84); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.84); tl.set("#c4", { opacity: 0 }, 4.24);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 4.70); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.70); tl.set("#c5", { opacity: 0 }, 5.52);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.52); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.52); tl.set("#c6", { opacity: 0 }, 5.92);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 6.86); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.86); tl.set("#c7", { opacity: 0 }, 7.90);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 7.90); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.90); tl.set("#c8", { opacity: 0 }, 8.72);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 8.72); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.72); tl.set("#c9", { opacity: 0 }, 9.28);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 10.02); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.02); tl.set("#c10", { opacity: 0 }, 10.82);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 10.82); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.82); tl.set("#c11", { opacity: 0 }, 11.64);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 11.64); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.64); tl.set("#c12", { opacity: 0 }, 12.18);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 12.18); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.18); tl.set("#c13", { opacity: 0 }, 12.48);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 13.68); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.68); tl.set("#c14", { opacity: 0 }, 13.98);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 14.42); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.42); tl.set("#c15", { opacity: 0 }, 15.42);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 15.42); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.42); tl.set("#c16", { opacity: 0 }, 16.64);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 16.64); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.64); tl.set("#c17", { opacity: 0 }, 17.26);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 17.26); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.26); tl.set("#c18", { opacity: 0 }, 17.90);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 18.90); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.90); tl.set("#c19", { opacity: 0 }, 19.70);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 19.70); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.70); tl.set("#c20", { opacity: 0 }, 20.84);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 21.24); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.24); tl.set("#c21", { opacity: 0 }, 21.80);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 21.80); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.80); tl.set("#c22", { opacity: 0 }, 22.20);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 22.20); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.20); tl.set("#c23", { opacity: 0 }, 22.50);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 23.38); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.38); tl.set("#c24", { opacity: 0 }, 23.68);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 24.18); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.18); tl.set("#c25", { opacity: 0 }, 25.10);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 25.10); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.10); tl.set("#c26", { opacity: 0 }, 25.80);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 25.80); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.80); tl.set("#c27", { opacity: 0 }, 26.68);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 26.68); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.68); tl.set("#c28", { opacity: 0 }, 27.98);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 27.98); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.98); tl.set("#c29", { opacity: 0 }, 28.90);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 28.90); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.90); tl.set("#c30", { opacity: 0 }, 29.60);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 29.60); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.60); tl.set("#c31", { opacity: 0 }, 29.98);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 30.84); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.84); tl.set("#c32", { opacity: 0 }, 31.52);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 31.52); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.52); tl.set("#c33", { opacity: 0 }, 32.70);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 33.36); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.36); tl.set("#c34", { opacity: 0 }, 34.16);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 34.16); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.16); tl.set("#c35", { opacity: 0 }, 35.18);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 35.18); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.18); tl.set("#c36", { opacity: 0 }, 36.14);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 36.14); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.14); tl.set("#c37", { opacity: 0 }, 36.86);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 36.86); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.86); tl.set("#c38", { opacity: 0 }, 37.16);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 37.72); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.72); tl.set("#c39", { opacity: 0 }, 38.68);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 38.68); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.68); tl.set("#c40", { opacity: 0 }, 39.40);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 39.40); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.40); tl.set("#c41", { opacity: 0 }, 39.70);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 40.46); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.46); tl.set("#c42", { opacity: 0 }, 41.00);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 41.00); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.00); tl.set("#c43", { opacity: 0 }, 41.80);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 41.80); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.80); tl.set("#c44", { opacity: 0 }, 42.16);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 43.08); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.08); tl.set("#c45", { opacity: 0 }, 43.42);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 44.04); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.04); tl.set("#c46", { opacity: 0 }, 44.52);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 44.52); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.52); tl.set("#c47", { opacity: 0 }, 45.10);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 45.10); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.10); tl.set("#c48", { opacity: 0 }, 45.88);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 45.88); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.88); tl.set("#c49", { opacity: 0 }, 46.34);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 47.26); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.26); tl.set("#c50", { opacity: 0 }, 47.98);
+    tl.set("#c51", { opacity: 1, scale: 0.92 }, 47.98); tl.to("#c51", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.98); tl.set("#c51", { opacity: 0 }, 48.96);
+    tl.set("#c52", { opacity: 1, scale: 0.92 }, 48.96); tl.to("#c52", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.96); tl.set("#c52", { opacity: 0 }, 49.90);
+    tl.set("#c53", { opacity: 1, scale: 0.92 }, 49.90); tl.to("#c53", { scale: 1, duration: 0.12, ease: "power2.out" }, 49.90); tl.set("#c53", { opacity: 0 }, 50.54);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

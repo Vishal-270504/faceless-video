@@ -1,0 +1,15 @@
+Centering a box used to take hours of guessing. Today it takes three lines of CSS.
+
+Flexbox is a layout tool. You turn on flex on the parent, and its children line up for you.
+
+Broken version: a box sits in the top left corner, held in place by margin tricks that break when the screen resizes.
+
+The fix: set display flex on the parent. Then set justify-content to center, which centers on the horizontal axis.
+
+Add align-items center, which centers on the vertical axis. The child now sits in the middle at any screen size.
+
+Flex also spaces items in a row. Use gap, so you don't need margins on every child.
+
+The takeaway: flex the parent, then align the children with two properties.
+
+Which layout do you still fight with margins?

@@ -1,0 +1,15 @@
+Your page freezes while it sorts ten thousand items. The buttons stop responding. The page is busy, not broken.
+
+JavaScript runs on one main thread. That thread draws the page and handles clicks. Heavy work blocks both.
+
+Broken version: a loop that filters a huge list inside a click handler. Every click waits until the loop ends.
+
+The fix: a Web Worker. It runs a separate script in a background thread.
+
+Send the data with postMessage. The worker sends the result back, and your code receives it in an onmessage handler.
+
+Workers can't touch the DOM. Keep the screen updates on the main thread, and do the number crunching in the worker.
+
+The takeaway: move heavy work off the main thread, and keep the screen free to respond.
+
+What's the slowest task in your frontend right now?

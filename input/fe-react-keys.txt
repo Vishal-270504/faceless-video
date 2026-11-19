@@ -1,0 +1,15 @@
+Your list looks fine, until you delete an item. Now the wrong row changes, or the typed text jumps to another item.
+
+React needs a key on each list item. The key tells React which item is which when the list changes.
+
+Broken version: the key is the array index. Delete the first item, and every later item moves up to an index that belongs to someone else.
+
+Why it fails: React matches rows by position, so the state stays with the slot, not with the item.
+
+The fix: use a stable ID from your data, like the note's database ID. The key then follows the item.
+
+Don't make random keys on each render. That forces every row to remount every time.
+
+The takeaway: give each list item an ID that never changes.
+
+Have you seen a list item show another item's text after a delete?

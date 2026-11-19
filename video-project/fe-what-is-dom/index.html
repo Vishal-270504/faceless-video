@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
+    .bgvid { position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
+      filter: blur(18px) brightness(0.32) saturate(1.15); }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #2ec4b6; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #2ec4b6; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(9,12,16,0.82); border: 1px solid rgba(46,196,182,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #8fb8b4; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f4fbfa; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f4fbfa; line-height: 1.12; }
+  .node { position: absolute; height: 64px; line-height: 64px; padding: 0 22px; border-radius: 14px; border: 2px solid #2ec4b6; background: rgba(46,196,182,0.10); font: 700 26px 'JetBrains Mono', monospace; color: #d9fbf6; }
+  .edge { position: absolute; background: #2ec4b6; opacity: 0.6; }
+  .file { position: absolute; height: 150px; border: 2px solid #3a4a4f; border-radius: 16px; background: rgba(255,255,255,0.03); }
+  .mono { position: absolute; font: 400 26px 'JetBrains Mono', monospace; color: #d9fbf6; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .acc { color: #2ec4b6; }
+  .hl { color: #ffd166; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="45.76"
+       data-width="1080" data-height="1920">
+    <video id="bg" class="bgvid clip" src="assets/bg.mp4" muted loop playsinline data-start="0" data-duration="45.76" data-track-index="0"></video>
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="4.8" data-track-index="1">01 · The page</div>
+  <div class="kick clip" data-start="5.4" data-duration="15.6" data-track-index="1">02 · The DOM</div>
+  <div class="kick clip" data-start="21.2" data-duration="5.5" data-track-index="1">03 · Live tree</div>
+  <div class="kick clip" data-start="26.5" data-duration="8.7" data-track-index="1">04 · Source vs live</div>
+  <div class="kick clip" data-start="41.8" data-duration="3.6" data-track-index="1">05 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: a web page in the browser -->
+  <div id="g0" class="g">
+    <div class="box" style="left: 40px; top: 60px; width: 820px; height: 520px; border: 2px solid #2b3d42; border-radius: 22px; background: rgba(255,255,255,0.03);">
+      <div class="file" style="left: 24px; top: 20px; width: 772px; height: 64px; height: 64px; border-radius: 32px;"></div>
+      <div class="mono" style="left: 48px; top: 34px; font-size: 26px; color: #8fb8b4;">example.com</div>
+      <div class="txt" style="left: 56px; top: 130px; font-size: 56px;">Hello</div>
+      <div class="node" style="left: 56px; top: 240px;">Get started</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 40px;">The page appears.</div>
+  </div>
+
+  <!-- 1: DOM = a tree -->
+  <div id="g1" class="g">
+    <div class="big" style="top: 60px; font-size: 40px; color: #8fb8b4;">Document Object Model</div>
+    <div class="node" style="left: 350px; top: 150px;">html</div>
+    <div class="edge" style="left: 392px; top: 214px; width: 4px; height: 54px;"></div>
+    <div class="node" style="left: 350px; top: 268px;">body</div>
+    <div class="txt" style="left: 60px; top: 400px; font-size: 40px;">A tree of every element.</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 32px; color: #8fb8b4;">Each one is a node.</div>
+  </div>
+
+  <!-- 2: example tree -->
+  <div id="g2" class="g">
+    <div class="node" style="left: 350px; top: 60px;">body</div>
+    <div class="edge" style="left: 300px; top: 124px; width: 160px; height: 4px;"></div>
+    <div class="edge" style="left: 300px; top: 124px; width: 4px; height: 70px;"></div>
+    <div class="edge" style="left: 600px; top: 124px; width: 4px; height: 70px;"></div>
+    <div class="node" id="n-h1" style="left: 120px; top: 190px;">h1</div>
+    <div class="node" id="n-btn" style="left: 470px; top: 190px;">button</div>
+    <div class="txt" style="left: 60px; top: 340px; font-size: 36px;">Heading, button: nodes.</div>
+    <div class="txt" style="left: 60px; top: 410px; font-size: 32px; color: #8fb8b4;">A heading and a button.</div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px; background: rgba(46,196,182,0.14); color: #2ec4b6;">Every element is a node.</div>
+  </div>
+
+  <!-- 3: JavaScript changes the tree -->
+  <div id="g3" class="g">
+    <div class="node" style="left: 60px; top: 120px; border-color: #ffd166; color: #ffd166;">h1</div>
+    <div class="txt" id="head3a" style="left: 60px; top: 230px; font-size: 52px;">Hello</div>
+    <div class="txt" id="head3b" style="left: 60px; top: 230px; font-size: 52px; opacity: 0; color: #ffd166;">Welcome back</div>
+    <div class="mono" style="left: 60px; top: 340px; font-size: 26px; color: #8fb8b4;">document.querySelector('h1').textContent = ...</div>
+    <div class="txt acc" style="left: 60px; top: 470px; font-size: 40px;">Screen updates at once.</div>
+  </div>
+
+  <!-- 4: HTML file is the source, DOM is what you see -->
+  <div id="g4" class="g">
+    <div class="file" style="left: 60px; top: 120px; width: 360px; height: 180px;"></div>
+    <div class="lbl" style="left: 84px; top: 146px;">index.html</div>
+    <div class="mono" style="left: 84px; top: 200px; font-size: 24px; color: #8fb8b4;">source file</div>
+    <div class="file" style="left: 480px; top: 120px; width: 360px; height: 180px; border-color: #2ec4b6;"></div>
+    <div class="lbl" style="left: 504px; top: 146px; color: #2ec4b6;">The DOM</div>
+    <div class="mono" style="left: 504px; top: 200px; font-size: 24px; color: #d9fbf6;">live page</div>
+    <div class="redbox" style="left: 60px; top: 360px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Not the live page once loaded.</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 36px;">The DOM is what you see and touch.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g">
+    <div class="big" style="top: 180px; font-size: 52px;">HTML is the blueprint.</div>
+    <div class="big acc" style="top: 330px; font-size: 52px;">The DOM is the building.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">Have you changed a page<br>with inspect?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.70" data-track-index="1">You type a</div>
+    <div id="c1" class="caption clip" data-start="0.70" data-duration="0.80" data-track-index="1">web address and</div>
+    <div id="c2" class="caption clip" data-start="1.50" data-duration="0.60" data-track-index="1">the page appears,</div>
+    <div id="c3" class="caption clip" data-start="2.88" data-duration="0.44" data-track-index="1">but what does</div>
+    <div id="c4" class="caption clip" data-start="3.32" data-duration="0.88" data-track-index="1">your browser actually</div>
+    <div id="c5" class="caption clip" data-start="4.20" data-duration="0.34" data-track-index="1">build?</div>
+    <div id="c6" class="caption clip" data-start="5.40" data-duration="0.64" data-track-index="1">It builds the</div>
+    <div id="c7" class="caption clip" data-start="6.04" data-duration="0.30" data-track-index="1">DOM.</div>
+    <div id="c8" class="caption clip" data-start="6.88" data-duration="0.68" data-track-index="1">It stands for</div>
+    <div id="c9" class="caption clip" data-start="7.56" data-duration="1.10" data-track-index="1">document object model,</div>
+    <div id="c10" class="caption clip" data-start="8.78" data-duration="0.92" data-track-index="1">and in plain</div>
+    <div id="c11" class="caption clip" data-start="9.70" data-duration="0.80" data-track-index="1">words it's a</div>
+    <div id="c12" class="caption clip" data-start="10.50" data-duration="0.78" data-track-index="1">tree of every</div>
+    <div id="c13" class="caption clip" data-start="11.28" data-duration="0.66" data-track-index="1">element on the</div>
+    <div id="c14" class="caption clip" data-start="11.94" data-duration="0.30" data-track-index="1">page.</div>
+    <div id="c15" class="caption clip" data-start="13.06" data-duration="0.58" data-track-index="1">Here's a small</div>
+    <div id="c16" class="caption clip" data-start="13.64" data-duration="0.46" data-track-index="1">example.</div>
+    <div id="c17" class="caption clip" data-start="14.70" data-duration="0.64" data-track-index="1">A page has</div>
+    <div id="c18" class="caption clip" data-start="15.34" data-duration="0.38" data-track-index="1">a body.</div>
+    <div id="c19" class="caption clip" data-start="16.32" data-duration="0.68" data-track-index="1">Inside the body</div>
+    <div id="c20" class="caption clip" data-start="17.00" data-duration="0.54" data-track-index="1">set a heading</div>
+    <div id="c21" class="caption clip" data-start="17.54" data-duration="0.58" data-track-index="1">and a button.</div>
+    <div id="c22" class="caption clip" data-start="18.74" data-duration="0.52" data-track-index="1">Each one is</div>
+    <div id="c23" class="caption clip" data-start="19.26" data-duration="0.50" data-track-index="1">a node in</div>
+    <div id="c24" class="caption clip" data-start="19.76" data-duration="0.30" data-track-index="1">the tree.</div>
+    <div id="c25" class="caption clip" data-start="21.26" data-duration="0.88" data-track-index="1">JavaScript reads and</div>
+    <div id="c26" class="caption clip" data-start="22.14" data-duration="0.86" data-track-index="1">changes this tree.</div>
+    <div id="c27" class="caption clip" data-start="23.60" data-duration="0.72" data-track-index="1">Change a node's</div>
+    <div id="c28" class="caption clip" data-start="24.32" data-duration="0.30" data-track-index="1">text,</div>
+    <div id="c29" class="caption clip" data-start="25.02" data-duration="0.38" data-track-index="1">and the screen</div>
+    <div id="c30" class="caption clip" data-start="25.40" data-duration="1.08" data-track-index="1">updates straight away.</div>
+    <div id="c31" class="caption clip" data-start="26.48" data-duration="1.34" data-track-index="1">Broken idea,</div>
+    <div id="c32" class="caption clip" data-start="28.38" data-duration="0.94" data-track-index="1">thinking the HTML</div>
+    <div id="c33" class="caption clip" data-start="29.32" data-duration="1.02" data-track-index="1">file is the</div>
+    <div id="c34" class="caption clip" data-start="30.34" data-duration="0.48" data-track-index="1">live page.</div>
+    <div id="c35" class="caption clip" data-start="31.54" data-duration="0.50" data-track-index="1">Once the browser</div>
+    <div id="c36" class="caption clip" data-start="32.04" data-duration="1.00" data-track-index="1">loads it, the</div>
+    <div id="c37" class="caption clip" data-start="33.04" data-duration="0.66" data-track-index="1">DOM is what</div>
+    <div id="c38" class="caption clip" data-start="33.70" data-duration="0.60" data-track-index="1">you see and</div>
+    <div id="c39" class="caption clip" data-start="34.30" data-duration="0.30" data-track-index="1">touch.</div>
+    <div id="c40" class="caption clip" data-start="35.44" data-duration="0.36" data-track-index="1">The takeaway,</div>
+    <div id="c41" class="caption clip" data-start="36.48" data-duration="1.20" data-track-index="1">HTML is the</div>
+    <div id="c42" class="caption clip" data-start="37.68" data-duration="0.30" data-track-index="1">blueprint,</div>
+    <div id="c43" class="caption clip" data-start="38.64" data-duration="0.42" data-track-index="1">and the DOM</div>
+    <div id="c44" class="caption clip" data-start="39.06" data-duration="0.70" data-track-index="1">is the building</div>
+    <div id="c45" class="caption clip" data-start="39.76" data-duration="1.56" data-track-index="1">JavaScript can rearrange.</div>
+    <div id="c46" class="caption clip" data-start="41.84" data-duration="0.76" data-track-index="1">Have you ever</div>
+    <div id="c47" class="caption clip" data-start="42.60" data-duration="0.72" data-track-index="1">changed a page</div>
+    <div id="c48" class="caption clip" data-start="43.32" data-duration="1.18" data-track-index="1">with your browser's</div>
+    <div id="c49" class="caption clip" data-start="44.50" data-duration="0.66" data-track-index="1">inspect tool?</div>
+    <audio id="narration" data-start="0" data-duration="45.76" data-track-index="2" data-volume="1"
+           src="assets/fe-what-is-dom.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the page
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.1);
+
+  // 1: DOM defined
+  tl.fromTo("#g1", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 5.4);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 5.4);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 12.8);
+
+  // 2: example tree
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.0);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.9);
+
+  // 3: JavaScript changes the tree
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.2);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 21.2);
+  tl.to("#head3a", { opacity: 0, duration: 0.3 }, 23.6);
+  tl.to("#head3b", { opacity: 1, duration: 0.4 }, 23.8);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 26.3);
+
+  // 4: source vs live
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 26.5);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 26.5);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 35.2);
+
+  // 5: takeaway
+  tl.fromTo("#g5", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 35.4);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 35.4);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 41.5);
+
+  // 6: question
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 41.84);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.70);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.70); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.70); tl.set("#c1", { opacity: 0 }, 1.50);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.50); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.50); tl.set("#c2", { opacity: 0 }, 2.10);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.88); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.88); tl.set("#c3", { opacity: 0 }, 3.32);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.32); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.32); tl.set("#c4", { opacity: 0 }, 4.20);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 4.20); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.20); tl.set("#c5", { opacity: 0 }, 4.54);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.40); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.40); tl.set("#c6", { opacity: 0 }, 6.04);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 6.04); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.04); tl.set("#c7", { opacity: 0 }, 6.34);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 6.88); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.88); tl.set("#c8", { opacity: 0 }, 7.56);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 7.56); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.56); tl.set("#c9", { opacity: 0 }, 8.66);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 8.78); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.78); tl.set("#c10", { opacity: 0 }, 9.70);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.70); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.70); tl.set("#c11", { opacity: 0 }, 10.50);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.50); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.50); tl.set("#c12", { opacity: 0 }, 11.28);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 11.28); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.28); tl.set("#c13", { opacity: 0 }, 11.94);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 11.94); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.94); tl.set("#c14", { opacity: 0 }, 12.24);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 13.06); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.06); tl.set("#c15", { opacity: 0 }, 13.64);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 13.64); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.64); tl.set("#c16", { opacity: 0 }, 14.10);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 14.70); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.70); tl.set("#c17", { opacity: 0 }, 15.34);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 15.34); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.34); tl.set("#c18", { opacity: 0 }, 15.72);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 16.32); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.32); tl.set("#c19", { opacity: 0 }, 17.00);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 17.00); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.00); tl.set("#c20", { opacity: 0 }, 17.54);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 17.54); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.54); tl.set("#c21", { opacity: 0 }, 18.12);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 18.74); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.74); tl.set("#c22", { opacity: 0 }, 19.26);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 19.26); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.26); tl.set("#c23", { opacity: 0 }, 19.76);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 19.76); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.76); tl.set("#c24", { opacity: 0 }, 20.06);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 21.26); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.26); tl.set("#c25", { opacity: 0 }, 22.14);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 22.14); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.14); tl.set("#c26", { opacity: 0 }, 23.00);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 23.60); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.60); tl.set("#c27", { opacity: 0 }, 24.32);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 24.32); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.32); tl.set("#c28", { opacity: 0 }, 24.62);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 25.02); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.02); tl.set("#c29", { opacity: 0 }, 25.40);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 25.40); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.40); tl.set("#c30", { opacity: 0 }, 26.48);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 26.48); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.48); tl.set("#c31", { opacity: 0 }, 27.82);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 28.38); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.38); tl.set("#c32", { opacity: 0 }, 29.32);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 29.32); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.32); tl.set("#c33", { opacity: 0 }, 30.34);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 30.34); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.34); tl.set("#c34", { opacity: 0 }, 30.82);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 31.54); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.54); tl.set("#c35", { opacity: 0 }, 32.04);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 32.04); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.04); tl.set("#c36", { opacity: 0 }, 33.04);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 33.04); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.04); tl.set("#c37", { opacity: 0 }, 33.70);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 33.70); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.70); tl.set("#c38", { opacity: 0 }, 34.30);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 34.30); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.30); tl.set("#c39", { opacity: 0 }, 34.60);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 35.44); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.44); tl.set("#c40", { opacity: 0 }, 35.80);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 36.48); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.48); tl.set("#c41", { opacity: 0 }, 37.68);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 37.68); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.68); tl.set("#c42", { opacity: 0 }, 37.98);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 38.64); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.64); tl.set("#c43", { opacity: 0 }, 39.06);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 39.06); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.06); tl.set("#c44", { opacity: 0 }, 39.76);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 39.76); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.76); tl.set("#c45", { opacity: 0 }, 41.32);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 41.84); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.84); tl.set("#c46", { opacity: 0 }, 42.60);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 42.60); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.60); tl.set("#c47", { opacity: 0 }, 43.32);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 43.32); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.32); tl.set("#c48", { opacity: 0 }, 44.50);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 44.50); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.50); tl.set("#c49", { opacity: 0 }, 45.16);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

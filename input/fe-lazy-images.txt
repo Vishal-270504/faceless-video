@@ -1,0 +1,15 @@
+Your page loads forty images before the user scrolls once. On a phone, that download takes seconds.
+
+Images below the screen don't need to load yet. Lazy loading waits until they get close to the screen.
+
+Broken version: every image in the HTML loads as soon as the page opens. The browser fetches all forty files, even for the top of the page.
+
+The fix: add loading equals lazy to the images below the fold. The browser loads each one as it nears the screen.
+
+Keep the first visible image eager. Lazy-loading the hero image delays the first thing users want to see.
+
+Always set width and height on images. The layout then holds still while they load.
+
+The takeaway: load what the user can see now, and wait for the rest.
+
+How many images does your slowest page load before anyone scrolls?

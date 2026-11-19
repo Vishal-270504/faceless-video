@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
+    .bgvid { position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
+      filter: blur(18px) brightness(0.32) saturate(1.15); }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #c6f432; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #c6f432; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(9,12,4,0.84); border: 1px solid rgba(198,244,50,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #d2e89a; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f8ffe6; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f8ffe6; line-height: 1.12; }
+  .mono { position: absolute; font: 400 25px 'JetBrains Mono', monospace; color: #f8ffe6; }
+  .screen { position: absolute; left: 60px; top: 120px; width: 780px; height: 260px; border: 2px solid #3a4a18; border-radius: 22px; background: rgba(255,255,255,0.03); }
+  .counter { position: absolute; font: 900 90px Inter, sans-serif; color: #c6f432; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .acc { color: #c6f432; }
+  .flow { position: absolute; height: 84px; line-height: 84px; text-align: center; border-radius: 16px; border: 2px solid #4a5a22; background: rgba(198,244,50,0.08); font: 700 28px Inter, sans-serif; color: #f8ffe6; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="48.92"
+       data-width="1080" data-height="1920">
+    <video id="bg" class="bgvid clip" src="assets/bg.mp4" muted loop playsinline data-start="0" data-duration="48.92" data-track-index="0"></video>
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.9" data-track-index="1">01 · Leak</div>
+  <div class="kick clip" data-start="8.2" data-duration="6.7" data-track-index="1">02 · Effect</div>
+  <div class="kick clip" data-start="15.8" data-duration="6.8" data-track-index="1">03 · No cleanup</div>
+  <div class="kick clip" data-start="22.6" data-duration="8.1" data-track-index="1">04 · Return</div>
+  <div class="kick clip" data-start="30.7" data-duration="5.3" data-track-index="1">05 · Clear</div>
+  <div class="kick clip" data-start="36.0" data-duration="5.1" data-track-index="1">06 · Twice</div>
+  <div class="kick clip" data-start="42.0" data-duration="3.6" data-track-index="1">07 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the leak: timer still running after leaving -->
+  <div id="g0" class="g">
+    <div class="screen">
+      <div class="lbl" style="left: 28px; top: 24px;">Chat page</div>
+      <div class="lbl" style="left: 28px; top: 120px; color: #ff8a8a;">Left the page. Timer still on:</div>
+      <div class="counter" id="tick0" style="left: 28px; top: 150px;">0</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 430px; font-size: 40px;">Still running in the background.</div>
+    <div class="txt" style="left: 60px; top: 500px; font-size: 30px; color: #d2e89a;">That is a leak.</div>
+  </div>
+
+  <!-- 1: an effect runs after render -->
+  <div id="g1" class="g">
+    <div class="mono" style="left: 60px; top: 120px; font-size: 26px;">useEffect(() =&gt; {</div>
+    <div class="mono acc" style="left: 100px; top: 170px; font-size: 26px; font-weight: 700;">start something here</div>
+    <div class="mono" style="left: 60px; top: 220px; font-size: 26px;">}, []);</div>
+    <div class="flow" style="left: 60px; top: 320px; width: 240px; height: 84px; line-height: 84px;">Render</div>
+    <div class="flow" style="left: 360px; top: 320px; width: 240px; height: 84px; line-height: 84px;">Effect</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 36px;">The effect runs after the render.</div>
+  </div>
+
+  <!-- 2: broken: no cleanup -->
+  <div id="g2" class="g">
+    <div class="mono" style="left: 60px; top: 110px; font-size: 26px;">useEffect(() =&gt; {</div>
+    <div class="mono acc" style="left: 100px; top: 160px; font-size: 26px; font-weight: 700;">setInterval(tick, 1000);</div>
+    <div class="mono" style="left: 60px; top: 210px; font-size: 26px;">}, []);</div>
+    <div class="redbox" style="left: 60px; top: 300px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">No cleanup: the timer never stops.</div>
+    <div class="txt" style="left: 60px; top: 420px; font-size: 36px;">tick 12, tick 13, tick 14...</div>
+    <div class="txt" style="left: 60px; top: 480px; font-size: 30px; color: #d2e89a;">Even after you leave.</div>
+  </div>
+
+  <!-- 3: return a cleanup function -->
+  <div id="g3" class="g">
+    <div class="mono" style="left: 60px; top: 110px; font-size: 26px;">useEffect(() =&gt; {</div>
+    <div class="mono" style="left: 100px; top: 160px; font-size: 26px;">const id = setInterval(tick, 1000);</div>
+    <div class="mono acc" style="left: 100px; top: 210px; font-size: 26px; font-weight: 700;">return () =&gt; clearInterval(id);</div>
+    <div class="mono" style="left: 60px; top: 260px; font-size: 26px;">}, []);</div>
+    <div class="txt" style="left: 60px; top: 380px; font-size: 40px;">Return a cleanup.</div>
+    <div class="txt" style="left: 60px; top: 450px; font-size: 32px; color: #d2e89a;">React calls it on leave.</div>
+  </div>
+
+  <!-- 4: inside cleanup: stop everything -->
+  <div id="g4" class="g">
+    <div class="flow" style="left: 60px; top: 130px; width: 780px; height: 84px; line-height: 84px;">Component leaves the screen</div>
+    <div class="flow" style="left: 60px; top: 260px; width: 780px; height: 84px; line-height: 84px; border-color: #c6f432;">Cleanup runs: clearInterval</div>
+    <div class="txt grn" style="left: 60px; top: 400px; font-size: 40px;">The leak stops.</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 30px; color: #d2e89a;">Remove listeners the same way.</div>
+  </div>
+
+  <!-- 5: dev runs effects twice -->
+  <div id="g5" class="g">
+    <div class="flow" style="left: 60px; top: 130px; width: 240px; height: 84px; line-height: 84px;">Mount</div>
+    <div class="flow" style="left: 330px; top: 130px; width: 240px; height: 84px; line-height: 84px;">Cleanup</div>
+    <div class="flow" style="left: 600px; top: 130px; width: 240px; height: 84px; line-height: 84px;">Mount</div>
+    <div class="txt" style="left: 60px; top: 300px; font-size: 36px;">In development, React does this on purpose.</div>
+    <div class="redbox" style="left: 60px; top: 410px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Missing cleanup shows up fast.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px; font-size: 52px;">Whatever an effect starts,</div>
+    <div class="big acc" style="top: 330px; font-size: 52px;">its cleanup must stop.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">What did you start in an<br>effect that never stops?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.74" data-track-index="1">You open a</div>
+    <div id="c1" class="caption clip" data-start="0.74" data-duration="1.00" data-track-index="1">chat page, leave</div>
+    <div id="c2" class="caption clip" data-start="1.74" data-duration="0.62" data-track-index="1">it, and the</div>
+    <div id="c3" class="caption clip" data-start="2.36" data-duration="0.82" data-track-index="1">old connection is</div>
+    <div id="c4" class="caption clip" data-start="3.18" data-duration="0.72" data-track-index="1">still running in</div>
+    <div id="c5" class="caption clip" data-start="3.90" data-duration="0.30" data-track-index="1">the background.</div>
+    <div id="c6" class="caption clip" data-start="5.08" data-duration="0.40" data-track-index="1">That's a leak.</div>
+    <div id="c7" class="caption clip" data-start="6.22" data-duration="0.62" data-track-index="1">Use effect can</div>
+    <div id="c8" class="caption clip" data-start="6.84" data-duration="0.48" data-track-index="1">fix it.</div>
+    <div id="c9" class="caption clip" data-start="8.22" data-duration="0.64" data-track-index="1">An effect runs</div>
+    <div id="c10" class="caption clip" data-start="8.86" data-duration="0.72" data-track-index="1">code after a</div>
+    <div id="c11" class="caption clip" data-start="9.58" data-duration="0.46" data-track-index="1">render.</div>
+    <div id="c12" class="caption clip" data-start="10.76" data-duration="0.60" data-track-index="1">Often it starts</div>
+    <div id="c13" class="caption clip" data-start="11.36" data-duration="0.76" data-track-index="1">something that must</div>
+    <div id="c14" class="caption clip" data-start="12.12" data-duration="1.18" data-track-index="1">stop later, like</div>
+    <div id="c15" class="caption clip" data-start="13.30" data-duration="0.86" data-track-index="1">a timer or</div>
+    <div id="c16" class="caption clip" data-start="14.16" data-duration="0.36" data-track-index="1">a listener.</div>
+    <div id="c17" class="caption clip" data-start="15.80" data-duration="0.96" data-track-index="1">Broken version set</div>
+    <div id="c18" class="caption clip" data-start="16.76" data-duration="1.08" data-track-index="1">interval inside Use</div>
+    <div id="c19" class="caption clip" data-start="17.84" data-duration="0.78" data-track-index="1">effect with no</div>
+    <div id="c20" class="caption clip" data-start="18.62" data-duration="0.30" data-track-index="1">cleanup.</div>
+    <div id="c21" class="caption clip" data-start="19.72" data-duration="0.42" data-track-index="1">Leave the page</div>
+    <div id="c22" class="caption clip" data-start="20.14" data-duration="0.76" data-track-index="1">and the timer</div>
+    <div id="c23" class="caption clip" data-start="20.90" data-duration="0.66" data-track-index="1">keeps running.</div>
+    <div id="c24" class="caption clip" data-start="22.56" data-duration="0.78" data-track-index="1">The fix return</div>
+    <div id="c25" class="caption clip" data-start="23.34" data-duration="0.94" data-track-index="1">a function from</div>
+    <div id="c26" class="caption clip" data-start="24.28" data-duration="0.38" data-track-index="1">the effect.</div>
+    <div id="c27" class="caption clip" data-start="25.48" data-duration="0.84" data-track-index="1">React calls it</div>
+    <div id="c28" class="caption clip" data-start="26.32" data-duration="0.68" data-track-index="1">before the effect</div>
+    <div id="c29" class="caption clip" data-start="27.00" data-duration="1.18" data-track-index="1">runs again, and</div>
+    <div id="c30" class="caption clip" data-start="28.18" data-duration="0.64" data-track-index="1">when the component</div>
+    <div id="c31" class="caption clip" data-start="28.82" data-duration="0.92" data-track-index="1">leaves the screen.</div>
+    <div id="c32" class="caption clip" data-start="30.68" data-duration="0.98" data-track-index="1">Inside that function,</div>
+    <div id="c33" class="caption clip" data-start="31.92" data-duration="0.72" data-track-index="1">clear the interval</div>
+    <div id="c34" class="caption clip" data-start="32.64" data-duration="0.84" data-track-index="1">or remove the</div>
+    <div id="c35" class="caption clip" data-start="33.48" data-duration="0.30" data-track-index="1">listener.</div>
+    <div id="c36" class="caption clip" data-start="34.50" data-duration="0.52" data-track-index="1">The leak stops.</div>
+    <div id="c37" class="caption clip" data-start="35.98" data-duration="0.38" data-track-index="1">In development,</div>
+    <div id="c38" class="caption clip" data-start="36.90" data-duration="1.00" data-track-index="1">React runs effects</div>
+    <div id="c39" class="caption clip" data-start="37.90" data-duration="0.90" data-track-index="1">twice on purpose.</div>
+    <div id="c40" class="caption clip" data-start="39.56" data-duration="0.62" data-track-index="1">A missing cleanup</div>
+    <div id="c41" class="caption clip" data-start="40.18" data-duration="0.84" data-track-index="1">shows up fast.</div>
+    <div id="c42" class="caption clip" data-start="42.04" data-duration="0.30" data-track-index="1">The takeaway,</div>
+    <div id="c43" class="caption clip" data-start="42.88" data-duration="0.64" data-track-index="1">whatever an effect</div>
+    <div id="c44" class="caption clip" data-start="43.52" data-duration="1.10" data-track-index="1">starts, its cleanup</div>
+    <div id="c45" class="caption clip" data-start="44.62" data-duration="0.68" data-track-index="1">must stop.</div>
+    <div id="c46" class="caption clip" data-start="46.06" data-duration="0.46" data-track-index="1">What did you</div>
+    <div id="c47" class="caption clip" data-start="46.52" data-duration="0.56" data-track-index="1">start in an</div>
+    <div id="c48" class="caption clip" data-start="47.08" data-duration="0.74" data-track-index="1">effect that never</div>
+    <div id="c49" class="caption clip" data-start="47.82" data-duration="0.50" data-track-index="1">gets stopped?</div>
+    <audio id="narration" data-start="0" data-duration="48.92" data-track-index="2" data-volume="1"
+           src="assets/fe-useeffect-cleanup.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#tick0", { innerText: 14, snap: { innerText: 1 }, duration: 6.0, ease: "none" }, 0.8);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.6);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 8.22);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 8.2);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.6);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 15.8);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 15.8);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 22.3);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 22.6);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 22.6);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 30.4);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 30.7);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.7);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 35.7);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 36.0);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 41.7);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 42.04);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.8);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 46.06);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.74);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.74); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.74); tl.set("#c1", { opacity: 0 }, 1.74);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.74); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.74); tl.set("#c2", { opacity: 0 }, 2.36);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.36); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.36); tl.set("#c3", { opacity: 0 }, 3.18);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.18); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.18); tl.set("#c4", { opacity: 0 }, 3.90);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.90); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.90); tl.set("#c5", { opacity: 0 }, 4.20);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.08); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.08); tl.set("#c6", { opacity: 0 }, 5.48);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 6.22); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.22); tl.set("#c7", { opacity: 0 }, 6.84);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 6.84); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.84); tl.set("#c8", { opacity: 0 }, 7.32);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 8.22); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.22); tl.set("#c9", { opacity: 0 }, 8.86);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 8.86); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.86); tl.set("#c10", { opacity: 0 }, 9.58);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.58); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.58); tl.set("#c11", { opacity: 0 }, 10.04);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.76); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.76); tl.set("#c12", { opacity: 0 }, 11.36);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 11.36); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.36); tl.set("#c13", { opacity: 0 }, 12.12);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 12.12); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.12); tl.set("#c14", { opacity: 0 }, 13.30);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 13.30); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.30); tl.set("#c15", { opacity: 0 }, 14.16);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 14.16); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.16); tl.set("#c16", { opacity: 0 }, 14.52);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 15.80); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.80); tl.set("#c17", { opacity: 0 }, 16.76);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 16.76); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.76); tl.set("#c18", { opacity: 0 }, 17.84);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 17.84); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.84); tl.set("#c19", { opacity: 0 }, 18.62);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 18.62); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.62); tl.set("#c20", { opacity: 0 }, 18.92);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 19.72); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.72); tl.set("#c21", { opacity: 0 }, 20.14);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 20.14); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.14); tl.set("#c22", { opacity: 0 }, 20.90);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 20.90); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.90); tl.set("#c23", { opacity: 0 }, 21.56);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 22.56); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.56); tl.set("#c24", { opacity: 0 }, 23.34);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 23.34); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.34); tl.set("#c25", { opacity: 0 }, 24.28);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 24.28); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.28); tl.set("#c26", { opacity: 0 }, 24.66);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 25.48); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.48); tl.set("#c27", { opacity: 0 }, 26.32);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 26.32); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.32); tl.set("#c28", { opacity: 0 }, 27.00);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 27.00); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.00); tl.set("#c29", { opacity: 0 }, 28.18);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 28.18); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.18); tl.set("#c30", { opacity: 0 }, 28.82);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 28.82); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.82); tl.set("#c31", { opacity: 0 }, 29.74);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 30.68); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.68); tl.set("#c32", { opacity: 0 }, 31.66);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 31.92); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.92); tl.set("#c33", { opacity: 0 }, 32.64);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 32.64); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.64); tl.set("#c34", { opacity: 0 }, 33.48);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 33.48); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.48); tl.set("#c35", { opacity: 0 }, 33.78);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 34.50); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.50); tl.set("#c36", { opacity: 0 }, 35.02);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 35.98); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.98); tl.set("#c37", { opacity: 0 }, 36.36);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 36.90); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.90); tl.set("#c38", { opacity: 0 }, 37.90);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 37.90); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.90); tl.set("#c39", { opacity: 0 }, 38.80);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 39.56); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.56); tl.set("#c40", { opacity: 0 }, 40.18);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 40.18); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.18); tl.set("#c41", { opacity: 0 }, 41.02);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 42.04); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.04); tl.set("#c42", { opacity: 0 }, 42.34);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 42.88); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.88); tl.set("#c43", { opacity: 0 }, 43.52);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 43.52); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.52); tl.set("#c44", { opacity: 0 }, 44.62);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 44.62); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.62); tl.set("#c45", { opacity: 0 }, 45.30);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 46.06); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.06); tl.set("#c46", { opacity: 0 }, 46.52);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 46.52); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.52); tl.set("#c47", { opacity: 0 }, 47.08);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 47.08); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.08); tl.set("#c48", { opacity: 0 }, 47.82);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 47.82); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.82); tl.set("#c49", { opacity: 0 }, 48.32);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

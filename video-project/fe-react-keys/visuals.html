@@ -1,0 +1,152 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #ff5d8f; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #ff5d8f; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(16,6,11,0.82); border: 1px solid rgba(255,93,143,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #e7b3c6; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #fff1f6; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #fff1f6; line-height: 1.12; }
+  .mono { position: absolute; font: 400 25px 'JetBrains Mono', monospace; color: #fff1f6; }
+  .row { position: absolute; left: 60px; width: 620px; height: 74px; border: 2px solid #5a2a3a; border-radius: 16px; background: rgba(255,93,143,0.08); font: 700 28px Inter, sans-serif; color: #fff1f6; padding: 20px 22px; }
+  .slot { position: absolute; left: 700px; width: 140px; height: 74px; border-radius: 16px; background: rgba(255,255,255,0.04); border: 1px dashed #7a4a5a; font: 700 22px 'JetBrains Mono', monospace; color: #e7b3c6; padding: 22px 14px; }
+  .keytag { position: absolute; left: 690px; height: 34px; line-height: 34px; padding: 0 12px; border-radius: 10px; background: #ff5d8f; color: #1a0610; font: 900 22px 'JetBrains Mono', monospace; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .acc { color: #ff5d8f; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.9" data-track-index="1">01 · Wrong row</div>
+  <div class="kick clip" data-start="8.0" data-duration="5.6" data-track-index="1">02 · The key</div>
+  <div class="kick clip" data-start="14.8" data-duration="9.1" data-track-index="1">03 · Index key</div>
+  <div class="kick clip" data-start="23.9" data-duration="5.7" data-track-index="1">04 · Slot</div>
+  <div class="kick clip" data-start="29.6" data-duration="7.9" data-track-index="1">05 · Stable ID</div>
+  <div class="kick clip" data-start="37.5" data-duration="5.1" data-track-index="1">06 · Random</div>
+  <div class="kick clip" data-start="43.5" data-duration="3.2" data-track-index="1">07 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: delete the first, wrong row changes -->
+  <div id="g0" class="g">
+    <div class="row" style="top: 110px;">Milk</div>
+    <div class="row" style="top: 200px;">Eggs</div>
+    <div class="row" style="top: 290px;">Bread</div>
+    <div class="redbox" style="left: 60px; top: 410px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Delete Milk. Eggs is wrong now.</div>
+    <div class="txt" style="left: 60px; top: 520px; font-size: 38px;">The wrong row changes.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #e7b3c6;">Or the typed text jumps.</div>
+  </div>
+
+  <!-- 1: the key tells React who is who -->
+  <div id="g1" class="g">
+    <div class="keytag" style="top: 130px;">key</div>
+    <div class="row" style="top: 110px;">Milk</div>
+    <div class="keytag" style="top: 220px;">key</div>
+    <div class="row" style="top: 200px;">Eggs</div>
+    <div class="keytag" style="top: 310px;">key</div>
+    <div class="row" style="top: 290px;">Bread</div>
+    <div class="txt" style="left: 60px; top: 420px; font-size: 38px;">Each item needs a key.</div>
+    <div class="txt" style="left: 60px; top: 490px; font-size: 32px; color: #e7b3c6;">It says which item is which.</div>
+  </div>
+
+  <!-- 2: broken: key is the index -->
+  <div id="g2" class="g">
+    <div class="mono acc" style="left: 60px; top: 100px; font-size: 26px;">key = index</div>
+    <div class="keytag" style="top: 150px;">0</div>
+    <div class="row" style="top: 140px; border-color: #ff8a8a;">Milk</div>
+    <div class="keytag" style="top: 240px;">1</div>
+    <div class="row" style="top: 230px;">Eggs</div>
+    <div class="keytag" style="top: 330px;">2</div>
+    <div class="row" style="top: 320px;">Bread</div>
+    <div class="redbox" style="left: 60px; top: 430px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Index: the position, not the item.</div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 34px;">Delete the first one:</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #e7b3c6;">every later index moves up.</div>
+  </div>
+
+  <!-- 3: state stays with the slot -->
+  <div id="g3" class="g">
+    <div class="lbl" style="left: 60px; top: 100px;">Typed text stays in the slot</div>
+    <div class="slot" style="top: 150px;">slot 0</div>
+    <div class="row" style="top: 150px; border-color: #ff8a8a;">Eggs (typed: Milk)</div>
+    <div class="slot" style="top: 250px;">slot 1</div>
+    <div class="row" style="top: 250px;">Bread</div>
+    <div class="txt" style="left: 60px; top: 390px; font-size: 36px;">React matches by position.</div>
+    <div class="txt" style="left: 60px; top: 460px; font-size: 30px; color: #e7b3c6;">So the state sticks to the slot.</div>
+  </div>
+
+  <!-- 4: the fix: stable ID -->
+  <div id="g4" class="g">
+    <div class="mono acc" style="left: 60px; top: 100px; font-size: 26px;">key = note.id</div>
+    <div class="keytag" style="top: 150px;">41</div>
+    <div class="row" style="top: 140px; text-decoration: line-through; opacity: 0.4;">Milk</div>
+    <div class="keytag" style="top: 240px;">42</div>
+    <div class="row" style="top: 230px;">Eggs</div>
+    <div class="keytag" style="top: 330px;">43</div>
+    <div class="row" style="top: 320px;">Bread</div>
+    <div class="txt grn" style="left: 60px; top: 440px; font-size: 38px;">Eggs stays Eggs.</div>
+    <div class="txt" style="left: 60px; top: 500px; font-size: 30px; color: #e7b3c6;">The key follows the item.</div>
+  </div>
+
+  <!-- 5: random keys remount -->
+  <div id="g5" class="g">
+    <div class="mono" style="left: 60px; top: 150px; font-size: 30px; color: #ff8a8a;">key={Math.random()}</div>
+    <div class="redbox" style="left: 60px; top: 240px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">New key on every render.</div>
+    <div class="txt" style="left: 60px; top: 360px; font-size: 40px;">Every row rebuilds.</div>
+    <div class="txt" style="left: 60px; top: 430px; font-size: 32px; color: #e7b3c6;">Slow, and inputs lose focus.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 210px; font-size: 52px;">Give each list item</div>
+    <div class="big acc" style="top: 340px; font-size: 52px;">an ID that never changes.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">Have you seen a list item<br>show another item's text?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.6);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 8.0);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 8.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.6);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 14.8);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 14.8);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 23.6);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 23.9);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 23.9);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 29.3);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 29.6);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 29.6);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 37.2);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 37.52);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 42.9);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 43.46);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 47.3);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 47.62);
+</script>

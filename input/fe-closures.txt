@@ -1,0 +1,15 @@
+A function remembers the variables around it, even after the outer function has finished. That's a closure.
+
+Here's an example. A function called makeCounter creates a number, then returns a new function that adds one to it.
+
+Broken idea: thinking the count resets every time you call the returned function. It doesn't. The inner function keeps its own copy of the number.
+
+Why it matters: closures keep private data without a global variable.
+
+Real use: a button handler that remembers which item it belongs to, even when it was created inside a loop.
+
+Tip: when you see a function inside a function, ask what it can still see.
+
+The takeaway: an inner function carries the outer variables with it.
+
+Where have you used a function that remembers something for later?

@@ -1,0 +1,15 @@
+You open a chat page, leave it, and the old connection is still running in the background. That's a leak. useEffect can fix it.
+
+An effect runs code after a render. Often it starts something that must stop later, like a timer or a listener.
+
+Broken version: setInterval inside useEffect, with no cleanup. Leave the page, and the timer keeps running.
+
+The fix: return a function from the effect. React calls it before the effect runs again, and when the component leaves the screen.
+
+Inside that function, clear the interval or remove the listener. The leak stops.
+
+In development, React runs effects twice on purpose. A missing cleanup shows up fast.
+
+The takeaway: whatever an effect starts, its cleanup must stop.
+
+What did you start in an effect that never gets stopped?

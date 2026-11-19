@@ -166,6 +166,16 @@ All eight topics on the brief have a rendered video and an entry in metadata/all
 - 26 `ux-optimistic-update` - Like feels slow? Update before the server. Rendered. Metadata in `metadata/all-videos.md`.
 - 27 `ux-search-as-you-type` - Why your search sends 10 requests. Rendered. Metadata in `metadata/all-videos.md`.
 - 28 `ux-focus-after-dialog` - Close a dialog without losing your place. Rendered. Metadata in `metadata/all-videos.md`.
+- 29 `fe-what-is-dom` - What is the DOM? (beginner). Rendered. Metadata in `metadata/all-videos.md`.
+- 30 `fe-css-box-model` - Why your box is bigger than you set (beginner). Rendered. Metadata in `metadata/all-videos.md`.
+- 31 `fe-flexbox-center` - Center anything in CSS with flexbox (beginner). Rendered. Metadata in `metadata/all-videos.md`.
+- 32 `fe-async-await` - Why your data says undefined (intermediate). Rendered. Metadata in `metadata/all-videos.md`.
+- 33 `fe-closures` - JavaScript closures in 60 seconds (intermediate). Rendered. Metadata in `metadata/all-videos.md`.
+- 34 `fe-css-grid` - Build a page layout with CSS Grid (intermediate). Rendered. Metadata in `metadata/all-videos.md`.
+- 35 `fe-react-keys` - The React key bug that shows the wrong row (intermediate). Rendered. Metadata in `metadata/all-videos.md`.
+- 36 `fe-useeffect-cleanup` - Stop the leak: useEffect cleanup (advanced). Rendered. Metadata in `metadata/all-videos.md`.
+- 37 `fe-web-workers` - Stop your page freezing with Web Workers (advanced). Rendered. Metadata in `metadata/all-videos.md`.
+- 38 `fe-lazy-images` - Why your page loads 40 images before scroll (advanced). Rendered. Metadata in `metadata/all-videos.md`.
 
 ## Install check (fresh PC)
 Node 22+, FFmpeg on PATH, Python 3.12, the venv above, then `npx --yes hyperframes@0.9.26 --version` must work.

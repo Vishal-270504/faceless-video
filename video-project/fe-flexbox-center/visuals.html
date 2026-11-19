@@ -1,0 +1,138 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #7bd389; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #7bd389; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(7,14,9,0.82); border: 1px solid rgba(123,211,137,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9fc9a6; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #eefbf0; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #eefbf0; line-height: 1.12; }
+  .parent { position: absolute; left: 60px; top: 150px; width: 780px; height: 360px; border: 2px dashed #3f6b48; border-radius: 22px; }
+  .item { position: absolute; width: 120px; height: 80px; background: #7bd389; border-radius: 14px; color: #0a140c; font: 900 26px Inter, sans-serif; text-align: center; line-height: 80px; }
+  .xline { position: absolute; left: 60px; width: 780px; height: 2px; background: rgba(123,211,137,0.5); }
+  .yline { position: absolute; top: 150px; height: 360px; width: 2px; background: rgba(123,211,137,0.5); }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .mono { position: absolute; font: 400 28px 'JetBrains Mono', monospace; color: #eefbf0; }
+  .acc { color: #7bd389; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="5.2" data-track-index="1">01 · The pain</div>
+  <div class="kick clip" data-start="5.8" data-duration="5.5" data-track-index="1">02 · Flexbox</div>
+  <div class="kick clip" data-start="11.6" data-duration="7.7" data-track-index="1">03 · Broken</div>
+  <div class="kick clip" data-start="19.4" data-duration="14.7" data-track-index="1">04 · The fix</div>
+  <div class="kick clip" data-start="34.8" data-duration="6.2" data-track-index="1">05 · Gap</div>
+  <div class="kick clip" data-start="41.1" data-duration="6.3" data-track-index="1">06 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the pain -->
+  <div id="g0" class="g">
+    <div class="item" style="left: 300px; top: 200px; transform: rotate(-6deg);"></div>
+    <div class="txt" style="left: 60px; top: 430px; font-size: 42px;">Centering used to take hours.</div>
+    <div class="txt" style="left: 60px; top: 500px; font-size: 32px; color: #9fc9a6;">Today it takes three lines.</div>
+  </div>
+
+  <!-- 1: flexbox parent and children -->
+  <div id="g1" class="g">
+    <div class="parent" style="top: 110px; height: 300px;"></div>
+    <div class="lbl" style="left: 84px; top: 128px;">parent: display flex</div>
+    <div class="item" style="left: 120px; top: 230px;">1</div>
+    <div class="item" style="left: 390px; top: 230px;">2</div>
+    <div class="item" style="left: 660px; top: 230px;">3</div>
+    <div class="txt" style="left: 60px; top: 470px; font-size: 38px;">The parent lines children up.</div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 30px; color: #9fc9a6;">Children follow the parent.</div>
+  </div>
+
+  <!-- 2: broken: top left, margin tricks -->
+  <div id="g2" class="g">
+    <div class="parent"></div>
+    <div class="item" style="left: 76px; top: 166px; background: #ff8a8a;"></div>
+    <div class="redbox" style="left: 60px; top: 540px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Margins: breaks on resize.</div>
+    <div class="txt" style="left: 60px; top: 614px; font-size: 30px; color: #9fc9a6;">Stuck in the corner.</div>
+  </div>
+
+  <!-- 3: justify-content center (horizontal) -->
+  <div id="g3" class="g">
+    <div class="parent"></div>
+    <div class="yline" style="left: 448px;"></div>
+    <div class="item" style="left: 390px; top: 150px;"></div>
+    <div class="mono acc" style="left: 60px; top: 530px; font-size: 32px;">justify-content: center;</div>
+    <div class="txt" style="left: 60px; top: 586px; font-size: 30px; color: #9fc9a6;">Horizontal: centered.</div>
+  </div>
+
+  <!-- 4: align-items center (vertical) -->
+  <div id="g4" class="g">
+    <div class="parent"></div>
+    <div class="xline" style="top: 330px;"></div>
+    <div class="yline" style="left: 448px;"></div>
+    <div class="item" style="left: 390px; top: 290px;"></div>
+    <div class="mono acc" style="left: 60px; top: 530px; font-size: 32px;">align-items: center;</div>
+    <div class="txt" style="left: 60px; top: 586px; font-size: 30px; color: #9fc9a6;">Vertical: centered too.</div>
+  </div>
+
+  <!-- 5: gap -->
+  <div id="g5" class="g">
+    <div class="item" style="left: 150px; top: 200px;">A</div>
+    <div class="item" style="left: 300px; top: 200px;">B</div>
+    <div class="item" style="left: 450px; top: 200px;">C</div>
+    <div class="mono acc" style="left: 150px; top: 340px; font-size: 32px;">gap: 16px;</div>
+    <div class="txt" style="left: 60px; top: 430px; font-size: 38px;">No margins on every child.</div>
+    <div class="txt" style="left: 60px; top: 490px; font-size: 30px; color: #9fc9a6;">Gap spaces them for you.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px; font-size: 52px;">Flex the parent,</div>
+    <div class="big acc" style="top: 330px; font-size: 52px;">then align the children.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">Which layout do you still<br>fight with margins?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.2);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 5.82);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 5.8);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 11.2);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 11.66);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 11.66);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 19.1);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 19.38);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 19.4);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 27.0);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 27.32);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 27.3);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 34.5);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 34.8);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.8);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 40.8);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 41.06);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.5);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.8);
+</script>

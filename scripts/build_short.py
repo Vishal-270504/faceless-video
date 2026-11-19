@@ -25,6 +25,9 @@ HTML = """<!doctype html>
     * {{ margin: 0; padding: 0; box-sizing: border-box; }}
     html, body {{ width: {W}px; height: {H}px; overflow: hidden; background: var(--ground); }}
     #root {{ position: relative; width: {W}px; height: {H}px; font-family: Arial, Helvetica, sans-serif; }}
+    /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
+    .bgvid {{ position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
+      filter: blur(18px) brightness(0.32) saturate(1.15); }}
     .caption {{
       position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
       color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
@@ -40,6 +43,7 @@ HTML = """<!doctype html>
 <body>
   <div id="root" data-composition-id="main" data-start="0" data-duration="{duration:.2f}"
        data-width="{W}" data-height="{H}">
+{bg_el}
 {visual_markup}
 {title_el}
 {caption_els}
@@ -117,9 +121,14 @@ def main() -> None:
         vis_markup = re.sub(r"<(style|script)>.*?</\1>", "", vis, flags=re.S)
     # Renderer only reads files inside the project folder, so copy the narration in.
     shutil.copy(ROOT / "output" / "audio" / f"{name}.wav", out_dir / "assets" / f"{name}.wav")
+    # Optional background clip from scripts/fetch_bg.py: muted, looped, behind everything else.
+    bg_el = ""
+    if (out_dir / "assets" / "bg.mp4").exists():
+        bg_el = (f'    <video id="bg" class="bgvid clip" src="assets/bg.mp4" muted loop playsinline '
+                 f'data-start="0" data-duration="{duration:.2f}" data-track-index="0"></video>')
     (out_dir / "index.html").write_text(
         HTML.format(
-            W=W, H=H, duration=duration, name=name,
+            W=W, H=H, duration=duration, name=name, bg_el=bg_el,
             title_el=title_el, caption_els="\n".join(caption_els),
             title_js=title_js, caption_js="\n".join(caption_js),
             visual_style=vis_style, visual_markup=vis_markup, visual_js=vis_js,

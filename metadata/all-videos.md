@@ -393,3 +393,183 @@ After a dialog closes, the cursor jumps to the top of the page and keyboard user
 
 **Thumbnail prompt for ChatGPT:**
 > Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "LOST FOCUS?" with "FOCUS?" in yellow. Centre: a flat page with three buttons, one outlined in a thick blue focus ring, and a small dialog box above them. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 29. fe-what-is-dom: What Is the DOM? The Page Behind Your Screen
+
+**Level:** Beginner
+
+**Title:** What Is the DOM? The Page Behind Your Screen
+
+**Description:**
+Your browser turns HTML into a live tree called the DOM, and JavaScript changes that tree to update the screen. This short shows what a node is, why changing the HTML file does not change the open page, and how to explore the DOM with your browser's inspect tool.
+
+Background video: Coverr-Free-Footage on Pixabay (https://pixabay.com/videos/id-4733/), Pixabay Content License.
+
+#frontend #webdev #javascript #beginner #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background with a teal (#2ec4b6) accent. Large bold white text across the top: "WHAT IS THE DOM?" with "DOM?" in teal. Centre: a flat tree diagram of three small rounded boxes (html, body, button) linked by thin teal lines. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 30. fe-css-box-model: Why Your Box Is Bigger Than You Set (Box Model)
+
+**Level:** Beginner
+
+**Title:** Why Your Box Is Bigger Than You Set
+
+**Description:**
+You set a box to 300 pixels and it measures 342 on screen. The CSS box model adds padding and border to the width, and border-box fixes it with one rule. This video walks through the four layers and the math.
+
+Background video: QuinceCreative on Pixabay (https://pixabay.com/videos/id-12919/), Pixabay Content License.
+
+#css #frontend #webdev #beginner #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background with an orange (#ff9f1c) accent. Large bold white text across the top: "BIGGER THAN 300?" with "300?" in orange. Centre: a flat dashed rectangle labelled "300" with a solid orange rectangle slightly larger around it, showing the extra space. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 31. fe-flexbox-center: Center Anything in CSS with Flexbox
+
+**Level:** Beginner
+
+**Title:** Center Anything in CSS with Flexbox
+
+**Description:**
+Centering a box both ways used to take hours of guessing. Flexbox does it with three properties: display flex on the parent, justify-content, and align-items. This video shows the broken margin version first, then the fix.
+
+Background video: ArtSqb on Pixabay (https://pixabay.com/videos/id-9809/), Pixabay Content License.
+
+#css #flexbox #frontend #webdev #beginner #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background with a green (#7bd389) accent. Large bold white text across the top: "CENTER IT" with "CENTER" in green. Centre: a flat dashed rectangle with one small green square exactly in its middle, with thin crosshair lines through it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 32. fe-async-await: Why Your Data Says undefined (async and await)
+
+**Level:** Intermediate
+
+**Title:** Why Your Data Says undefined: async/await
+
+**Description:**
+You fetch data, log it, and it says undefined because your code ran before the response arrived. The fix is await, plus a check on response.ok, since a 404 still resolves. This video shows the timeline behind the bug.
+
+Background video: cipnt on Pixabay (https://pixabay.com/videos/id-14900/), Pixabay Content License.
+
+#javascript #async #webdev #frontend #intermediate #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black navy background with a sky-blue (#4cc9f0) accent. Large bold white text across the top: "UNDEFINED?" with "UNDEFINED?" in sky blue. Centre: two flat horizontal timeline bars, one short (JavaScript) and one long (network), with a small sky-blue dot at the start of the short bar. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 33. fe-closures: JavaScript Closures in 60 Seconds
+
+**Level:** Intermediate
+
+**Title:** JavaScript Closures in 60 Seconds
+
+**Description:**
+A closure is a function that remembers the variables around it, even after the outer function has finished. This short builds a counter step by step, shows why the count is not reset, and shows the loop-of-buttons case that trips up beginners.
+
+Background video: MotionVision on Pixabay (https://pixabay.com/videos/id-47712/), Pixabay Content License.
+
+#javascript #closures #webdev #frontend #intermediate #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black indigo background with a violet (#b388ff) accent. Large bold white text across the top: "IT REMEMBERS" with "REMEMBERS" in violet. Centre: a flat rounded box containing a small violet square labelled "count", with a dashed inner box beside it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 34. fe-css-grid: Build a Page Layout with CSS Grid
+
+**Level:** Intermediate
+
+**Title:** Build a Page Layout with CSS Grid
+
+**Description:**
+A header, a sidebar and a main area sound simple, but fixed widths break on a phone. CSS Grid defines the whole page as rows and columns, with named areas, and stacks on mobile with one line of CSS. This short shows the overflow bug, the fix, and when to use Flexbox instead.
+
+Background video: doktorkleinmusic on Pixabay (https://pixabay.com/videos/id-326417/), Pixabay Content License.
+
+#css #grid #frontend #webdev #intermediate #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background with an amber (#ffd166) accent. Large bold white text across the top: "PAGE LAYOUT" with "LAYOUT" in amber. Centre: a flat wireframe of a web page with a wide header box on top, a narrow box on the left and a wide box on the right. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 35. fe-react-keys: The React Key Bug That Shows the Wrong Row
+
+**Level:** Intermediate
+
+**Title:** The React Key Bug That Shows the Wrong Row
+
+**Description:**
+You delete an item and the wrong row changes, or typed text jumps to another item. Using the array index as a key is the usual cause. This short shows why React matches rows by position and how a stable ID fixes it.
+
+Background video: Coverr-Free-Footage on Pixabay (https://pixabay.com/videos/id-3180/), Pixabay Content License.
+
+#react #javascript #webdev #frontend #intermediate #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background with a pink (#ff5d8f) accent. Large bold white text across the top: "WRONG ROW?" with "WRONG" in pink. Centre: a flat list of three rows, with small pink key tags on the right of each row, and the top row marked with a flat red X. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 36. fe-useeffect-cleanup: Stop the Leak: useEffect Cleanup Explained
+
+**Level:** Advanced
+
+**Title:** Stop the Leak: useEffect Cleanup Explained
+
+**Description:**
+A timer started in useEffect keeps running after the page is gone, and that is a memory leak. Return a cleanup function from the effect to clear the interval or remove the listener. This short shows the leak, the cleanup, and why React runs effects twice in development.
+
+Background video: MattHrusc on Pixabay (https://pixabay.com/videos/id-26452/), Pixabay Content License.
+
+#react #hooks #javascript #webdev #advanced #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black olive background with a lime (#c6f432) accent. Large bold white text across the top: "STILL RUNNING?" with "RUNNING?" in lime. Centre: a flat rounded box showing a large lime number, with a flat line of arrows running out of it toward a small X. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 37. fe-web-workers: Stop Your Page Freezing with Web Workers
+
+**Level:** Advanced
+
+**Title:** Stop Your Page Freezing with Web Workers
+
+**Description:**
+Heavy JavaScript on the main thread freezes the page and every click waits in line. A Web Worker runs the work in a background thread and sends the result back with postMessage. This short shows the blocked thread, the worker lane, and the one thing workers cannot do: touch the DOM.
+
+Background video: onijake on Pixabay (https://pixabay.com/videos/id-13461/), Pixabay Content License.
+
+#javascript #webworkers #performance #webdev #advanced #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background with an ember (#ff7a45) accent. Large bold white text across the top: "PAGE FROZEN?" with "FROZEN?" in ember. Centre: two flat horizontal lanes, the top one fully orange and blocked, and the bottom lane split, with a clear green free area on the top. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 38. fe-lazy-images: Why Your Page Loads 40 Images Before Scroll
+
+**Level:** Advanced
+
+**Title:** Why Your Page Loads 40 Images Before Scroll
+
+**Description:**
+A page that downloads every image on open is slow on a phone, and most of those images are off screen. Add loading="lazy" to images below the fold, keep the hero eager, and set width and height so the layout does not jump. This short shows each step.
+
+Background video: AttilaPergel on Pixabay (https://pixabay.com/videos/id-111280/), Pixabay Content License.
+
+#webperformance #frontend #html #webdev #advanced #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black indigo background with an indigo (#a5b4fc) accent. Large bold white text across the top: "40 IMAGES?" with "40" in indigo. Centre: a flat grid of small square tiles, the top rows solid indigo and the lower rows dashed outlines, with a dashed horizontal line marking the screen edge. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.

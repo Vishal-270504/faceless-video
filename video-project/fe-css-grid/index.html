@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
+    .bgvid { position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
+      filter: blur(18px) brightness(0.32) saturate(1.15); }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #ffd166; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #ffd166; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(16,13,6,0.82); border: 1px solid rgba(255,209,102,0.35); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #e6d4a0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #fff9ec; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #fff9ec; line-height: 1.12; }
+  .mono { position: absolute; font: 400 25px 'JetBrains Mono', monospace; color: #fff9ec; }
+  .cell { position: absolute; border: 2px solid #5a4a22; border-radius: 14px; background: rgba(255,209,102,0.10); font: 700 26px Inter, sans-serif; color: #fff9ec; padding: 14px 18px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .acc { color: #ffd166; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="47.92"
+       data-width="1080" data-height="1920">
+    <video id="bg" class="bgvid clip" src="assets/bg.mp4" muted loop playsinline data-start="0" data-duration="47.92" data-track-index="0"></video>
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.0" data-track-index="1">01 · The page</div>
+  <div class="kick clip" data-start="7.4" data-duration="5.9" data-track-index="1">02 · Grid</div>
+  <div class="kick clip" data-start="13.7" data-duration="7.3" data-track-index="1">03 · Overflow</div>
+  <div class="kick clip" data-start="21.0" data-duration="6.4" data-track-index="1">04 · Areas</div>
+  <div class="kick clip" data-start="27.4" data-duration="6.1" data-track-index="1">05 · Columns</div>
+  <div class="kick clip" data-start="34.4" data-duration="5.7" data-track-index="1">06 · Phone</div>
+  <div class="kick clip" data-start="40.1" data-duration="5.6" data-track-index="1">07 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the page we want -->
+  <div id="g0" class="g">
+    <div class="cell" style="left: 60px; top: 120px; width: 780px; height: 110px;">Header</div>
+    <div class="cell" style="left: 60px; top: 250px; width: 240px; height: 300px;">Sidebar</div>
+    <div class="cell" style="left: 320px; top: 250px; width: 520px; height: 300px;">Main</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 36px;">Header, sidebar, main.</div>
+  </div>
+
+  <!-- 1: grid = rows and columns -->
+  <div id="g1" class="g">
+    <div class="cell" style="left: 60px; top: 120px; width: 240px; height: 120px;"></div>
+    <div class="cell" style="left: 320px; top: 120px; width: 260px; height: 120px;"></div>
+    <div class="cell" style="left: 600px; top: 120px; width: 240px; height: 120px;"></div>
+    <div class="cell" style="left: 60px; top: 260px; width: 240px; height: 120px;"></div>
+    <div class="cell" style="left: 320px; top: 260px; width: 260px; height: 120px;"></div>
+    <div class="cell" style="left: 600px; top: 260px; width: 240px; height: 120px;"></div>
+    <div class="lbl acc" style="left: 60px; top: 410px; font-size: 30px;">columns</div>
+    <div class="txt" style="left: 60px; top: 490px; font-size: 38px;">Rows and columns.</div>
+    <div class="txt" style="left: 60px; top: 550px; font-size: 30px; color: #e6d4a0;">Items fill the slots.</div>
+  </div>
+
+  <!-- 2: broken: fixed sidebar pushes content off -->
+  <div id="g2" class="g">
+    <div class="cell" style="left: 60px; top: 120px; width: 780px; height: 90px;">Header</div>
+    <div class="cell" style="left: 60px; top: 230px; width: 520px; height: 250px;">Sidebar (520px fixed)</div>
+    <div class="cell" style="left: 600px; top: 230px; width: 520px; height: 250px; border-color: #ff8a8a; background: rgba(255,107,107,0.08);">Main</div>
+    <div class="redbox" style="left: 60px; top: 510px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Main runs off the screen.</div>
+    <div class="txt" style="left: 60px; top: 596px; font-size: 28px; color: #e6d4a0;">Nested fixed widths break.</div>
+  </div>
+
+  <!-- 3: named grid areas -->
+  <div id="g3" class="g">
+    <div class="mono" style="left: 60px; top: 110px; font-size: 24px; color: #e6d4a0;">grid-template-areas:</div>
+    <div class="mono acc" style="left: 60px; top: 150px; font-size: 26px;">"header header"</div>
+    <div class="mono acc" style="left: 60px; top: 190px; font-size: 26px;">"sidebar main"</div>
+    <div class="cell" style="left: 60px; top: 260px; width: 780px; height: 90px; border-color: #ffd166;">header</div>
+    <div class="cell" style="left: 60px; top: 370px; width: 240px; height: 200px; border-color: #ffd166;">sidebar</div>
+    <div class="cell" style="left: 320px; top: 370px; width: 520px; height: 200px; border-color: #ffd166;">main</div>
+  </div>
+
+  <!-- 4: columns code -->
+  <div id="g4" class="g">
+    <div class="mono" style="left: 60px; top: 120px; font-size: 28px;">grid-template-columns:</div>
+    <div class="mono acc" style="left: 60px; top: 170px; font-size: 36px; font-weight: 700;">240px 1fr;</div>
+    <div class="cell" style="left: 60px; top: 260px; width: 240px; height: 200px;">240px</div>
+    <div class="cell" style="left: 320px; top: 260px; width: 520px; height: 200px; border-style: dashed;">1fr: the rest</div>
+    <div class="txt" style="left: 60px; top: 510px; font-size: 36px;">Fixed sidebar, flexible main.</div>
+  </div>
+
+  <!-- 5: phone: one column -->
+  <div id="g5" class="g">
+    <div class="box" style="left: 300px; top: 60px; width: 300px; height: 540px; border: 3px solid #5a4a22; border-radius: 36px; background: rgba(255,255,255,0.02);">
+      <div class="cell" style="left: 20px; top: 24px; width: 260px; height: 70px; font-size: 22px; padding: 18px;">Header</div>
+      <div class="cell" style="left: 20px; top: 110px; width: 260px; height: 80px; font-size: 22px; padding: 18px;">Sidebar</div>
+      <div class="cell" style="left: 20px; top: 206px; width: 260px; height: 290px; font-size: 22px; padding: 18px;">Main</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 600px; font-size: 34px;">Same markup. One column.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 180px; font-size: 52px;">Grid for the whole page.</div>
+    <div class="big acc" style="top: 330px; font-size: 52px;">Flexbox for the pieces inside.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">What page would you<br>build with Grid first?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.56" data-track-index="1">You need a</div>
+    <div id="c1" class="caption clip" data-start="0.56" data-duration="0.56" data-track-index="1">page with a</div>
+    <div id="c2" class="caption clip" data-start="1.12" data-duration="0.90" data-track-index="1">header, a sidebar,</div>
+    <div id="c3" class="caption clip" data-start="2.36" data-duration="0.32" data-track-index="1">and a main</div>
+    <div id="c4" class="caption clip" data-start="2.68" data-duration="0.32" data-track-index="1">area.</div>
+    <div id="c5" class="caption clip" data-start="3.70" data-duration="0.98" data-track-index="1">Flexbox can do</div>
+    <div id="c6" class="caption clip" data-start="4.68" data-duration="0.72" data-track-index="1">it, but Grid</div>
+    <div id="c7" class="caption clip" data-start="5.40" data-duration="0.68" data-track-index="1">was built for</div>
+    <div id="c8" class="caption clip" data-start="6.08" data-duration="0.42" data-track-index="1">this job.</div>
+    <div id="c9" class="caption clip" data-start="7.40" data-duration="1.10" data-track-index="1">CSS Grid lays</div>
+    <div id="c10" class="caption clip" data-start="8.50" data-duration="0.82" data-track-index="1">out rows and</div>
+    <div id="c11" class="caption clip" data-start="9.32" data-duration="0.30" data-track-index="1">columns.</div>
+    <div id="c12" class="caption clip" data-start="10.30" data-duration="0.56" data-track-index="1">You define the</div>
+    <div id="c13" class="caption clip" data-start="10.86" data-duration="0.30" data-track-index="1">tracks,</div>
+    <div id="c14" class="caption clip" data-start="11.54" data-duration="0.52" data-track-index="1">and the items</div>
+    <div id="c15" class="caption clip" data-start="12.06" data-duration="0.72" data-track-index="1">fill the slots.</div>
+    <div id="c16" class="caption clip" data-start="13.66" data-duration="1.40" data-track-index="1">Broken version nested</div>
+    <div id="c17" class="caption clip" data-start="15.06" data-duration="0.94" data-track-index="1">divs with fixed</div>
+    <div id="c18" class="caption clip" data-start="16.00" data-duration="1.30" data-track-index="1">widths. On a</div>
+    <div id="c19" class="caption clip" data-start="17.30" data-duration="0.30" data-track-index="1">phone,</div>
+    <div id="c20" class="caption clip" data-start="17.98" data-duration="0.76" data-track-index="1">the sidebar pushes</div>
+    <div id="c21" class="caption clip" data-start="18.74" data-duration="0.84" data-track-index="1">the content off</div>
+    <div id="c22" class="caption clip" data-start="19.58" data-duration="0.40" data-track-index="1">the screen.</div>
+    <div id="c23" class="caption clip" data-start="20.96" data-duration="0.64" data-track-index="1">The fix make</div>
+    <div id="c24" class="caption clip" data-start="21.60" data-duration="0.54" data-track-index="1">the page a</div>
+    <div id="c25" class="caption clip" data-start="22.14" data-duration="0.30" data-track-index="1">grid.</div>
+    <div id="c26" class="caption clip" data-start="23.12" data-duration="0.48" data-track-index="1">Name the areas,</div>
+    <div id="c27" class="caption clip" data-start="24.04" data-duration="0.74" data-track-index="1">header on top,</div>
+    <div id="c28" class="caption clip" data-start="25.06" data-duration="0.62" data-track-index="1">sidebar on the</div>
+    <div id="c29" class="caption clip" data-start="25.68" data-duration="0.30" data-track-index="1">left,</div>
+    <div id="c30" class="caption clip" data-start="26.26" data-duration="0.40" data-track-index="1">main on the</div>
+    <div id="c31" class="caption clip" data-start="26.66" data-duration="0.30" data-track-index="1">right.</div>
+    <div id="c32" class="caption clip" data-start="27.38" data-duration="1.06" data-track-index="1">Then set grid</div>
+    <div id="c33" class="caption clip" data-start="28.44" data-duration="1.22" data-track-index="1">template columns with</div>
+    <div id="c34" class="caption clip" data-start="29.66" data-duration="0.64" data-track-index="1">a fixed width</div>
+    <div id="c35" class="caption clip" data-start="30.30" data-duration="0.56" data-track-index="1">for the sidebar,</div>
+    <div id="c36" class="caption clip" data-start="31.60" data-duration="0.74" data-track-index="1">and one flexible</div>
+    <div id="c37" class="caption clip" data-start="32.34" data-duration="0.86" data-track-index="1">column for the</div>
+    <div id="c38" class="caption clip" data-start="33.20" data-duration="0.30" data-track-index="1">content.</div>
+    <div id="c39" class="caption clip" data-start="34.42" data-duration="0.58" data-track-index="1">On a phone,</div>
+    <div id="c40" class="caption clip" data-start="35.28" data-duration="0.62" data-track-index="1">switch the columns</div>
+    <div id="c41" class="caption clip" data-start="35.90" data-duration="0.46" data-track-index="1">to one.</div>
+    <div id="c42" class="caption clip" data-start="36.90" data-duration="0.60" data-track-index="1">The same markup</div>
+    <div id="c43" class="caption clip" data-start="37.50" data-duration="0.96" data-track-index="1">stacks with no</div>
+    <div id="c44" class="caption clip" data-start="38.46" data-duration="0.74" data-track-index="1">extra code.</div>
+    <div id="c45" class="caption clip" data-start="40.10" data-duration="0.30" data-track-index="1">The takeaway,</div>
+    <div id="c46" class="caption clip" data-start="41.06" data-duration="0.62" data-track-index="1">use Grid for</div>
+    <div id="c47" class="caption clip" data-start="41.68" data-duration="0.58" data-track-index="1">the whole page,</div>
+    <div id="c48" class="caption clip" data-start="42.70" data-duration="0.92" data-track-index="1">and Flexbox for</div>
+    <div id="c49" class="caption clip" data-start="43.62" data-duration="0.94" data-track-index="1">small pieces inside</div>
+    <div id="c50" class="caption clip" data-start="44.56" data-duration="0.32" data-track-index="1">it.</div>
+    <div id="c51" class="caption clip" data-start="45.70" data-duration="0.68" data-track-index="1">What page would</div>
+    <div id="c52" class="caption clip" data-start="46.38" data-duration="0.50" data-track-index="1">you build with</div>
+    <div id="c53" class="caption clip" data-start="46.88" data-duration="0.44" data-track-index="1">Grid first?</div>
+    <audio id="narration" data-start="0" data-duration="47.92" data-track-index="2" data-volume="1"
+           src="assets/fe-css-grid.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.9);
+
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.4);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.4);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.0);
+
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.7);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 13.7);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.7);
+
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 21.0);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 21.0);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 27.1);
+
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 27.38);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 27.38);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 33.7);
+
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 34.42);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 39.8);
+
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.1);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.3);
+
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.7);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.56);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.56); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.56); tl.set("#c1", { opacity: 0 }, 1.12);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.12); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.12); tl.set("#c2", { opacity: 0 }, 2.02);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.36); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.36); tl.set("#c3", { opacity: 0 }, 2.68);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 2.68); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.68); tl.set("#c4", { opacity: 0 }, 3.00);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.70); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.70); tl.set("#c5", { opacity: 0 }, 4.68);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 4.68); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.68); tl.set("#c6", { opacity: 0 }, 5.40);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 5.40); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.40); tl.set("#c7", { opacity: 0 }, 6.08);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 6.08); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.08); tl.set("#c8", { opacity: 0 }, 6.50);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 7.40); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.40); tl.set("#c9", { opacity: 0 }, 8.50);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 8.50); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.50); tl.set("#c10", { opacity: 0 }, 9.32);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.32); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.32); tl.set("#c11", { opacity: 0 }, 9.62);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.30); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.30); tl.set("#c12", { opacity: 0 }, 10.86);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 10.86); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.86); tl.set("#c13", { opacity: 0 }, 11.16);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 11.54); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.54); tl.set("#c14", { opacity: 0 }, 12.06);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 12.06); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.06); tl.set("#c15", { opacity: 0 }, 12.78);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 13.66); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.66); tl.set("#c16", { opacity: 0 }, 15.06);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 15.06); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.06); tl.set("#c17", { opacity: 0 }, 16.00);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 16.00); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.00); tl.set("#c18", { opacity: 0 }, 17.30);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 17.30); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.30); tl.set("#c19", { opacity: 0 }, 17.60);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 17.98); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.98); tl.set("#c20", { opacity: 0 }, 18.74);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 18.74); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.74); tl.set("#c21", { opacity: 0 }, 19.58);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 19.58); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.58); tl.set("#c22", { opacity: 0 }, 19.98);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 20.96); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.96); tl.set("#c23", { opacity: 0 }, 21.60);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 21.60); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.60); tl.set("#c24", { opacity: 0 }, 22.14);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 22.14); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.14); tl.set("#c25", { opacity: 0 }, 22.44);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 23.12); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.12); tl.set("#c26", { opacity: 0 }, 23.60);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 24.04); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.04); tl.set("#c27", { opacity: 0 }, 24.78);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 25.06); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.06); tl.set("#c28", { opacity: 0 }, 25.68);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 25.68); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.68); tl.set("#c29", { opacity: 0 }, 25.98);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 26.26); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.26); tl.set("#c30", { opacity: 0 }, 26.66);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 26.66); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.66); tl.set("#c31", { opacity: 0 }, 26.96);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 27.38); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.38); tl.set("#c32", { opacity: 0 }, 28.44);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 28.44); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.44); tl.set("#c33", { opacity: 0 }, 29.66);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 29.66); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.66); tl.set("#c34", { opacity: 0 }, 30.30);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 30.30); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.30); tl.set("#c35", { opacity: 0 }, 30.86);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 31.60); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.60); tl.set("#c36", { opacity: 0 }, 32.34);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 32.34); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.34); tl.set("#c37", { opacity: 0 }, 33.20);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 33.20); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.20); tl.set("#c38", { opacity: 0 }, 33.50);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 34.42); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.42); tl.set("#c39", { opacity: 0 }, 35.00);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 35.28); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.28); tl.set("#c40", { opacity: 0 }, 35.90);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 35.90); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.90); tl.set("#c41", { opacity: 0 }, 36.36);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 36.90); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.90); tl.set("#c42", { opacity: 0 }, 37.50);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 37.50); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.50); tl.set("#c43", { opacity: 0 }, 38.46);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 38.46); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.46); tl.set("#c44", { opacity: 0 }, 39.20);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 40.10); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.10); tl.set("#c45", { opacity: 0 }, 40.40);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 41.06); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.06); tl.set("#c46", { opacity: 0 }, 41.68);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 41.68); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.68); tl.set("#c47", { opacity: 0 }, 42.26);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 42.70); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.70); tl.set("#c48", { opacity: 0 }, 43.62);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 43.62); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.62); tl.set("#c49", { opacity: 0 }, 44.56);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 44.56); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.56); tl.set("#c50", { opacity: 0 }, 44.88);
+    tl.set("#c51", { opacity: 1, scale: 0.92 }, 45.70); tl.to("#c51", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.70); tl.set("#c51", { opacity: 0 }, 46.38);
+    tl.set("#c52", { opacity: 1, scale: 0.92 }, 46.38); tl.to("#c52", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.38); tl.set("#c52", { opacity: 0 }, 46.88);
+    tl.set("#c53", { opacity: 1, scale: 0.92 }, 46.88); tl.to("#c53", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.88); tl.set("#c53", { opacity: 0 }, 47.32);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>
