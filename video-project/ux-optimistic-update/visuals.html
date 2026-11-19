@@ -1,0 +1,180 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .note { position: absolute; left: 90px; top: 110px; width: 700px; height: 330px; background: #1a1a25; border: 1px solid #2f2f42; border-radius: 22px; overflow: hidden; }
+  .ntitle { position: absolute; left: 32px; top: 30px; font: 900 32px Inter, sans-serif; color: #f2f2f7; }
+  .ntext { position: absolute; left: 32px; top: 90px; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .likebtn { position: absolute; left: 32px; top: 200px; width: 220px; height: 72px; line-height: 68px; text-align: center; border: 2px solid #8fa8ff; color: #8fa8ff; border-radius: 16px; font: 900 28px Inter, sans-serif; }
+  .liked { background: #5fd39a; border-color: #5fd39a; color: #0b0b12; }
+  .pill { position: absolute; left: 280px; top: 214px; height: 44px; line-height: 44px; padding: 0 18px; border-radius: 22px; font: 700 24px Inter, sans-serif; }
+  .spin { position: absolute; left: 540px; top: 200px; width: 72px; height: 72px; border: 6px solid #2b2b3c; border-top-color: #8fa8ff; border-radius: 50%; }
+  .finger { position: absolute; width: 54px; height: 54px; border-radius: 50%; background: rgba(233,233,241,0.85); }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .flow { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.5" data-track-index="1">01 · Double tap</div>
+  <div class="kick clip" data-start="7.7" data-duration="10.9" data-track-index="1">02 · Instant</div>
+  <div class="kick clip" data-start="18.7" data-duration="16.0" data-track-index="1">03 · Rollback</div>
+  <div class="kick clip" data-start="35.6" data-duration="5.5" data-track-index="1">04 · Low risk</div>
+  <div class="kick clip" data-start="42.1" data-duration="5.6" data-track-index="1">05 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: tap, nothing, tap again -->
+  <div id="g0" class="g">
+    <div class="note">
+      <div class="ntitle">Trip plan</div>
+      <div class="ntext">Pack chargers, book the train</div>
+      <div class="likebtn" id="like0">Like</div>
+      <div class="finger" id="fing0" style="left: 180px; top: 224px; opacity: 0;"></div>
+      <div class="lbl" id="wait0" style="left: 280px; top: 220px; font-size: 26px; color: #9a9db0; opacity: 0;">Waiting 2 seconds…</div>
+    </div>
+    <div class="txt" style="left: 90px; top: 500px; font-size: 40px;">You tap. Nothing happens.</div>
+    <div class="txt" style="left: 90px; top: 562px; font-size: 32px; color: #9a9db0;">So you tap again.</div>
+  </div>
+
+  <!-- 1: optimistic: change now, confirm later -->
+  <div id="g1" class="g">
+    <div class="note">
+      <div class="ntitle">Trip plan</div>
+      <div class="ntext">Pack chargers, book the train</div>
+      <div class="likebtn liked">Liked</div>
+      <div class="pill" style="background: rgba(95,211,154,0.16); color: #5fd39a;">Shown now</div>
+    </div>
+    <div class="txt acc" style="left: 90px; top: 500px; font-size: 40px;">Show the change now.</div>
+    <div class="txt" style="left: 90px; top: 562px; font-size: 32px; color: #9a9db0;">Ask the server in the background.</div>
+  </div>
+
+  <!-- 2: broken: spinner blocks -->
+  <div id="g2" class="g">
+    <div class="note">
+      <div class="ntitle">Trip plan</div>
+      <div class="ntext">Pack chargers, book the train</div>
+      <div class="likebtn" style="opacity: 0.4;">Like</div>
+      <div class="spin" id="spin2"></div>
+    </div>
+    <div class="redbox" style="left: 90px; top: 500px; width: 700px; height: 64px; line-height: 64px; padding: 0 22px;">Waiting on the server.</div>
+    <div class="txt" style="left: 90px; top: 580px; font-size: 30px; color: #9a9db0;">The screen is stuck.</div>
+  </div>
+
+  <!-- 3: the fix: instant -->
+  <div id="g3" class="g">
+    <div class="note">
+      <div class="ntitle">Trip plan</div>
+      <div class="ntext">Pack chargers, book the train</div>
+      <div class="likebtn liked">Liked</div>
+      <div class="pill" style="background: #2a2a3a; color: #9a9db0;">Syncing…</div>
+    </div>
+    <div class="txt grn" style="left: 90px; top: 500px; font-size: 40px;">Screen updates at once.</div>
+    <div class="txt" style="left: 90px; top: 562px; font-size: 32px; color: #9a9db0;">The request runs behind it.</div>
+  </div>
+
+  <!-- 4: server says no: undo -->
+  <div id="g4" class="g">
+    <div class="note">
+      <div class="ntitle">Trip plan</div>
+      <div class="ntext">Pack chargers, book the train</div>
+      <div class="likebtn" id="undo4">Like</div>
+      <div class="pill" style="left: 280px; top: 214px; background: rgba(255,107,107,0.16); color: #ff8a8a;">Couldn't like. Try again.</div>
+    </div>
+    <div class="txt red" style="left: 90px; top: 500px; font-size: 40px;">Server says no?</div>
+    <div class="txt" style="left: 90px; top: 562px; font-size: 32px; color: #9a9db0;">Undo the change, and say why.</div>
+  </div>
+
+  <!-- 5: rollback visible -->
+  <div id="g5" class="g">
+    <div class="flow" style="left: 90px; top: 170px; width: 300px; height: 180px;"><div class="lbl" style="left: 24px; top: 24px;">Before</div><div class="txt" style="left: 24px; top: 80px; font-size: 40px; color: #5fd39a;">Liked</div></div>
+    <div class="txt acc" style="left: 420px; top: 240px; font-size: 40px;">→</div>
+    <div class="flow" style="left: 490px; top: 170px; width: 300px; height: 180px; border-color: #ff8a8a;"><div class="lbl" style="left: 24px; top: 24px; color: #ff8a8a;">After failure</div><div class="txt" style="left: 24px; top: 80px; font-size: 40px;">Like</div></div>
+    <div class="txt" style="left: 90px; top: 430px; font-size: 40px;">Never show a lie.</div>
+    <div class="txt" style="left: 90px; top: 500px; font-size: 32px; color: #9a9db0;">Roll back, and say what failed.</div>
+  </div>
+
+  <!-- 6: low risk vs payments -->
+  <div id="g6" class="g">
+    <div class="flow" style="left: 90px; top: 150px; width: 700px; height: 150px; border-color: #5fd39a;"><div class="lbl" style="left: 28px; top: 24px; color: #5fd39a;">Use it for</div><div class="txt" style="left: 28px; top: 74px; font-size: 34px;">Like, pin, mark done</div></div>
+    <div class="flow" style="left: 90px; top: 330px; width: 700px; height: 150px; border-color: #ff8a8a;"><div class="lbl" style="left: 28px; top: 24px; color: #ff8a8a;">Wait for the server</div><div class="txt" style="left: 28px; top: 74px; font-size: 34px;">Payments, deletes</div></div>
+  </div>
+
+  <!-- 7: takeaway -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 200px;">Make the screen fast,</div>
+    <div class="big acc" style="top: 330px;">but never hide a failure.</div>
+  </div>
+
+  <!-- 8: question -->
+  <div id="g8" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">Which action in your app<br>feels slow today?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: double tap
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.fromTo("#fing0", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 1.0);
+  tl.to("#wait0", { opacity: 1, duration: 0.4 }, 1.8);
+  tl.fromTo("#fing0", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }, 4.6);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.2);
+
+  // 1: instant
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.74);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.7);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 12.9);
+
+  // 2: broken spinner
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 13.64);
+  tl.to("#spin2", { rotation: 720, duration: 2.8, ease: "none" }, 13.9);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 17.5);
+
+  // 3: fix
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 18.74);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 18.7);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 23.4);
+
+  // 4: server says no
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 23.7);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 29.2);
+
+  // 5: rollback visible
+  tl.fromTo("#g5", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 29.48);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 34.4);
+
+  // 6: low risk
+  tl.to("#g6", { opacity: 1, duration: 0.4 }, 35.6);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 35.6);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 41.7);
+
+  // 7: takeaway
+  tl.to("#g7", { opacity: 1, duration: 0.4 }, 42.1);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 42.1);
+  tl.to("#g7", { opacity: 0, duration: 0.3 }, 45.6);
+
+  // 8: question
+  tl.fromTo("#g8", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 46.0);
+</script>

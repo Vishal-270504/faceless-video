@@ -1,0 +1,13 @@
+You tap the tiny X on your phone and hit the wrong button. Again. The button is too small.
+
+A tap target is the area that reacts when a finger touches the screen. Apple suggests 44 points, and Google suggests 48. Use those as your minimum.
+
+Broken version: a 20-pixel close icon, with another icon right next to it. Miss by a few pixels, and you open the wrong thing.
+
+The fix: keep the icon small, but make the touch area bigger. Add padding until the tappable area reaches about 44 pixels.
+
+Leave space between buttons too. A gap of 8 pixels stops most wrong taps.
+
+The takeaway: the icon can look small, but the area you can tap must be big.
+
+Which button in your app do people always miss?

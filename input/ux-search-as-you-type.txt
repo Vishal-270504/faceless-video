@@ -1,0 +1,15 @@
+You type a search, hit enter, and wait. Then you realize you typed one letter too many. Search should feel like it's listening.
+
+Live search shows results while you type. But a server call for every letter wastes work and slows the screen.
+
+Broken version: a request for every keystroke. Type pagination, and the server can get ten requests in one second.
+
+The fix: debounce. Wait until the user pauses for about 300 milliseconds, then search once.
+
+Debounce means: ignore the early keystrokes, and act only after the pause.
+
+Keep the search box focused while results update, so the user never has to click back in.
+
+The takeaway: search should respond to the pause, not to every letter.
+
+What's the last search you typed that felt slow?

@@ -1,0 +1,13 @@
+You hover over a note, and a trash icon appears. Nice on your laptop. Now open the app on your phone. There's no hover. The delete button is gone.
+
+Hover-only actions hide controls until the mouse moves over them. A phone has no mouse, so those controls never show up.
+
+Broken version: edit and delete icons appear only on hover. On a touch screen, the user has no way to find them.
+
+The fix: show the actions all the time, or put them in a visible menu, like three dots.
+
+Hover can still add a nice touch. But it should never be the only way to reach a feature.
+
+The takeaway: if a feature needs a hover, a phone user can't use it.
+
+Can your users reach every action without a mouse?

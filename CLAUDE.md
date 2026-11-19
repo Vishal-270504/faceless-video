@@ -156,6 +156,16 @@ All eight topics on the brief have a rendered video and an entry in metadata/all
 - 16 `aspnet-controller-service-repo` - Controller, service, repository in ASP.NET Core. Rendered. Metadata in `metadata/all-videos.md`.
 - 17 `api-never-trust-client` - Never trust the client: decide on the server. Rendered. Metadata in `metadata/all-videos.md`.
 - 18 `api-cache-per-user` - Cache a notes list for 60 seconds (MISS vs HIT). Rendered. Metadata in `metadata/all-videos.md`.
+- 19 `ux-tap-targets` - Your buttons are too small to tap. Rendered. Metadata in `metadata/all-videos.md`.
+- 20 `ux-hover-only-actions` - Hover-only buttons vanish on phones. Rendered. Metadata in `metadata/all-videos.md`.
+- 21 `ux-thumb-zone` - Put your main button where the thumb rests. Rendered. Metadata in `metadata/all-videos.md`.
+- 22 `ux-button-labels` - Stop using OK and Cancel: name the action. Rendered. Metadata in `metadata/all-videos.md`.
+- 23 `ux-one-primary-button` - One loud button per screen. Rendered. Metadata in `metadata/all-videos.md`.
+- 24 `ux-contrast` - Light grey text is invisible in sunlight. Rendered. Metadata in `metadata/all-videos.md`.
+- 25 `ux-autosave-notes` - Never make users save their notes by hand. Rendered. Metadata in `metadata/all-videos.md`.
+- 26 `ux-optimistic-update` - Like feels slow? Update before the server. Rendered. Metadata in `metadata/all-videos.md`.
+- 27 `ux-search-as-you-type` - Why your search sends 10 requests. Rendered. Metadata in `metadata/all-videos.md`.
+- 28 `ux-focus-after-dialog` - Close a dialog without losing your place. Rendered. Metadata in `metadata/all-videos.md`.
 
 ## Install check (fresh PC)
 Node 22+, FFmpeg on PATH, Python 3.12, the venv above, then `npx --yes hyperframes@0.9.26 --version` must work.

@@ -1,0 +1,15 @@
+Your text looks fine on your big monitor. Outside, on a bright phone screen, it almost disappears. That's a contrast problem.
+
+Contrast is how far apart the text color and the background color are. Light grey text on white is a common mistake.
+
+Broken version: a note's date in light grey on white. The contrast ratio is about 2.8 to 1.
+
+The fix: darken the grey until it reaches at least 4.5 to 1. The same date is now easy to read.
+
+Use a free contrast checker on your text, labels and buttons. It takes seconds.
+
+Large text, 24 pixels and up, needs only 3 to 1. Don't rely on that for small text.
+
+The takeaway: if your users have to squint, they're already struggling.
+
+Which text in your app would fail a contrast check?

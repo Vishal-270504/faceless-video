@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .page { position: absolute; left: 60px; top: 110px; width: 780px; height: 400px; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 22px; overflow: hidden; }
+  .pbtn { position: absolute; height: 64px; line-height: 60px; text-align: center; border: 2px solid #3a3a50; background: #242433; color: #e9e9f1; border-radius: 14px; font: 700 26px Inter, sans-serif; }
+  .overlay { position: absolute; left: 60px; top: 110px; width: 780px; height: 400px; background: rgba(5,5,10,0.6); border-radius: 22px; }
+  .dialog { position: absolute; left: 150px; top: 150px; width: 600px; height: 320px; background: #232335; border: 1px solid #3a3a52; border-radius: 22px; }
+  .dbtn { position: absolute; top: 210px; height: 60px; line-height: 56px; text-align: center; border-radius: 14px; font: 900 26px Inter, sans-serif; }
+  .ring { position: absolute; border: 4px solid #8fa8ff; border-radius: 16px; }
+  .ring-red { position: absolute; border: 4px solid #ff8a8a; border-radius: 16px; }
+  .cursor { position: absolute; width: 22px; height: 22px; border-radius: 50%; background: #e9e9f1; }
+  .key { position: absolute; height: 60px; line-height: 60px; padding: 0 26px; border-radius: 14px; background: #2a2a3a; border: 2px solid #8fa8ff; color: #f2f2f7; font: 900 26px Inter, sans-serif; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="52.02"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="8.4" data-track-index="1">01 · The jump</div>
+  <div class="kick clip" data-start="8.7" data-duration="6.0" data-track-index="1">02 · Focus</div>
+  <div class="kick clip" data-start="15.5" data-duration="7.8" data-track-index="1">03 · Broken</div>
+  <div class="kick clip" data-start="23.2" data-duration="7.3" data-track-index="1">04 · Trap Tab</div>
+  <div class="kick clip" data-start="30.5" data-duration="6.7" data-track-index="1">05 · Return</div>
+  <div class="kick clip" data-start="37.1" data-duration="6.6" data-track-index="1">06 · Escape</div>
+  <div class="kick clip" data-start="43.2" data-duration="5.4" data-track-index="1">07 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the cursor jumps to the top after closing -->
+  <div id="g0" class="g">
+    <div class="page">
+      <div class="pbtn" style="left: 60px; top: 150px; width: 300px;">Open dialog</div>
+      <div class="pbtn" style="left: 60px; top: 240px; width: 300px;">Settings</div>
+      <div class="pbtn" style="left: 60px; top: 330px; width: 300px;">Help</div>
+    </div>
+    <div class="cursor" id="cur0" style="left: 400px; top: 200px;"></div>
+    <div class="txt" style="left: 60px; top: 540px; font-size: 40px;">Dialog closed.</div>
+    <div class="txt" style="left: 60px; top: 600px; font-size: 32px; color: #ff8a8a;">Focus lost. Back at the top.</div>
+  </div>
+
+  <!-- 1: focus is where the keys go -->
+  <div id="g1" class="g">
+    <div class="page">
+      <div class="pbtn" style="left: 60px; top: 150px; width: 300px;">Open dialog</div>
+      <div class="pbtn" style="left: 60px; top: 240px; width: 300px;">Settings</div>
+      <div class="pbtn" style="left: 60px; top: 330px; width: 300px;">Help</div>
+      <div class="ring" id="fr1" style="left: 52px; top: 142px; width: 316px; height: 80px;"></div>
+    </div>
+    <div class="txt acc" style="left: 60px; top: 540px; font-size: 40px;">Focus: where the next key goes.</div>
+    <div class="txt" style="left: 60px; top: 600px; font-size: 30px; color: #9a9db0;">Keyboard and screen readers.</div>
+  </div>
+
+  <!-- 2: broken: focus still behind the dialog -->
+  <div id="g2" class="g">
+    <div class="page">
+      <div class="pbtn" style="left: 60px; top: 150px; width: 300px;">Open dialog</div>
+      <div class="pbtn" style="left: 60px; top: 240px; width: 300px;">Settings</div>
+      <div class="pbtn" style="left: 60px; top: 330px; width: 300px;">Help</div>
+      <div class="overlay"></div>
+      <div class="ring-red" style="left: 52px; top: 232px; width: 316px; height: 80px;"></div>
+    </div>
+    <div class="dialog" style="left: 150px; top: 150px;"></div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Tab goes behind the dialog.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">The user loses their place.</div>
+  </div>
+
+  <!-- 3: fix: focus trapped in dialog -->
+  <div id="g3" class="g">
+    <div class="page">
+      <div class="pbtn" style="left: 60px; top: 150px; width: 300px;">Open dialog</div>
+      <div class="pbtn" style="left: 60px; top: 240px; width: 300px;">Settings</div>
+      <div class="pbtn" style="left: 60px; top: 330px; width: 300px;">Help</div>
+      <div class="overlay"></div>
+      <div class="dialog" style="left: 90px; top: 40px;">
+        <div class="lbl" style="left: 30px; top: 30px; color: #f2f2f7; font-size: 30px;">Delete?</div>
+        <div class="dbtn" style="left: 40px; width: 240px; background: #2a2a3a; color: #e9e9f1;" id="dc3">Cancel</div>
+        <div class="dbtn" style="left: 310px; width: 240px; background: #8fa8ff; color: #0b0b12;" id="ds3">Save</div>
+      </div>
+      <div class="ring" id="fr3" style="left: 126px; top: 246px; width: 248px; height: 68px;"></div>
+    </div>
+    <div class="txt grn" style="left: 60px; top: 540px; font-size: 38px;">Tab stays inside.</div>
+    <div class="txt" style="left: 60px; top: 600px; font-size: 30px; color: #9a9db0;">Focus moves between the two.</div>
+  </div>
+
+  <!-- 4: return focus to the opener -->
+  <div id="g4" class="g">
+    <div class="page">
+      <div class="pbtn" style="left: 60px; top: 150px; width: 300px;">Open dialog</div>
+      <div class="pbtn" style="left: 60px; top: 240px; width: 300px;">Settings</div>
+      <div class="pbtn" style="left: 60px; top: 330px; width: 300px;">Help</div>
+      <div class="ring" id="fr4" style="left: 52px; top: 142px; width: 316px; height: 80px;"></div>
+    </div>
+    <div class="txt grn" style="left: 60px; top: 540px; font-size: 40px;">Closed: back to the button.</div>
+    <div class="txt" style="left: 60px; top: 600px; font-size: 30px; color: #9a9db0;">Right where they were.</div>
+  </div>
+
+  <!-- 5: escape and visible outline -->
+  <div id="g5" class="g">
+    <div class="key" style="left: 240px; top: 170px;">Esc</div>
+    <div class="txt" style="left: 60px; top: 300px; font-size: 36px;">Escape closes the dialog.</div>
+    <div class="pbtn" style="left: 60px; top: 400px; width: 300px; border-color: #8fa8ff; box-shadow: 0 0 0 6px rgba(143,168,255,0.25);">Settings</div>
+    <div class="txt acc" style="left: 400px; top: 420px; font-size: 32px;">Visible outline.</div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 32px; color: #9a9db0;">Users see where they are.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px;">Open with focus inside.</div>
+    <div class="big acc" style="top: 330px;">Close with focus back.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">Have you tried your app<br>using only the keyboard?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.76" data-track-index="1">You open a</div>
+    <div id="c1" class="caption clip" data-start="0.76" data-duration="0.30" data-track-index="1">dialog,</div>
+    <div id="c2" class="caption clip" data-start="1.52" data-duration="0.86" data-track-index="1">close it, and</div>
+    <div id="c3" class="caption clip" data-start="2.38" data-duration="0.76" data-track-index="1">your cursor jumps</div>
+    <div id="c4" class="caption clip" data-start="3.14" data-duration="0.58" data-track-index="1">to the top</div>
+    <div id="c5" class="caption clip" data-start="3.72" data-duration="0.42" data-track-index="1">of the page.</div>
+    <div id="c6" class="caption clip" data-start="4.88" data-duration="0.52" data-track-index="1">Now you have</div>
+    <div id="c7" class="caption clip" data-start="5.40" data-duration="0.46" data-track-index="1">to find your</div>
+    <div id="c8" class="caption clip" data-start="5.86" data-duration="0.42" data-track-index="1">place again.</div>
+    <div id="c9" class="caption clip" data-start="6.98" data-duration="0.42" data-track-index="1">That's a focus</div>
+    <div id="c10" class="caption clip" data-start="7.40" data-duration="0.34" data-track-index="1">problem.</div>
+    <div id="c11" class="caption clip" data-start="8.68" data-duration="0.90" data-track-index="1">Focus is the</div>
+    <div id="c12" class="caption clip" data-start="9.58" data-duration="0.98" data-track-index="1">element that receives</div>
+    <div id="c13" class="caption clip" data-start="10.56" data-duration="0.78" data-track-index="1">the next key</div>
+    <div id="c14" class="caption clip" data-start="11.34" data-duration="0.30" data-track-index="1">press.</div>
+    <div id="c15" class="caption clip" data-start="12.46" data-duration="0.92" data-track-index="1">Keyboard users and</div>
+    <div id="c16" class="caption clip" data-start="13.38" data-duration="0.86" data-track-index="1">screen readers depend</div>
+    <div id="c17" class="caption clip" data-start="14.24" data-duration="0.50" data-track-index="1">on it.</div>
+    <div id="c18" class="caption clip" data-start="15.50" data-duration="0.56" data-track-index="1">Broken version,</div>
+    <div id="c19" class="caption clip" data-start="16.68" data-duration="0.98" data-track-index="1">a dialog opens</div>
+    <div id="c20" class="caption clip" data-start="17.66" data-duration="0.96" data-track-index="1">but focus stays</div>
+    <div id="c21" class="caption clip" data-start="18.62" data-duration="0.70" data-track-index="1">behind it.</div>
+    <div id="c22" class="caption clip" data-start="19.86" data-duration="0.94" data-track-index="1">Press tab and</div>
+    <div id="c23" class="caption clip" data-start="20.80" data-duration="0.62" data-track-index="1">you're moving through</div>
+    <div id="c24" class="caption clip" data-start="21.42" data-duration="0.74" data-track-index="1">the page behind</div>
+    <div id="c25" class="caption clip" data-start="22.16" data-duration="0.44" data-track-index="1">the dialog.</div>
+    <div id="c26" class="caption clip" data-start="23.20" data-duration="1.22" data-track-index="1">The fix, when</div>
+    <div id="c27" class="caption clip" data-start="24.42" data-duration="0.80" data-track-index="1">a dialog opens,</div>
+    <div id="c28" class="caption clip" data-start="25.66" data-duration="0.84" data-track-index="1">move focus inside</div>
+    <div id="c29" class="caption clip" data-start="26.50" data-duration="1.40" data-track-index="1">it. Keep tab</div>
+    <div id="c30" class="caption clip" data-start="27.90" data-duration="0.96" data-track-index="1">inside until the</div>
+    <div id="c31" class="caption clip" data-start="28.86" data-duration="0.82" data-track-index="1">dialog closes.</div>
+    <div id="c32" class="caption clip" data-start="30.54" data-duration="0.60" data-track-index="1">When it closes,</div>
+    <div id="c33" class="caption clip" data-start="31.54" data-duration="0.92" data-track-index="1">send focus back</div>
+    <div id="c34" class="caption clip" data-start="32.46" data-duration="0.56" data-track-index="1">to the button</div>
+    <div id="c35" class="caption clip" data-start="33.02" data-duration="0.66" data-track-index="1">that opened it.</div>
+    <div id="c36" class="caption clip" data-start="34.20" data-duration="0.78" data-track-index="1">The user continues</div>
+    <div id="c37" class="caption clip" data-start="34.98" data-duration="1.16" data-track-index="1">exactly where they</div>
+    <div id="c38" class="caption clip" data-start="36.14" data-duration="0.30" data-track-index="1">were.</div>
+    <div id="c39" class="caption clip" data-start="37.12" data-duration="0.84" data-track-index="1">Press escape to</div>
+    <div id="c40" class="caption clip" data-start="37.96" data-duration="1.14" data-track-index="1">close and give</div>
+    <div id="c41" class="caption clip" data-start="39.10" data-duration="0.72" data-track-index="1">focus a visible</div>
+    <div id="c42" class="caption clip" data-start="39.82" data-duration="1.38" data-track-index="1">outline so users</div>
+    <div id="c43" class="caption clip" data-start="41.20" data-duration="0.72" data-track-index="1">can see where</div>
+    <div id="c44" class="caption clip" data-start="41.92" data-duration="0.40" data-track-index="1">they are.</div>
+    <div id="c45" class="caption clip" data-start="43.18" data-duration="0.32" data-track-index="1">The takeaway,</div>
+    <div id="c46" class="caption clip" data-start="44.26" data-duration="0.94" data-track-index="1">a dialog opens</div>
+    <div id="c47" class="caption clip" data-start="45.20" data-duration="0.82" data-track-index="1">with focus inside</div>
+    <div id="c48" class="caption clip" data-start="46.02" data-duration="1.44" data-track-index="1">and closes with</div>
+    <div id="c49" class="caption clip" data-start="47.46" data-duration="0.80" data-track-index="1">focus back where</div>
+    <div id="c50" class="caption clip" data-start="48.26" data-duration="0.34" data-track-index="1">it started.</div>
+    <div id="c51" class="caption clip" data-start="49.62" data-duration="0.42" data-track-index="1">Have you tried</div>
+    <div id="c52" class="caption clip" data-start="50.04" data-duration="0.68" data-track-index="1">your app using</div>
+    <div id="c53" class="caption clip" data-start="50.72" data-duration="0.70" data-track-index="1">only the keyboard?</div>
+    <audio id="narration" data-start="0" data-duration="52.02" data-track-index="2" data-volume="1"
+           src="assets/ux-focus-after-dialog.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the cursor jumps to the top after the dialog closes
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#cur0", { x: -280, y: -50, duration: 1.2, ease: "power2.inOut" }, 4.5);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 8.1);
+
+  // 1: focus ring
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 8.68);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 8.7);
+  tl.to("#fr1", { y: 90, duration: 0.5, ease: "power2.inOut" }, 11.0);
+  tl.to("#fr1", { y: 180, duration: 0.5, ease: "power2.inOut" }, 12.4);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.9);
+
+  // 2: broken focus behind the dialog
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 15.5);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 15.5);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 23.0);
+
+  // 3: trap Tab inside the dialog
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 23.2);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 23.2);
+  tl.to("#fr3", { x: 270, duration: 0.5, ease: "power2.inOut" }, 25.5);
+  tl.to("#fr3", { x: 0, duration: 0.5, ease: "power2.inOut" }, 27.6);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 30.2);
+
+  // 4: return to the opener
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 30.54);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 30.5);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 37.0);
+
+  // 5: escape and outline
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 37.12);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 43.0);
+
+  // 6: takeaway
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 43.2);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 48.0);
+
+  // 7: question
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 49.62);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.76);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.76); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.76); tl.set("#c1", { opacity: 0 }, 1.06);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.52); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.52); tl.set("#c2", { opacity: 0 }, 2.38);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.38); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.38); tl.set("#c3", { opacity: 0 }, 3.14);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.14); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.14); tl.set("#c4", { opacity: 0 }, 3.72);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.72); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.72); tl.set("#c5", { opacity: 0 }, 4.14);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 4.88); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.88); tl.set("#c6", { opacity: 0 }, 5.40);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 5.40); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.40); tl.set("#c7", { opacity: 0 }, 5.86);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 5.86); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.86); tl.set("#c8", { opacity: 0 }, 6.28);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 6.98); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.98); tl.set("#c9", { opacity: 0 }, 7.40);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 7.40); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.40); tl.set("#c10", { opacity: 0 }, 7.74);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 8.68); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.68); tl.set("#c11", { opacity: 0 }, 9.58);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 9.58); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.58); tl.set("#c12", { opacity: 0 }, 10.56);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 10.56); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.56); tl.set("#c13", { opacity: 0 }, 11.34);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 11.34); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.34); tl.set("#c14", { opacity: 0 }, 11.64);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 12.46); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.46); tl.set("#c15", { opacity: 0 }, 13.38);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 13.38); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.38); tl.set("#c16", { opacity: 0 }, 14.24);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 14.24); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.24); tl.set("#c17", { opacity: 0 }, 14.74);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 15.50); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.50); tl.set("#c18", { opacity: 0 }, 16.06);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 16.68); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.68); tl.set("#c19", { opacity: 0 }, 17.66);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 17.66); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.66); tl.set("#c20", { opacity: 0 }, 18.62);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 18.62); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.62); tl.set("#c21", { opacity: 0 }, 19.32);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 19.86); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.86); tl.set("#c22", { opacity: 0 }, 20.80);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 20.80); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.80); tl.set("#c23", { opacity: 0 }, 21.42);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 21.42); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.42); tl.set("#c24", { opacity: 0 }, 22.16);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 22.16); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.16); tl.set("#c25", { opacity: 0 }, 22.60);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 23.20); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.20); tl.set("#c26", { opacity: 0 }, 24.42);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 24.42); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.42); tl.set("#c27", { opacity: 0 }, 25.22);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 25.66); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.66); tl.set("#c28", { opacity: 0 }, 26.50);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 26.50); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.50); tl.set("#c29", { opacity: 0 }, 27.90);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 27.90); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.90); tl.set("#c30", { opacity: 0 }, 28.86);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 28.86); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.86); tl.set("#c31", { opacity: 0 }, 29.68);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 30.54); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.54); tl.set("#c32", { opacity: 0 }, 31.14);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 31.54); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.54); tl.set("#c33", { opacity: 0 }, 32.46);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 32.46); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.46); tl.set("#c34", { opacity: 0 }, 33.02);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 33.02); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.02); tl.set("#c35", { opacity: 0 }, 33.68);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 34.20); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.20); tl.set("#c36", { opacity: 0 }, 34.98);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 34.98); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.98); tl.set("#c37", { opacity: 0 }, 36.14);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 36.14); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.14); tl.set("#c38", { opacity: 0 }, 36.44);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 37.12); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.12); tl.set("#c39", { opacity: 0 }, 37.96);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 37.96); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.96); tl.set("#c40", { opacity: 0 }, 39.10);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 39.10); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.10); tl.set("#c41", { opacity: 0 }, 39.82);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 39.82); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.82); tl.set("#c42", { opacity: 0 }, 41.20);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 41.20); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.20); tl.set("#c43", { opacity: 0 }, 41.92);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 41.92); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.92); tl.set("#c44", { opacity: 0 }, 42.32);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 43.18); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.18); tl.set("#c45", { opacity: 0 }, 43.50);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 44.26); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.26); tl.set("#c46", { opacity: 0 }, 45.20);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 45.20); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.20); tl.set("#c47", { opacity: 0 }, 46.02);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 46.02); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.02); tl.set("#c48", { opacity: 0 }, 47.46);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 47.46); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.46); tl.set("#c49", { opacity: 0 }, 48.26);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 48.26); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.26); tl.set("#c50", { opacity: 0 }, 48.60);
+    tl.set("#c51", { opacity: 1, scale: 0.92 }, 49.62); tl.to("#c51", { scale: 1, duration: 0.12, ease: "power2.out" }, 49.62); tl.set("#c51", { opacity: 0 }, 50.04);
+    tl.set("#c52", { opacity: 1, scale: 0.92 }, 50.04); tl.to("#c52", { scale: 1, duration: 0.12, ease: "power2.out" }, 50.04); tl.set("#c52", { opacity: 0 }, 50.72);
+    tl.set("#c53", { opacity: 1, scale: 0.92 }, 50.72); tl.to("#c53", { scale: 1, duration: 0.12, ease: "power2.out" }, 50.72); tl.set("#c53", { opacity: 0 }, 51.42);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

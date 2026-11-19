@@ -1,0 +1,15 @@
+You type a long note, then your phone dies. Everything is gone. Users trust apps that never lose their words.
+
+Autosave saves the note while the user types. There's no Save button to remember.
+
+Broken version: a Save button only. Type for five minutes, forget to tap it, and the text is lost.
+
+The fix: save the draft after the user pauses for about one second. Show a small status line: Saving, then Saved 2 seconds ago.
+
+Save to the device first, so typing never waits for the network. If the save fails, keep the text on screen and say so.
+
+The status line matters most. It tells the user their words are safe.
+
+The takeaway: never make users save their words by hand. Save for them, and show that you did.
+
+When did you last lose a note you were writing?

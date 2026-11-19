@@ -1,0 +1,175 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .screen { position: absolute; left: 150px; top: 120px; width: 600px; height: 400px; background: #1a1a25; border: 1px solid #2f2f42; border-radius: 22px; overflow: hidden; }
+  .mini { position: absolute; top: 150px; width: 250px; height: 340px; background: #1a1a25; border: 1px solid #2f2f42; border-radius: 20px; overflow: hidden; }
+  .b { position: absolute; left: 80px; width: 440px; height: 52px; line-height: 52px; text-align: center; font: 900 26px Inter, sans-serif; border-radius: 14px; }
+  .solid { background: #8fa8ff; color: #0b0b12; }
+  .plain { background: #2a2a3a; color: #e9e9f1; }
+  .outline { border: 2px solid #8fa8ff; color: #8fa8ff; }
+  .link { background: transparent; color: #9a9db0; text-decoration: underline; font-weight: 700; }
+  .danger-line { border: 2px solid #ff8a8a; color: #ff8a8a; }
+  .danger-solid { background: #ff8a8a; color: #0b0b12; }
+  .mb { position: absolute; left: 16px; width: 218px; height: 40px; line-height: 40px; text-align: center; font: 900 22px Inter, sans-serif; border-radius: 12px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="12.1" data-track-index="1">01 · Five buttons</div>
+  <div class="kick clip" data-start="12.4" data-duration="5.3" data-track-index="1">02 · Equal weight</div>
+  <div class="kick clip" data-start="17.7" data-duration="7.3" data-track-index="1">03 · One loud</div>
+  <div class="kick clip" data-start="25.0" data-duration="4.7" data-track-index="1">04 · Same spot</div>
+  <div class="kick clip" data-start="29.96" data-duration="6.3" data-track-index="1">05 · Danger</div>
+  <div class="kick clip" data-start="36.24" data-duration="4.5" data-track-index="1">06 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: five identical buttons -->
+  <div id="g0" class="g">
+    <div class="screen">
+      <div class="b solid" style="top: 72px;">Save</div>
+      <div class="b solid" style="top: 136px;">Share</div>
+      <div class="b solid" style="top: 200px;">Export</div>
+      <div class="b solid" style="top: 264px;">Archive</div>
+      <div class="b solid" style="top: 328px;">Delete</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 552px; font-size: 40px;">Which one matters?</div>
+  </div>
+
+  <!-- 1: one primary action -->
+  <div id="g1" class="g">
+    <div class="screen" style="opacity: 0.3;">
+      <div class="b solid" style="top: 72px;">Save</div>
+      <div class="b solid" style="top: 136px;">Share</div>
+      <div class="b solid" style="top: 200px;">Export</div>
+      <div class="b solid" style="top: 264px;">Archive</div>
+      <div class="b solid" style="top: 328px;">Delete</div>
+    </div>
+    <div class="big" style="top: 210px; font-size: 56px;">Every screen needs</div>
+    <div class="big acc" style="top: 290px; font-size: 56px;">one primary action.</div>
+    <div class="txt" style="left: 60px; top: 560px; font-size: 34px; color: #9a9db0;">The main thing you want done.</div>
+  </div>
+
+  <!-- 2: broken: all equal -->
+  <div id="g2" class="g">
+    <div class="screen">
+      <div class="b solid" style="top: 72px;">Save</div>
+      <div class="b solid" style="top: 136px;">Share</div>
+      <div class="b solid" style="top: 200px;">Export</div>
+      <div class="b solid" style="top: 264px;">Archive</div>
+      <div class="b solid" style="top: 328px;">Delete</div>
+    </div>
+    <div class="redbox" style="left: 60px; top: 552px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Equal weight: no focus.</div>
+  </div>
+
+  <!-- 3: the fix -->
+  <div id="g3" class="g">
+    <div class="screen">
+      <div class="b solid" style="top: 72px; height: 80px; line-height: 80px; font-size: 32px;">Save note</div>
+      <div class="b outline" style="top: 180px; width: 212px; left: 80px; background: transparent;">Share</div>
+      <div class="b outline" style="top: 180px; width: 212px; left: 308px; background: transparent;">Export</div>
+      <div class="b link" style="top: 270px; left: 80px; width: 440px; background: transparent;">Archive</div>
+    </div>
+    <div class="txt grn" style="left: 60px; top: 552px; font-size: 38px;">Solid, bold, one.</div>
+  </div>
+
+  <!-- 4: same spot on every screen -->
+  <div id="g4" class="g">
+    <div class="mini" style="left: 40px;">
+      <div class="lbl" style="left: 16px; top: 16px; font-size: 22px;">Notes</div>
+      <div class="mb solid" style="top: 286px;">Save note</div>
+    </div>
+    <div class="mini" style="left: 330px; border-color: #8fa8ff;">
+      <div class="lbl" style="left: 16px; top: 16px; font-size: 22px;">Share</div>
+      <div class="mb solid" style="top: 286px;">Send link</div>
+    </div>
+    <div class="mini" style="left: 620px;">
+      <div class="lbl" style="left: 16px; top: 16px; font-size: 22px;">Settings</div>
+      <div class="mb solid" style="top: 286px;">Save changes</div>
+    </div>
+    <div class="txt acc" style="left: 60px; top: 530px; font-size: 38px;">Same spot, every screen.</div>
+    <div class="txt" style="left: 60px; top: 590px; font-size: 30px; color: #9a9db0;">Users learn where to look.</div>
+  </div>
+
+  <!-- 5: danger does not look like save -->
+  <div id="g5" class="g">
+    <div class="screen" style="height: 400px;">
+      <div class="b solid" style="top: 90px; height: 72px; line-height: 72px; font-size: 30px;">Save</div>
+      <div class="b danger-line" style="top: 200px; height: 72px; line-height: 68px; font-size: 30px;">Delete</div>
+    </div>
+    <div class="txt red" style="left: 60px; top: 552px; font-size: 36px;">Delete is not the main action.</div>
+    <div class="txt" style="left: 60px; top: 604px; font-size: 28px; color: #9a9db0;">Red solid would fight Save.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px;">One loud button per screen.</div>
+    <div class="big acc" style="top: 330px;">Everything else stays quiet.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">What's the one thing you want<br>users to do on your last screen?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: five identical buttons
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.5);
+
+  // 1: one primary action
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 6.84);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 12.1);
+
+  // 2: broken equal weight
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 12.38);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 12.4);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 17.4);
+
+  // 3: fix
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 17.68);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 17.7);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 24.7);
+
+  // 4: same spot
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 25.0);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 25.0);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 29.7);
+
+  // 5: danger
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 29.96);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 29.96);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 36.0);
+
+  // 6: takeaway
+  tl.to("#g6", { opacity: 1, duration: 0.4 }, 36.24);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 40.5);
+
+  // 7: question
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.8);
+</script>

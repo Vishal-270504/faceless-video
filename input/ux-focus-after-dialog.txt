@@ -1,0 +1,15 @@
+You open a dialog, close it, and your cursor jumps to the top of the page. Now you have to find your place again. That's a focus problem.
+
+Focus is the element that receives the next key press. Keyboard users and screen readers depend on it.
+
+Broken version: a dialog opens, but focus stays behind it. Press Tab, and you're moving through the page behind the dialog.
+
+The fix: when a dialog opens, move focus inside it. Keep Tab inside until the dialog closes.
+
+When it closes, send focus back to the button that opened it. The user continues exactly where they were.
+
+Press Escape to close. And give focus a visible outline, so users can see where they are.
+
+The takeaway: a dialog opens with focus inside, and closes with focus back where it started.
+
+Have you tried your app using only the keyboard?

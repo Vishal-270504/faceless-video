@@ -1,0 +1,13 @@
+Your main button sits in the top right corner. Now try to tap it with one hand on a big phone. Your thumb can't reach it.
+
+Most people hold their phone in one hand. The thumb reaches the bottom of the screen easily. The top corners are hard.
+
+Broken version: the Save button sits under the status bar, far from the thumb.
+
+The fix: move the main action to the bottom, in a bar that stays in place while you scroll.
+
+Keep less important actions up top, like back or settings. Those can be a stretch, because you use them less.
+
+The takeaway: put the action you use most where the thumb already rests.
+
+Where is the main button on your phone screen?

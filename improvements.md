@@ -52,3 +52,21 @@ Categories: STORY (how the script hooks, explains and ends), EXPLAIN (how simple
 - VISUAL: no blank gap longer than 0.5 s between cards; fade the next card in while the last one fades out.
 - CRAFT: check the word count (110-125) from make_voice before writing visuals.
 - STORY: one rule for status codes across the series (401 missing token, 403 or 404 for other users' data).
+
+## Videos 19-28: UI/UX series (added 2026-11-19)
+- 19 ux-tap-targets: dashed 44 pt box around the icon; the fix shows a tap ring. Lesson: a caption at y 618 was clipped by the card edge; keep captions above y 600.
+- 20 ux-hover-only-actions: laptop row with a cursor reveals the icons; the phone shows the hidden icons as ghosts. Lesson: a left/top tween fails lint (gsap_non_transform_motion); use x/y.
+- 21 ux-thumb-zone: easy/hard zone map on a phone, then a bottom action bar. Lesson: the dashed reach line has to connect the thumb to the button.
+- 22 ux-button-labels: real dialog mockup; chips of verbs against words to avoid. Lesson: the delete example was dropped because ux-details already covered delete confirmation.
+- 23 ux-one-primary-button: five identical buttons, then a hierarchy screen, then three screens with the same primary spot.
+- 24 ux-contrast: real ratios (#999 on white is 2.8:1, #595959 is 7:1). Lesson: check the frames where the fail badge appears; they are the proof.
+- 25 ux-autosave-notes: notes editor with a Saving, then Saved status line, plus a Save-only failure. Lesson: tween by element id, not nth-of-type.
+- 26 ux-optimistic-update: double tap, instant state, spinner in the broken version, rollback. Lesson: the takeaway card faded after the question card started; fixed.
+- 27 ux-search-as-you-type: ten request tiles for "pagination", then a debounce bar. Lesson: no invented timings; say "about 300 ms".
+- 28 ux-focus-after-dialog: a focus ring moves across the buttons; dialog trap; Escape chip. Lesson: three left/top tweens failed lint; all converted to x/y before the first render.
+
+## Open items from videos 19-28 (apply next)
+- VISUAL: keep all text above y 600 inside the card (the card ends at 640).
+- CRAFT: animate position with x/y, never left/top, in every new visuals file.
+- CRAFT: word counts ran 119-145 for this batch; aim for 110-125 before writing visuals.
+- STORY: every video ends with the takeaway sentence, then the question.

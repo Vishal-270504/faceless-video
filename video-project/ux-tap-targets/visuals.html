@@ -1,0 +1,148 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .phone { position: absolute; left: 330px; top: 24px; width: 240px; height: 480px; background: #0f0f16; border: 3px solid #2b2b3c; border-radius: 36px; overflow: hidden; }
+  .bar { position: absolute; left: 0; top: 0; width: 240px; height: 64px; background: #1a1a25; }
+  .xico { position: absolute; width: 20px; height: 20px; }
+  .xico:before, .xico:after { content: ""; position: absolute; left: 9px; top: -4px; width: 2px; height: 28px; background: #e9e9f1; }
+  .xico:before { transform: rotate(45deg); }
+  .xico:after { transform: rotate(-45deg); }
+  .pen { position: absolute; width: 18px; height: 18px; border: 2px solid #e9e9f1; border-radius: 3px; }
+  .hit { position: absolute; width: 44px; height: 44px; border: 2px dashed #8fa8ff; border-radius: 10px; }
+  .ring { position: absolute; width: 96px; height: 96px; border-radius: 50%; background: rgba(143,168,255,0.22); border: 2px solid #8fa8ff; }
+  .dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #8fa8ff; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="17.0" data-track-index="1">01 · The miss</div>
+  <div class="kick clip" data-start="17.1" data-duration="17.2" data-track-index="1">02 · The fix</div>
+  <div class="kick clip" data-start="34.4" data-duration="5.5" data-track-index="1">03 · Spacing</div>
+  <div class="kick clip" data-start="40.0" data-duration="7.2" data-track-index="1">04 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the tiny close icon -->
+  <div id="g0" class="g">
+    <div class="phone">
+      <div class="bar"><div class="lbl" style="left: 20px; top: 18px; font-size: 24px;">Note</div></div>
+      <div class="xico" style="left: 196px; top: 20px;"></div>
+      <div class="txt" style="left: 20px; top: 120px; font-size: 26px; color: #9a9db0;">Your note text</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 540px; font-size: 40px;">Tap the tiny X.</div>
+    <div class="txt" style="left: 60px; top: 596px; font-size: 30px; color: #9a9db0;">Miss? Wrong button.</div>
+  </div>
+
+  <!-- 1: the 44 point minimum -->
+  <div id="g1" class="g">
+    <div class="hit" style="left: 418px; top: 210px; width: 88px; height: 88px;"></div>
+    <div class="lbl acc" style="left: 380px; top: 318px; font-size: 30px; width: 170px; text-align: center; color: #8fa8ff;">44 pt</div>
+    <div class="txt" style="left: 60px; top: 390px; font-size: 40px; width: 780px; text-align: center;">Touch area: at least 44.</div>
+    <div class="txt" style="left: 60px; top: 456px; font-size: 30px; width: 780px; text-align: center; color: #9a9db0;">Apple: 44 pt. Google: 48 dp.</div>
+    <div class="txt" style="left: 60px; top: 560px; font-size: 30px; width: 780px; text-align: center; color: #9a9db0;">Pick the bigger number.</div>
+  </div>
+
+  <!-- 2: the broken version -->
+  <div id="g2" class="g">
+    <div class="phone">
+      <div class="bar"></div>
+      <div class="xico" style="left: 60px; top: 150px;"></div>
+      <div class="xico" style="left: 110px; top: 150px;"></div>
+      <div class="xico" style="left: 160px; top: 150px;"></div>
+    </div>
+    <div class="dot" style="left: 355px; top: 330px; width: 36px; height: 36px; background: rgba(255,107,107,0.4);" id="finger2"></div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Icons 20 px. Miss by 4 px.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">You open the wrong thing.</div>
+  </div>
+
+  <!-- 3: the fix: small icon, big touch area -->
+  <div id="g3" class="g">
+    <div class="phone">
+      <div class="bar"></div>
+      <div class="hit" style="left: 88px; top: 118px; width: 64px; height: 64px;"></div>
+      <div class="xico" style="left: 110px; top: 140px;"></div>
+    </div>
+    <div class="ring" id="ring3" style="left: 406px; top: 130px; width: 88px; height: 88px; opacity: 0;"></div>
+    <div class="txt" style="left: 60px; top: 540px; font-size: 40px;">Icon stays small.</div>
+    <div class="txt acc" style="left: 60px; top: 598px; font-size: 34px;">Touch area grows to 44.</div>
+  </div>
+
+  <!-- 4: spacing between buttons -->
+  <div id="g4" class="g">
+    <div class="redbox" style="left: 176px; top: 180px; width: 150px; height: 60px; line-height: 60px; text-align: center; color: #f2f2f7; background: #1a1a25;">Edit</div>
+    <div class="redbox" style="left: 344px; top: 180px; width: 150px; height: 60px; line-height: 60px; text-align: center; color: #f2f2f7; background: #1a1a25;">Delete</div>
+    <div class="acc" style="position: absolute; left: 326px; top: 180px; width: 18px; height: 60px; border-left: 2px dashed #8fa8ff; border-right: 2px dashed #8fa8ff;"></div>
+    <div class="txt acc" style="left: 60px; top: 300px; font-size: 40px; width: 780px; text-align: center;">8 px gap</div>
+    <div class="txt" style="left: 60px; top: 380px; font-size: 32px; width: 780px; text-align: center; color: #9a9db0;">Stops most wrong taps.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g">
+    <div class="big" style="top: 200px;">The icon can be small.</div>
+    <div class="big acc" style="top: 360px;">The tap area can't be.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 240px; font-size: 56px;">Which button do people miss?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the tiny close icon
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.7);
+
+  // 1: 44 point minimum
+  tl.fromTo("#g1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 6.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 16.7);
+
+  // 2: broken version, finger lands between icons
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 17.06);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 17.1);
+  tl.fromTo("#finger2", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, 19.0);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 24.4);
+
+  // 3: fix
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 24.74);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.4);
+  tl.fromTo("#ring3", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 26.6);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 34.1);
+
+  // 4: spacing
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 34.42);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 39.6);
+
+  // 5: takeaway
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 40.0);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 40.0);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 44.9);
+
+  // 6: question
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.2);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 45.2);
+</script>

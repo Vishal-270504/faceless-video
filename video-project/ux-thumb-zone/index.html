@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .phone { position: absolute; left: 320px; top: 12px; width: 260px; height: 500px; background: #0f0f16; border: 3px solid #2b2b3c; border-radius: 38px; overflow: hidden; }
+  .status { position: absolute; left: 0; top: 0; width: 260px; height: 40px; background: #1a1a25; }
+  .btn { position: absolute; background: #8fa8ff; color: #0b0b12; font: 900 24px Inter, sans-serif; text-align: center; border-radius: 14px; }
+  .outline { position: absolute; border: 2px solid #8fa8ff; color: #8fa8ff; font: 700 24px Inter, sans-serif; text-align: center; border-radius: 14px; }
+  .zone { position: absolute; }
+  .zlabel { position: absolute; font: 700 24px Inter, sans-serif; }
+  .thumb { position: absolute; width: 56px; height: 56px; border-radius: 50%; background: #e9e9f1; opacity: 0.9; }
+  .reach { position: absolute; height: 0; border-top: 3px dashed #ff8a8a; }
+  .tickmark { position: absolute; width: 26px; height: 46px; border-right: 7px solid #5fd39a; border-bottom: 7px solid #5fd39a; transform: rotate(45deg); }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="39.62"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.5" data-track-index="1">01 · The stretch</div>
+  <div class="kick clip" data-start="7.7" data-duration="7.6" data-track-index="1">02 · Thumb reach</div>
+  <div class="kick clip" data-start="15.3" data-duration="9.0" data-track-index="1">03 · The fix</div>
+  <div class="kick clip" data-start="25.5" data-duration="6.7" data-track-index="1">04 · Secondary</div>
+  <div class="kick clip" data-start="32.6" data-duration="6.6" data-track-index="1">05 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: Save is far away at the top right -->
+  <div id="g0" class="g">
+    <div class="phone">
+      <div class="status"></div>
+      <div class="outline" style="left: 170px; top: 60px; width: 76px; height: 46px; line-height: 42px;">Save</div>
+      <div class="txt" style="left: 22px; top: 130px; font-size: 26px; color: #9a9db0;">Milk, eggs, bread</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 38px;">Can your thumb reach it?</div>
+    <div class="txt" style="left: 60px; top: 588px; font-size: 30px; color: #9a9db0;">One hand, big phone.</div>
+  </div>
+
+  <!-- 1: reach zones -->
+  <div id="g1" class="g">
+    <div class="phone">
+      <div class="status"></div>
+      <div class="zone" style="left: 0px; top: 240px; width: 260px; height: 256px; background: rgba(95,211,154,0.14);"></div>
+      <div class="zone" style="left: 150px; top: 44px; width: 110px; height: 96px; background: rgba(255,107,107,0.16);"></div>
+      <div class="zlabel grn" style="left: 40px; top: 380px;">Easy</div>
+      <div class="zlabel red" style="left: 160px; top: 90px; font-size: 22px;">Hard</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 38px;">The bottom is easy.</div>
+    <div class="txt" style="left: 60px; top: 588px; font-size: 30px; color: #9a9db0;">The top corners are a stretch.</div>
+  </div>
+
+  <!-- 2: broken: Save under the status bar -->
+  <div id="g2" class="g">
+    <div class="phone">
+      <div class="status"></div>
+      <div class="btn" style="left: 170px; top: 60px; width: 76px; height: 46px; line-height: 46px;">Save</div>
+      <div class="txt" style="left: 22px; top: 150px; font-size: 26px; color: #9a9db0;">Milk, eggs, bread</div>
+      <div class="thumb" style="left: 100px; top: 400px;"></div>
+    </div>
+    <div style="position: absolute; left: 446px; top: 150px; height: 250px; border-left: 3px dashed #ff8a8a;"></div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Save is out of reach.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">The thumb has to stretch.</div>
+  </div>
+
+  <!-- 3: the fix: bottom action bar -->
+  <div id="g3" class="g">
+    <div class="phone">
+      <div class="status"></div>
+      <div class="txt" style="left: 22px; top: 150px; font-size: 26px; color: #9a9db0;">Milk, eggs, bread</div>
+      <div class="btn" style="left: 16px; top: 430px; width: 228px; height: 54px; line-height: 54px;">Save note</div>
+    </div>
+    <div class="txt grn" style="left: 60px; top: 530px; font-size: 40px;">Main button: bottom.</div>
+    <div class="txt" style="left: 60px; top: 588px; font-size: 30px; color: #9a9db0;">Right where the thumb rests.</div>
+  </div>
+
+  <!-- 4: secondary actions up top -->
+  <div id="g4" class="g">
+    <div class="phone">
+      <div class="status"></div>
+      <div class="outline" style="left: 16px; top: 56px; width: 80px; height: 46px; line-height: 42px;">Back</div>
+      <div class="outline" style="left: 164px; top: 56px; width: 80px; height: 46px; line-height: 42px;">Gear</div>
+      <div class="btn" style="left: 16px; top: 430px; width: 228px; height: 54px; line-height: 54px;">Save note</div>
+    </div>
+    <div class="txt acc" style="left: 60px; top: 530px; font-size: 40px;">Less used: top.</div>
+    <div class="txt" style="left: 60px; top: 588px; font-size: 30px; color: #9a9db0;">Used often: bottom.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g">
+    <div class="big" style="top: 200px;">Put the action you use</div>
+    <div class="big acc" style="top: 330px;">most where the thumb rests.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 240px; font-size: 54px;">Where is the main button<br>on your phone screen?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.94" data-track-index="1">Your main button</div>
+    <div id="c1" class="caption clip" data-start="0.94" data-duration="0.62" data-track-index="1">sits in the</div>
+    <div id="c2" class="caption clip" data-start="1.56" data-duration="0.76" data-track-index="1">top right corner.</div>
+    <div id="c3" class="caption clip" data-start="2.90" data-duration="0.60" data-track-index="1">Now try to</div>
+    <div id="c4" class="caption clip" data-start="3.50" data-duration="0.46" data-track-index="1">tap it with</div>
+    <div id="c5" class="caption clip" data-start="3.96" data-duration="0.64" data-track-index="1">one hand on</div>
+    <div id="c6" class="caption clip" data-start="4.60" data-duration="0.48" data-track-index="1">a big phone.</div>
+    <div id="c7" class="caption clip" data-start="5.74" data-duration="0.82" data-track-index="1">Your thumb can't</div>
+    <div id="c8" class="caption clip" data-start="6.56" data-duration="0.38" data-track-index="1">reach it.</div>
+    <div id="c9" class="caption clip" data-start="7.72" data-duration="0.92" data-track-index="1">Most people hold</div>
+    <div id="c10" class="caption clip" data-start="8.64" data-duration="0.60" data-track-index="1">their phone in</div>
+    <div id="c11" class="caption clip" data-start="9.24" data-duration="0.40" data-track-index="1">one hand.</div>
+    <div id="c12" class="caption clip" data-start="10.10" data-duration="0.76" data-track-index="1">The thumb reaches</div>
+    <div id="c13" class="caption clip" data-start="10.86" data-duration="0.72" data-track-index="1">the bottom of</div>
+    <div id="c14" class="caption clip" data-start="11.58" data-duration="0.64" data-track-index="1">the screen easily.</div>
+    <div id="c15" class="caption clip" data-start="13.08" data-duration="0.50" data-track-index="1">The top corners</div>
+    <div id="c16" class="caption clip" data-start="13.58" data-duration="0.52" data-track-index="1">are hard.</div>
+    <div id="c17" class="caption clip" data-start="15.30" data-duration="0.30" data-track-index="1">Broken version,</div>
+    <div id="c18" class="caption clip" data-start="16.24" data-duration="0.66" data-track-index="1">the save button</div>
+    <div id="c19" class="caption clip" data-start="16.90" data-duration="0.68" data-track-index="1">sits under the</div>
+    <div id="c20" class="caption clip" data-start="17.58" data-duration="0.60" data-track-index="1">status bar,</div>
+    <div id="c21" class="caption clip" data-start="18.54" data-duration="0.52" data-track-index="1">far from the</div>
+    <div id="c22" class="caption clip" data-start="19.06" data-duration="0.30" data-track-index="1">thumb.</div>
+    <div id="c23" class="caption clip" data-start="20.24" data-duration="0.30" data-track-index="1">The fix,</div>
+    <div id="c24" class="caption clip" data-start="20.96" data-duration="0.60" data-track-index="1">move the main</div>
+    <div id="c25" class="caption clip" data-start="21.56" data-duration="0.64" data-track-index="1">action to the</div>
+    <div id="c26" class="caption clip" data-start="22.20" data-duration="0.30" data-track-index="1">bottom,</div>
+    <div id="c27" class="caption clip" data-start="22.92" data-duration="0.34" data-track-index="1">in a bar</div>
+    <div id="c28" class="caption clip" data-start="23.26" data-duration="0.68" data-track-index="1">that stays in</div>
+    <div id="c29" class="caption clip" data-start="23.94" data-duration="0.64" data-track-index="1">place while you</div>
+    <div id="c30" class="caption clip" data-start="24.58" data-duration="0.30" data-track-index="1">scroll.</div>
+    <div id="c31" class="caption clip" data-start="25.50" data-duration="0.94" data-track-index="1">Keep less important</div>
+    <div id="c32" class="caption clip" data-start="26.44" data-duration="1.08" data-track-index="1">actions up top,</div>
+    <div id="c33" class="caption clip" data-start="27.86" data-duration="0.66" data-track-index="1">like back or</div>
+    <div id="c34" class="caption clip" data-start="28.52" data-duration="0.30" data-track-index="1">settings.</div>
+    <div id="c35" class="caption clip" data-start="29.34" data-duration="0.78" data-track-index="1">Those can be</div>
+    <div id="c36" class="caption clip" data-start="30.12" data-duration="0.82" data-track-index="1">a stretch because</div>
+    <div id="c37" class="caption clip" data-start="30.94" data-duration="0.56" data-track-index="1">you use them</div>
+    <div id="c38" class="caption clip" data-start="31.50" data-duration="0.30" data-track-index="1">less.</div>
+    <div id="c39" class="caption clip" data-start="32.58" data-duration="0.40" data-track-index="1">The takeaway,</div>
+    <div id="c40" class="caption clip" data-start="33.48" data-duration="0.62" data-track-index="1">put the action</div>
+    <div id="c41" class="caption clip" data-start="34.10" data-duration="0.74" data-track-index="1">you use most</div>
+    <div id="c42" class="caption clip" data-start="34.84" data-duration="0.68" data-track-index="1">where the thumb</div>
+    <div id="c43" class="caption clip" data-start="35.52" data-duration="0.70" data-track-index="1">already rests.</div>
+    <div id="c44" class="caption clip" data-start="37.20" data-duration="0.48" data-track-index="1">Where is the</div>
+    <div id="c45" class="caption clip" data-start="37.68" data-duration="0.70" data-track-index="1">main button on</div>
+    <div id="c46" class="caption clip" data-start="38.38" data-duration="0.64" data-track-index="1">your phone screen?</div>
+    <audio id="narration" data-start="0" data-duration="39.62" data-track-index="2" data-volume="1"
+           src="assets/ux-thumb-zone.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: far away
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.4);
+
+  // 1: reach zones
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.72);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.7);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.9);
+
+  // 2: broken: Save under status bar, thumb stretch
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 15.3);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 15.3);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 20.0);
+
+  // 3: fix, bottom bar
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 20.24);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 25.2);
+
+  // 4: secondary up top
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 25.5);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 25.5);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 32.2);
+
+  // 5: takeaway
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 32.6);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 32.6);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 36.9);
+
+  // 6: question
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 37.2);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 37.2);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.94);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.94); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.94); tl.set("#c1", { opacity: 0 }, 1.56);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.56); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.56); tl.set("#c2", { opacity: 0 }, 2.32);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.90); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.90); tl.set("#c3", { opacity: 0 }, 3.50);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.50); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.50); tl.set("#c4", { opacity: 0 }, 3.96);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.96); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.96); tl.set("#c5", { opacity: 0 }, 4.60);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 4.60); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.60); tl.set("#c6", { opacity: 0 }, 5.08);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 5.74); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.74); tl.set("#c7", { opacity: 0 }, 6.56);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 6.56); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.56); tl.set("#c8", { opacity: 0 }, 6.94);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 7.72); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.72); tl.set("#c9", { opacity: 0 }, 8.64);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 8.64); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.64); tl.set("#c10", { opacity: 0 }, 9.24);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.24); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.24); tl.set("#c11", { opacity: 0 }, 9.64);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.10); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.10); tl.set("#c12", { opacity: 0 }, 10.86);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 10.86); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.86); tl.set("#c13", { opacity: 0 }, 11.58);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 11.58); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.58); tl.set("#c14", { opacity: 0 }, 12.22);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 13.08); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.08); tl.set("#c15", { opacity: 0 }, 13.58);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 13.58); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.58); tl.set("#c16", { opacity: 0 }, 14.10);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 15.30); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.30); tl.set("#c17", { opacity: 0 }, 15.60);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 16.24); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.24); tl.set("#c18", { opacity: 0 }, 16.90);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 16.90); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.90); tl.set("#c19", { opacity: 0 }, 17.58);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 17.58); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.58); tl.set("#c20", { opacity: 0 }, 18.18);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 18.54); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.54); tl.set("#c21", { opacity: 0 }, 19.06);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 19.06); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.06); tl.set("#c22", { opacity: 0 }, 19.36);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 20.24); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.24); tl.set("#c23", { opacity: 0 }, 20.54);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 20.96); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.96); tl.set("#c24", { opacity: 0 }, 21.56);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 21.56); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.56); tl.set("#c25", { opacity: 0 }, 22.20);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 22.20); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.20); tl.set("#c26", { opacity: 0 }, 22.50);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 22.92); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.92); tl.set("#c27", { opacity: 0 }, 23.26);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 23.26); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.26); tl.set("#c28", { opacity: 0 }, 23.94);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 23.94); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.94); tl.set("#c29", { opacity: 0 }, 24.58);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 24.58); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.58); tl.set("#c30", { opacity: 0 }, 24.88);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 25.50); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.50); tl.set("#c31", { opacity: 0 }, 26.44);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 26.44); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.44); tl.set("#c32", { opacity: 0 }, 27.52);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 27.86); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.86); tl.set("#c33", { opacity: 0 }, 28.52);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 28.52); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.52); tl.set("#c34", { opacity: 0 }, 28.82);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 29.34); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.34); tl.set("#c35", { opacity: 0 }, 30.12);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 30.12); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.12); tl.set("#c36", { opacity: 0 }, 30.94);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 30.94); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.94); tl.set("#c37", { opacity: 0 }, 31.50);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 31.50); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.50); tl.set("#c38", { opacity: 0 }, 31.80);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 32.58); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.58); tl.set("#c39", { opacity: 0 }, 32.98);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 33.48); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.48); tl.set("#c40", { opacity: 0 }, 34.10);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 34.10); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.10); tl.set("#c41", { opacity: 0 }, 34.84);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 34.84); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.84); tl.set("#c42", { opacity: 0 }, 35.52);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 35.52); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.52); tl.set("#c43", { opacity: 0 }, 36.22);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 37.20); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.20); tl.set("#c44", { opacity: 0 }, 37.68);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 37.68); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.68); tl.set("#c45", { opacity: 0 }, 38.38);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 38.38); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.38); tl.set("#c46", { opacity: 0 }, 39.02);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

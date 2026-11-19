@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .phone { position: absolute; left: 330px; top: 24px; width: 240px; height: 480px; background: #0f0f16; border: 3px solid #2b2b3c; border-radius: 36px; overflow: hidden; }
+  .bar { position: absolute; left: 0; top: 0; width: 240px; height: 64px; background: #1a1a25; }
+  .xico { position: absolute; width: 20px; height: 20px; }
+  .xico:before, .xico:after { content: ""; position: absolute; left: 9px; top: -4px; width: 2px; height: 28px; background: #e9e9f1; }
+  .xico:before { transform: rotate(45deg); }
+  .xico:after { transform: rotate(-45deg); }
+  .pen { position: absolute; width: 18px; height: 18px; border: 2px solid #e9e9f1; border-radius: 3px; }
+  .hit { position: absolute; width: 44px; height: 44px; border: 2px dashed #8fa8ff; border-radius: 10px; }
+  .ring { position: absolute; width: 96px; height: 96px; border-radius: 50%; background: rgba(143,168,255,0.22); border: 2px solid #8fa8ff; }
+  .dot { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: #8fa8ff; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="47.74"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="17.0" data-track-index="1">01 · The miss</div>
+  <div class="kick clip" data-start="17.1" data-duration="17.2" data-track-index="1">02 · The fix</div>
+  <div class="kick clip" data-start="34.4" data-duration="5.5" data-track-index="1">03 · Spacing</div>
+  <div class="kick clip" data-start="40.0" data-duration="7.2" data-track-index="1">04 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the tiny close icon -->
+  <div id="g0" class="g">
+    <div class="phone">
+      <div class="bar"><div class="lbl" style="left: 20px; top: 18px; font-size: 24px;">Note</div></div>
+      <div class="xico" style="left: 196px; top: 20px;"></div>
+      <div class="txt" style="left: 20px; top: 120px; font-size: 26px; color: #9a9db0;">Your note text</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 540px; font-size: 40px;">Tap the tiny X.</div>
+    <div class="txt" style="left: 60px; top: 596px; font-size: 30px; color: #9a9db0;">Miss? Wrong button.</div>
+  </div>
+
+  <!-- 1: the 44 point minimum -->
+  <div id="g1" class="g">
+    <div class="hit" style="left: 418px; top: 210px; width: 88px; height: 88px;"></div>
+    <div class="lbl acc" style="left: 380px; top: 318px; font-size: 30px; width: 170px; text-align: center; color: #8fa8ff;">44 pt</div>
+    <div class="txt" style="left: 60px; top: 390px; font-size: 40px; width: 780px; text-align: center;">Touch area: at least 44.</div>
+    <div class="txt" style="left: 60px; top: 456px; font-size: 30px; width: 780px; text-align: center; color: #9a9db0;">Apple: 44 pt. Google: 48 dp.</div>
+    <div class="txt" style="left: 60px; top: 560px; font-size: 30px; width: 780px; text-align: center; color: #9a9db0;">Pick the bigger number.</div>
+  </div>
+
+  <!-- 2: the broken version -->
+  <div id="g2" class="g">
+    <div class="phone">
+      <div class="bar"></div>
+      <div class="xico" style="left: 60px; top: 150px;"></div>
+      <div class="xico" style="left: 110px; top: 150px;"></div>
+      <div class="xico" style="left: 160px; top: 150px;"></div>
+    </div>
+    <div class="dot" style="left: 355px; top: 330px; width: 36px; height: 36px; background: rgba(255,107,107,0.4);" id="finger2"></div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Icons 20 px. Miss by 4 px.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">You open the wrong thing.</div>
+  </div>
+
+  <!-- 3: the fix: small icon, big touch area -->
+  <div id="g3" class="g">
+    <div class="phone">
+      <div class="bar"></div>
+      <div class="hit" style="left: 88px; top: 118px; width: 64px; height: 64px;"></div>
+      <div class="xico" style="left: 110px; top: 140px;"></div>
+    </div>
+    <div class="ring" id="ring3" style="left: 406px; top: 130px; width: 88px; height: 88px; opacity: 0;"></div>
+    <div class="txt" style="left: 60px; top: 540px; font-size: 40px;">Icon stays small.</div>
+    <div class="txt acc" style="left: 60px; top: 598px; font-size: 34px;">Touch area grows to 44.</div>
+  </div>
+
+  <!-- 4: spacing between buttons -->
+  <div id="g4" class="g">
+    <div class="redbox" style="left: 176px; top: 180px; width: 150px; height: 60px; line-height: 60px; text-align: center; color: #f2f2f7; background: #1a1a25;">Edit</div>
+    <div class="redbox" style="left: 344px; top: 180px; width: 150px; height: 60px; line-height: 60px; text-align: center; color: #f2f2f7; background: #1a1a25;">Delete</div>
+    <div class="acc" style="position: absolute; left: 326px; top: 180px; width: 18px; height: 60px; border-left: 2px dashed #8fa8ff; border-right: 2px dashed #8fa8ff;"></div>
+    <div class="txt acc" style="left: 60px; top: 300px; font-size: 40px; width: 780px; text-align: center;">8 px gap</div>
+    <div class="txt" style="left: 60px; top: 380px; font-size: 32px; width: 780px; text-align: center; color: #9a9db0;">Stops most wrong taps.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g">
+    <div class="big" style="top: 200px;">The icon can be small.</div>
+    <div class="big acc" style="top: 360px;">The tap area can't be.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 240px; font-size: 56px;">Which button do people miss?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.72" data-track-index="1">You tap the</div>
+    <div id="c1" class="caption clip" data-start="0.72" data-duration="0.70" data-track-index="1">tiny X on</div>
+    <div id="c2" class="caption clip" data-start="1.42" data-duration="0.56" data-track-index="1">your phone and</div>
+    <div id="c3" class="caption clip" data-start="1.98" data-duration="0.46" data-track-index="1">hit the wrong</div>
+    <div id="c4" class="caption clip" data-start="2.44" data-duration="0.30" data-track-index="1">button.</div>
+    <div id="c5" class="caption clip" data-start="3.24" data-duration="0.30" data-track-index="1">Again,</div>
+    <div id="c6" class="caption clip" data-start="3.86" data-duration="0.68" data-track-index="1">the button is</div>
+    <div id="c7" class="caption clip" data-start="4.54" data-duration="0.52" data-track-index="1">too small.</div>
+    <div id="c8" class="caption clip" data-start="5.98" data-duration="0.52" data-track-index="1">A tap target</div>
+    <div id="c9" class="caption clip" data-start="6.50" data-duration="0.76" data-track-index="1">is the area</div>
+    <div id="c10" class="caption clip" data-start="7.26" data-duration="0.92" data-track-index="1">that reacts when</div>
+    <div id="c11" class="caption clip" data-start="8.18" data-duration="0.72" data-track-index="1">a finger touches</div>
+    <div id="c12" class="caption clip" data-start="8.90" data-duration="0.58" data-track-index="1">the screen.</div>
+    <div id="c13" class="caption clip" data-start="10.48" data-duration="0.92" data-track-index="1">Apple suggests 44</div>
+    <div id="c14" class="caption clip" data-start="11.40" data-duration="1.32" data-track-index="1">points and Google</div>
+    <div id="c15" class="caption clip" data-start="12.72" data-duration="1.00" data-track-index="1">suggests 48.</div>
+    <div id="c16" class="caption clip" data-start="14.68" data-duration="0.72" data-track-index="1">Use those as</div>
+    <div id="c17" class="caption clip" data-start="15.40" data-duration="0.36" data-track-index="1">your minimum.</div>
+    <div id="c18" class="caption clip" data-start="17.06" data-duration="0.30" data-track-index="1">Broken version,</div>
+    <div id="c19" class="caption clip" data-start="17.82" data-duration="0.72" data-track-index="1">a 20 pixel</div>
+    <div id="c20" class="caption clip" data-start="18.54" data-duration="1.30" data-track-index="1">close icon with</div>
+    <div id="c21" class="caption clip" data-start="19.84" data-duration="1.10" data-track-index="1">another icon right</div>
+    <div id="c22" class="caption clip" data-start="20.94" data-duration="0.60" data-track-index="1">next to it.</div>
+    <div id="c23" class="caption clip" data-start="22.18" data-duration="0.40" data-track-index="1">Missed by a</div>
+    <div id="c24" class="caption clip" data-start="22.58" data-duration="1.12" data-track-index="1">few pixels and</div>
+    <div id="c25" class="caption clip" data-start="23.70" data-duration="0.56" data-track-index="1">you open the</div>
+    <div id="c26" class="caption clip" data-start="24.26" data-duration="1.44" data-track-index="1">wrong thing. The</div>
+    <div id="c27" class="caption clip" data-start="25.70" data-duration="0.30" data-track-index="1">fix,</div>
+    <div id="c28" class="caption clip" data-start="26.38" data-duration="0.52" data-track-index="1">keep the icon</div>
+    <div id="c29" class="caption clip" data-start="26.90" data-duration="0.58" data-track-index="1">small,</div>
+    <div id="c30" class="caption clip" data-start="27.90" data-duration="0.48" data-track-index="1">but make the</div>
+    <div id="c31" class="caption clip" data-start="28.38" data-duration="0.88" data-track-index="1">touch area bigger.</div>
+    <div id="c32" class="caption clip" data-start="30.06" data-duration="0.84" data-track-index="1">Add padding until</div>
+    <div id="c33" class="caption clip" data-start="30.90" data-duration="0.86" data-track-index="1">the tapable area</div>
+    <div id="c34" class="caption clip" data-start="31.76" data-duration="1.14" data-track-index="1">reaches about 44</div>
+    <div id="c35" class="caption clip" data-start="32.90" data-duration="0.56" data-track-index="1">pixels.</div>
+    <div id="c36" class="caption clip" data-start="34.42" data-duration="1.02" data-track-index="1">Leave space between</div>
+    <div id="c37" class="caption clip" data-start="35.44" data-duration="0.64" data-track-index="1">buttons too.</div>
+    <div id="c38" class="caption clip" data-start="36.74" data-duration="0.42" data-track-index="1">A gap of</div>
+    <div id="c39" class="caption clip" data-start="37.16" data-duration="0.82" data-track-index="1">8 pixels stops</div>
+    <div id="c40" class="caption clip" data-start="37.98" data-duration="0.90" data-track-index="1">most wrong taps.</div>
+    <div id="c41" class="caption clip" data-start="39.96" data-duration="0.30" data-track-index="1">The takeaway,</div>
+    <div id="c42" class="caption clip" data-start="40.80" data-duration="0.72" data-track-index="1">the icon can</div>
+    <div id="c43" class="caption clip" data-start="41.52" data-duration="0.46" data-track-index="1">look small,</div>
+    <div id="c44" class="caption clip" data-start="42.40" data-duration="0.48" data-track-index="1">but the area</div>
+    <div id="c45" class="caption clip" data-start="42.88" data-duration="0.68" data-track-index="1">you can tap</div>
+    <div id="c46" class="caption clip" data-start="43.56" data-duration="0.78" data-track-index="1">must be big.</div>
+    <div id="c47" class="caption clip" data-start="45.20" data-duration="0.60" data-track-index="1">Which button in</div>
+    <div id="c48" class="caption clip" data-start="45.80" data-duration="0.44" data-track-index="1">your app do</div>
+    <div id="c49" class="caption clip" data-start="46.24" data-duration="0.90" data-track-index="1">people always miss?</div>
+    <audio id="narration" data-start="0" data-duration="47.74" data-track-index="2" data-volume="1"
+           src="assets/ux-tap-targets.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: the tiny close icon
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.7);
+
+  // 1: 44 point minimum
+  tl.fromTo("#g1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 6.0);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 16.7);
+
+  // 2: broken version, finger lands between icons
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 17.06);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 17.1);
+  tl.fromTo("#finger2", { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "power2.out" }, 19.0);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 24.4);
+
+  // 3: fix
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 24.74);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 34.4);
+  tl.fromTo("#ring3", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(2)" }, 26.6);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 34.1);
+
+  // 4: spacing
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 34.42);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 39.6);
+
+  // 5: takeaway
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 40.0);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 40.0);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 44.9);
+
+  // 6: question
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.2);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 45.2);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.72);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.72); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.72); tl.set("#c1", { opacity: 0 }, 1.42);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.42); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.42); tl.set("#c2", { opacity: 0 }, 1.98);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 1.98); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.98); tl.set("#c3", { opacity: 0 }, 2.44);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 2.44); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.44); tl.set("#c4", { opacity: 0 }, 2.74);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.24); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.24); tl.set("#c5", { opacity: 0 }, 3.54);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 3.86); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.86); tl.set("#c6", { opacity: 0 }, 4.54);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 4.54); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.54); tl.set("#c7", { opacity: 0 }, 5.06);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 5.98); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.98); tl.set("#c8", { opacity: 0 }, 6.50);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 6.50); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.50); tl.set("#c9", { opacity: 0 }, 7.26);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 7.26); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.26); tl.set("#c10", { opacity: 0 }, 8.18);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 8.18); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.18); tl.set("#c11", { opacity: 0 }, 8.90);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 8.90); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.90); tl.set("#c12", { opacity: 0 }, 9.48);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 10.48); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.48); tl.set("#c13", { opacity: 0 }, 11.40);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 11.40); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.40); tl.set("#c14", { opacity: 0 }, 12.72);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 12.72); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.72); tl.set("#c15", { opacity: 0 }, 13.72);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 14.68); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.68); tl.set("#c16", { opacity: 0 }, 15.40);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 15.40); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.40); tl.set("#c17", { opacity: 0 }, 15.76);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 17.06); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.06); tl.set("#c18", { opacity: 0 }, 17.36);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 17.82); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.82); tl.set("#c19", { opacity: 0 }, 18.54);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 18.54); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.54); tl.set("#c20", { opacity: 0 }, 19.84);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 19.84); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.84); tl.set("#c21", { opacity: 0 }, 20.94);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 20.94); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.94); tl.set("#c22", { opacity: 0 }, 21.54);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 22.18); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.18); tl.set("#c23", { opacity: 0 }, 22.58);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 22.58); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.58); tl.set("#c24", { opacity: 0 }, 23.70);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 23.70); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.70); tl.set("#c25", { opacity: 0 }, 24.26);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 24.26); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.26); tl.set("#c26", { opacity: 0 }, 25.70);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 25.70); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.70); tl.set("#c27", { opacity: 0 }, 26.00);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 26.38); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.38); tl.set("#c28", { opacity: 0 }, 26.90);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 26.90); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.90); tl.set("#c29", { opacity: 0 }, 27.48);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 27.90); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.90); tl.set("#c30", { opacity: 0 }, 28.38);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 28.38); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.38); tl.set("#c31", { opacity: 0 }, 29.26);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 30.06); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.06); tl.set("#c32", { opacity: 0 }, 30.90);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 30.90); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.90); tl.set("#c33", { opacity: 0 }, 31.76);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 31.76); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.76); tl.set("#c34", { opacity: 0 }, 32.90);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 32.90); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.90); tl.set("#c35", { opacity: 0 }, 33.46);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 34.42); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.42); tl.set("#c36", { opacity: 0 }, 35.44);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 35.44); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.44); tl.set("#c37", { opacity: 0 }, 36.08);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 36.74); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.74); tl.set("#c38", { opacity: 0 }, 37.16);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 37.16); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.16); tl.set("#c39", { opacity: 0 }, 37.98);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 37.98); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.98); tl.set("#c40", { opacity: 0 }, 38.88);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 39.96); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.96); tl.set("#c41", { opacity: 0 }, 40.26);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 40.80); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.80); tl.set("#c42", { opacity: 0 }, 41.52);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 41.52); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.52); tl.set("#c43", { opacity: 0 }, 41.98);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 42.40); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.40); tl.set("#c44", { opacity: 0 }, 42.88);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 42.88); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.88); tl.set("#c45", { opacity: 0 }, 43.56);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 43.56); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.56); tl.set("#c46", { opacity: 0 }, 44.34);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 45.20); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.20); tl.set("#c47", { opacity: 0 }, 45.80);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 45.80); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.80); tl.set("#c48", { opacity: 0 }, 46.24);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 46.24); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.24); tl.set("#c49", { opacity: 0 }, 47.14);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

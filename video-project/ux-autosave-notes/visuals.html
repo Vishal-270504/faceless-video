@@ -1,0 +1,178 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .editor { position: absolute; left: 60px; top: 110px; width: 780px; height: 400px; background: #1a1a25; border: 1px solid #2f2f42; border-radius: 22px; overflow: hidden; }
+  .head { position: absolute; left: 0; top: 0; width: 780px; height: 80px; border-bottom: 1px solid #2b2b3c; }
+  .title { position: absolute; left: 32px; top: 26px; font: 900 30px Inter, sans-serif; color: #f2f2f7; }
+  .line { position: absolute; left: 32px; font: 700 28px Inter, sans-serif; color: #e9e9f1; }
+  .status { position: absolute; left: 32px; bottom: 26px; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .dot { position: absolute; left: 0; top: 10px; width: 14px; height: 14px; border-radius: 50%; }
+  .save { position: absolute; right: 26px; top: 20px; width: 130px; height: 50px; line-height: 50px; text-align: center; background: #8fa8ff; color: #0b0b12; font: 900 26px Inter, sans-serif; border-radius: 14px; }
+  .battery { position: absolute; left: 360px; top: 230px; width: 200px; height: 96px; border: 4px solid #e9e9f1; border-radius: 14px; }
+  .battery:after { content: ""; position: absolute; right: -16px; top: 28px; width: 10px; height: 36px; background: #e9e9f1; border-radius: 0 4px 4px 0; }
+  .batfill { position: absolute; left: 8px; top: 8px; bottom: 8px; width: 24px; background: #ff8a8a; border-radius: 6px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .flow { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; text-align: center; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.0" data-track-index="1">01 · Lost words</div>
+  <div class="kick clip" data-start="7.4" data-duration="5.2" data-track-index="1">02 · Autosave</div>
+  <div class="kick clip" data-start="12.6" data-duration="6.6" data-track-index="1">03 · Save button</div>
+  <div class="kick clip" data-start="19.2" data-duration="8.8" data-track-index="1">04 · The fix</div>
+  <div class="kick clip" data-start="28.0" data-duration="8.1" data-track-index="1">05 · Status line</div>
+  <div class="kick clip" data-start="36.1" data-duration="10.8" data-track-index="1">06 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the phone dies -->
+  <div id="g0" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+    </div>
+    <div class="battery"><div class="batfill" style="width: 8px;"></div></div>
+    <div class="lbl red" style="left: 360px; top: 340px; font-size: 26px;">Battery 2%</div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 40px;">Five minutes of typing.</div>
+    <div class="txt" style="left: 60px; top: 604px; font-size: 32px; color: #9a9db0;">Then nothing.</div>
+  </div>
+
+  <!-- 1: autosave, no button -->
+  <div id="g1" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+      <div id="rent1" class="line" style="top: 260px; color: #8fa8ff;">Rent a car</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 40px;">No Save button needed.</div>
+    <div class="txt" style="left: 60px; top: 604px; font-size: 32px; color: #9a9db0;">It saves as you type.</div>
+  </div>
+
+  <!-- 2: broken: Save button only -->
+  <div id="g2" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div><div class="save">Save</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+      <div class="status" style="color: #ff8a8a;">Not saved</div>
+    </div>
+    <div class="redbox" style="left: 60px; top: 548px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Forget Save: text lost.</div>
+  </div>
+
+  <!-- 3: the fix: save after a pause, status line -->
+  <div id="g3" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+      <div class="status" id="st-a" style="left: 32px;"><span id="dot-a" class="dot" style="background: #9a9db0;"></span><span style="margin-left: 26px;">Saving…</span></div>
+      <div class="status" id="st-b" style="left: 32px; opacity: 0;"><span class="dot" style="background: #5fd39a;"></span><span class="grn" style="margin-left: 26px;">Saved 2 seconds ago</span></div>
+    </div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 38px;">Pause one second, then save.</div>
+    <div class="txt" style="left: 60px; top: 604px; font-size: 30px; color: #9a9db0;">Show: Saving, then Saved.</div>
+  </div>
+
+  <!-- 4: local first, failure kept -->
+  <div id="g4" class="g">
+    <div class="flow" style="left: 60px; top: 160px; width: 220px; height: 130px;"><div class="lbl" style="left: 0; right: 0; top: 46px; text-align: center; color: #e9e9f1;">This device</div></div>
+    <div class="txt acc" style="left: 296px; top: 200px; font-size: 40px;">→</div>
+    <div class="flow" style="left: 350px; top: 160px; width: 220px; height: 130px;"><div class="lbl" style="left: 0; right: 0; top: 46px; text-align: center; color: #9a9db0;">Server</div></div>
+    <div class="txt" style="left: 60px; top: 340px; font-size: 36px;">Typing never waits.</div>
+    <div class="redbox" id="fail4" style="left: 60px; top: 430px; width: 780px; height: 92px; line-height: 46px; padding: 18px 22px; opacity: 0;">Save failed. Your text stays.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">Never delete what they typed.</div>
+  </div>
+
+  <!-- 5: status line matters -->
+  <div id="g5" class="g">
+    <div class="editor" style="height: 240px; top: 150px;">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="status" style="left: 32px; bottom: 36px; font-size: 40px;"><span class="dot" style="background: #5fd39a; top: 14px;"></span><span class="grn" style="margin-left: 34px;">Saved 2 seconds ago</span></div>
+    </div>
+    <div class="txt acc" style="left: 60px; top: 440px; font-size: 40px;">It tells them: safe.</div>
+    <div class="txt" style="left: 60px; top: 510px; font-size: 32px; color: #9a9db0;">Words are saved, and they know it.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px;">Never make users save</div>
+    <div class="big acc" style="top: 330px;">their words by hand.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">When did you last lose<br>a note you were writing?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: battery dies
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.fromTo("#g0 .line", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.8, ease: "power2.out" }, 0.8);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.1);
+
+  // 1: autosave
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.4);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.4);
+  tl.fromTo("#rent1", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 9.2);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 12.4);
+
+  // 2: broken save button
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 12.6);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 12.6);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 19.0);
+
+  // 3: fix: saving, then saved
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 19.2);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 19.2);
+  tl.to("#st-a", { opacity: 1, duration: 0.3 }, 21.0);
+  tl.to("#st-a", { opacity: 0, duration: 0.3 }, 23.6);
+  tl.to("#st-b", { opacity: 1, duration: 0.4 }, 24.0);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 27.8);
+
+  // 4: local first and failure
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 28.0);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 28.0);
+  tl.to("#fail4", { opacity: 1, duration: 0.4 }, 32.0);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 35.8);
+
+  // 5: status line
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 36.12);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 39.8);
+
+  // 6: takeaway
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.9);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.8);
+
+  // 7: question
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 46.92);
+</script>

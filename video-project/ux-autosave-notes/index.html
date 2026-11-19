@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .editor { position: absolute; left: 60px; top: 110px; width: 780px; height: 400px; background: #1a1a25; border: 1px solid #2f2f42; border-radius: 22px; overflow: hidden; }
+  .head { position: absolute; left: 0; top: 0; width: 780px; height: 80px; border-bottom: 1px solid #2b2b3c; }
+  .title { position: absolute; left: 32px; top: 26px; font: 900 30px Inter, sans-serif; color: #f2f2f7; }
+  .line { position: absolute; left: 32px; font: 700 28px Inter, sans-serif; color: #e9e9f1; }
+  .status { position: absolute; left: 32px; bottom: 26px; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .dot { position: absolute; left: 0; top: 10px; width: 14px; height: 14px; border-radius: 50%; }
+  .save { position: absolute; right: 26px; top: 20px; width: 130px; height: 50px; line-height: 50px; text-align: center; background: #8fa8ff; color: #0b0b12; font: 900 26px Inter, sans-serif; border-radius: 14px; }
+  .battery { position: absolute; left: 360px; top: 230px; width: 200px; height: 96px; border: 4px solid #e9e9f1; border-radius: 14px; }
+  .battery:after { content: ""; position: absolute; right: -16px; top: 28px; width: 10px; height: 36px; background: #e9e9f1; border-radius: 0 4px 4px 0; }
+  .batfill { position: absolute; left: 8px; top: 8px; bottom: 8px; width: 24px; background: #ff8a8a; border-radius: 6px; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .flow { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; text-align: center; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="49.46"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.0" data-track-index="1">01 · Lost words</div>
+  <div class="kick clip" data-start="7.4" data-duration="5.2" data-track-index="1">02 · Autosave</div>
+  <div class="kick clip" data-start="12.6" data-duration="6.6" data-track-index="1">03 · Save button</div>
+  <div class="kick clip" data-start="19.2" data-duration="8.8" data-track-index="1">04 · The fix</div>
+  <div class="kick clip" data-start="28.0" data-duration="8.1" data-track-index="1">05 · Status line</div>
+  <div class="kick clip" data-start="36.1" data-duration="10.8" data-track-index="1">06 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the phone dies -->
+  <div id="g0" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+    </div>
+    <div class="battery"><div class="batfill" style="width: 8px;"></div></div>
+    <div class="lbl red" style="left: 360px; top: 340px; font-size: 26px;">Battery 2%</div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 40px;">Five minutes of typing.</div>
+    <div class="txt" style="left: 60px; top: 604px; font-size: 32px; color: #9a9db0;">Then nothing.</div>
+  </div>
+
+  <!-- 1: autosave, no button -->
+  <div id="g1" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+      <div id="rent1" class="line" style="top: 260px; color: #8fa8ff;">Rent a car</div>
+    </div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 40px;">No Save button needed.</div>
+    <div class="txt" style="left: 60px; top: 604px; font-size: 32px; color: #9a9db0;">It saves as you type.</div>
+  </div>
+
+  <!-- 2: broken: Save button only -->
+  <div id="g2" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div><div class="save">Save</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+      <div class="status" style="color: #ff8a8a;">Not saved</div>
+    </div>
+    <div class="redbox" style="left: 60px; top: 548px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Forget Save: text lost.</div>
+  </div>
+
+  <!-- 3: the fix: save after a pause, status line -->
+  <div id="g3" class="g">
+    <div class="editor">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="line" style="top: 110px;">Pack chargers</div>
+      <div class="line" style="top: 160px;">Book the train</div>
+      <div class="line" style="top: 210px;">Check passports</div>
+      <div class="status" id="st-a" style="left: 32px;"><span id="dot-a" class="dot" style="background: #9a9db0;"></span><span style="margin-left: 26px;">Saving…</span></div>
+      <div class="status" id="st-b" style="left: 32px; opacity: 0;"><span class="dot" style="background: #5fd39a;"></span><span class="grn" style="margin-left: 26px;">Saved 2 seconds ago</span></div>
+    </div>
+    <div class="txt" style="left: 60px; top: 548px; font-size: 38px;">Pause one second, then save.</div>
+    <div class="txt" style="left: 60px; top: 604px; font-size: 30px; color: #9a9db0;">Show: Saving, then Saved.</div>
+  </div>
+
+  <!-- 4: local first, failure kept -->
+  <div id="g4" class="g">
+    <div class="flow" style="left: 60px; top: 160px; width: 220px; height: 130px;"><div class="lbl" style="left: 0; right: 0; top: 46px; text-align: center; color: #e9e9f1;">This device</div></div>
+    <div class="txt acc" style="left: 296px; top: 200px; font-size: 40px;">→</div>
+    <div class="flow" style="left: 350px; top: 160px; width: 220px; height: 130px;"><div class="lbl" style="left: 0; right: 0; top: 46px; text-align: center; color: #9a9db0;">Server</div></div>
+    <div class="txt" style="left: 60px; top: 340px; font-size: 36px;">Typing never waits.</div>
+    <div class="redbox" id="fail4" style="left: 60px; top: 430px; width: 780px; height: 92px; line-height: 46px; padding: 18px 22px; opacity: 0;">Save failed. Your text stays.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">Never delete what they typed.</div>
+  </div>
+
+  <!-- 5: status line matters -->
+  <div id="g5" class="g">
+    <div class="editor" style="height: 240px; top: 150px;">
+      <div class="head"><div class="title">Trip plan</div></div>
+      <div class="status" style="left: 32px; bottom: 36px; font-size: 40px;"><span class="dot" style="background: #5fd39a; top: 14px;"></span><span class="grn" style="margin-left: 34px;">Saved 2 seconds ago</span></div>
+    </div>
+    <div class="txt acc" style="left: 60px; top: 440px; font-size: 40px;">It tells them: safe.</div>
+    <div class="txt" style="left: 60px; top: 510px; font-size: 32px; color: #9a9db0;">Words are saved, and they know it.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px;">Never make users save</div>
+    <div class="big acc" style="top: 330px;">their words by hand.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">When did you last lose<br>a note you were writing?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.66" data-track-index="1">You type a</div>
+    <div id="c1" class="caption clip" data-start="0.66" data-duration="0.68" data-track-index="1">long note, then</div>
+    <div id="c2" class="caption clip" data-start="1.34" data-duration="0.64" data-track-index="1">your phone dies.</div>
+    <div id="c3" class="caption clip" data-start="2.94" data-duration="0.56" data-track-index="1">Everything is gone.</div>
+    <div id="c4" class="caption clip" data-start="4.12" data-duration="0.96" data-track-index="1">Users trust apps</div>
+    <div id="c5" class="caption clip" data-start="5.08" data-duration="0.84" data-track-index="1">that never lose</div>
+    <div id="c6" class="caption clip" data-start="5.92" data-duration="0.56" data-track-index="1">their words.</div>
+    <div id="c7" class="caption clip" data-start="7.40" data-duration="0.88" data-track-index="1">Auto -Save saves</div>
+    <div id="c8" class="caption clip" data-start="8.28" data-duration="0.76" data-track-index="1">the note while</div>
+    <div id="c9" class="caption clip" data-start="9.04" data-duration="0.62" data-track-index="1">the user types.</div>
+    <div id="c10" class="caption clip" data-start="10.34" data-duration="0.64" data-track-index="1">There's no Save</div>
+    <div id="c11" class="caption clip" data-start="10.98" data-duration="0.72" data-track-index="1">button to remember.</div>
+    <div id="c12" class="caption clip" data-start="12.58" data-duration="0.60" data-track-index="1">Broken version,</div>
+    <div id="c13" class="caption clip" data-start="13.74" data-duration="0.60" data-track-index="1">a Save button</div>
+    <div id="c14" class="caption clip" data-start="14.34" data-duration="0.30" data-track-index="1">only.</div>
+    <div id="c15" class="caption clip" data-start="15.24" data-duration="0.72" data-track-index="1">Type for five</div>
+    <div id="c16" class="caption clip" data-start="15.96" data-duration="0.86" data-track-index="1">minutes, forget to</div>
+    <div id="c17" class="caption clip" data-start="16.82" data-duration="0.60" data-track-index="1">tap it, and</div>
+    <div id="c18" class="caption clip" data-start="17.42" data-duration="0.56" data-track-index="1">the text is</div>
+    <div id="c19" class="caption clip" data-start="17.98" data-duration="0.30" data-track-index="1">lost.</div>
+    <div id="c20" class="caption clip" data-start="19.24" data-duration="0.30" data-track-index="1">The fix,</div>
+    <div id="c21" class="caption clip" data-start="19.82" data-duration="0.60" data-track-index="1">save the draft</div>
+    <div id="c22" class="caption clip" data-start="20.42" data-duration="0.74" data-track-index="1">after the user</div>
+    <div id="c23" class="caption clip" data-start="21.16" data-duration="0.84" data-track-index="1">pauses for about</div>
+    <div id="c24" class="caption clip" data-start="22.00" data-duration="0.60" data-track-index="1">one second.</div>
+    <div id="c25" class="caption clip" data-start="23.26" data-duration="0.66" data-track-index="1">Show a small</div>
+    <div id="c26" class="caption clip" data-start="23.92" data-duration="0.76" data-track-index="1">status line,</div>
+    <div id="c27" class="caption clip" data-start="25.14" data-duration="0.38" data-track-index="1">saving,</div>
+    <div id="c28" class="caption clip" data-start="25.96" data-duration="0.74" data-track-index="1">then saved two</div>
+    <div id="c29" class="caption clip" data-start="26.70" data-duration="0.68" data-track-index="1">seconds ago.</div>
+    <div id="c30" class="caption clip" data-start="27.96" data-duration="0.78" data-track-index="1">Save to the</div>
+    <div id="c31" class="caption clip" data-start="28.74" data-duration="0.60" data-track-index="1">device first,</div>
+    <div id="c32" class="caption clip" data-start="29.72" data-duration="0.68" data-track-index="1">so typing never</div>
+    <div id="c33" class="caption clip" data-start="30.40" data-duration="0.66" data-track-index="1">waits for the</div>
+    <div id="c34" class="caption clip" data-start="31.06" data-duration="0.30" data-track-index="1">network.</div>
+    <div id="c35" class="caption clip" data-start="32.08" data-duration="0.42" data-track-index="1">If the Save</div>
+    <div id="c36" class="caption clip" data-start="32.50" data-duration="1.12" data-track-index="1">fails, keep the</div>
+    <div id="c37" class="caption clip" data-start="33.62" data-duration="0.74" data-track-index="1">text on screen</div>
+    <div id="c38" class="caption clip" data-start="34.36" data-duration="0.80" data-track-index="1">and say so.</div>
+    <div id="c39" class="caption clip" data-start="36.12" data-duration="0.64" data-track-index="1">The status line</div>
+    <div id="c40" class="caption clip" data-start="36.76" data-duration="0.88" data-track-index="1">matters most.</div>
+    <div id="c41" class="caption clip" data-start="38.28" data-duration="0.50" data-track-index="1">It tells the</div>
+    <div id="c42" class="caption clip" data-start="38.78" data-duration="0.68" data-track-index="1">user their words</div>
+    <div id="c43" class="caption clip" data-start="39.46" data-duration="0.44" data-track-index="1">are safe.</div>
+    <div id="c44" class="caption clip" data-start="40.90" data-duration="0.30" data-track-index="1">The takeaway,</div>
+    <div id="c45" class="caption clip" data-start="41.66" data-duration="0.66" data-track-index="1">never make users</div>
+    <div id="c46" class="caption clip" data-start="42.32" data-duration="0.76" data-track-index="1">save their words</div>
+    <div id="c47" class="caption clip" data-start="43.08" data-duration="0.54" data-track-index="1">by hand.</div>
+    <div id="c48" class="caption clip" data-start="44.40" data-duration="0.46" data-track-index="1">Save for them</div>
+    <div id="c49" class="caption clip" data-start="44.86" data-duration="0.78" data-track-index="1">and show that</div>
+    <div id="c50" class="caption clip" data-start="45.64" data-duration="0.36" data-track-index="1">you did.</div>
+    <div id="c51" class="caption clip" data-start="46.92" data-duration="0.46" data-track-index="1">When did you</div>
+    <div id="c52" class="caption clip" data-start="47.38" data-duration="0.74" data-track-index="1">last lose a</div>
+    <div id="c53" class="caption clip" data-start="48.12" data-duration="0.44" data-track-index="1">note you were</div>
+    <div id="c54" class="caption clip" data-start="48.56" data-duration="0.30" data-track-index="1">writing?</div>
+    <audio id="narration" data-start="0" data-duration="49.46" data-track-index="2" data-volume="1"
+           src="assets/ux-autosave-notes.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: battery dies
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.fromTo("#g0 .line", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.4, stagger: 0.8, ease: "power2.out" }, 0.8);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.1);
+
+  // 1: autosave
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 7.4);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 7.4);
+  tl.fromTo("#rent1", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 9.2);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 12.4);
+
+  // 2: broken save button
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 12.6);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 12.6);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 19.0);
+
+  // 3: fix: saving, then saved
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 19.2);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 19.2);
+  tl.to("#st-a", { opacity: 1, duration: 0.3 }, 21.0);
+  tl.to("#st-a", { opacity: 0, duration: 0.3 }, 23.6);
+  tl.to("#st-b", { opacity: 1, duration: 0.4 }, 24.0);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 27.8);
+
+  // 4: local first and failure
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 28.0);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 28.0);
+  tl.to("#fail4", { opacity: 1, duration: 0.4 }, 32.0);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 35.8);
+
+  // 5: status line
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 36.12);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 39.8);
+
+  // 6: takeaway
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.9);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 45.8);
+
+  // 7: question
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 46.92);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.66);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.66); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.66); tl.set("#c1", { opacity: 0 }, 1.34);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.34); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.34); tl.set("#c2", { opacity: 0 }, 1.98);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.94); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.94); tl.set("#c3", { opacity: 0 }, 3.50);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 4.12); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.12); tl.set("#c4", { opacity: 0 }, 5.08);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 5.08); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.08); tl.set("#c5", { opacity: 0 }, 5.92);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.92); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.92); tl.set("#c6", { opacity: 0 }, 6.48);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 7.40); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.40); tl.set("#c7", { opacity: 0 }, 8.28);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 8.28); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.28); tl.set("#c8", { opacity: 0 }, 9.04);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 9.04); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.04); tl.set("#c9", { opacity: 0 }, 9.66);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 10.34); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.34); tl.set("#c10", { opacity: 0 }, 10.98);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 10.98); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.98); tl.set("#c11", { opacity: 0 }, 11.70);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 12.58); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.58); tl.set("#c12", { opacity: 0 }, 13.18);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 13.74); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.74); tl.set("#c13", { opacity: 0 }, 14.34);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 14.34); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.34); tl.set("#c14", { opacity: 0 }, 14.64);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 15.24); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.24); tl.set("#c15", { opacity: 0 }, 15.96);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 15.96); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.96); tl.set("#c16", { opacity: 0 }, 16.82);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 16.82); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.82); tl.set("#c17", { opacity: 0 }, 17.42);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 17.42); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.42); tl.set("#c18", { opacity: 0 }, 17.98);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 17.98); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.98); tl.set("#c19", { opacity: 0 }, 18.28);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 19.24); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.24); tl.set("#c20", { opacity: 0 }, 19.54);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 19.82); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.82); tl.set("#c21", { opacity: 0 }, 20.42);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 20.42); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.42); tl.set("#c22", { opacity: 0 }, 21.16);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 21.16); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.16); tl.set("#c23", { opacity: 0 }, 22.00);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 22.00); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.00); tl.set("#c24", { opacity: 0 }, 22.60);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 23.26); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.26); tl.set("#c25", { opacity: 0 }, 23.92);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 23.92); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.92); tl.set("#c26", { opacity: 0 }, 24.68);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 25.14); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.14); tl.set("#c27", { opacity: 0 }, 25.52);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 25.96); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.96); tl.set("#c28", { opacity: 0 }, 26.70);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 26.70); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.70); tl.set("#c29", { opacity: 0 }, 27.38);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 27.96); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.96); tl.set("#c30", { opacity: 0 }, 28.74);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 28.74); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.74); tl.set("#c31", { opacity: 0 }, 29.34);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 29.72); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.72); tl.set("#c32", { opacity: 0 }, 30.40);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 30.40); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.40); tl.set("#c33", { opacity: 0 }, 31.06);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 31.06); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.06); tl.set("#c34", { opacity: 0 }, 31.36);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 32.08); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.08); tl.set("#c35", { opacity: 0 }, 32.50);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 32.50); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.50); tl.set("#c36", { opacity: 0 }, 33.62);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 33.62); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.62); tl.set("#c37", { opacity: 0 }, 34.36);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 34.36); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.36); tl.set("#c38", { opacity: 0 }, 35.16);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 36.12); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.12); tl.set("#c39", { opacity: 0 }, 36.76);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 36.76); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.76); tl.set("#c40", { opacity: 0 }, 37.64);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 38.28); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.28); tl.set("#c41", { opacity: 0 }, 38.78);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 38.78); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.78); tl.set("#c42", { opacity: 0 }, 39.46);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 39.46); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.46); tl.set("#c43", { opacity: 0 }, 39.90);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 40.90); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.90); tl.set("#c44", { opacity: 0 }, 41.20);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 41.66); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.66); tl.set("#c45", { opacity: 0 }, 42.32);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 42.32); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.32); tl.set("#c46", { opacity: 0 }, 43.08);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 43.08); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.08); tl.set("#c47", { opacity: 0 }, 43.62);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 44.40); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.40); tl.set("#c48", { opacity: 0 }, 44.86);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 44.86); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.86); tl.set("#c49", { opacity: 0 }, 45.64);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 45.64); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.64); tl.set("#c50", { opacity: 0 }, 46.00);
+    tl.set("#c51", { opacity: 1, scale: 0.92 }, 46.92); tl.to("#c51", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.92); tl.set("#c51", { opacity: 0 }, 47.38);
+    tl.set("#c52", { opacity: 1, scale: 0.92 }, 47.38); tl.to("#c52", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.38); tl.set("#c52", { opacity: 0 }, 48.12);
+    tl.set("#c53", { opacity: 1, scale: 0.92 }, 48.12); tl.to("#c53", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.12); tl.set("#c53", { opacity: 0 }, 48.56);
+    tl.set("#c54", { opacity: 1, scale: 0.92 }, 48.56); tl.to("#c54", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.56); tl.set("#c54", { opacity: 0 }, 48.86);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

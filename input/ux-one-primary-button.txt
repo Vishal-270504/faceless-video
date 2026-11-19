@@ -1,0 +1,15 @@
+A screen has five buttons, and every one looks the same. Which one matters? Your eyes don't know where to go.
+
+Every screen needs one primary action. That's the main thing you want the user to do.
+
+Broken version: five solid blue buttons, the same size and the same color.
+
+The fix: make the primary button solid and bold. Make the rest secondary, as outlines or plain text links.
+
+Keep the main button in the same place on every screen. Users learn where to look.
+
+Don't style a destructive action like the main one. A red delete button should never look like Save.
+
+The takeaway: one loud button per screen. Everything else stays quiet.
+
+What's the one thing you want users to do on your last screen?

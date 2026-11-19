@@ -1,0 +1,17 @@
+You tap the heart on a note. Nothing happens for two seconds. So you tap again, and now it's liked twice, or unliked.
+
+The fix is optimistic UI. Show the change right away, then ask the server to confirm it.
+
+Broken version: the button waits for the server, and a spinner blocks the screen.
+
+The fix: update the screen instantly, and send the request in the background.
+
+If the server says yes, nothing else happens. If it says no, undo the change and show a clear message.
+
+Keep the rollback visible. Never let the screen quietly show something that didn't save.
+
+Use this for small, low-risk actions: like, pin, mark done. For payments, wait for the server.
+
+The takeaway: make the screen fast, but never hide a failure.
+
+Which action in your app feels slow today?

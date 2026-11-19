@@ -253,3 +253,143 @@ Your API answers the same question over and over. A per-user cache saves the lis
 
 **Thumbnail prompt for ChatGPT:**
 > Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "MISS → HIT" with "HIT" in yellow. Centre: a flat white coffee cup on top of a stack of three blue cards, with a small clock icon beside it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 19. ux-tap-targets: Your Buttons Are Too Small to Tap
+
+**Title:** Your Buttons Are Too Small to Tap
+
+**Description:**
+You tap the tiny X and hit the wrong thing. The icon can look small, but the area that reacts to a finger has to be big. Here is the minimum size Apple and Google suggest, and how to add it without changing the look.
+
+#uxdesign #mobile #accessibility #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "TOO SMALL?" with "SMALL?" in yellow. Centre: a flat phone outline with one small X icon and a dashed blue square of 44 points around it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 20. ux-hover-only-actions: Hover-Only Buttons Vanish on Phones
+
+**Title:** Hover-Only Buttons Vanish on Phones
+
+**Description:**
+Edit and delete icons that appear only on hover look great on a laptop. On a phone there is no hover, so users cannot find those actions at all. Here is how to show them, and how to use hover as a bonus.
+
+#uxdesign #mobile #webdev #frontend #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "NO HOVER?" with "HOVER?" in yellow. Centre: a flat phone outline showing one list row with a faint, dashed trash icon that is barely visible. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 21. ux-thumb-zone: Put Your Main Button Where the Thumb Rests
+
+**Title:** Put Your Main Button Where the Thumb Rests
+
+**Description:**
+Most people hold their phone in one hand, and the top corners are a stretch. Your most-used button should sit at the bottom, where the thumb already rests. Here is how to move it and what to keep up top.
+
+#uxdesign #mobile #ios #android #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "THUMB REACH" with "REACH" in yellow. Centre: a flat phone outline, the bottom half shaded green and the top right corner shaded red, with one white thumb circle at the bottom. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 22. ux-button-labels: Stop Using OK and Cancel: Name the Action
+
+**Title:** Stop Using OK and Cancel: Name the Action
+
+**Description:**
+A dialog that says OK and Cancel makes users guess what happens next. A button label should say the action itself, in a verb. Here are the words to swap out, and the ones to avoid.
+
+#uxdesign #uxwriting #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "OK? CANCEL?" with "OK?" in yellow. Centre: a flat dialog box with a question line and two buttons, one reading "Publish note" in blue and one reading "Keep private" in outline. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 23. ux-one-primary-button: One Loud Button Per Screen
+
+**Title:** One Loud Button Per Screen
+
+**Description:**
+When every button on a screen looks the same, users do not know what to do first. Give each screen one primary action, make the rest quieter, and never style a delete like the main button.
+
+#uxdesign #webdesign #ui #webdev #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "ONE LOUD BUTTON" with "LOUD" in yellow. Centre: a flat screen outline with one large solid blue button at the bottom and two thin outlined buttons above it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 24. ux-contrast: Light Grey Text Is Invisible in Sunlight
+
+**Title:** Light Grey Text Is Invisible in Sunlight
+
+**Description:**
+Text that looks fine on a big monitor can disappear on a bright phone screen. The cause is low contrast between text and background. Here is how to measure it, what ratio to aim for, and the quick fix.
+
+#uxdesign #accessibility #webdev #css #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "CAN YOU READ IT?" with "READ" in yellow. Centre: a flat white card with a faint grey date line, and a small red label beside it reading "2.8 : 1". Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 25. ux-autosave-notes: Never Make Users Save Their Notes by Hand
+
+**Title:** Never Make Users Save Their Notes by Hand
+
+**Description:**
+A note app with only a Save button loses words when the user forgets to tap it or the phone dies. Autosave the draft after a short pause, and show a status line so users know their words are safe.
+
+#uxdesign #notesapp #webdev #javascript #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "LOST YOUR NOTE?" with "NOTE?" in yellow. Centre: a flat editor card with three short text lines and a green dot followed by a line reading "Saved". Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 26. ux-optimistic-update: Like Feels Slow? Update Before the Server
+
+**Title:** Like Feels Slow? Update Before the Server
+
+**Description:**
+A button that waits for the server feels broken, and users tap it twice. Optimistic UI updates the screen at once and sends the request in the background. If the server says no, roll back and say why.
+
+#uxdesign #webdev #react #javascript #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "TAP. WAIT. TAP." with "WAIT." in yellow. Centre: a flat note card with one green button labelled "Liked" and a small grey pill labelled "Syncing". Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 27. ux-search-as-you-type: Why Your Search Sends 10 Requests
+
+**Title:** Why Your Search Sends 10 Requests
+
+**Description:**
+Live search that calls the server on every keystroke wastes work and slows the screen. Debounce it: wait for a short pause, then search once. The box keeps focus, and the results update as the user types.
+
+#uxdesign #webdev #javascript #search #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "10 REQUESTS?" with "10" in yellow. Centre: a flat search bar with a row of ten small red squares below it, and a single blue bar labelled as a pause on the right. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 28. ux-focus-after-dialog: Close a Dialog Without Losing Your Place
+
+**Title:** Close a Dialog Without Losing Your Place
+
+**Description:**
+After a dialog closes, the cursor jumps to the top of the page and keyboard users are lost. Move focus into the dialog when it opens, keep Tab inside it, and send focus back to the button that opened it when it closes.
+
+#accessibility #uxdesign #webdev #frontend #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text across the top: "LOST FOCUS?" with "FOCUS?" in yellow. Centre: a flat page with three buttons, one outlined in a thick blue focus ring, and a small dialog box above them. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.

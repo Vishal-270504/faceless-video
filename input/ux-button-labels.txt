@@ -1,0 +1,13 @@
+You see a dialog: Publish this note to everyone? Two buttons: OK and Cancel. What does OK do? You have to read it twice.
+
+Vague labels make people think. A button label should say exactly what happens when you tap it.
+
+Broken version: OK and Cancel. The user has to guess whether OK publishes the note or only closes the box.
+
+The fix: name the action. Publish note, and Keep private. Now one glance is enough.
+
+Start with a verb: save, send, copy, publish. Avoid Submit, Continue and Yes when a real verb fits.
+
+The takeaway: a button should answer one question: what happens if I tap this?
+
+What does the OK button on your last dialog actually do?

@@ -1,0 +1,180 @@
+<style>
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 56px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .search { position: absolute; left: 60px; top: 120px; width: 780px; height: 80px; background: #1a1a25; border: 2px solid #2f2f42; border-radius: 40px; }
+  .search.focus { border-color: #8fa8ff; }
+  .query { position: absolute; left: 32px; top: 18px; font: 700 34px Inter, sans-serif; color: #f2f2f7; }
+  .res { position: absolute; left: 60px; width: 780px; height: 74px; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 16px; }
+  .rtxt { position: absolute; left: 26px; top: 20px; font: 700 28px Inter, sans-serif; color: #f2f2f7; }
+  .lt { position: absolute; top: 300px; width: 66px; height: 92px; border-radius: 14px; background: #1a1a25; border: 1px solid #2b2b3c; text-align: center; font: 900 36px Inter, sans-serif; color: #f2f2f7; line-height: 92px; }
+  .lt.hot { background: rgba(255,107,107,0.2); border-color: #ff8a8a; color: #ff8a8a; }
+  .tickbox { position: absolute; left: 60px; top: 430px; width: 780px; height: 40px; border-radius: 20px; background: #1a1a25; }
+  .tick { position: absolute; top: 8px; width: 8px; height: 24px; background: #ff8a8a; border-radius: 4px; }
+  .gbar { position: absolute; left: 60px; top: 430px; width: 780px; height: 40px; border-radius: 20px; background: #1a1a25; overflow: hidden; }
+  .gfill { position: absolute; left: 0; top: 0; height: 40px; width: 300px; background: rgba(143,168,255,0.35); }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.3" data-track-index="1">01 · Wait, then enter</div>
+  <div class="kick clip" data-start="8.1" data-duration="6.2" data-track-index="1">02 · Live results</div>
+  <div class="kick clip" data-start="15.0" data-duration="8.2" data-track-index="1">03 · Too many calls</div>
+  <div class="kick clip" data-start="23.1" data-duration="10.6" data-track-index="1">04 · Debounce</div>
+  <div class="kick clip" data-start="34.7" data-duration="5.1" data-track-index="1">05 · Keep focus</div>
+  <div class="kick clip" data-start="40.5" data-duration="4.6" data-track-index="1">06 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: one letter too many -->
+  <div id="g0" class="g">
+    <div class="search"><div class="query">paginationn</div></div>
+    <div class="redbox" style="left: 60px; top: 240px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Hit enter. Wait. Wrong word.</div>
+    <div class="txt" style="left: 60px; top: 340px; font-size: 40px;">Search should listen.</div>
+    <div class="txt" style="left: 60px; top: 400px; font-size: 30px; color: #9a9db0;">Not make you wait.</div>
+  </div>
+
+  <!-- 1: live results -->
+  <div id="g1" class="g">
+    <div class="search focus"><div class="query">pagin</div></div>
+    <div class="res" style="top: 230px;"><div class="rtxt">Pagination in a Notes API</div></div>
+    <div class="res" style="top: 320px;"><div class="rtxt">Pagination UI: next page</div></div>
+    <div class="res" style="top: 410px;"><div class="rtxt">Paginated lists</div></div>
+    <div class="txt acc" style="left: 60px; top: 530px; font-size: 38px;">Results shrink as you type.</div>
+  </div>
+
+  <!-- 2: broken: one request per letter -->
+  <div id="g2" class="g">
+    <div class="search focus"><div class="query">pagination</div></div>
+    <div class="lt" style="left: 60px;" id="l0">p</div>
+    <div class="lt" style="left: 130px;" id="l1">a</div>
+    <div class="lt" style="left: 200px;" id="l2">g</div>
+    <div class="lt" style="left: 270px;" id="l3">i</div>
+    <div class="lt" style="left: 340px;" id="l4">n</div>
+    <div class="lt" style="left: 410px;" id="l5">a</div>
+    <div class="lt" style="left: 480px;" id="l6">t</div>
+    <div class="lt" style="left: 550px;" id="l7">i</div>
+    <div class="lt" style="left: 620px;" id="l8">o</div>
+    <div class="lt" style="left: 690px;" id="l9">n</div>
+    <div class="txt red" style="left: 60px; top: 430px; font-size: 36px;">Ten requests for one word.</div>
+    <div class="txt" style="left: 60px; top: 500px; font-size: 30px; color: #9a9db0;">One per keystroke.</div>
+  </div>
+
+  <!-- 3: debounce: wait for the pause -->
+  <div id="g3" class="g">
+    <div class="tickbox" style="top: 240px;"></div>
+    <div class="tick" style="left: 80px; top: 248px;"></div>
+    <div class="tick" style="left: 140px; top: 248px;"></div>
+    <div class="tick" style="left: 200px; top: 248px;"></div>
+    <div class="tick" style="left: 260px; top: 248px;"></div>
+    <div class="tick" style="left: 320px; top: 248px;"></div>
+    <div class="tick" style="left: 380px; top: 248px;"></div>
+    <div class="tick" style="left: 440px; top: 248px;"></div>
+    <div class="tick" style="left: 500px; top: 248px;"></div>
+    <div class="tick" style="left: 560px; top: 248px;"></div>
+    <div class="tick" style="left: 620px; top: 248px;"></div>
+    <div class="txt" style="left: 60px; top: 300px; font-size: 30px; color: #9a9db0;">Keystrokes</div>
+    <div class="gbar" style="top: 380px;"><div class="gfill" style="left: 540px;"></div></div>
+    <div class="txt acc" style="left: 60px; top: 450px; font-size: 40px;">Pause ~300 ms, then search.</div>
+    <div class="txt grn" style="left: 60px; top: 520px; font-size: 36px;">One request.</div>
+  </div>
+
+  <!-- 4: what debounce means -->
+  <div id="g4" class="g">
+    <div class="big" style="top: 170px; font-size: 52px;">Debounce:</div>
+    <div class="big acc" style="top: 250px; font-size: 96px;">300 ms</div>
+    <div class="txt" style="left: 60px; top: 420px; font-size: 34px;">Early keys: ignored.</div>
+    <div class="txt" style="left: 60px; top: 480px; font-size: 34px;">The pause: searched once.</div>
+  </div>
+
+  <!-- 5: keep focus -->
+  <div id="g5" class="g">
+    <div class="search focus"><div class="query">pagination</div></div>
+    <div class="res" style="top: 230px;"><div class="rtxt">Pagination in a Notes API</div></div>
+    <div class="res" style="top: 320px;"><div class="rtxt">Paginated lists</div></div>
+    <div class="txt acc" style="left: 60px; top: 460px; font-size: 40px;">Keep the box focused.</div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 32px; color: #9a9db0;">Results update. No clicking back.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 200px;">Search should respond</div>
+    <div class="big acc" style="top: 330px;">to the pause, not each letter.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g">
+    <div class="big" style="top: 240px; font-size: 52px;">What's the last search you<br>typed that felt slow?</div>
+  </div>
+</div>
+
+<script>
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: one letter too many
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.6);
+
+  // 1: live results
+  tl.to("#g1", { opacity: 1, duration: 0.4 }, 8.1);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 8.1);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 14.4);
+
+  // 2: broken: a request per letter
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 15.04);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 15.0);
+  tl.to("#l0", { className: "lt hot", duration: 0.01 }, 15.6);
+  tl.to("#l1", { className: "lt hot", duration: 0.01 }, 16.0);
+  tl.to("#l2", { className: "lt hot", duration: 0.01 }, 16.4);
+  tl.to("#l3", { className: "lt hot", duration: 0.01 }, 16.8);
+  tl.to("#l4", { className: "lt hot", duration: 0.01 }, 17.2);
+  tl.to("#l5", { className: "lt hot", duration: 0.01 }, 17.6);
+  tl.to("#l6", { className: "lt hot", duration: 0.01 }, 18.0);
+  tl.to("#l7", { className: "lt hot", duration: 0.01 }, 18.4);
+  tl.to("#l8", { className: "lt hot", duration: 0.01 }, 18.8);
+  tl.to("#l9", { className: "lt hot", duration: 0.01 }, 19.2);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 22.9);
+
+  // 3: debounce
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 23.14);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 23.1);
+  tl.fromTo("#g3 .gfill", { width: 0 }, { width: 300, duration: 1.2, ease: "power1.out" }, 25.0);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 28.9);
+
+  // 4: debounce meaning
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 29.58);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 34.3);
+
+  // 5: keep focus
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 34.68);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 39.5);
+
+  // 6: takeaway
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 40.52);
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 40.52);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 44.5);
+
+  // 7: question
+  tl.fromTo("#g7", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 45.02);
+</script>

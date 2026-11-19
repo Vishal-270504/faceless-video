@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Arial, Helvetica, sans-serif; }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #8fa8ff; text-transform: uppercase; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 170px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; inset: 0; background: #8fa8ff; transform: scaleX(0); transform-origin: left center; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .big { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f2f2f7; line-height: 1.12; }
+  .laptop { position: absolute; left: 60px; top: 150px; width: 780px; height: 300px; background: #0f0f16; border: 3px solid #2b2b3c; border-radius: 22px; overflow: hidden; }
+  .phone { position: absolute; left: 330px; top: 24px; width: 240px; height: 480px; background: #0f0f16; border: 3px solid #2b2b3c; border-radius: 36px; overflow: hidden; }
+  .row { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 14px; }
+  .title { position: absolute; font: 700 24px Inter, sans-serif; color: #f2f2f7; }
+  .trash { position: absolute; width: 40px; height: 44px; border: 3px solid #ff8a8a; border-radius: 6px; }
+  .trash:before { content: ""; position: absolute; left: -6px; top: -8px; width: 52px; height: 3px; background: #ff8a8a; }
+  .pen { position: absolute; width: 36px; height: 36px; border: 3px solid #8fa8ff; border-radius: 6px; }
+  .dots { position: absolute; width: 40px; height: 40px; }
+  .dots:before { content: ""; position: absolute; left: 0; top: 16px; width: 8px; height: 8px; border-radius: 50%; background: #e9e9f1; box-shadow: 14px 0 0 #e9e9f1, 28px 0 0 #e9e9f1; }
+  .cursor { position: absolute; width: 22px; height: 22px; border-radius: 50%; background: #e9e9f1; }
+  .ghost { opacity: 0.22; }
+  .redbox { position: absolute; background: rgba(255,107,107,0.14); color: #ff8a8a; font: 700 28px Inter, sans-serif; border-radius: 14px; }
+  .grn { color: #5fd39a; }
+  .red { color: #ff8a8a; }
+  .acc { color: #8fa8ff; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="44.16"
+       data-width="1080" data-height="1920">
+
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="9.3" data-track-index="1">01 · On a laptop</div>
+  <div class="kick clip" data-start="9.7" data-duration="15.0" data-track-index="1">02 · On a phone</div>
+  <div class="kick clip" data-start="24.8" data-duration="6.6" data-track-index="1">03 · The fix</div>
+  <div class="kick clip" data-start="36.9" data-duration="6.6" data-track-index="1">04 · Takeaway</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 182px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 364px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 546px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 728px;"><i id="p5"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: laptop, hover reveals trash -->
+  <div id="g0" class="g">
+    <div class="laptop">
+      <div class="row" style="left: 40px; top: 60px; width: 700px; height: 120px;">
+        <div class="title" style="left: 26px; top: 26px;">Groceries</div>
+        <div class="lbl" style="left: 26px; top: 66px; font-size: 24px;">Milk, eggs, bread</div>
+        <div id="trash0" class="trash" style="left: 610px; top: 36px; opacity: 0;"></div>
+        <div id="pen0" class="pen" style="left: 540px; top: 40px; opacity: 0;"></div>
+      </div>
+      <div id="cur0" class="cursor" style="left: 430px; top: 230px;"></div>
+    </div>
+    <div class="txt" style="left: 60px; top: 520px; font-size: 40px;">Hover, and the icons appear.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">Nice on a laptop.</div>
+  </div>
+
+  <!-- 1: phone, no hover -->
+  <div id="g1" class="g">
+    <div class="phone">
+      <div class="row" style="left: 14px; top: 110px; width: 204px; height: 110px;">
+        <div class="title" style="left: 14px; top: 20px; font-size: 22px;">Groceries</div>
+        <div class="lbl" style="left: 14px; top: 60px; font-size: 22px;">Milk, eggs</div>
+      </div>
+      <div class="lbl" style="left: 14px; top: 260px; font-size: 22px; color: #5a5d70;">No hover here</div>
+    </div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Phones have no mouse.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">Hover never happens.</div>
+  </div>
+
+  <!-- 2: broken: actions only on hover -->
+  <div id="g2" class="g">
+    <div class="phone">
+      <div class="row" style="left: 14px; top: 110px; width: 204px; height: 110px;">
+        <div class="title" style="left: 14px; top: 20px; font-size: 22px;">Groceries</div>
+        <div class="lbl" style="left: 14px; top: 60px; font-size: 22px;">Milk, eggs</div>
+      </div>
+      <div class="trash ghost" style="left: 40px; top: 250px; width: 36px; height: 40px;"></div>
+      <div class="pen ghost" style="left: 120px; top: 250px; width: 32px; height: 32px;"></div>
+    </div>
+    <div class="redbox" style="left: 60px; top: 500px; width: 780px; height: 64px; line-height: 64px; padding: 0 22px;">Edit and delete: hidden.</div>
+    <div class="txt" style="left: 60px; top: 580px; font-size: 30px; color: #9a9db0;">The user can't find them.</div>
+  </div>
+
+  <!-- 3: the fix: visible actions or a menu -->
+  <div id="g3" class="g">
+    <div class="phone">
+      <div class="row" style="left: 14px; top: 110px; width: 204px; height: 110px;">
+        <div class="title" style="left: 14px; top: 20px; font-size: 22px;">Groceries</div>
+        <div class="lbl" style="left: 14px; top: 60px; font-size: 22px;">Milk, eggs</div>
+        <div class="dots" style="left: 150px; top: 40px;"></div>
+      </div>
+      <div class="row" style="left: 14px; top: 240px; width: 204px; height: 110px; border-color: #5fd39a;">
+        <div class="title" style="left: 14px; top: 20px; font-size: 22px;">Ideas</div>
+        <div class="lbl" style="left: 14px; top: 60px; font-size: 22px;">Video hooks</div>
+        <div class="dots" style="left: 150px; top: 40px;"></div>
+      </div>
+    </div>
+    <div class="txt grn" style="left: 60px; top: 540px; font-size: 40px;">Always visible.</div>
+    <div class="txt" style="left: 60px; top: 600px; font-size: 30px; color: #9a9db0;">Or in a menu you can tap.</div>
+  </div>
+
+  <!-- 4: hover as a bonus -->
+  <div id="g4" class="g">
+    <div class="laptop" style="left: 60px; top: 150px; width: 780px; height: 240px;">
+      <div class="row" style="left: 40px; top: 50px; width: 700px; height: 120px; border-color: #8fa8ff;">
+        <div class="title" style="left: 26px; top: 26px;">Groceries</div>
+        <div class="lbl" style="left: 26px; top: 66px; font-size: 24px;">Milk, eggs, bread</div>
+      </div>
+    </div>
+    <div class="txt acc" style="left: 60px; top: 460px; font-size: 40px;">Hover: a nice extra.</div>
+    <div class="txt" style="left: 60px; top: 530px; font-size: 34px;">Never the only way.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g">
+    <div class="big" style="top: 200px;">If a feature needs hover,</div>
+    <div class="big acc" style="top: 330px;">a phone user can't use it.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g">
+    <div class="big" style="top: 240px; font-size: 54px;">Can your users reach<br>every action without a mouse?</div>
+  </div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="0.80" data-track-index="1">You hover over</div>
+    <div id="c1" class="caption clip" data-start="0.80" data-duration="0.64" data-track-index="1">a note and</div>
+    <div id="c2" class="caption clip" data-start="1.44" data-duration="0.82" data-track-index="1">a trash icon</div>
+    <div id="c3" class="caption clip" data-start="2.26" data-duration="0.36" data-track-index="1">appears,</div>
+    <div id="c4" class="caption clip" data-start="3.30" data-duration="0.56" data-track-index="1">nice on your</div>
+    <div id="c5" class="caption clip" data-start="3.86" data-duration="0.30" data-track-index="1">laptop,</div>
+    <div id="c6" class="caption clip" data-start="4.72" data-duration="0.74" data-track-index="1">now open the</div>
+    <div id="c7" class="caption clip" data-start="5.46" data-duration="0.42" data-track-index="1">app on your</div>
+    <div id="c8" class="caption clip" data-start="5.88" data-duration="0.30" data-track-index="1">phone,</div>
+    <div id="c9" class="caption clip" data-start="6.62" data-duration="0.50" data-track-index="1">there's no hover,</div>
+    <div id="c10" class="caption clip" data-start="7.62" data-duration="0.78" data-track-index="1">the delete button</div>
+    <div id="c11" class="caption clip" data-start="8.40" data-duration="0.36" data-track-index="1">is gone.</div>
+    <div id="c12" class="caption clip" data-start="9.70" data-duration="0.90" data-track-index="1">Hover only actions</div>
+    <div id="c13" class="caption clip" data-start="10.60" data-duration="1.26" data-track-index="1">hide controls until</div>
+    <div id="c14" class="caption clip" data-start="11.86" data-duration="0.70" data-track-index="1">the mouse moves</div>
+    <div id="c15" class="caption clip" data-start="12.56" data-duration="0.52" data-track-index="1">over them.</div>
+    <div id="c16" class="caption clip" data-start="13.76" data-duration="0.62" data-track-index="1">A phone has</div>
+    <div id="c17" class="caption clip" data-start="14.38" data-duration="0.40" data-track-index="1">no mouse,</div>
+    <div id="c18" class="caption clip" data-start="15.26" data-duration="0.60" data-track-index="1">so those controls</div>
+    <div id="c19" class="caption clip" data-start="15.86" data-duration="1.16" data-track-index="1">never show up.</div>
+    <div id="c20" class="caption clip" data-start="17.74" data-duration="0.62" data-track-index="1">Broken version,</div>
+    <div id="c21" class="caption clip" data-start="18.92" data-duration="0.84" data-track-index="1">edit and delete</div>
+    <div id="c22" class="caption clip" data-start="19.76" data-duration="1.32" data-track-index="1">icons appear only</div>
+    <div id="c23" class="caption clip" data-start="21.08" data-duration="0.42" data-track-index="1">on hover.</div>
+    <div id="c24" class="caption clip" data-start="22.20" data-duration="0.32" data-track-index="1">On a touch</div>
+    <div id="c25" class="caption clip" data-start="22.52" data-duration="0.32" data-track-index="1">screen,</div>
+    <div id="c26" class="caption clip" data-start="23.30" data-duration="0.60" data-track-index="1">the user has</div>
+    <div id="c27" class="caption clip" data-start="23.90" data-duration="0.50" data-track-index="1">no way to</div>
+    <div id="c28" class="caption clip" data-start="24.40" data-duration="1.36" data-track-index="1">find them. The</div>
+    <div id="c29" class="caption clip" data-start="25.76" data-duration="0.30" data-track-index="1">fix,</div>
+    <div id="c30" class="caption clip" data-start="26.36" data-duration="0.80" data-track-index="1">show the actions</div>
+    <div id="c31" class="caption clip" data-start="27.16" data-duration="0.72" data-track-index="1">all the time,</div>
+    <div id="c32" class="caption clip" data-start="28.36" data-duration="0.46" data-track-index="1">or put them</div>
+    <div id="c33" class="caption clip" data-start="28.82" data-duration="0.38" data-track-index="1">in a visible</div>
+    <div id="c34" class="caption clip" data-start="29.20" data-duration="1.10" data-track-index="1">menu, like three</div>
+    <div id="c35" class="caption clip" data-start="30.30" data-duration="0.30" data-track-index="1">dots.</div>
+    <div id="c36" class="caption clip" data-start="31.44" data-duration="0.74" data-track-index="1">Hover can still</div>
+    <div id="c37" class="caption clip" data-start="32.18" data-duration="0.64" data-track-index="1">add a nice</div>
+    <div id="c38" class="caption clip" data-start="32.82" data-duration="1.18" data-track-index="1">touch, but it</div>
+    <div id="c39" class="caption clip" data-start="34.00" data-duration="0.58" data-track-index="1">should never be</div>
+    <div id="c40" class="caption clip" data-start="34.58" data-duration="0.68" data-track-index="1">the only way</div>
+    <div id="c41" class="caption clip" data-start="35.26" data-duration="0.42" data-track-index="1">to reach a</div>
+    <div id="c42" class="caption clip" data-start="35.68" data-duration="0.30" data-track-index="1">feature.</div>
+    <div id="c43" class="caption clip" data-start="36.86" data-duration="0.34" data-track-index="1">The takeaway,</div>
+    <div id="c44" class="caption clip" data-start="37.76" data-duration="0.56" data-track-index="1">if a feature</div>
+    <div id="c45" class="caption clip" data-start="38.32" data-duration="0.54" data-track-index="1">needs a hover,</div>
+    <div id="c46" class="caption clip" data-start="39.24" data-duration="0.58" data-track-index="1">a phone user</div>
+    <div id="c47" class="caption clip" data-start="39.82" data-duration="0.74" data-track-index="1">can't use it.</div>
+    <div id="c48" class="caption clip" data-start="41.38" data-duration="0.48" data-track-index="1">Can your users</div>
+    <div id="c49" class="caption clip" data-start="41.86" data-duration="1.18" data-track-index="1">reach every action</div>
+    <div id="c50" class="caption clip" data-start="43.04" data-duration="0.52" data-track-index="1">without a mouse?</div>
+    <audio id="narration" data-start="0" data-duration="44.16" data-track-index="2" data-volume="1"
+           src="assets/ux-hover-only-actions.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo("#win", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+
+  // 0: laptop; cursor moves onto the row, icons appear
+  tl.to("#g0", { opacity: 1, duration: 0.4 }, 0.1);
+  tl.to("#p1", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 0.1);
+  tl.to("#cur0", { x: -50, y: -60, duration: 1.4, ease: "power2.inOut" }, 2.4);
+  tl.to("#trash0", { opacity: 1, duration: 0.4 }, 3.9);
+  tl.to("#pen0", { opacity: 1, duration: 0.4 }, 4.1);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 9.4);
+
+  // 1: phone, no hover
+  tl.fromTo("#g1", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 9.7);
+  tl.to("#p2", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 9.7);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 17.5);
+
+  // 2: broken: ghost icons
+  tl.to("#g2", { opacity: 1, duration: 0.4 }, 17.74);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 24.5);
+
+  // 3: fix
+  tl.to("#g3", { opacity: 1, duration: 0.4 }, 24.82);
+  tl.to("#p3", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 24.8);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 31.2);
+
+  // 4: hover as a bonus
+  tl.to("#g4", { opacity: 1, duration: 0.4 }, 31.44);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 36.6);
+
+  // 5: takeaway
+  tl.to("#g5", { opacity: 1, duration: 0.4 }, 36.9);
+  tl.to("#p4", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 36.9);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 41.1);
+
+  // 6: question
+  tl.fromTo("#g6", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 41.38);
+  tl.to("#p5", { scaleX: 1, duration: 0.5, ease: "power2.out" }, 41.4);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 0.80);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 0.80); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.80); tl.set("#c1", { opacity: 0 }, 1.44);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.44); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.44); tl.set("#c2", { opacity: 0 }, 2.26);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.26); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.26); tl.set("#c3", { opacity: 0 }, 2.62);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.30); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.30); tl.set("#c4", { opacity: 0 }, 3.86);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.86); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.86); tl.set("#c5", { opacity: 0 }, 4.16);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 4.72); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.72); tl.set("#c6", { opacity: 0 }, 5.46);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 5.46); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.46); tl.set("#c7", { opacity: 0 }, 5.88);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 5.88); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.88); tl.set("#c8", { opacity: 0 }, 6.18);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 6.62); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.62); tl.set("#c9", { opacity: 0 }, 7.12);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 7.62); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.62); tl.set("#c10", { opacity: 0 }, 8.40);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 8.40); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.40); tl.set("#c11", { opacity: 0 }, 8.76);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 9.70); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.70); tl.set("#c12", { opacity: 0 }, 10.60);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 10.60); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.60); tl.set("#c13", { opacity: 0 }, 11.86);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 11.86); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.86); tl.set("#c14", { opacity: 0 }, 12.56);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 12.56); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.56); tl.set("#c15", { opacity: 0 }, 13.08);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 13.76); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.76); tl.set("#c16", { opacity: 0 }, 14.38);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 14.38); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.38); tl.set("#c17", { opacity: 0 }, 14.78);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 15.26); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.26); tl.set("#c18", { opacity: 0 }, 15.86);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 15.86); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.86); tl.set("#c19", { opacity: 0 }, 17.02);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 17.74); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.74); tl.set("#c20", { opacity: 0 }, 18.36);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 18.92); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.92); tl.set("#c21", { opacity: 0 }, 19.76);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 19.76); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.76); tl.set("#c22", { opacity: 0 }, 21.08);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 21.08); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.08); tl.set("#c23", { opacity: 0 }, 21.50);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 22.20); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.20); tl.set("#c24", { opacity: 0 }, 22.52);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 22.52); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.52); tl.set("#c25", { opacity: 0 }, 22.84);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 23.30); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.30); tl.set("#c26", { opacity: 0 }, 23.90);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 23.90); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.90); tl.set("#c27", { opacity: 0 }, 24.40);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 24.40); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.40); tl.set("#c28", { opacity: 0 }, 25.76);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 25.76); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.76); tl.set("#c29", { opacity: 0 }, 26.06);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 26.36); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.36); tl.set("#c30", { opacity: 0 }, 27.16);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 27.16); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.16); tl.set("#c31", { opacity: 0 }, 27.88);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 28.36); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.36); tl.set("#c32", { opacity: 0 }, 28.82);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 28.82); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.82); tl.set("#c33", { opacity: 0 }, 29.20);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 29.20); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 29.20); tl.set("#c34", { opacity: 0 }, 30.30);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 30.30); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.30); tl.set("#c35", { opacity: 0 }, 30.60);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 31.44); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.44); tl.set("#c36", { opacity: 0 }, 32.18);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 32.18); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.18); tl.set("#c37", { opacity: 0 }, 32.82);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 32.82); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.82); tl.set("#c38", { opacity: 0 }, 34.00);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 34.00); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.00); tl.set("#c39", { opacity: 0 }, 34.58);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 34.58); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.58); tl.set("#c40", { opacity: 0 }, 35.26);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 35.26); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.26); tl.set("#c41", { opacity: 0 }, 35.68);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 35.68); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.68); tl.set("#c42", { opacity: 0 }, 35.98);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 36.86); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.86); tl.set("#c43", { opacity: 0 }, 37.20);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 37.76); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.76); tl.set("#c44", { opacity: 0 }, 38.32);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 38.32); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.32); tl.set("#c45", { opacity: 0 }, 38.86);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 39.24); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.24); tl.set("#c46", { opacity: 0 }, 39.82);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 39.82); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.82); tl.set("#c47", { opacity: 0 }, 40.56);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 41.38); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.38); tl.set("#c48", { opacity: 0 }, 41.86);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 41.86); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.86); tl.set("#c49", { opacity: 0 }, 43.04);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 43.04); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 43.04); tl.set("#c50", { opacity: 0 }, 43.56);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>
