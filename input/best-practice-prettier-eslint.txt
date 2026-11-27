@@ -1,0 +1,13 @@
+Two developers, two styles, one messy file. Every change turns into an argument about spaces and quotes.
+
+Two tools fix this. Prettier formats your code the same way every time. ESLint checks your code for likely mistakes and for rules you set.
+
+Used for: consistent code, catching bugs like unused variables, and fewer style comments in reviews.
+
+Example: you save a file, and Prettier fixes the spacing. ESLint flags a variable you never used.
+
+Both run from the terminal, and many editors run Prettier for you on save.
+
+Takeaway: let the tools handle style, so people can focus on the logic.
+
+Do you run a formatter on save? Tell me in the comments.

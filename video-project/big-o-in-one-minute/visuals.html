@@ -1,0 +1,210 @@
+<style>
+  :root { --acc: #22d3ee; --ink: #f5f5f7; --mute: #9aa3b8; --red: #f87171; }
+  #kick { position: absolute; left: 90px; top: 236px; width: 500px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: var(--acc); text-transform: uppercase; white-space: nowrap; }
+  #logo { position: absolute; left: 640px; top: 226px; width: 350px; height: 56px; }
+  .mk { position: absolute; left: 0; top: 4px; width: 56px; height: 46px; }
+  .mkc { position: absolute; width: 40px; height: 30px; border-radius: 8px; border: 3px solid var(--acc); background: #0c0d16; }
+  #mk1 { left: 0; top: 0; opacity: 0.45; }
+  #mk2 { left: 8px; top: 8px; opacity: 0.7; }
+  #mk3 { left: 16px; top: 16px; background: var(--acc); }
+  .wm { position: absolute; left: 72px; top: 12px; font: 900 28px Inter, sans-serif; letter-spacing: 0.06em; color: var(--ink); white-space: nowrap; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 120px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; left: 0; top: 0; width: 120px; height: 6px; background: var(--acc); }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(8,14,18,0.88); border: 1px solid rgba(34,211,238,0.3); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .txt { position: absolute; font: 700 40px Inter, sans-serif; color: var(--ink); line-height: 1.2; }
+  .sub { position: absolute; font: 400 28px Inter, sans-serif; color: var(--mute); line-height: 1.3; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: var(--acc); text-transform: uppercase; letter-spacing: 0.1em; }
+  .box { position: absolute; border-radius: 22px; background: #0f1a20; border: 1px solid #1f3b45; padding: 26px; }
+  .row { position: absolute; left: 26px; width: 728px; height: 60px; border-radius: 14px; background: #142830; border: 1px solid #245262; font: 700 26px 'JetBrains Mono', monospace; color: var(--ink); padding: 14px 20px; white-space: nowrap; }
+  .bar { position: absolute; width: 160px; background: var(--acc); border-radius: 12px 12px 0 0; }
+  .mono { position: absolute; font: 700 26px 'JetBrains Mono', monospace; color: var(--ink); text-align: center; width: 160px; }
+  .tile { position: absolute; width: 84px; height: 84px; border-radius: 14px; background: #142830; border: 2px solid var(--acc); }
+  .dots { position: absolute; border-radius: 4px; background: radial-gradient(circle, var(--acc) 42%, transparent 46%) 0 0 / 52px 52px; }
+  .chip { position: absolute; height: 70px; border-radius: 35px; background: var(--acc); color: #04161a; font: 700 30px Inter, sans-serif; line-height: 70px; padding: 0 32px; white-space: nowrap; }
+  .ques { position: absolute; left: 60px; width: 780px; text-align: center; font: 900 60px Inter, sans-serif; color: var(--ink); line-height: 1.15; }
+  #bigmk { position: absolute; left: 380px; top: 90px; width: 140px; height: 110px; }
+  #bigmk .mkc { width: 110px; height: 80px; border-width: 6px; border-radius: 18px; }
+  #bigmk #bm1 { left: 0; top: 0; opacity: 0.4; }
+  #bigmk #bm2 { left: 20px; top: 14px; opacity: 0.7; }
+  #bigmk #bm3 { left: 40px; top: 28px; background: var(--acc); }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="6.44" data-track-index="1">01 · The crash</div>
+  <div class="kick clip" data-start="6.62" data-duration="6.90" data-track-index="1">02 · Growth</div>
+  <div class="kick clip" data-start="13.76" data-duration="4.60" data-track-index="1">03 · One loop</div>
+  <div class="kick clip" data-start="18.70" data-duration="6.42" data-track-index="1">04 · Loop in loop</div>
+  <div class="kick clip" data-start="25.22" data-duration="5.06" data-track-index="1">05 · Hash map</div>
+  <div class="kick clip" data-start="30.44" data-duration="4.00" data-track-index="1">06 · Takeaway</div>
+  <div class="kick clip" data-start="34.64" data-duration="3.08" data-track-index="1">07 · Question</div>
+</div>
+
+<div id="logo">
+  <div class="mk"><div id="mk1" class="mkc"></div><div id="mk2" class="mkc"></div><div id="mk3" class="mkc"></div></div>
+  <div class="wm">BIG O</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p0"></i></div>
+  <div class="seg" style="left: 129px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 259px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 388px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 518px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 647px;"><i id="p5"></i></div>
+  <div class="seg" style="left: 777px;"><i id="p6"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: hook -->
+  <div id="g0" class="g clip" data-start="0" data-duration="6.44" data-track-index="2">
+    <div class="box" style="left: 60px; top: 110px; width: 350px; height: 240px;">
+      <div class="lbl" style="left: 26px; top: 22px;">Solution A</div>
+      <div class="txt" style="left: 26px; top: 90px; font-size: 56px; color: var(--acc);">works</div>
+    </div>
+    <div class="box" style="left: 490px; top: 110px; width: 350px; height: 240px;">
+      <div class="lbl" style="left: 26px; top: 22px;">Solution B</div>
+      <div class="txt" style="left: 26px; top: 90px; font-size: 56px; color: var(--acc);">works</div>
+    </div>
+    <div class="txt" id="t0" style="left: 60px; top: 410px; width: 780px; opacity: 0;">One breaks with a million users.</div>
+  </div>
+
+  <!-- 1: the growth bars -->
+  <div id="g1" class="g clip" data-start="6.62" data-duration="6.90" data-track-index="2">
+    <div class="bar" id="b1" style="left: 150px; top: 390px; height: 80px; opacity: 0;"></div>
+    <div class="bar" id="b2" style="left: 370px; top: 270px; height: 200px; opacity: 0;"></div>
+    <div class="bar" id="b3" style="left: 590px; top: 130px; height: 340px; opacity: 0;"></div>
+    <div class="mono" style="left: 150px; top: 480px;">O(1)</div>
+    <div class="mono" style="left: 370px; top: 480px;">O(n)</div>
+    <div class="mono" style="left: 590px; top: 480px;">O(n²)</div>
+    <div class="sub" id="s1" style="left: 60px; top: 40px; width: 780px; opacity: 0; color: var(--ink);">How the work grows as the input grows.</div>
+  </div>
+
+  <!-- 2: O(n) doubles -->
+  <div id="g2" class="g clip" data-start="13.76" data-duration="4.60" data-track-index="2">
+    <div class="tile" style="left: 60px; top: 150px;"></div>
+    <div class="tile" style="left: 160px; top: 150px;"></div>
+    <div class="tile" style="left: 260px; top: 150px;"></div>
+    <div class="tile" style="left: 360px; top: 150px;"></div>
+    <div class="tile" id="h1" style="left: 460px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="h2" style="left: 560px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="h3" style="left: 660px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="h4" style="left: 760px; top: 150px; opacity: 0;"></div>
+    <div class="txt" id="t2" style="left: 60px; top: 340px; width: 780px; opacity: 0;">A loop over n items: O(n).</div>
+    <div class="sub" id="s2" style="left: 60px; top: 420px; width: 780px; opacity: 0;">Double the items, double the work.</div>
+  </div>
+
+  <!-- 3: O(n squared) -->
+  <div id="g3" class="g clip" data-start="18.70" data-duration="6.42" data-track-index="2">
+    <div class="dots" style="left: 60px; top: 140px; width: 208px; height: 208px;"></div>
+    <div class="dots" id="gd" style="left: 420px; top: 140px; width: 256px; height: 256px; opacity: 0;"></div>
+    <div class="sub" style="left: 60px; top: 370px; width: 240px;">4 items: 16 pairs</div>
+    <div class="sub" id="s3a" style="left: 420px; top: 420px; width: 400px; opacity: 0;">8 items: 64 pairs</div>
+    <div class="txt" id="t3" style="left: 60px; top: 470px; width: 780px; opacity: 0;">A loop in a loop: O(n²).</div>
+    <div class="sub" id="s3b" style="left: 60px; top: 540px; width: 780px; opacity: 0;">Double the items, 4 times the work.</div>
+  </div>
+
+  <!-- 4: hash map lookup -->
+  <div id="g4" class="g clip" data-start="25.22" data-duration="5.06" data-track-index="2">
+    <div class="box" style="left: 60px; top: 110px; width: 780px; height: 260px;">
+      <div class="lbl" style="left: 26px; top: 22px;">Hash map</div>
+      <div class="row" id="hm1" style="top: 76px; width: 728px; opacity: 0;">"ana" → slot 7</div>
+      <div class="row" id="hm2" style="top: 150px; width: 728px; opacity: 0;">"ben" → slot 2</div>
+    </div>
+    <div class="txt" id="t4" style="left: 60px; top: 410px; width: 780px; opacity: 0;">Lookup is usually O(1).</div>
+    <div class="sub" id="s4" style="left: 60px; top: 490px; width: 780px; opacity: 0;">Size barely matters.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g clip" data-start="30.44" data-duration="4.00" data-track-index="2">
+    <div class="chip" id="c5" style="left: 60px; top: 170px; opacity: 0;">Your list × 100</div>
+    <div class="txt" id="t5" style="left: 60px; top: 300px; width: 780px; font-size: 44px; color: var(--acc); opacity: 0;">Ask what happens when it is 100 times bigger.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g clip" data-start="34.64" data-duration="3.08" data-track-index="2">
+    <div id="bigmk">
+      <div class="mkc" id="bm1"></div><div class="mkc" id="bm2"></div><div class="mkc" id="bm3"></div>
+    </div>
+    <div class="ques" id="q1" style="top: 300px; opacity: 0;">What is the slowest loop in your code?</div>
+    <div class="sub" id="q2" style="left: 60px; width: 780px; text-align: center; top: 520px; opacity: 0;">Comment it below.</div>
+  </div>
+</div>
+
+<script>
+  tl.from("#mk1", { opacity: 0, x: -14, duration: 0.4, ease: "power2.out" }, 0.1);
+  tl.from("#mk2", { opacity: 0, x: -8, duration: 0.4, ease: "power2.out" }, 0.25);
+  tl.from("#mk3", { opacity: 0, x: -2, duration: 0.4, ease: "power2.out" }, 0.4);
+
+  tl.set(["#p0","#p1","#p2","#p3","#p4","#p5","#p6"], { scaleX: 0, transformOrigin: "left center" }, 0);
+  tl.to("#p0", { scaleX: 1, duration: 6.44, ease: "none" }, 0);
+  tl.to("#p1", { scaleX: 1, duration: 6.9, ease: "none" }, 6.62);
+  tl.to("#p2", { scaleX: 1, duration: 4.6, ease: "none" }, 13.76);
+  tl.to("#p3", { scaleX: 1, duration: 6.42, ease: "none" }, 18.7);
+  tl.to("#p4", { scaleX: 1, duration: 5.06, ease: "none" }, 25.22);
+  tl.to("#p5", { scaleX: 1, duration: 4.0, ease: "none" }, 30.44);
+  tl.to("#p6", { scaleX: 1, duration: 3.08, ease: "none" }, 34.64);
+
+  tl.to("#g0", { opacity: 1, duration: 0.3 }, 0);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.14);
+  tl.to("#g1", { opacity: 1, duration: 0.3 }, 6.62);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.22);
+  tl.to("#g2", { opacity: 1, duration: 0.3 }, 13.76);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 18.06);
+  tl.to("#g3", { opacity: 1, duration: 0.3 }, 18.7);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 24.82);
+  tl.to("#g4", { opacity: 1, duration: 0.3 }, 25.22);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 29.98);
+  tl.to("#g5", { opacity: 1, duration: 0.3 }, 30.44);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 34.14);
+  tl.to("#g6", { opacity: 1, duration: 0.3 }, 34.64);
+
+  // 0: hook, the crash line lands after the 2 s hold
+  tl.to("#t0", { opacity: 1, duration: 0.4 }, 3.0);
+
+  // 1: growth bars, one per beat
+  tl.to("#s1", { opacity: 1, duration: 0.4 }, 6.9);
+  tl.to("#b1", { opacity: 1, duration: 0.35 }, 8.0);
+  tl.to("#b2", { opacity: 1, duration: 0.35 }, 9.5);
+  tl.to("#b3", { opacity: 1, duration: 0.35 }, 11.0);
+
+  // 2: O(n) tiles, the second four appear as the doubling is said
+  tl.to("#t2", { opacity: 1, duration: 0.4 }, 14.2);
+  tl.to("#h1", { opacity: 1, duration: 0.3 }, 15.0);
+  tl.to("#h2", { opacity: 1, duration: 0.3 }, 15.2);
+  tl.to("#h3", { opacity: 1, duration: 0.3 }, 15.4);
+  tl.to("#h4", { opacity: 1, duration: 0.3 }, 15.6);
+  tl.to("#s2", { opacity: 1, duration: 0.4 }, 16.4);
+
+  // 3: O(n squared) grid
+  tl.to("#gd", { opacity: 1, duration: 0.4 }, 20.5);
+  tl.to("#s3a", { opacity: 1, duration: 0.4 }, 21.0);
+  tl.to("#t3", { opacity: 1, duration: 0.4 }, 22.0);
+  tl.to("#s3b", { opacity: 1, duration: 0.4 }, 23.2);
+
+  // 4: hash map
+  tl.from("#hm1", { x: -20, duration: 0.35, ease: "power2.out" }, 25.6);
+  tl.to("#hm1", { opacity: 1, duration: 0.35 }, 25.6);
+  tl.from("#hm2", { x: -20, duration: 0.35, ease: "power2.out" }, 26.2);
+  tl.to("#hm2", { opacity: 1, duration: 0.35 }, 26.2);
+  tl.to("#t4", { opacity: 1, duration: 0.4 }, 27.2);
+  tl.to("#s4", { opacity: 1, duration: 0.4 }, 28.2);
+
+  // 5: takeaway
+  tl.to("#c5", { opacity: 1, duration: 0.35 }, 30.9);
+  tl.to("#t5", { opacity: 1, duration: 0.4 }, 31.8);
+
+  // 6: question, mark pulses once
+  tl.from("#bm1", { scale: 0.6, duration: 0.5, ease: "back.out(2)" }, 34.8);
+  tl.from("#bm2", { scale: 0.6, duration: 0.5, ease: "back.out(2)" }, 34.95);
+  tl.from("#bm3", { scale: 0.6, duration: 0.5, ease: "back.out(2)" }, 35.1);
+  tl.to("#bm1", { opacity: 0.4, duration: 0.3 }, 34.8);
+  tl.to("#bm2", { opacity: 0.7, duration: 0.3 }, 34.95);
+  tl.to("#q1", { opacity: 1, duration: 0.4 }, 35.2);
+  tl.to("#q2", { opacity: 1, duration: 0.4 }, 35.7);
+  tl.to("#bigmk", { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1, ease: "power1.inOut" }, 35.8);
+</script>

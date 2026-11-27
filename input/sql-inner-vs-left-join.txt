@@ -1,0 +1,15 @@
+Your report is missing users who never placed an order. The query is not wrong, but the join is. The fix is one word.
+
+A join combines rows from two tables that match on a shared key.
+
+An inner join keeps only the rows that match on both sides.
+
+A left join keeps every row from the left table, even when nothing matches on the right.
+
+Example: all users, left joined with orders. Users with no orders show empty order columns.
+
+Use inner when you need only the matches. Use left when the missing rows still matter.
+
+Takeaway: pick the join by asking which side must survive.
+
+Which join do you reach for first? Comment it.

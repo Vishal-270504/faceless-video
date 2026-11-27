@@ -1,0 +1,15 @@
+You hear just run the container, and you do not know what that means. Here is the difference between an image and a container.
+
+A Docker image is a packed recipe: your code, the runtime and the libraries, frozen in read-only layers.
+
+A container is one running copy of that image, started from it.
+
+You can start ten containers from one image, and they all begin the same way.
+
+Each container gets its own thin writable layer, so changes in one container never touch another.
+
+Example: the same image runs on your laptop and on a server, so the setup matches.
+
+Takeaway: the image is the blueprint, and the container is the running house.
+
+Do you use Docker today? Comment yes or no.

@@ -1,0 +1,195 @@
+<style>
+  :root { --acc: #818cf8; --ink: #f5f5f7; --mute: #9aa3b8; --red: #f87171; }
+  #kick { position: absolute; left: 90px; top: 236px; width: 500px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: var(--acc); text-transform: uppercase; white-space: nowrap; }
+  #logo { position: absolute; left: 640px; top: 226px; width: 350px; height: 56px; }
+  .mk { position: absolute; left: 0; top: 4px; width: 56px; height: 46px; }
+  .mkc { position: absolute; width: 40px; height: 30px; border-radius: 8px; border: 3px solid var(--acc); background: #0c0d16; }
+  #mk1 { left: 0; top: 0; opacity: 0.45; }
+  #mk2 { left: 8px; top: 8px; opacity: 0.7; }
+  #mk3 { left: 16px; top: 16px; background: var(--acc); }
+  .wm { position: absolute; left: 72px; top: 12px; font: 900 28px Inter, sans-serif; letter-spacing: 0.06em; color: var(--ink); white-space: nowrap; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 120px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; left: 0; top: 0; width: 120px; height: 6px; background: var(--acc); }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(12,12,26,0.88); border: 1px solid rgba(129,140,248,0.3); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .txt { position: absolute; font: 700 40px Inter, sans-serif; color: var(--ink); line-height: 1.2; }
+  .sub { position: absolute; font: 400 28px Inter, sans-serif; color: var(--mute); line-height: 1.3; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: var(--acc); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+  .box { position: absolute; border-radius: 22px; background: #14142a; border: 1px solid rgba(129,140,248,0.25); padding: 26px; }
+  .code { position: absolute; width: 780px; height: 90px; padding: 20px 26px; border-radius: 18px; background: #14142a; border: 1px solid rgba(129,140,248,0.25); font: 400 26px 'JetBrains Mono', monospace; line-height: 50px; color: var(--ink); white-space: nowrap; }
+  .wire { position: absolute; height: 4px; background: var(--acc); border-radius: 2px; }
+  .ques { position: absolute; left: 60px; width: 780px; text-align: center; font: 900 60px Inter, sans-serif; color: var(--ink); line-height: 1.15; }
+  #bigmk { position: absolute; left: 380px; top: 90px; width: 140px; height: 110px; }
+  #bigmk .mkc { width: 110px; height: 80px; border-width: 6px; border-radius: 18px; }
+  #bigmk #bm1 { left: 0; top: 0; opacity: 0.4; }
+  #bigmk #bm2 { left: 20px; top: 14px; opacity: 0.7; }
+  #bigmk #bm3 { left: 40px; top: 28px; background: var(--acc); }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="7.66" data-track-index="1">01 · The problem</div>
+  <div class="kick clip" data-start="8.46" data-duration="5.00" data-track-index="1">02 · Checked first</div>
+  <div class="kick clip" data-start="14.48" data-duration="5.40" data-track-index="1">03 · Null</div>
+  <div class="kick clip" data-start="20.66" data-duration="3.90" data-track-index="1">04 · Implicit any</div>
+  <div class="kick clip" data-start="25.42" data-duration="6.48" data-track-index="1">05 · Config</div>
+  <div class="kick clip" data-start="32.72" data-duration="3.98" data-track-index="1">06 · Takeaway</div>
+  <div class="kick clip" data-start="37.54" data-duration="3.64" data-track-index="1">07 · Question</div>
+</div>
+
+<div id="logo">
+  <div class="mk"><div id="mk1" class="mkc"></div><div id="mk2" class="mkc"></div><div id="mk3" class="mkc"></div></div>
+  <div class="wm">DEV TIPS</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p0"></i></div>
+  <div class="seg" style="left: 129px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 259px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 388px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 518px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 647px;"><i id="p5"></i></div>
+  <div class="seg" style="left: 777px;"><i id="p6"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the problem -->
+  <div id="g0" class="g clip" data-start="0" data-duration="8.06" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 70px;">Your code</div>
+    <div class="code" id="ca" style="left: 60px; top: 112px; opacity: 0;">const name = user.name.toUpperCase();</div>
+    <div class="sub" id="cr" style="left: 60px; top: 236px; width: 780px; color: var(--red); opacity: 0;">TypeError: Cannot read properties of undefined</div>
+    <div class="txt" id="t0" style="left: 60px; top: 380px; width: 780px; opacity: 0;">It compiles. It still crashes at runtime.</div>
+  </div>
+
+  <!-- 1: checked first -->
+  <div id="g1" class="g clip" data-start="8.16" data-duration="5.7" data-track-index="2">
+    <div class="txt" id="t1" style="left: 60px; top: 100px; font-size: 48px; opacity: 0;">Before the code runs.</div>
+    <div class="box" id="s1a" style="left: 60px; top: 230px; width: 220px; height: 150px; opacity: 0;"><div class="txt" style="left: 26px; top: 40px; font-size: 34px;">Write</div></div>
+    <div class="wire" id="w1" style="left: 282px; top: 305px; width: 56px; opacity: 0;"></div>
+    <div class="box" id="s1b" style="left: 340px; top: 230px; width: 220px; height: 150px; border-color: var(--acc); opacity: 0;"><div class="txt" style="left: 26px; top: 40px; font-size: 34px; color: var(--acc);">Check</div></div>
+    <div class="wire" id="w2" style="left: 562px; top: 305px; width: 56px; opacity: 0;"></div>
+    <div class="box" id="s1c" style="left: 620px; top: 230px; width: 220px; height: 150px; opacity: 0;"><div class="txt" style="left: 26px; top: 40px; font-size: 34px;">Run</div></div>
+    <div class="sub" id="s1d" style="left: 60px; top: 440px; width: 780px; opacity: 0;">Types are checked first. Then the code runs.</div>
+  </div>
+
+  <!-- 2: null -->
+  <div id="g2" class="g clip" data-start="14.18" data-duration="6.1" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 80px;">Before</div>
+    <div class="code" id="c2a" style="left: 60px; top: 122px; opacity: 0;">return user.name.length;</div>
+    <div class="sub" id="e2" style="left: 60px; top: 230px; width: 780px; color: var(--red); opacity: 0;">'user.name' is possibly 'undefined'</div>
+    <div class="lbl" style="left: 60px; top: 300px;">After</div>
+    <div class="code" id="c2b" style="left: 60px; top: 342px; border-color: var(--acc); opacity: 0;">return user.name?.length ?? 0;</div>
+  </div>
+
+  <!-- 3: implicit any -->
+  <div id="g3" class="g clip" data-start="20.36" data-duration="4.6" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 90px;">Missing type</div>
+    <div class="code" id="c3a" style="left: 60px; top: 140px; opacity: 0;">function greet(name) {</div>
+    <div class="sub" id="e3" style="left: 60px; top: 250px; width: 780px; color: var(--red); opacity: 0;">'name' is implicitly 'any'</div>
+    <div class="code" id="c3b" style="left: 60px; top: 340px; border-color: var(--acc); opacity: 0;">function greet(name: string) {</div>
+  </div>
+
+  <!-- 4: config -->
+  <div id="g4" class="g clip" data-start="25.12" data-duration="7.18" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 80px;">tsconfig.json</div>
+    <div class="box" id="cfg" style="left: 60px; top: 130px; width: 780px; height: 300px; opacity: 0;">
+      <div style="position: absolute; left: 26px; top: 24px; font: 400 30px 'JetBrains Mono', monospace; line-height: 50px; color: var(--ink); white-space: pre;">{
+  "compilerOptions": {
+    <span style="color: var(--acc);">"strict": true</span>
+  }
+}</div>
+    </div>
+    <div class="sub" id="s4" style="left: 60px; top: 470px; width: 780px; opacity: 0;">Then fix the errors one file at a time.</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g clip" data-start="32.42" data-duration="4.68" data-track-index="2">
+    <div class="box" id="k1" style="left: 60px; top: 110px; width: 780px; height: 120px; opacity: 0;">
+      <div class="sub" style="position: absolute; left: 34px; top: 28px; color: var(--ink); font-size: 32px;">Strict mode finds bugs while you type.</div>
+    </div>
+    <div class="box" id="k2" style="left: 60px; top: 260px; width: 780px; height: 120px; opacity: 0;">
+      <div class="sub" style="position: absolute; left: 34px; top: 28px; color: var(--ink); font-size: 32px;">Not when a user clicks.</div>
+    </div>
+    <div class="txt" id="t5" style="left: 60px; top: 440px; font-size: 52px; color: var(--acc); opacity: 0;">Catch it early.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g clip" data-start="37.24" data-duration="4.34" data-track-index="2">
+    <div id="bigmk">
+      <div class="mkc" id="bm1"></div><div class="mkc" id="bm2"></div><div class="mkc" id="bm3"></div>
+    </div>
+    <div class="ques" id="q1" style="top: 270px; opacity: 0;">Did you turn strict on in your last project?</div>
+  </div>
+</div>
+
+<script>
+  tl.from("#mk1", { opacity: 0, x: -14, duration: 0.4, ease: "power2.out" }, 0.1);
+  tl.from("#mk2", { opacity: 0, x: -8, duration: 0.4, ease: "power2.out" }, 0.25);
+  tl.from("#mk3", { opacity: 0, x: -2, duration: 0.4, ease: "power2.out" }, 0.4);
+
+  tl.set(["#p0","#p1","#p2","#p3","#p4","#p5","#p6"], { scaleX: 0, transformOrigin: "left center" }, 0);
+  tl.to("#p0", { scaleX: 1, duration: 7.66, ease: "none" }, 0);
+  tl.to("#p1", { scaleX: 1, duration: 5.0, ease: "none" }, 8.46);
+  tl.to("#p2", { scaleX: 1, duration: 5.4, ease: "none" }, 14.48);
+  tl.to("#p3", { scaleX: 1, duration: 3.9, ease: "none" }, 20.66);
+  tl.to("#p4", { scaleX: 1, duration: 6.48, ease: "none" }, 25.42);
+  tl.to("#p5", { scaleX: 1, duration: 3.98, ease: "none" }, 32.72);
+  tl.to("#p6", { scaleX: 1, duration: 3.64, ease: "none" }, 37.54);
+
+  tl.to("#g0", { opacity: 1, duration: 0.3 }, 0);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 7.76);
+  tl.to("#g1", { opacity: 1, duration: 0.3 }, 8.16);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.56);
+  tl.to("#g2", { opacity: 1, duration: 0.3 }, 14.18);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 19.98);
+  tl.to("#g3", { opacity: 1, duration: 0.3 }, 20.36);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 24.66);
+  tl.to("#g4", { opacity: 1, duration: 0.3 }, 25.12);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 32.0);
+  tl.to("#g5", { opacity: 1, duration: 0.3 }, 32.42);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 36.8);
+  tl.to("#g6", { opacity: 1, duration: 0.3 }, 37.24);
+
+  // 0: the problem, crash held about 3 s
+  tl.to("#ca", { opacity: 1, duration: 0.4 }, 0.6);
+  tl.to("#cr", { opacity: 1, duration: 0.4 }, 2.0);
+  tl.to("#t0", { opacity: 1, duration: 0.4 }, 3.4);
+
+  // 1: checked first
+  tl.to("#t1", { opacity: 1, duration: 0.4 }, 8.6);
+  tl.to("#s1a", { opacity: 1, duration: 0.35 }, 9.2);
+  tl.to("#w1", { opacity: 1, duration: 0.3 }, 9.6);
+  tl.to("#s1b", { opacity: 1, duration: 0.35 }, 10.2);
+  tl.to("#w2", { opacity: 1, duration: 0.3 }, 10.6);
+  tl.to("#s1c", { opacity: 1, duration: 0.35 }, 11.2);
+  tl.to("#s1d", { opacity: 1, duration: 0.4 }, 11.8);
+
+  // 2: null
+  tl.to("#c2a", { opacity: 1, duration: 0.4 }, 14.9);
+  tl.to("#e2", { opacity: 1, duration: 0.4 }, 15.9);
+  tl.to("#c2b", { opacity: 1, duration: 0.4 }, 17.2);
+
+  // 3: implicit any
+  tl.to("#c3a", { opacity: 1, duration: 0.4 }, 20.9);
+  tl.to("#e3", { opacity: 1, duration: 0.4 }, 21.8);
+  tl.to("#c3b", { opacity: 1, duration: 0.4 }, 23.0);
+
+  // 4: config
+  tl.to("#cfg", { opacity: 1, duration: 0.4 }, 25.8);
+  tl.to("#s4", { opacity: 1, duration: 0.4 }, 29.0);
+
+  // 5: takeaway
+  tl.to("#k1", { opacity: 1, duration: 0.4 }, 32.9);
+  tl.to("#k2", { opacity: 1, duration: 0.4 }, 34.0);
+  tl.to("#t5", { opacity: 1, duration: 0.4 }, 35.2);
+
+  // 6: question, mark pulses once
+  tl.from("#bm1", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)" }, 37.6);
+  tl.from("#bm2", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)" }, 37.75);
+  tl.from("#bm3", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)" }, 37.9);
+  tl.to("#q1", { opacity: 1, duration: 0.4 }, 38.0);
+  tl.to("#bigmk", { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1, ease: "power1.inOut" }, 38.4);
+</script>

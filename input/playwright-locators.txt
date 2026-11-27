@@ -1,0 +1,15 @@
+Your test clicks the button, then fails. The button is still there. Why?
+
+Because it found the wrong thing. Tests often search by CSS class, and classes change.
+
+Playwright's best practice: find elements the way a user sees them. Role, then name.
+
+For example, get by role button, name Save. It finds the button a user sees, whatever its class.
+
+Labels work too: get by label Email finds the input a user reads as Email.
+
+Use test IDs only when nothing else works. They are stable, but they are invisible to users.
+
+Takeaway: if your test cannot find a button a user can see, the user might not find it either.
+
+Which selector do you use most? Comment it.

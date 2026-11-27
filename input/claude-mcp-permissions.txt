@@ -1,0 +1,13 @@
+You add an MCP server to read one folder. Did you check what else it can do?
+
+An MCP server runs on your machine, with your user rights. If it can delete files, Claude can ask it to.
+
+Check the tool list before you connect. Look for names like delete, write, send or run.
+
+Give each server the smallest access it needs. A read-only token beats a full admin key.
+
+Prefer servers with a clear source, and read what each tool does before you approve it.
+
+Takeaway: treat every MCP server like a new app on your computer.
+
+Which server are you thinking of adding? Tell me in the comments.

@@ -1,0 +1,15 @@
+Chatbot or agent? A chatbot answers. An agent does the job, and checks its own work.
+
+An agent is a model in a loop: it picks a tool, reads the result, then picks the next step.
+
+The tools are the hands: read a file, run a test, search the web, call an outside service.
+
+The loop repeats until the goal is met or it hits a step limit.
+
+Example: fix a failing test. The agent runs the test, reads the error, edits the code, and runs it again.
+
+A vague goal makes a vague agent.
+
+Takeaway: give an agent a clear goal, a few tools, and a way to check its work.
+
+Would you let an agent fix your tests? Comment yes or no.

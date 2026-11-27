@@ -1,0 +1,13 @@
+Your test adds a wait of two seconds, and still fails sometimes. Here is why.
+
+A fixed wait guesses how long the page takes. On a slow machine, the guess is wrong. On a fast one, you wait for nothing.
+
+Playwright auto waits. Before a click, it checks the element is visible, enabled and stable, so it never clicks too early.
+
+For checks, expect the text Saved to be visible. It retries until it passes or times out.
+
+A timeout is a limit, not a delay. A fast page passes right away.
+
+Takeaway: wait for the thing you need, not for time to pass.
+
+How long is the longest wait in your tests? Comment it.

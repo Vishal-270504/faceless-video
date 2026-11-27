@@ -1,0 +1,13 @@
+Your TypeScript project compiles, but a missing value still crashes at runtime. Strict mode is the setting you probably turned off.
+
+TypeScript checks your types before the code runs. Strict mode turns on the strongest checks.
+
+It catches null and undefined. A value that might be missing must be checked before you use it.
+
+It stops implicit any. Every value gets a real type, not a guess.
+
+Turn it on in tsconfig dot json, with strict set to true. Then fix the errors one file at a time.
+
+Takeaway: strict mode finds bugs while you type, not when a user clicks.
+
+Did you turn strict on in your last project? Comment yes or no.

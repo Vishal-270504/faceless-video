@@ -573,3 +573,277 @@ Background video: AttilaPergel on Pixabay (https://pixabay.com/videos/id-111280/
 
 **Thumbnail prompt for ChatGPT:**
 > Vertical 9:16 image, 1080x1920. Near-black indigo background with an indigo (#a5b4fc) accent. Large bold white text across the top: "40 IMAGES?" with "40" in indigo. Centre: a flat grid of small square tiles, the top rows solid indigo and the lower rows dashed outlines, with a dashed horizontal line marking the screen edge. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 39. claude-skills-what-is: Stop repeating yourself with Claude skills
+
+**Title:** Stop Repeating Yourself: Claude Skills Explained
+
+**Description:**
+You paste the same rules into Claude every week. A Claude skill is a folder of instructions that Claude loads only when a task needs them. Here is the two-line header that makes it work, and when one is worth writing.
+
+#claude #claudeskills #ai #productivity #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "REPEAT YOURSELF?" with "REPEAT" in amber. Centre: a flat illustration of a stack of three amber file cards, the top one labelled "SKILL.md" with two short lines, and a small grey chat bubble on the left. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 40. claude-skills-vs-claude-md: Prompt, CLAUDE.md or skill?
+
+**Title:** Prompt, CLAUDE.md or Skill? Which One to Use
+
+**Description:**
+Claude has three places for instructions, and each one loads at a different time. A chat prompt lasts one conversation, CLAUDE.md loads every session in your project, and a skill loads when its task comes up. Learn which one fits each kind of rule.
+
+#claude #claudeskills #claudecode #ai #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "WHERE DO RULES GO?" with "RULES" in amber. Centre: three flat stacked panels side by side, labelled "CHAT", "CLAUDE.md" and "SKILL", the middle one highlighted in amber. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 41. claude-mcp-what-is: MCP in 60 seconds
+
+**Title:** MCP in 60 Seconds: The Plug for Claude's Tools
+
+**Description:**
+Claude cannot see your database or calendar by itself. MCP, the Model Context Protocol, is one standard way to connect tools to Claude. A server lists the actions it offers, and any MCP client can use them. Build one server and it works everywhere.
+
+#claude #mcp #modelcontextprotocol #ai #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "MCP IS THE PLUG" with "PLUG" in green. Centre: a flat illustration of two rounded boxes, one labelled "CLIENT" and one labelled "SERVER", joined by a green connector line with a small dot in the middle. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 42. claude-mcp-tool-call: What happens when Claude calls a tool
+
+**Title:** What Happens When Claude Calls an MCP Tool
+
+**Description:**
+One tool call, in five steps: the server lists its tools, Claude picks one, the client sends the request, the server does the work, and Claude answers in plain words. Find out why a clear tool name and description decide whether Claude uses the right tool.
+
+#claude #mcp #ai #llm #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "5 STEPS" with "5" in green. Centre: a flat vertical list of five numbered green rounded rows, each row with a small arrow pointing down to the next, the third row labelled "create_note". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 43. claude-mcp-permissions: Check this before you add an MCP server
+
+**Title:** Before You Add an MCP Server, Check This
+
+**Description:**
+An MCP server runs with your user rights, so a tool that deletes or sends can act for Claude. Check the tool list before you connect, give each server the smallest access it needs, and read what each tool does before you approve it. Treat every server like a new app.
+
+#claude #mcp #security #devtools #ai #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "CHECK BEFORE CONNECT" with "CHECK" in green. Centre: a flat illustration of a shield-shaped checklist with three rows and a red tag on the row labelled "delete". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 44. playwright-first-test: Your first Playwright test
+
+**Title:** Your First Playwright Test in 60 Seconds
+
+**Description:**
+Stop clicking through the same login page after every change. Playwright opens a real browser, runs your steps, and checks what the user sees. Here is the three-step test, and how the saved trace shows you exactly where a failure happened.
+
+#playwright #testing #webdev #qa #javascript #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "TEST LIKE A USER" with "USER" in teal. Centre: a flat illustration of a browser window with a teal button labelled "Log in" and a teal check mark beside the word "Welcome" below it. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 45. playwright-locators: Why your test can't find the button
+
+**Title:** Why Your Playwright Test Can't Find the Button
+
+**Description:**
+Tests that search by CSS class break whenever the class changes. Find elements by role and name, the way a user sees them, and your tests keep working. The same habit also catches real accessibility problems, like a button with no name.
+
+#playwright #testing #accessibility #webdev #qa #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "CAN'T FIND IT?" with "FIND" in teal. Centre: a flat illustration of a teal button labelled "Save" with a dashed magnifier outline pointing at it, and a small grey label "class: btn-x9" above it. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 46. playwright-no-sleep: Stop waiting two seconds in tests
+
+**Title:** Stop Waiting Two Seconds in Your Tests
+
+**Description:**
+A fixed wait guesses how long the page takes, and the guess fails on slow machines. Playwright waits for each element to be ready before it clicks, and an expect check retries until the text appears. Wait for the thing you need, not for time to pass.
+
+#playwright #testing #webdev #ci #javascript #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "STOP THE SLEEP" with "SLEEP" in teal. Centre: a flat illustration of a grey timer showing "2 s" with a red cross over it, and beside it a teal check mark over the word "Saved". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 47. claude-agents-what-is: Agent vs chatbot
+
+**Title:** AI Agent vs Chatbot: What an Agent Really Does
+
+**Description:**
+A chatbot answers once. An agent is a model in a loop: it picks a tool, reads the result, and repeats until the goal is met or it runs out of steps. Here is that loop, with a failing test as the example, and why a clear goal matters most.
+
+#claude #aiagents #ai #llm #programming #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "CHATBOT OR AGENT?" with "AGENT?" in violet. Centre: a flat illustration of a violet loop arrow connecting three rounded nodes labelled "READ", "EDIT" and "RUN". Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 48. claude-subagents-context: Keep Claude's chat clean with subagents
+
+**Title:** Keep Claude's Chat Clean with Subagents
+
+**Description:**
+A subagent gets its own fresh context window, does the messy research, and returns only a short summary. Your main thread stays focused on decisions, and several subagents can work on separate parts of a job at the same time.
+
+#claude #subagents #aiagents #claudecode #ai #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. Large bold white text at the top: "CLEAN CONTEXT" with "CLEAN" in violet. Centre: a flat illustration of one large violet panel labelled "MAIN" with a small violet panel branching off to the side labelled "SUBAGENT", and a thin arrow carrying a short summary back. Clean, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+---
+
+## 57. best-practice-prettier-eslint: Stop style arguments with a formatter and linter
+
+**Title:** Stop style arguments: formatter and linter
+
+**Description:**
+Two developers, two styles, and every code change turns into a debate about spaces and quotes. Prettier formats your code the same way every time, and ESLint flags likely mistakes such as unused variables. Let the tools handle style so reviews can focus on the logic.
+
+#javascript #codequality #codingtips #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark charcoal background with thin yellow code lines. Main text in quotes: "Let tools handle style". One central illustration: a tidy stack of two matching code blocks beside a small yellow checkmark. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 59. ts-strict-mode: Strict mode catches bugs while you type
+
+**Title:** Strict mode: catch bugs while you type
+
+**Description:**
+Your TypeScript project compiles, but a missing value can still crash the app at runtime. Strict mode turns on the stronger checks for null, undefined and implicit any, before you run the code. Turn it on in tsconfig.json, then fix the errors one file at a time.
+
+#typescript #javascript #codingtips #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Deep navy background with a soft indigo light at the top. Main text in quotes: "Catch bugs while you type". One central illustration: a small settings card with one large indigo toggle switch turned on. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 60. ts-type-safe-api: Share types between client and server
+
+**Title:** Share types between client and server
+
+**Description:**
+Your frontend sends a note, but the backend expects a different shape, and you only find out in production. A shared type defines the shape once for both sides, so the compiler flags mismatches before users do. Types vanish at runtime, so validate incoming data too.
+
+#typescript #api #webdev #codingtips #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Plain dark charcoal background with a soft rose light at the bottom. Main text in quotes: "One type, both sides". One central illustration: two matching rounded cards joined by a single rose line. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 61. rust-for-js-devs: Why the Rust compiler says no
+
+**Title:** Why the Rust compiler says no
+
+**Description:**
+The Rust compiler refuses your code and it feels strict, but it is protecting your memory. Rust checks ownership and borrowing at compile time, so a whole class of memory bugs is caught before the program runs. A first look for JavaScript developers.
+
+#rust #javascript #programming #codingtips #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Plain dark plum background with a soft fuchsia light near the top. Main text in quotes: "Why the compiler says no". One central illustration: a single rounded card with a flat fuchsia padlock shape on it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+
+
+## 67. sql-inner-vs-left-join: Inner vs left join: why rows go missing
+
+**Title:** Inner vs left join: why rows go missing
+
+**Description:**
+Your report is missing users who never placed an order, and the join type is the reason. An inner join keeps only the rows that match on both sides, while a left join keeps every row from the left table.
+
+#sql #database #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark navy background. "INNER OR LEFT?" in large white letters. One central illustration of two overlapping table grids with one row missing from the overlap. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 68. http-status-codes: HTTP status codes: what 404 and 500 mean
+
+**Title:** HTTP status codes: what 404 and 500 mean
+
+**Description:**
+A blank error that shows only a number like 404 gives you no clue. The first digit of an HTTP status code tells you the family, and a 4xx points at the request while a 5xx points at the server.
+
+#http #webdev #api #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark charcoal background. "404 OR 500?" in large white letters. One central illustration of a large numbered signpost with two arrows, one labelled client and one labelled server. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 69. env-vars-keep-secrets: Keep API keys out of your code
+
+**Title:** Keep API keys out of your code
+
+**Description:**
+You pushed an API key to a public repo, and now anyone can read it. Store secrets in environment variables, keep your .env file out of git, and rotate any key that has leaked.
+
+#security #webdev #devtips #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark olive background. "PUSHED A KEY?" in large white letters. One central illustration of a simple padlock with a key shape through it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 70. big-o-in-one-minute: Big O in one minute: why your code slows down
+
+**Title:** Big O in one minute: why your code slows down
+
+**Description:**
+Two solutions both work on your laptop, but one breaks with a million users. Big O describes how the work grows as the input grows, from a single loop to a loop inside a loop.
+
+#bigo #algorithms #programming #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark teal background. "WHAT IF 100X?" in large white letters. One central illustration of three rising bars labelled O(1), O(n) and O(n²). Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 71. unit-vs-integration-test: Unit vs integration tests: why both matter
+
+**Title:** Unit vs integration tests: why both matter
+
+**Description:**
+All your unit tests pass, yet login still breaks. A unit test checks one small function with fake inputs, while an integration test checks the parts working together, like the API and the database.
+
+#testing #unittest #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark plum background. "ALL TESTS PASS?" in large white letters. One central illustration of one small block on the left and a chain of three connected blocks on the right. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 72. docker-image-vs-container: Docker image vs container: what is the difference
+
+**Title:** Docker image vs container: what is the difference
+
+**Description:**
+You hear "just run the container" and do not know what that means. An image is the frozen recipe with your code and its libraries, and a container is one running copy started from that image.
+
+#docker #devops #containers #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark navy background. "IMAGE OR CONTAINER?" in large white letters. One central illustration of a blueprint sheet beside a small house built from it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+

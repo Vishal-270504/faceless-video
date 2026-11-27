@@ -1,0 +1,13 @@
+You ask Claude to save a note. Here is what happens behind the scenes, in five steps.
+
+Step one: the server lists its tools. Each one has a name, a description and the inputs it needs.
+
+Step two: Claude reads that list, and chooses create note with the title you gave.
+
+Step three: the client sends the request to the server. Claude does not run the code itself.
+
+Step four: the server does the work and returns a result, like note 42 saved.
+
+Step five: Claude reads the result and answers you in plain words.
+
+Takeaway: clear names and descriptions help Claude pick the right tool. Which tool is confusing to you? Comment it.

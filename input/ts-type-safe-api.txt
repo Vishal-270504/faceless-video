@@ -1,0 +1,13 @@
+Your frontend sends a note, but the backend expects a different shape. You only find out in production.
+
+A shared type fixes that. Define the shape once, and use it on both sides.
+
+Example: a type for a note, with an id, a title and an optional tag.
+
+The compiler now flags any code that sends or reads the wrong field. Both sides read the same file, so a rename shows up as an error.
+
+Data from outside, like a network response, can still be wrong at runtime, because types disappear when the code runs. Check it there too.
+
+Takeaway: share types between client and server, and validate what comes in.
+
+Where do your frontend and backend types disagree? Comment below.

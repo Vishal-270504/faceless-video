@@ -1,0 +1,13 @@
+You told Claude your project rules in chat. Next session, it forgot them all.
+
+There are three places to put instructions, and each one loads at a different time.
+
+A chat prompt lasts for one conversation. Good for a one-off question.
+
+CLAUDE dot md loads at the start of every session in your project. Good for facts that never change: your stack, your commands, your rules.
+
+A skill loads only when its task comes up. Good for a routine with steps, like a review checklist or a migration.
+
+Takeaway: project rules go in CLAUDE dot md. Repeatable procedures go in a skill.
+
+Where do your rules live today? Tell me in the comments.

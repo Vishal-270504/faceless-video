@@ -1,0 +1,13 @@
+Claude can write code, but by itself it cannot open your database or your calendar.
+
+MCP stands for Model Context Protocol. It is one standard way to plug tools into Claude.
+
+The tool side is a server. A small program that lists the actions it offers, like search tickets or create a note.
+
+The Claude side is a client, like the Claude app or Claude Code. It connects to the server and shows its tools to Claude.
+
+Build one server, and every client that speaks MCP can use it.
+
+Takeaway: MCP is the plug. The server decides what is possible, and Claude decides when to use it.
+
+Which tool would you connect first? Comment it below.

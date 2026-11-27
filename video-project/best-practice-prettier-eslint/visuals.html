@@ -1,0 +1,203 @@
+<style>
+  :root { --acc: #facc15; --ink: #f5f5f7; --mute: #9aa3b8; --red: #f87171; }
+  #kick { position: absolute; left: 90px; top: 236px; width: 500px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: var(--acc); text-transform: uppercase; white-space: nowrap; }
+  #logo { position: absolute; left: 640px; top: 226px; width: 350px; height: 56px; }
+  .mk { position: absolute; left: 0; top: 4px; width: 56px; height: 46px; }
+  .mkc { position: absolute; width: 40px; height: 30px; border-radius: 8px; border: 3px solid var(--acc); background: #0c0d16; }
+  #mk1 { left: 0; top: 0; opacity: 0.45; }
+  #mk2 { left: 8px; top: 8px; opacity: 0.7; }
+  #mk3 { left: 16px; top: 16px; background: var(--acc); }
+  .wm { position: absolute; left: 72px; top: 12px; font: 900 28px Inter, sans-serif; letter-spacing: 0.06em; color: var(--ink); white-space: nowrap; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 120px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; left: 0; top: 0; width: 120px; height: 6px; background: var(--acc); }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(14,13,8,0.88); border: 1px solid rgba(250,204,21,0.3); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .txt { position: absolute; font: 700 40px Inter, sans-serif; color: var(--ink); line-height: 1.2; }
+  .sub { position: absolute; font: 400 28px Inter, sans-serif; color: var(--mute); line-height: 1.3; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: var(--acc); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+  .box { position: absolute; border-radius: 22px; background: #1a180e; border: 1px solid rgba(250,204,21,0.25); padding: 26px; }
+  .code { position: absolute; width: 780px; height: 90px; padding: 20px 26px; border-radius: 18px; background: #1a180e; border: 1px solid rgba(250,204,21,0.25); font: 400 26px 'JetBrains Mono', monospace; line-height: 50px; color: var(--ink); white-space: nowrap; }
+  .cmd { position: absolute; left: 26px; font: 400 30px 'JetBrains Mono', monospace; color: var(--ink); white-space: nowrap; }
+  .row { position: absolute; left: 60px; width: 780px; height: 110px; border-radius: 22px; background: #1a180e; border: 1px solid rgba(250,204,21,0.25); }
+  .row .rt { position: absolute; left: 84px; top: 34px; font: 700 32px Inter, sans-serif; color: var(--ink); white-space: nowrap; }
+  .chip { position: absolute; height: 70px; border-radius: 35px; background: var(--acc); color: #171304; font: 700 30px Inter, sans-serif; line-height: 70px; padding: 0 32px; white-space: nowrap; }
+  .ok { position: absolute; width: 60px; height: 30px; }
+  .ok i { position: absolute; left: 6px; top: 2px; width: 24px; height: 12px; border-left: 6px solid var(--acc); border-bottom: 6px solid var(--acc); transform: rotate(-45deg); }
+  .ques { position: absolute; left: 60px; width: 780px; text-align: center; font: 900 60px Inter, sans-serif; color: var(--ink); line-height: 1.15; }
+  #bigmk { position: absolute; left: 380px; top: 90px; width: 140px; height: 110px; }
+  #bigmk .mkc { width: 110px; height: 80px; border-width: 6px; border-radius: 18px; }
+  #bigmk #bm1 { left: 0; top: 0; opacity: 0.4; }
+  #bigmk #bm2 { left: 20px; top: 14px; opacity: 0.7; }
+  #bigmk #bm3 { left: 40px; top: 28px; background: var(--acc); }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="6.64" data-track-index="1">01 · The mess</div>
+  <div class="kick clip" data-start="7.50" data-duration="8.66" data-track-index="1">02 · Two tools</div>
+  <div class="kick clip" data-start="16.90" data-duration="6.18" data-track-index="1">03 · Used for</div>
+  <div class="kick clip" data-start="24.24" data-duration="6.00" data-track-index="1">04 · Example</div>
+  <div class="kick clip" data-start="31.18" data-duration="4.02" data-track-index="1">05 · Terminal</div>
+  <div class="kick clip" data-start="36.10" data-duration="4.08" data-track-index="1">06 · Takeaway</div>
+  <div class="kick clip" data-start="41.08" data-duration="2.56" data-track-index="1">07 · Question</div>
+</div>
+
+<div id="logo">
+  <div class="mk"><div id="mk1" class="mkc"></div><div id="mk2" class="mkc"></div><div id="mk3" class="mkc"></div></div>
+  <div class="wm">DEV TIPS</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p0"></i></div>
+  <div class="seg" style="left: 129px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 259px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 388px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 518px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 647px;"><i id="p5"></i></div>
+  <div class="seg" style="left: 777px;"><i id="p6"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: the mess -->
+  <div id="g0" class="g clip" data-start="0" data-duration="7.04" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 70px;">Dev A</div>
+    <div class="code" id="ca" style="left: 60px; top: 112px; opacity: 0;">const user = {name:'Ana', age:30}</div>
+    <div class="lbl" style="left: 60px; top: 246px;">Dev B</div>
+    <div class="code" id="cb" style="left: 60px; top: 288px; opacity: 0;">const user={ name: "Ben",age:31 };</div>
+    <div class="txt" id="t0" style="left: 60px; top: 430px; width: 780px; opacity: 0;">Same file. Two styles. Every change becomes an argument.</div>
+  </div>
+
+  <!-- 1: two tools -->
+  <div id="g1" class="g clip" data-start="7.2" data-duration="9.36" data-track-index="2">
+    <div class="txt" id="t1" style="left: 60px; top: 110px; font-size: 48px; opacity: 0;">Two tools fix this.</div>
+    <div class="box" id="b1a" style="left: 60px; top: 220px; width: 380px; height: 330px; opacity: 0;">
+      <div class="lbl" style="left: 26px; top: 26px;">Prettier</div>
+      <div class="txt" style="left: 26px; top: 90px; font-size: 60px; font-weight: 900;">Formats</div>
+      <div class="sub" style="left: 26px; top: 185px; width: 330px;">Same spacing, every time.</div>
+    </div>
+    <div class="box" id="b1b" style="left: 460px; top: 220px; width: 380px; height: 330px; opacity: 0;">
+      <div class="lbl" style="left: 26px; top: 26px;">ESLint</div>
+      <div class="txt" style="left: 26px; top: 90px; font-size: 60px; font-weight: 900;">Checks</div>
+      <div class="sub" style="left: 26px; top: 185px; width: 330px;">Flags likely mistakes and rules you set.</div>
+    </div>
+  </div>
+
+  <!-- 2: used for -->
+  <div id="g2" class="g clip" data-start="16.6" data-duration="6.88" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 80px;">Used for</div>
+    <div class="row" id="r1" style="top: 140px; opacity: 0;"><div class="ok" style="left: 26px; top: 40px;"><i></i></div><div class="rt">Consistent code</div></div>
+    <div class="row" id="r2" style="top: 270px; opacity: 0;"><div class="ok" style="left: 26px; top: 40px;"><i></i></div><div class="rt">Catch bugs, like unused variables</div></div>
+    <div class="row" id="r3" style="top: 400px; opacity: 0;"><div class="ok" style="left: 26px; top: 40px;"><i></i></div><div class="rt">Fewer style comments</div></div>
+  </div>
+
+  <!-- 3: example -->
+  <div id="g3" class="g clip" data-start="23.94" data-duration="6.7" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 80px;">You save the file</div>
+    <div class="code" id="c3a" style="left: 60px; top: 130px; color: var(--mute); opacity: 0;">let  count=1</div>
+    <div class="lbl" style="left: 60px; top: 246px;" id="l3">Prettier fixes it</div>
+    <div class="code" id="c3b" style="left: 60px; top: 290px; border-color: var(--acc); opacity: 0;">let count = 1;</div>
+    <div class="code" id="c3c" style="left: 60px; top: 410px; opacity: 0;">let temp = 2;</div>
+    <div class="sub" id="e3" style="left: 60px; top: 520px; color: var(--red); opacity: 0;">ESLint: 'temp' is never used</div>
+  </div>
+
+  <!-- 4: terminal -->
+  <div id="g4" class="g clip" data-start="30.88" data-duration="4.72" data-track-index="2">
+    <div class="lbl" style="left: 60px; top: 90px;">Terminal</div>
+    <div class="box" id="term" style="left: 60px; top: 140px; width: 780px; height: 260px; background: #0a0907; opacity: 0;">
+      <div class="cmd" style="top: 40px;">$ npx prettier --write .</div>
+      <div class="cmd" style="top: 120px;">$ npx eslint .</div>
+    </div>
+    <div class="chip" id="chip4" style="left: 60px; top: 460px; opacity: 0;">Many editors run Prettier on save</div>
+  </div>
+
+  <!-- 5: takeaway -->
+  <div id="g5" class="g clip" data-start="35.8" data-duration="4.78" data-track-index="2">
+    <div class="box" id="k1" style="left: 60px; top: 110px; width: 780px; height: 120px; opacity: 0;">
+      <div class="sub" style="position: absolute; left: 34px; top: 28px; color: var(--ink); font-size: 32px;">Tools handle the style.</div>
+    </div>
+    <div class="box" id="k2" style="left: 60px; top: 260px; width: 780px; height: 120px; opacity: 0;">
+      <div class="sub" style="position: absolute; left: 34px; top: 28px; color: var(--ink); font-size: 32px;">You focus on the logic.</div>
+    </div>
+    <div class="txt" id="t5" style="left: 60px; top: 440px; font-size: 52px; color: var(--acc); opacity: 0;">Style is not a debate.</div>
+  </div>
+
+  <!-- 6: question -->
+  <div id="g6" class="g clip" data-start="40.78" data-duration="3.26" data-track-index="2">
+    <div id="bigmk">
+      <div class="mkc" id="bm1"></div><div class="mkc" id="bm2"></div><div class="mkc" id="bm3"></div>
+    </div>
+    <div class="ques" id="q1" style="top: 300px; opacity: 0;">Do you run a formatter on save?</div>
+  </div>
+</div>
+
+<script>
+  tl.from("#mk1", { opacity: 0, x: -14, duration: 0.4, ease: "power2.out" }, 0.1);
+  tl.from("#mk2", { opacity: 0, x: -8, duration: 0.4, ease: "power2.out" }, 0.25);
+  tl.from("#mk3", { opacity: 0, x: -2, duration: 0.4, ease: "power2.out" }, 0.4);
+
+  tl.set(["#p0","#p1","#p2","#p3","#p4","#p5","#p6"], { scaleX: 0, transformOrigin: "left center" }, 0);
+  tl.to("#p0", { scaleX: 1, duration: 6.64, ease: "none" }, 0);
+  tl.to("#p1", { scaleX: 1, duration: 8.66, ease: "none" }, 7.5);
+  tl.to("#p2", { scaleX: 1, duration: 6.18, ease: "none" }, 16.9);
+  tl.to("#p3", { scaleX: 1, duration: 6.0, ease: "none" }, 24.24);
+  tl.to("#p4", { scaleX: 1, duration: 4.02, ease: "none" }, 31.18);
+  tl.to("#p5", { scaleX: 1, duration: 4.08, ease: "none" }, 36.1);
+  tl.to("#p6", { scaleX: 1, duration: 2.56, ease: "none" }, 41.08);
+
+  tl.to("#g0", { opacity: 1, duration: 0.3 }, 0);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.74);
+  tl.to("#g1", { opacity: 1, duration: 0.3 }, 7.2);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 16.26);
+  tl.to("#g2", { opacity: 1, duration: 0.3 }, 16.6);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 23.18);
+  tl.to("#g3", { opacity: 1, duration: 0.3 }, 23.94);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 30.34);
+  tl.to("#g4", { opacity: 1, duration: 0.3 }, 30.88);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 35.3);
+  tl.to("#g5", { opacity: 1, duration: 0.3 }, 35.8);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 40.28);
+  tl.to("#g6", { opacity: 1, duration: 0.3 }, 40.78);
+
+  // 0: the mess
+  tl.to("#ca", { opacity: 1, duration: 0.4 }, 0.6);
+  tl.to("#cb", { opacity: 1, duration: 0.4 }, 1.8);
+  tl.to("#t0", { opacity: 1, duration: 0.4 }, 3.2);
+
+  // 1: two tools
+  tl.to("#t1", { opacity: 1, duration: 0.4 }, 7.6);
+  tl.to("#b1a", { opacity: 1, duration: 0.4 }, 9.0);
+  tl.to("#b1b", { opacity: 1, duration: 0.4 }, 11.0);
+
+  // 2: used for
+  tl.from("#r1", { x: -20, duration: 0.35, ease: "power2.out" }, 17.3);
+  tl.to("#r1", { opacity: 1, duration: 0.35 }, 17.3);
+  tl.from("#r2", { x: -20, duration: 0.35, ease: "power2.out" }, 18.3);
+  tl.to("#r2", { opacity: 1, duration: 0.35 }, 18.3);
+  tl.from("#r3", { x: -20, duration: 0.35, ease: "power2.out" }, 19.3);
+  tl.to("#r3", { opacity: 1, duration: 0.35 }, 19.3);
+
+  // 3: example
+  tl.to("#c3a", { opacity: 1, duration: 0.4 }, 24.4);
+  tl.to("#c3b", { opacity: 1, duration: 0.4 }, 25.6);
+  tl.to("#c3c", { opacity: 1, duration: 0.4 }, 26.6);
+  tl.to("#e3", { opacity: 1, duration: 0.4 }, 27.6);
+
+  // 4: terminal
+  tl.to("#term", { opacity: 1, duration: 0.4 }, 31.2);
+  tl.to("#chip4", { opacity: 1, duration: 0.4 }, 33.0);
+
+  // 5: takeaway
+  tl.to("#k1", { opacity: 1, duration: 0.4 }, 36.2);
+  tl.to("#k2", { opacity: 1, duration: 0.4 }, 37.3);
+  tl.to("#t5", { opacity: 1, duration: 0.4 }, 38.5);
+
+  // 6: question, mark pulses once
+  tl.from("#bm1", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)" }, 40.9);
+  tl.from("#bm2", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)" }, 41.05);
+  tl.from("#bm3", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)" }, 41.2);
+  tl.to("#q1", { opacity: 1, duration: 0.4 }, 41.2);
+  tl.to("#bigmk", { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1, ease: "power1.inOut" }, 41.6);
+</script>

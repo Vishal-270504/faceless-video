@@ -1,0 +1,234 @@
+<style>
+  :root { --acc: #e879f9; --ink: #f5f5f7; --mute: #9aa3b8; --red: #f87171; }
+  #kick { position: absolute; left: 90px; top: 236px; width: 500px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: var(--acc); text-transform: uppercase; white-space: nowrap; }
+  #logo { position: absolute; left: 640px; top: 226px; width: 350px; height: 56px; }
+  .mk { position: absolute; left: 0; top: 4px; width: 56px; height: 46px; }
+  .mkc { position: absolute; width: 40px; height: 30px; border-radius: 8px; border: 3px solid var(--acc); background: #0c0d16; }
+  #mk1 { left: 0; top: 0; opacity: 0.45; }
+  #mk2 { left: 8px; top: 8px; opacity: 0.7; }
+  #mk3 { left: 16px; top: 16px; background: var(--acc); }
+  .wm { position: absolute; left: 72px; top: 12px; font: 900 28px Inter, sans-serif; letter-spacing: 0.06em; color: var(--ink); white-space: nowrap; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 108px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; left: 0; top: 0; width: 108px; height: 6px; background: var(--acc); }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(16,8,18,0.88); border: 1px solid rgba(232,121,249,0.3); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .txt { position: absolute; font: 700 40px Inter, sans-serif; color: var(--ink); line-height: 1.2; }
+  .sub { position: absolute; font: 400 28px Inter, sans-serif; color: var(--mute); line-height: 1.3; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: var(--acc); text-transform: uppercase; letter-spacing: 0.1em; }
+  .box { position: absolute; border-radius: 22px; background: #1a0e1d; border: 1px solid #3d2344; padding: 26px; }
+  .row { position: absolute; left: 26px; width: 728px; height: 60px; border-radius: 14px; background: #241429; border: 1px solid #4f2d57; font: 700 26px 'JetBrains Mono', monospace; color: var(--ink); padding: 14px 20px; white-space: nowrap; }
+  .node { position: absolute; height: 100px; border-radius: 18px; background: #241429; border: 2px solid var(--acc); font: 700 28px 'JetBrains Mono', monospace; color: var(--ink); text-align: center; line-height: 96px; white-space: nowrap; }
+  .wire { position: absolute; height: 4px; background: var(--acc); border-radius: 2px; }
+  .tile { position: absolute; width: 84px; height: 84px; border-radius: 14px; background: #241429; border: 2px solid var(--acc); }
+  .chip { position: absolute; height: 70px; border-radius: 35px; background: var(--acc); color: #1d0a21; font: 700 30px Inter, sans-serif; line-height: 70px; padding: 0 32px; white-space: nowrap; }
+  .ok { position: absolute; width: 60px; height: 30px; }
+  .ok i { position: absolute; left: 6px; top: 2px; width: 24px; height: 12px; border-left: 6px solid var(--acc); border-bottom: 6px solid var(--acc); transform: rotate(-45deg); }
+  .xmark { position: absolute; width: 44px; height: 44px; }
+  .xmark i { position: absolute; left: 19px; top: -4px; width: 6px; height: 52px; background: var(--red); transform: rotate(45deg); }
+  .xmark b { position: absolute; left: -4px; top: 19px; width: 52px; height: 6px; background: var(--red); transform: rotate(45deg); }
+  .ques { position: absolute; left: 60px; width: 780px; text-align: center; font: 900 60px Inter, sans-serif; color: var(--ink); line-height: 1.15; }
+  #bigmk { position: absolute; left: 380px; top: 90px; width: 140px; height: 110px; }
+  #bigmk .mkc { width: 110px; height: 80px; border-width: 6px; border-radius: 18px; }
+  #bigmk #bm1 { left: 0; top: 0; opacity: 0.4; }
+  #bigmk #bm2 { left: 20px; top: 14px; opacity: 0.7; }
+  #bigmk #bm3 { left: 40px; top: 28px; background: var(--acc); }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="5.48" data-track-index="1">01 · The gap</div>
+  <div class="kick clip" data-start="5.82" data-duration="5.66" data-track-index="1">02 · Unit</div>
+  <div class="kick clip" data-start="11.90" data-duration="5.18" data-track-index="1">03 · Integration</div>
+  <div class="kick clip" data-start="17.66" data-duration="5.06" data-track-index="1">04 · Math vs fit</div>
+  <div class="kick clip" data-start="23.16" data-duration="6.40" data-track-index="1">05 · Example</div>
+  <div class="kick clip" data-start="29.84" data-duration="5.28" data-track-index="1">06 · Need both</div>
+  <div class="kick clip" data-start="35.28" data-duration="4.24" data-track-index="1">07 · Takeaway</div>
+  <div class="kick clip" data-start="39.84" data-duration="3.20" data-track-index="1">08 · Question</div>
+</div>
+
+<div id="logo">
+  <div class="mk"><div id="mk1" class="mkc"></div><div id="mk2" class="mkc"></div><div id="mk3" class="mkc"></div></div>
+  <div class="wm">TESTS</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p0"></i></div>
+  <div class="seg" style="left: 112px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 224px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 336px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 448px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 560px;"><i id="p5"></i></div>
+  <div class="seg" style="left: 672px;"><i id="p6"></i></div>
+  <div class="seg" style="left: 784px;"><i id="p7"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: hook -->
+  <div id="g0" class="g clip" data-start="0" data-duration="5.48" data-track-index="2">
+    <div class="box" style="left: 60px; top: 110px; width: 780px; height: 240px;">
+      <div class="lbl" style="left: 26px; top: 22px;">Test run</div>
+      <div class="row" id="ut" style="top: 76px; width: 620px; opacity: 0;">unit tests: 42 passed</div>
+      <div class="ok" id="okA" style="left: 690px; top: 90px; opacity: 0;"><i></i></div>
+      <div class="row" id="lg" style="top: 150px; width: 620px; opacity: 0;">user login: broken</div>
+      <div class="xmark" id="xlg" style="left: 690px; top: 160px; opacity: 0;"><i></i><b></b></div>
+    </div>
+    <div class="txt" id="t0" style="left: 60px; top: 410px; width: 780px; opacity: 0;">Every unit test passes. Login still breaks.</div>
+  </div>
+
+  <!-- 1: unit test, one function alone -->
+  <div id="g1" class="g clip" data-start="5.82" data-duration="5.66" data-track-index="2">
+    <div class="node" style="left: 60px; top: 170px; width: 220px;">10, 0.2</div>
+    <div class="wire" style="left: 290px; top: 218px; width: 50px;"></div>
+    <div class="node" style="left: 350px; top: 170px; width: 200px; font-size: 24px;">price()</div>
+    <div class="wire" style="left: 560px; top: 218px; width: 50px;"></div>
+    <div class="node" style="left: 620px; top: 170px; width: 220px;">8</div>
+    <div class="txt" id="t1" style="left: 60px; top: 380px; width: 780px; opacity: 0;">One small function, fake inputs.</div>
+    <div class="sub" id="s1" style="left: 60px; top: 460px; width: 780px; opacity: 0;">Fast and precise.</div>
+  </div>
+
+  <!-- 2: integration test, parts together -->
+  <div id="g2" class="g clip" data-start="11.90" data-duration="5.18" data-track-index="2">
+    <div class="node" style="left: 60px; top: 170px; width: 240px;">API</div>
+    <div class="wire" style="left: 300px; top: 218px; width: 300px;"></div>
+    <div class="node" style="left: 600px; top: 170px; width: 240px;">Database</div>
+    <div class="txt" id="t2" style="left: 60px; top: 380px; width: 780px; opacity: 0;">Several parts working together.</div>
+    <div class="sub" id="s2" style="left: 60px; top: 460px; width: 780px; opacity: 0;">Post an order, then read it back.</div>
+  </div>
+
+  <!-- 3: math vs fit -->
+  <div id="g3" class="g clip" data-start="17.66" data-duration="5.06" data-track-index="2">
+    <div class="chip" id="c3a" style="left: 60px; top: 170px; opacity: 0;">Unit: the math is right</div>
+    <div class="chip" id="c3b" style="left: 60px; top: 290px; opacity: 0;">Integration: the parts fit</div>
+    <div class="txt" id="t3" style="left: 60px; top: 430px; width: 780px; opacity: 0;">Two different questions.</div>
+  </div>
+
+  <!-- 4: example -->
+  <div id="g4" class="g clip" data-start="23.16" data-duration="6.40" data-track-index="2">
+    <div class="box" style="left: 60px; top: 110px; width: 780px; height: 150px;">
+      <div class="lbl" style="left: 26px; top: 22px;">Unit</div>
+      <div class="row" id="ex1" style="top: 66px; opacity: 0;">price(10, 0.2) == 8</div>
+    </div>
+    <div class="box" style="left: 60px; top: 290px; width: 780px; height: 150px;">
+      <div class="lbl" style="left: 26px; top: 22px;">Integration</div>
+      <div class="row" id="ex2" style="top: 66px; opacity: 0;">POST order, then GET it</div>
+    </div>
+    <div class="sub" id="s4" style="left: 60px; top: 480px; width: 780px; opacity: 0;">Price math versus the whole order path.</div>
+  </div>
+
+  <!-- 5: need both -->
+  <div id="g5" class="g clip" data-start="29.84" data-duration="5.28" data-track-index="2">
+    <div class="sub" style="left: 60px; top: 100px; width: 780px; color: var(--ink);">Many fast unit tests</div>
+    <div class="tile" id="u1" style="left: 60px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="u2" style="left: 160px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="u3" style="left: 260px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="u4" style="left: 360px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="u5" style="left: 460px; top: 150px; opacity: 0;"></div>
+    <div class="tile" id="u6" style="left: 560px; top: 150px; opacity: 0;"></div>
+    <div class="sub" style="left: 60px; top: 290px; width: 780px; color: var(--ink);">A few integration tests on main paths</div>
+    <div class="tile" id="i1" style="left: 60px; top: 340px; width: 360px; opacity: 0;"></div>
+    <div class="tile" id="i2" style="left: 460px; top: 340px; width: 360px; opacity: 0;"></div>
+    <div class="txt" id="t5" style="left: 60px; top: 480px; width: 780px; color: var(--acc); opacity: 0;">You need both.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g clip" data-start="35.28" data-duration="4.24" data-track-index="2">
+    <div class="box" id="k1" style="left: 60px; top: 170px; width: 780px; height: 220px; padding: 30px 34px; opacity: 0;">
+      <div class="txt" style="position: absolute; left: 34px; top: 40px; width: 712px; font-size: 40px;">Passing unit tests do not prove the pieces connect.</div>
+    </div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g clip" data-start="39.84" data-duration="3.20" data-track-index="2">
+    <div id="bigmk">
+      <div class="mkc" id="bm1"></div><div class="mkc" id="bm2"></div><div class="mkc" id="bm3"></div>
+    </div>
+    <div class="ques" id="q1" style="top: 300px; opacity: 0;">Which one are you missing in your project?</div>
+    <div class="sub" id="q2" style="left: 60px; width: 780px; text-align: center; top: 520px; opacity: 0;">Comment it below.</div>
+  </div>
+</div>
+
+<script>
+  tl.from("#mk1", { opacity: 0, x: -14, duration: 0.4, ease: "power2.out" }, 0.1);
+  tl.from("#mk2", { opacity: 0, x: -8, duration: 0.4, ease: "power2.out" }, 0.25);
+  tl.from("#mk3", { opacity: 0, x: -2, duration: 0.4, ease: "power2.out" }, 0.4);
+
+  tl.set(["#p0","#p1","#p2","#p3","#p4","#p5","#p6","#p7"], { scaleX: 0, transformOrigin: "left center" }, 0);
+  tl.to("#p0", { scaleX: 1, duration: 5.48, ease: "none" }, 0);
+  tl.to("#p1", { scaleX: 1, duration: 5.66, ease: "none" }, 5.82);
+  tl.to("#p2", { scaleX: 1, duration: 5.18, ease: "none" }, 11.9);
+  tl.to("#p3", { scaleX: 1, duration: 5.06, ease: "none" }, 17.66);
+  tl.to("#p4", { scaleX: 1, duration: 6.4, ease: "none" }, 23.16);
+  tl.to("#p5", { scaleX: 1, duration: 5.28, ease: "none" }, 29.84);
+  tl.to("#p6", { scaleX: 1, duration: 4.24, ease: "none" }, 35.28);
+  tl.to("#p7", { scaleX: 1, duration: 3.2, ease: "none" }, 39.84);
+
+  tl.to("#g0", { opacity: 1, duration: 0.3 }, 0);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.18);
+  tl.to("#g1", { opacity: 1, duration: 0.3 }, 5.82);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 11.18);
+  tl.to("#g2", { opacity: 1, duration: 0.3 }, 11.9);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 16.78);
+  tl.to("#g3", { opacity: 1, duration: 0.3 }, 17.66);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 22.42);
+  tl.to("#g4", { opacity: 1, duration: 0.3 }, 23.16);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 29.26);
+  tl.to("#g5", { opacity: 1, duration: 0.3 }, 29.84);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 34.82);
+  tl.to("#g6", { opacity: 1, duration: 0.3 }, 35.28);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 39.22);
+  tl.to("#g7", { opacity: 1, duration: 0.3 }, 39.84);
+
+  // 0: hook, held about 2 s before the line
+  tl.to("#ut", { opacity: 1, duration: 0.35 }, 0.4);
+  tl.to("#okA", { opacity: 1, duration: 0.3 }, 0.8);
+  tl.to("#lg", { opacity: 1, duration: 0.35 }, 1.2);
+  tl.to("#xlg", { opacity: 1, duration: 0.3 }, 1.6);
+  tl.to("#t0", { opacity: 1, duration: 0.4 }, 3.0);
+
+  // 1: unit
+  tl.to("#t1", { opacity: 1, duration: 0.4 }, 7.6);
+  tl.to("#s1", { opacity: 1, duration: 0.4 }, 8.6);
+
+  // 2: integration
+  tl.to("#t2", { opacity: 1, duration: 0.4 }, 13.6);
+  tl.to("#s2", { opacity: 1, duration: 0.4 }, 14.8);
+
+  // 3: math vs fit
+  tl.to("#c3a", { opacity: 1, duration: 0.35 }, 18.2);
+  tl.to("#c3b", { opacity: 1, duration: 0.35 }, 19.4);
+  tl.to("#t3", { opacity: 1, duration: 0.4 }, 20.6);
+
+  // 4: example
+  tl.from("#ex1", { x: -20, duration: 0.35, ease: "power2.out" }, 23.8);
+  tl.to("#ex1", { opacity: 1, duration: 0.35 }, 23.8);
+  tl.from("#ex2", { x: -20, duration: 0.35, ease: "power2.out" }, 26.2);
+  tl.to("#ex2", { opacity: 1, duration: 0.35 }, 26.2);
+  tl.to("#s4", { opacity: 1, duration: 0.4 }, 27.8);
+
+  // 5: need both
+  tl.to("#u1", { opacity: 1, duration: 0.25 }, 30.4);
+  tl.to("#u2", { opacity: 1, duration: 0.25 }, 30.55);
+  tl.to("#u3", { opacity: 1, duration: 0.25 }, 30.7);
+  tl.to("#u4", { opacity: 1, duration: 0.25 }, 30.85);
+  tl.to("#u5", { opacity: 1, duration: 0.25 }, 31.0);
+  tl.to("#u6", { opacity: 1, duration: 0.25 }, 31.15);
+  tl.to("#i1", { opacity: 1, duration: 0.35 }, 32.6);
+  tl.to("#i2", { opacity: 1, duration: 0.35 }, 33.2);
+  tl.to("#t5", { opacity: 1, duration: 0.4 }, 33.8);
+
+  // 6: takeaway
+  tl.to("#k1", { opacity: 1, duration: 0.4 }, 35.8);
+
+  // 7: question, mark pulses once
+  tl.from("#bm1", { scale: 0.6, duration: 0.5, ease: "back.out(2)" }, 40.0);
+  tl.from("#bm2", { scale: 0.6, duration: 0.5, ease: "back.out(2)" }, 40.15);
+  tl.from("#bm3", { scale: 0.6, duration: 0.5, ease: "back.out(2)" }, 40.3);
+  tl.to("#bm1", { opacity: 0.4, duration: 0.3 }, 40.0);
+  tl.to("#bm2", { opacity: 0.7, duration: 0.3 }, 40.15);
+  tl.to("#q1", { opacity: 1, duration: 0.4 }, 40.4);
+  tl.to("#q2", { opacity: 1, duration: 0.4 }, 40.9);
+  tl.to("#bigmk", { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1, ease: "power1.inOut" }, 41.0);
+</script>

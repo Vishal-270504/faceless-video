@@ -1,0 +1,15 @@
+You click through the same login page after every change. A Playwright test does that click for you.
+
+Playwright is a free tool that opens a real browser, clicks, types and checks what the page shows.
+
+Three steps: open the page, click Log in, check that Welcome appears.
+
+Each step is one line of code, so a test reads almost like a list of what a user does.
+
+Run npx playwright test, and Playwright opens the browser and runs every test in the folder.
+
+If a test fails, Playwright can save a trace: screenshots and every step, so you see exactly where it broke.
+
+Takeaway: test what the user does, then check what the user sees.
+
+Which page would you test first? Comment it below.

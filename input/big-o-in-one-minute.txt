@@ -1,0 +1,13 @@
+Two solutions both work on your laptop. One breaks with a million users. Big O explains why.
+
+Big O describes how the work grows as the input grows. It is about the trend, not the speed of one run.
+
+A loop over n items is O of n: double the items, and the work doubles.
+
+A loop inside a loop, over every pair, is O of n squared: double the items, and the work quadruples.
+
+Looking up a key in a hash map is usually O of 1: the size barely matters.
+
+Takeaway: ask what happens when the list is a hundred times bigger.
+
+What is the slowest loop in your code? Comment it.

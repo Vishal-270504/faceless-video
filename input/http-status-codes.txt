@@ -1,0 +1,17 @@
+Your app shows a blank error, and the only clue is a number like 404. Here is what the numbers mean.
+
+HTTP status codes tell the client how a request went. They come in five families.
+
+1xx: information.
+
+2xx: success. 200 means OK, 201 means created.
+
+3xx: redirect. Go elsewhere to finish.
+
+4xx: your request is wrong. 400 is bad input, 401 means log in, 403 means logged in but not allowed, 404 means not found.
+
+5xx: the server failed. 500 means something broke on the server.
+
+Takeaway: the first digit tells you who to check. Four means the request, five means the server.
+
+Which code do you see most often? Comment it.

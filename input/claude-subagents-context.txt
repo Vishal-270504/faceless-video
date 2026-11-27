@@ -1,0 +1,15 @@
+Your main chat fills with old logs and dead ends. Here is a fix.
+
+A subagent is a helper with its own fresh memory, called a context window.
+
+The main agent gives it one task, like search the codebase for every API call.
+
+The subagent reads whatever it needs, works in its own space, and returns only a short summary.
+
+Your main context stays clean. Only the answer comes back, not the hundred files it read.
+
+Several subagents can work at the same time on separate parts of the job.
+
+Takeaway: send the messy research to a subagent, and keep your main thread for decisions.
+
+How big is your longest chat right now? Comment below.

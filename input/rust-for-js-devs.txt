@@ -1,0 +1,15 @@
+The Rust compiler refuses your code, and you think it is being strict. It is protecting memory.
+
+Rust is a fast language that checks memory safety at compile time, with no garbage collector.
+
+Ownership: every value has one owner. When that owner goes out of scope, the value is freed.
+
+Borrowing: other code can look at a value without owning it, as long as the rules are followed.
+
+Why it matters: a whole class of memory bugs is caught before the program ever runs.
+
+You may meet Rust in many fast developer tools, and in WebAssembly modules that run in the browser.
+
+Takeaway: the strict compiler teaches rules that a JavaScript garbage collector hides from you.
+
+Have you tried Rust yet? Comment your experience.

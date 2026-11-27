@@ -1,0 +1,15 @@
+All your unit tests pass, yet the app still breaks when a user logs in. Here is why.
+
+A unit test checks one small function alone, with fake inputs. It is fast and precise.
+
+An integration test checks several parts together, like the API and the database.
+
+Unit tests tell you the math is right. Integration tests tell you the parts fit together.
+
+Example: a unit test for a price calculation, versus a test that posts an order and reads it back.
+
+You need both: many fast unit tests, and a few integration tests on the main paths.
+
+Takeaway: passing unit tests do not prove that the pieces connect.
+
+Which one are you missing in your project? Comment it.
