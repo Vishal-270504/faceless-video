@@ -1,0 +1,15 @@
+Your Fibonacci function takes forever, because it solves the same small problem again and again.
+
+Dynamic programming, or DP, solves big problems by solving small ones first.
+
+The idea: save each small answer, so you never solve it twice. Each Fibonacci number is the sum of the two before it.
+
+Example: fib of 5 needs fib of 4 and fib of 3, and fib of 3 is needed twice.
+
+This saving is called memoization. Store each answer the first time you work it out. A recursive function is one that calls itself.
+
+Saved answers mean each one is worked out once.
+
+Takeaway: if the same sub-problem keeps coming back, save its answer.
+
+Have you hit a slow recursive function? Comment where.

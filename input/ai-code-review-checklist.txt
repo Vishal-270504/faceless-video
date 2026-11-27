@@ -1,0 +1,15 @@
+You asked an AI for a feature. It runs and looks right. Check three things before you merge.
+
+AI code often works on the happy path and skips the failure cases.
+
+First, check the edge cases. An empty list, a missing user, a slow network.
+
+Second, check security. Does the code trust input that came from the browser? Anyone can alter what the browser sends, so the server must check it too.
+
+Third, run the real tests yourself. Do not rely on the AI saying they pass.
+
+Ask the AI to explain each line. If it cannot, do not merge.
+
+Takeaway: you own AI-written code, so read every line you would sign.
+
+What bug did an AI write for you last? Comment it.

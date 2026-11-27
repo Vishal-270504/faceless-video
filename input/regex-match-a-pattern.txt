@@ -1,0 +1,15 @@
+You want to check whether a text looks like an email. A long chain of if statements is not the answer.
+
+A regular expression, or regex, is a pattern that describes text, instead of one fixed word.
+
+Symbols do the work: a dot matches any single character, plus means one or more, and square brackets list a set of allowed characters.
+
+Example: a pattern for one or more digits matches 2026, but it does not match hello.
+
+Regex is easy to get wrong, so test it with good and bad examples.
+
+For real email checks, use a library or your framework's validation.
+
+Takeaway: regex finds patterns. Test it before you trust it.
+
+What text do you wish you could match? Comment it.

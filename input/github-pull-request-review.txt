@@ -1,0 +1,11 @@
+You pushed code straight to the trunk, and it broke the live site. There is a better way.
+
+A pull request is a review step. You ask to merge your branch into the trunk, and others read your changes before they land.
+
+Example: you open a pull request for a new login form. A teammate comments that the error message is missing. You fix it, then merge.
+
+CI checks run on the pull request too. CI means continuous integration: an automatic run of your tests and build.
+
+Takeaway: a green check and a human review come before code reaches the trunk.
+
+Do you review your own pull requests before you merge? Tell me in the comments.

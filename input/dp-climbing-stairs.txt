@@ -1,0 +1,15 @@
+You can climb one or two steps at a time. How many different ways reach the top of ten steps?
+
+One step has one way. Two steps have two ways.
+
+The rule: the ways to reach step n equal the ways to reach step n minus one, plus the ways to reach step n minus two. Fill a table from the bottom, one step at a time.
+
+Each step needs only the two before it, so keep just the last two numbers.
+
+Plain recursion repeats the same calls. The loop makes one pass.
+
+For ten steps the answer is 89.
+
+Takeaway: find the rule first, then fill the table.
+
+Could you fill the table for five steps? Comment your answer.

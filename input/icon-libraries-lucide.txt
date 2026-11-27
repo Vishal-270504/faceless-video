@@ -1,0 +1,15 @@
+You need a search icon, a trash can, and a menu button. Drawing them yourself takes hours.
+
+An icon library is a package of ready-made icons. Each icon is a small vector picture you can drop into your app.
+
+Lucide is one example. Others are Heroicons, Font Awesome, and React Icons.
+
+Install Lucide with one line: npm install lucide-react.
+
+Then import an icon by name and use it like a component. Import Search, then write Search in your code, and it shows up on the screen.
+
+All the icons share one style, so your screens look consistent.
+
+Takeaway: one package, one style, and no hand-drawn icons.
+
+Where do you get your icons today? Tell me in the comments.

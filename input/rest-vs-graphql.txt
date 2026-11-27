@@ -1,0 +1,15 @@
+Your screen needs one user and their last three orders, and you make four requests. There is another way.
+
+REST uses one URL per resource, like slash users and slash orders.
+
+Each URL returns a fixed shape, so you often get fields you do not need.
+
+GraphQL uses one endpoint, and the client asks for exactly the fields it wants.
+
+That helps when a screen needs mixed data, but you must build a schema and a query layer.
+
+Neither is always better. REST's one URL per resource is easy to cache. GraphQL is flexible for complex screens.
+
+Takeaway: pick the tool for the screen, not for the trend.
+
+Which one does your app use? Comment it.

@@ -1,0 +1,15 @@
+Your site loads fast in your city and slowly in another country. The fix is not a faster server.
+
+A CDN, a content delivery network, is a set of servers spread across the world.
+
+It keeps copies of your static files, like images, CSS and JavaScript, close to each user.
+
+A visitor gets the file from the nearest server, so the trip is shorter.
+
+The first request fills the cache, and later requests for the same file come from it.
+
+Cache rules matter: a file cached for too long can show old content after you deploy.
+
+Takeaway: a CDN moves your files closer to users. It does not make your code faster.
+
+Where are most of your users? Comment your country.

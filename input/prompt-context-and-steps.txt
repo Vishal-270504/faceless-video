@@ -1,0 +1,13 @@
+Big questions get weak answers. When you ask for everything at once, the AI has to guess.
+
+Two habits fix it. Give context first, then ask for a plan before the answer.
+
+Context means what the project is, what you tried, and what you need. A few sentences are enough.
+
+Example: instead of build me a shop, say: I have a React app with a cart. Give me a five-step plan, and wait for my OK before any code.
+
+Then break big asks into small ones. Login first, then cart, then checkout.
+
+Takeaway: context, then a plan, then one small step at a time.
+
+Do you ask for a whole app in one message? Tell me in the comments.

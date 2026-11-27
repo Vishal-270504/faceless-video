@@ -1,0 +1,15 @@
+You wrote the answer down, but you cannot find the note. Let an AI search your notes.
+
+Send your notes and your question to an AI model through its API. An API lets your program send text to the model and get text back.
+
+Step one: store your notes as plain text files in one folder.
+
+Step two: pick the notes that match the question. A simple keyword search works.
+
+Step three: send the question with those few notes, and ask the model to answer only from them.
+
+Example: you ask, what did I decide about the budget? It answers from two notes.
+
+Takeaway: the answer is only as good as your notes, so keep them clean.
+
+Which notes would you ask first? Comment.

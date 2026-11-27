@@ -1,0 +1,15 @@
+An AI said the bug was fixed, but the tests still fail. Here is how an agent is different.
+
+An agent is an AI that works in a loop. It plans, edits files, runs the tests, reads the errors, and repeats.
+
+Used for: fixing failing tests and small features.
+
+Example: you ask it to add a due date to tasks. One test fails on a missing field. It reads the error and fixes that too.
+
+The loop is fast, but it can be confidently wrong. Tests catch many mistakes, not all.
+
+So keep a human review at the end.
+
+Takeaway: let the agent do the loop, and you do the final check.
+
+Have you tried one yet? Tell me in the comments.

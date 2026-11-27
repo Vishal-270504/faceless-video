@@ -1,0 +1,15 @@
+You ship a big change on Friday, and nobody can turn it off without a new deploy. A feature flag fixes that.
+
+A feature flag is a switch in code or config that turns a feature on or off without deploying.
+
+You wrap the new feature in a check: if the flag is on, show the new screen.
+
+Turn it on for your team first, then for a small share of users, then for everyone.
+
+If something breaks, turn the flag off in seconds, instead of waiting for a rollback.
+
+Flags add clutter, so remove them once the feature is stable.
+
+Takeaway: a flag separates shipping the code from releasing the feature.
+
+Would you use flags for your next release? Comment yes or no.

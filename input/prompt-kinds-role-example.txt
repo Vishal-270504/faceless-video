@@ -1,0 +1,17 @@
+Your AI answers are vague, or the wrong shape. The fix is usually in how you ask.
+
+Four details get better answers: a role, an example, an output format, and constraints.
+
+Role: say who the AI should act as, like a senior database engineer.
+
+Example: show one sample answer, so it copies the style.
+
+Output format: ask for a table or a numbered list.
+
+Constraints: set limits, like under 100 words, or only use the code I pasted.
+
+Together: act as a senior reviewer. List three login risks in a table with risk and fix columns.
+
+Takeaway: say who, show what, set the shape, and set the limits.
+
+Which of the four do you leave out? Tell me in the comments.

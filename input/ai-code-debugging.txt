@@ -1,0 +1,13 @@
+The fix the AI suggested did not work, and now your code is worse. Do not ask for a full rewrite.
+
+Step one: reproduce the bug in one simple case. If you cannot repeat it, you cannot fix it.
+
+Step two: give the AI the exact error text, the file name, and what you expected.
+
+Step three: ask for the smallest change that makes that one case pass. A test is a small check that says pass or fail.
+
+Step four: keep that test, so the bug cannot come back quietly.
+
+Takeaway: a small, repeatable failure is worth more than a big rewrite. Debugging is still your job.
+
+What do you do when AI code breaks? Comment your method.

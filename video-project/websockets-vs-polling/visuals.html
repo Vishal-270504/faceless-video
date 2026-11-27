@@ -1,0 +1,189 @@
+<style>
+  #logo { position: absolute; left: 90px; top: 168px; width: 900px; height: 50px; }
+  .mk { position: absolute; }
+  .mk i { position: absolute; display: block; width: 52%; height: 70%; border: 3px solid #fb7185; border-radius: 8px; background: #13131b; }
+  .mk i:nth-child(1) { left: 0; top: 18%; }
+  .mk i:nth-child(2) { left: 24%; top: 0; }
+  .mk i:nth-child(3) { left: 48%; top: 18%; }
+  #wm { position: absolute; left: 70px; top: 6px; font: 900 30px Inter, sans-serif; letter-spacing: 0.12em; color: #f2f2f7; }
+  #kick { position: absolute; left: 90px; top: 236px; width: 900px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: #fb7185; text-transform: uppercase; white-space: nowrap; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 105px; height: 6px; background: #252534; border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #fb7185; }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: #13131b; border: 1px solid #242433; border-radius: 28px; overflow: hidden; }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .lbl { position: absolute; font: 700 24px Inter, sans-serif; color: #9a9db0; }
+  .txt { position: absolute; font: 700 32px Inter, sans-serif; color: #f2f2f7; }
+  .box { position: absolute; background: #1a1a25; border: 1px solid #2b2b3c; border-radius: 18px; }
+  .mono { position: absolute; font: 400 26px 'JetBrains Mono', monospace; color: #e9e9f1; white-space: pre; }
+  .bigc { position: absolute; left: 0; width: 900px; text-align: center; font: 900 58px Inter, sans-serif; color: #f2f2f7; line-height: 1.15; }
+  .chip { position: absolute; border-radius: 12px; font: 700 26px Inter, sans-serif; padding: 10px 18px; }
+  .accent { color: #fb7185; }
+  .redtxt { color: #ff8a8a; }
+  .grn { color: #5fd39a; }
+  .line { position: absolute; width: 248px; height: 4px; background: #fb7185; }
+  .mk-big { position: absolute; left: 370px; top: 150px; width: 160px; height: 120px; }
+</style>
+
+<div id="logo">
+  <div class="mk" style="left: 0; top: 0; width: 56px; height: 44px;"><i></i><i></i><i></i></div>
+  <div id="wm">REALTIME</div>
+</div>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="6.46" data-track-index="1">The problem</div>
+  <div class="kick clip" data-start="6.46" data-duration="5.34" data-track-index="1">01 · Polling</div>
+  <div class="kick clip" data-start="11.80" data-duration="6.60" data-track-index="1">02 · Long polling</div>
+  <div class="kick clip" data-start="18.40" data-duration="5.50" data-track-index="1">03 · WebSockets</div>
+  <div class="kick clip" data-start="23.90" data-duration="5.96" data-track-index="1">04 · When to use it</div>
+  <div class="kick clip" data-start="29.86" data-duration="5.24" data-track-index="1">05 · Plain polling is fine</div>
+  <div class="kick clip" data-start="35.10" data-duration="3.78" data-track-index="1">Takeaway</div>
+  <div class="kick clip" data-start="38.88" data-duration="2.80" data-track-index="1">Your turn</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p0"></i></div>
+  <div class="seg" style="left: 113px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 226px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 339px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 452px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 565px;"><i id="p5"></i></div>
+  <div class="seg" style="left: 678px;"><i id="p6"></i></div>
+  <div class="seg" style="left: 791px;"><i id="p7"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: hook: the chat that feels late -->
+  <div id="g0" class="g clip" data-start="0" data-duration="6.32" data-track-index="2">
+    <div class="box" style="left: 56px; top: 180px; width: 788px; height: 260px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Chat · refresh every 2 s</div>
+      <div class="box" style="left: 28px; top: 80px; width: 460px; height: 80px; background: #232334;">
+        <div class="txt" style="left: 22px; top: 22px; font-size: 30px;">Are you there?</div>
+      </div>
+    </div>
+    <div class="chip redtxt" style="left: 56px; top: 480px; background: rgba(255,107,107,0.12);">Still feels late</div>
+  </div>
+
+  <!-- 1: polling asks again and again -->
+  <div id="g1" class="g clip" data-start="6.46" data-duration="5.04" data-track-index="2">
+    <div class="box" style="left: 56px; top: 180px; width: 788px; height: 80px;">
+      <div class="mono" style="left: 36px; top: 24px; font-size: 26px;">GET /messages  →  no news</div>
+    </div>
+    <div class="box" style="left: 56px; top: 280px; width: 788px; height: 80px;">
+      <div class="mono" style="left: 36px; top: 24px; font-size: 26px;">GET /messages  →  no news</div>
+    </div>
+    <div class="box" style="left: 56px; top: 380px; width: 788px; height: 80px;">
+      <div class="mono" style="left: 36px; top: 24px; font-size: 26px;">GET /messages  →  no news</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 500px; font-size: 34px;">Asked again and again.</div>
+  </div>
+
+  <!-- 2: long polling holds the request -->
+  <div id="g2" class="g clip" data-start="11.40" data-duration="6.84" data-track-index="2">
+    <div class="box" style="left: 56px; top: 180px; width: 788px; height: 80px;">
+      <div class="mono" style="left: 36px; top: 24px; font-size: 26px;">GET /messages  (held open)</div>
+    </div>
+    <div class="box" style="left: 56px; top: 290px; width: 788px; height: 80px; border-color: #fb7185;">
+      <div class="lbl accent" style="left: 36px; top: 26px;">Waiting for news...</div>
+    </div>
+    <div class="box" style="left: 56px; top: 400px; width: 788px; height: 80px;">
+      <div class="mono grn" style="left: 36px; top: 24px; font-size: 26px;">200 OK  →  1 new message</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 520px; font-size: 32px;">Fewer empty replies.</div>
+  </div>
+
+  <!-- 3: WebSockets: one open connection -->
+  <div id="g3" class="g clip" data-start="18.40" data-duration="5.72" data-track-index="2">
+    <div class="box" style="left: 56px; top: 240px; width: 260px; height: 150px;">
+      <div class="txt" style="left: 22px; top: 52px; font-size: 32px;">Client</div>
+    </div>
+    <div class="box" style="left: 584px; top: 240px; width: 260px; height: 150px;">
+      <div class="txt" style="left: 22px; top: 52px; font-size: 32px;">Server</div>
+    </div>
+    <div id="lineA" class="line" style="left: 326px; top: 290px;"></div>
+    <div id="lineB" class="line" style="left: 326px; top: 350px;"></div>
+    <div class="txt accent" style="left: 56px; top: 460px; font-size: 32px;">One open connection,</div>
+    <div class="txt accent" style="left: 56px; top: 506px; font-size: 32px;">both sides can send anytime.</div>
+  </div>
+
+  <!-- 4: use cases -->
+  <div id="g4" class="g clip" data-start="23.90" data-duration="6.16" data-track-index="2">
+    <div class="box" style="left: 56px; top: 180px; width: 788px; height: 90px;">
+      <div class="txt" style="left: 28px; top: 26px; font-size: 32px;">Chat</div>
+    </div>
+    <div class="box" style="left: 56px; top: 300px; width: 788px; height: 90px;">
+      <div class="txt" style="left: 28px; top: 26px; font-size: 32px;">Live scores</div>
+    </div>
+    <div class="box" style="left: 56px; top: 420px; width: 788px; height: 90px;">
+      <div class="txt" style="left: 28px; top: 26px; font-size: 32px;">Shared editing</div>
+    </div>
+    <div class="txt" style="left: 56px; top: 550px; font-size: 30px;">Updates come all the time.</div>
+  </div>
+
+  <!-- 5: a dashboard that refreshes once a minute -->
+  <div id="g5" class="g clip" data-start="29.86" data-duration="5.24" data-track-index="2">
+    <div class="box" style="left: 56px; top: 180px; width: 788px; height: 260px;">
+      <div class="lbl" style="left: 28px; top: 22px;">Sales dashboard</div>
+      <div class="txt" style="left: 28px; top: 80px; font-size: 34px;">Refreshes once a minute</div>
+    </div>
+    <div class="chip grn" style="left: 56px; top: 480px; background: rgba(95,211,154,0.12);">Plain polling is fine</div>
+    <div class="txt" style="left: 56px; top: 560px; font-size: 32px;">Simple, and enough.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g clip" data-start="34.80" data-duration="3.82" data-track-index="2">
+    <div class="bigc" style="top: 220px; font-size: 48px;">Match the tool to how often the data changes.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g clip" data-start="38.88" data-duration="2.80" data-track-index="2">
+    <div id="bigmk" class="mk mk-big"><i></i><i></i><i></i></div>
+    <div class="bigc" style="top: 330px; font-size: 46px;">Where would you need live updates?</div>
+  </div>
+</div>
+
+<script>
+  tl.to("#g0", { opacity: 1, duration: 0.3 }, 0);
+  tl.fromTo("#g0 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, 0.3);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 6.02);
+
+  tl.to("#g1", { opacity: 1, duration: 0.3 }, 6.46);
+  tl.fromTo("#g1 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.7, ease: "power2.out" }, 6.76);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 11.20);
+
+  tl.to("#g2", { opacity: 1, duration: 0.3 }, 11.40);
+  tl.fromTo("#g2 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 1.2, ease: "power2.out" }, 11.60);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 17.94);
+
+  tl.to("#g3", { opacity: 1, duration: 0.3 }, 18.40);
+  tl.fromTo("#lineA", { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.6, ease: "power2.out", transformOrigin: "left center" }, 19.10);
+  tl.fromTo("#lineB", { scaleX: 0, transformOrigin: "right center" }, { scaleX: 1, duration: 0.6, ease: "power2.out", transformOrigin: "right center" }, 19.60);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 23.82);
+
+  tl.to("#g4", { opacity: 1, duration: 0.3 }, 23.90);
+  tl.fromTo("#g4 .box", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.8, ease: "power2.out" }, 24.58);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 29.76);
+
+  tl.to("#g5", { opacity: 1, duration: 0.3 }, 29.86);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 34.66);
+
+  tl.to("#g6", { opacity: 1, duration: 0.3 }, 34.80);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 38.32);
+
+  tl.to("#g7", { opacity: 1, duration: 0.3 }, 38.88);
+  tl.to("#bigmk", { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1 }, 39.5);
+
+  // progress: one segment per beat, filled at the beat start
+  tl.set(["#p0","#p1","#p2","#p3","#p4","#p5","#p6","#p7"], { scaleX: 0, transformOrigin: "left center" }, 0);
+  tl.to("#p0", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 0);
+  tl.to("#p1", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 6.76);
+  tl.to("#p2", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 12.10);
+  tl.to("#p3", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 19.10);
+  tl.to("#p4", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 24.58);
+  tl.to("#p5", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 30.16);
+  tl.to("#p6", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 35.40);
+  tl.to("#p7", { scaleX: 1, duration: 0.4, transformOrigin: "left center" }, 39.18);
+</script>

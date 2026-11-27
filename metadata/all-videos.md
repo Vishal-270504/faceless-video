@@ -847,3 +847,250 @@ You hear "just run the container" and do not know what that means. An image is t
 **Thumbnail prompt for ChatGPT:**
 > Vertical 9:16 image, 1080x1920. Dark navy background. "IMAGE OR CONTAINER?" in large white letters. One central illustration of a blueprint sheet beside a small house built from it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
 
+
+---
+
+## 49. git-commit-save-point: Commit is a save point
+
+**Title:** Git commit: save points you can go back to
+
+**Description:**
+You changed a file, something broke, and you cannot remember what worked. A commit stores your files at one moment with a short note, so you can return to a working version. Commit when something works and write down what you did.
+
+#git #github #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark charcoal background with faint orange horizontal lines. Main text in quotes: "SAVE POINT". One central illustration: three stacked rounded cards, the top one lit orange with a small tick mark. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 50. git-branch-try-safely: Try a risky change on a branch
+
+**Title:** Git branch: try big changes without breaking main
+
+**Description:**
+You want to try a big change, but you fear breaking main. A branch is a separate line of work, so main stays untouched until you are happy. Create one with git switch -c, and delete it if the experiment fails.
+
+#git #github #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark charcoal background with a faint orange lane diagram. Main text in quotes: "TRY SAFELY". One central illustration: a grey horizontal main line with a short orange branch line forking off and ending in a small cross. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 51. github-pull-request-review: Get a review before you merge
+
+**Title:** Pull request: review code before it hits main
+
+**Description:**
+Pushing straight to main can break the live site in minutes. A pull request asks others to read your changes and run the checks before they land. Open one for every change, wait for a green check and a review, then merge.
+
+#github #git #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark slate background with faint grey grid lines. Main text in quotes: "PULL REQUEST". One central illustration: a branch card sliding into a main card through a small gate with a check mark. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 52. prompt-kinds-role-example: Four details for better AI answers
+
+**Title:** Better AI answers: role, example, format, limits
+
+**Description:**
+Vague AI answers usually come from a vague question. Four details fix most of it: a role, one example, an output format, and clear constraints. Combine them in one prompt and the answer comes back in the shape you need.
+
+#ai #prompts #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark navy background with faint sky-blue grid lines. Main text in quotes: "4 DETAILS". One central illustration: four rounded cards arranged in a two by two grid, one card lit sky blue. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 53. prompt-context-and-steps: Give context and a plan before big asks
+
+**Title:** Big AI requests fail: give context, then a plan
+
+**Description:**
+Asking an AI to build a whole app in one message makes it guess. Give context first: what the project is, what you tried, and what you need. Then ask for a plan, wait for your OK, and take one small step at a time.
+
+#ai #prompts #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark navy background with faint sky-blue lines. Main text in quotes: "PLAN FIRST". One central illustration: a single large question mark card breaking into three small stacked step cards in sky blue. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 54. agentic-coding-loop: Let the AI agent loop, then check it
+
+**Title:** AI agents: the loop that fixes code, and its limit
+
+**Description:**
+An AI agent plans, edits files, runs the tests, reads the errors, and repeats. It is fast, but it can say a bug is fixed when the tests still fail. Tests catch many mistakes, not all, so keep a human review at the end.
+
+#ai #agents #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark violet background with faint lavender lines. Main text in quotes: "AI AGENT". One central illustration: four rounded nodes in a loop (plan, edit, test, read) with a red warning tag. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 55. storybook-ui-catalog: Build and check UI components alone
+
+**Title:** Storybook: see every button state, not just one
+
+**Description:**
+Checking a disabled button usually means clicking through the whole app. Storybook shows each UI component alone, in every state, so you can build and test it without the app. Each story is a saved example with its props filled in.
+
+#storybook #react #frontend #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark plum background with faint pink grid lines. Main text in quotes: "STORYBOOK". One central illustration: three small button cards in a row, one enabled, one greyed out, one with a loading dots mark. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 56. icon-libraries-lucide: One icon package instead of drawing icons
+
+**Title:** Icon libraries: skip drawing icons by hand
+
+**Description:**
+Drawing a search, trash, or menu icon by hand takes hours. An icon library is a package of ready-made icons that share one style. Lucide is one example: install it with npm, then import an icon by name and use it like a component.
+
+#icons #frontend #react #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark olive background with faint lime grid lines. Main text in quotes: "ICON LIBRARY". One central illustration: three matching lime outlined square tiles, each with a simple flat symbol. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+## 62. ai-code-review-checklist: Check AI code: 3 things before you merge
+
+**Title:** Check AI code: 3 things before you merge
+
+**Description:**
+AI-written code often works on the normal path and skips the failure cases, so it can look right and still break. This short shows three checks to run before you merge: edge cases, security, and the real tests. You learn that you own the code you merge, so you should be able to explain it.
+
+#ai #coding #codereview #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark charcoal background with faint code lines. Main text in quotes: "CHECK BEFORE YOU MERGE". One central illustration: a yellow pull request card with a green merge button and a red warning mark. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 63. ai-code-debugging: Debug AI code in 4 steps
+
+**Title:** Debug AI code in 4 steps, not a rewrite
+
+**Description:**
+When an AI fix does not work and the code gets worse, asking for a full rewrite usually makes it harder to find the cause. This short shows four steps: reproduce the bug, paste the exact error, ask for the smallest change, and keep a test. You learn to keep debugging your job, even with an AI helper.
+
+#ai #debugging #coding #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark teal background with faint grid lines. Main text in quotes: "DEBUG, DON'T REWRITE". One central illustration: a cyan four-step ladder with a red bug at the bottom and a green check at the top. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 64. python-chatbot-own-notes: Search your notes with an AI
+
+**Title:** Search your own notes with an AI model
+
+**Description:**
+Hundreds of notes are hard to search by eye, and a plain keyword search can miss the answer. This short shows how to send only the matching notes and your question to an AI model through its API, so it answers from your own text. You learn that the answer is only as good as the notes you keep.
+
+#python #ai #api #productivity #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark navy background with a faint grid of small note cards. Main text in quotes: "ASK YOUR NOTES". One central illustration: a stack of indigo note cards with a magnifying lens over one card and a speech bubble with a check mark. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 65. dp-memoization-one-minute: Stop solving the same problem twice
+
+**Title:** Stop solving the same problem twice (DP)
+
+**Description:**
+A naive recursive Fibonacci function repeats the same small calls again and again, so it gets very slow. This short explains memoization: save each answer the first time and look it up after that. You learn the one rule to spot dynamic programming problems: if the same sub-problem keeps coming back, save its answer.
+
+#dynamicprogramming #python #algorithms #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark navy background with a faint grid of number boxes. Main text in quotes: "SAVE THE ANSWER". One central illustration: a small tree of blue boxes with two boxes marked in red and a blue lookup arrow pointing to a saved box. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 66. dp-climbing-stairs: Count the ways up ten steps
+
+**Title:** Count the ways up 10 steps (answer: 89)
+
+**Description:**
+Many dynamic programming questions look hard until you find the rule. Here, the ways to reach a step are the ways to reach the two steps below it, added together, so you fill a table from the bottom. You learn to find the rule first, then fill the table, and that ten steps give 89 ways.
+
+#dynamicprogramming #algorithms #python #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark plum background with faint step lines. Main text in quotes: "10 STEPS. HOW MANY WAYS?". One central illustration: a staircase of ten plum blocks rising to a fuchsia top block, with small number labels 1, 2, 3, 5 along the steps. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+## 73. rest-vs-graphql: REST vs GraphQL: pick the tool for the screen
+
+**Title:** REST vs GraphQL: pick the tool for the screen
+
+**Description:**
+Your screen needs one user and their last three orders, and it makes four requests. This short compares REST's one URL per resource with GraphQL's single endpoint, where the client asks for exactly the fields it needs. You learn the trade-off: REST is easy to cache, GraphQL is flexible for complex screens.
+
+#api #rest #graphql #webdev #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Deep indigo background. "REST or GraphQL?" in large bold white letters. Two simple road signs, one with a single arrow and one with a branching fork. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 74. cdn-what-it-does: What a CDN does (and what it does not)
+
+**Title:** What a CDN does (and what it does not)
+
+**Description:**
+Your site loads fast in one city and slowly in another country, and a faster server will not fix that. A CDN is a set of servers around the world that keep copies of your static files close to each user. You learn that a CDN shortens the trip for files but does not make your code faster, and that cache rules can show old files after a deploy.
+
+#webdev #cdn #performance #frontend #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark teal background. "A CDN is not a faster server" in large bold white letters. One central illustration of a single server in the middle with short arrows reaching out to small globes around it. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 75. regex-match-a-pattern: Regex in 60 seconds: match a pattern, not a word
+
+**Title:** Regex in 60 seconds: match a pattern, not a word
+
+**Description:**
+You want to check whether some text looks like an email, and a long chain of if statements is not the answer. A regular expression is a pattern that describes text, and symbols like a dot, plus and square brackets do the work. You learn the basics with one example and the rule to remember: test a pattern before you trust it.
+
+#regex #javascript #programming #coding #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark charcoal background. "Match a pattern, not a word" in large bold white letters. One central illustration of a small row of text characters with a bright yellow highlight box drawn around a group of digits. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 76. websockets-vs-polling: Polling vs WebSockets: when live data is worth it
+
+**Title:** Polling vs WebSockets: when live data is worth it
+
+**Description:**
+Your chat app refreshes every two seconds and still feels late. This short compares polling, long polling and WebSockets, and explains how each one asks the server for new data. You learn to match the tool to how often the data changes: WebSockets for chat or live scores, plain polling for a dashboard that refreshes once a minute.
+
+#websockets #webdev #realtime #javascript #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark plum background. "Do you need live updates?" in large bold white letters. One central illustration of two dots joined by a single open line with arrows going both ways. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 77. feature-flags-in-one-minute: Feature flags: ship the code, release later
+
+**Title:** Feature flags: ship the code, release later
+
+**Description:**
+You ship a big change on Friday and nobody can turn it off without a new deploy. A feature flag is a switch in code or config that turns a feature on or off without deploying. You learn to roll it out in stages, switch it off in seconds if something breaks, and remove the flag once the feature is stable.
+
+#featureflags #devops #webdev #release #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark navy background. "Ship now, release later" in large bold white letters. One central illustration of a single large toggle switch in the on position. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+
+## 78. react-error-boundary: React error boundary: stop the blank page
+
+**Title:** React error boundary: stop the blank page
+
+**Description:**
+One component throws an error and your whole React page goes blank. An error boundary is a component that catches errors from the components below it and shows a fallback with a retry button instead. You learn to wrap the risky parts like a chart, and that error boundaries do not catch errors in event handlers or async code.
+
+#react #reactjs #frontend #javascript #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Dark violet background. "Isolate the broken part" in large bold white letters. One central illustration of a small page layout with one tile cracked and a fallback card with a button in its place. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+

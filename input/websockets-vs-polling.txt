@@ -1,0 +1,15 @@
+Your chat app refreshes every two seconds, and it still feels late. Here are three ways to get new data.
+
+Polling: the client asks the server again and again, even when nothing has changed.
+
+Long polling: the server holds the request until there is news, then answers. Fewer empty replies.
+
+WebSockets: one open connection where either side can send a message at any time.
+
+Use WebSockets for chat, live scores or shared editing, where updates come all the time.
+
+A simple dashboard that refreshes once a minute is fine with plain polling.
+
+Takeaway: match the tool to how often the data changes.
+
+Where would you need live updates? Comment it.

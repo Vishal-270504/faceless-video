@@ -1,0 +1,15 @@
+One component throws an error, and your whole React page goes blank. An error boundary keeps the rest of the page alive.
+
+An error boundary is a component that catches errors thrown by the components below it.
+
+It shows a fallback screen, like a short message and a retry button, instead of a blank page.
+
+Place it around the risky parts, like a chart or a widget, so the header and menu still work.
+
+Error boundaries catch errors during rendering. They do not catch errors in event handlers or async code, so handle those separately.
+
+Log the error, so you can see it in your monitoring.
+
+Takeaway: isolate the failure to the part that broke.
+
+Which widget would you wrap first? Comment it.

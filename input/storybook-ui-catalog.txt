@@ -1,0 +1,13 @@
+Your button looks fine in the app, but how does it look disabled? Checking means clicking through everything.
+
+Storybook is a tool that shows each UI component alone, in every state, so you can build and test it without the whole app.
+
+Used for: building components, documenting them, and spotting visual bugs.
+
+Example: a Button gets one story for primary, one for disabled, and one for loading. You see all three side by side.
+
+Each story is a saved example of the component with its props filled in.
+
+Takeaway: a component you can see on its own is easier to build and easier to trust.
+
+Do you rebuild the button every time, or reuse one? Tell me in the comments.

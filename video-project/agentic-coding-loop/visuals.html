@@ -1,0 +1,231 @@
+<style>
+  :root { --acc: #c084fc; --ink: #f5f5f7; --mute: #9aa3b8; --red: #f87171; --dark: #14091f; }
+  #kick { position: absolute; left: 90px; top: 236px; width: 600px; height: 40px; }
+  .kick { position: absolute; left: 0; top: 0; font: 700 26px Inter, sans-serif; letter-spacing: 0.18em; color: var(--acc); text-transform: uppercase; white-space: nowrap; }
+  #logo { position: absolute; left: 640px; top: 226px; width: 350px; height: 56px; }
+  .mk { position: absolute; left: 0; top: 4px; width: 56px; height: 46px; }
+  .mkc { position: absolute; width: 40px; height: 30px; border-radius: 8px; border: 3px solid var(--acc); background: #140a1e; }
+  #mk1 { left: 0; top: 0; opacity: 0.45; }
+  #mk2 { left: 8px; top: 8px; opacity: 0.7; }
+  #mk3 { left: 16px; top: 16px; background: var(--acc); }
+  .wm { position: absolute; left: 72px; top: 12px; font: 900 28px Inter, sans-serif; letter-spacing: 0.06em; color: var(--ink); white-space: nowrap; }
+  #prog { position: absolute; left: 90px; top: 292px; width: 900px; height: 6px; }
+  .seg { position: absolute; top: 0; width: 105px; height: 6px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+  .seg i { position: absolute; left: 0; top: 0; width: 105px; height: 6px; background: var(--acc); }
+
+  #win { position: absolute; left: 90px; top: 330px; width: 900px; height: 640px; background: rgba(20,10,30,0.92); border: 1px solid rgba(192,132,252,0.3); border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.55); }
+  #win * { box-sizing: border-box; }
+  .g { position: absolute; left: 0; top: 0; width: 900px; height: 640px; opacity: 0; }
+  .txt { position: absolute; left: 0; width: 900px; text-align: center; font: 900 44px Inter, sans-serif; color: var(--ink); line-height: 1.2; white-space: nowrap; }
+  .sub { position: absolute; left: 0; width: 900px; text-align: center; font: 400 30px Inter, sans-serif; color: var(--mute); line-height: 1.3; }
+  .lbl { position: absolute; font: 700 26px Inter, sans-serif; color: var(--acc); text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; }
+  .lbl2 { position: absolute; font: 700 26px 'JetBrains Mono', monospace; color: var(--mute); white-space: nowrap; }
+  .box { position: absolute; border-radius: 22px; background: #1e1230; border: 1px solid #4a2d6a; }
+  .file { position: absolute; left: 36px; width: 528px; height: 62px; border-radius: 14px; background: #120a1e; border: 1px solid #4a2d6a; font: 700 28px 'JetBrains Mono', monospace; color: var(--ink); padding: 14px 20px; white-space: nowrap; }
+  .wire { position: absolute; height: 4px; background: var(--acc); border-radius: 2px; }
+  .vwire { position: absolute; width: 4px; background: var(--acc); border-radius: 2px; }
+  .chip { position: absolute; height: 70px; border-radius: 35px; background: var(--acc); color: var(--dark); font: 700 30px Inter, sans-serif; line-height: 70px; padding: 0 32px; white-space: nowrap; opacity: 0; }
+  .chipB { background: #1e1230; color: var(--ink); border: 2px solid var(--acc); }
+  .pill { position: absolute; left: 60px; width: 780px; height: 96px; border-radius: 20px; background: #22153a; border: 1px solid #4a2d6a; border-left: 10px solid var(--acc); font: 700 36px Inter, sans-serif; color: var(--ink); line-height: 96px; padding-left: 36px; opacity: 0; }
+  .badge { position: absolute; padding: 6px 16px; border-radius: 12px; background: var(--red); color: var(--dark); font: 700 26px Inter, sans-serif; white-space: nowrap; opacity: 0; }
+  .ok { position: absolute; width: 60px; height: 30px; opacity: 0; }
+  .ok i { position: absolute; left: 6px; top: 2px; width: 24px; height: 12px; border-left: 6px solid var(--acc); border-bottom: 6px solid var(--acc); transform: rotate(-45deg); }
+  .ques { position: absolute; left: 60px; width: 780px; text-align: center; font: 900 60px Inter, sans-serif; color: var(--ink); line-height: 1.15; opacity: 0; }
+  #bigmk { position: absolute; left: 380px; top: 96px; width: 140px; height: 110px; }
+  #bigmk .mkc { width: 110px; height: 80px; border-width: 6px; border-radius: 18px; }
+  #bm1 { left: 0; top: 0; opacity: 0; }
+  #bm2 { left: 20px; top: 14px; opacity: 0; }
+  #bm3 { left: 40px; top: 28px; background: var(--acc); opacity: 0; }
+</style>
+
+<div id="kick">
+  <div class="kick clip" data-start="0" data-duration="5.74" data-track-index="1">01 · Hook</div>
+  <div class="kick clip" data-start="6.06" data-duration="7.54" data-track-index="1">02 · Agent</div>
+  <div class="kick clip" data-start="13.82" data-duration="3.44" data-track-index="1">03 · Used for</div>
+  <div class="kick clip" data-start="17.54" data-duration="8.28" data-track-index="1">04 · Example</div>
+  <div class="kick clip" data-start="25.88" data-duration="5.52" data-track-index="1">05 · Wrong</div>
+  <div class="kick clip" data-start="31.48" data-duration="2.34" data-track-index="1">06 · Review</div>
+  <div class="kick clip" data-start="33.90" data-duration="3.90" data-track-index="1">07 · Takeaway</div>
+  <div class="kick clip" data-start="37.94" data-duration="2.86" data-track-index="1">08 · Question</div>
+</div>
+
+<div id="logo">
+  <div class="mk"><div id="mk1" class="mkc"></div><div id="mk2" class="mkc"></div><div id="mk3" class="mkc"></div></div>
+  <div class="wm">AGENTS</div>
+</div>
+
+<div id="prog">
+  <div class="seg" style="left: 0px;"><i id="p0"></i></div>
+  <div class="seg" style="left: 113px;"><i id="p1"></i></div>
+  <div class="seg" style="left: 226px;"><i id="p2"></i></div>
+  <div class="seg" style="left: 339px;"><i id="p3"></i></div>
+  <div class="seg" style="left: 452px;"><i id="p4"></i></div>
+  <div class="seg" style="left: 565px;"><i id="p5"></i></div>
+  <div class="seg" style="left: 678px;"><i id="p6"></i></div>
+  <div class="seg" style="left: 791px;"><i id="p7"></i></div>
+</div>
+
+<div id="win">
+  <!-- 0: hook, bug fixed claim, tests still fail -->
+  <div id="g0" class="g clip" data-start="0" data-duration="5.74" data-track-index="2">
+    <div class="chip" id="bf0" style="left: 200px; top: 130px;">Bug fixed!</div>
+    <div class="box" style="left: 150px; top: 230px; width: 600px; height: 170px;">
+      <div class="file" style="top: 30px; color: var(--red);">FAIL  login.test.js</div>
+      <div class="file" style="top: 100px; color: var(--red);">FAIL  tasks.test.js</div>
+    </div>
+    <div class="badge" id="bd0" style="left: 560px; top: 242px;">STILL FAILING</div>
+    <div class="txt" id="t0" style="top: 440px; opacity: 0;">Said fixed. Tests still fail.</div>
+    <div class="sub" id="s0" style="top: 510px; opacity: 0;">Here is how an agent is different.</div>
+  </div>
+
+  <!-- 1: the agent loop -->
+  <div id="g1" class="g clip" data-start="6.06" data-duration="7.54" data-track-index="2">
+    <div class="chip" id="lp1a" style="left: 90px; top: 150px;">Plan</div>
+    <div class="wire" id="wl1a" style="left: 240px; top: 183px; width: 230px;"></div>
+    <div class="chip" id="lp1b" style="left: 480px; top: 150px;">Edit</div>
+    <div class="vwire" style="left: 540px; top: 220px; height: 120px;"></div>
+    <div class="chip" id="lp1c" style="left: 480px; top: 340px;">Run tests</div>
+    <div class="wire" id="wl1b" style="left: 330px; top: 373px; width: 140px;"></div>
+    <div class="chip" id="lp1d" style="left: 90px; top: 340px;">Read errors</div>
+    <div class="vwire" style="left: 200px; top: 220px; height: 120px;"></div>
+    <div class="txt" id="t1" style="top: 480px; opacity: 0;">An agent works in a loop.</div>
+    <div class="sub" id="s1" style="top: 548px; opacity: 0;">Plan, edit, run tests, read errors, repeat.</div>
+  </div>
+
+  <!-- 2: used for -->
+  <div id="g2" class="g clip" data-start="13.82" data-duration="3.44" data-track-index="2">
+    <div class="lbl" id="l2" style="left: 60px; top: 90px; opacity: 0;">Used for</div>
+    <div class="pill" id="pl1" style="top: 170px;">Fixing failing tests</div>
+    <div class="pill" id="pl2" style="top: 310px;">Small features</div>
+  </div>
+
+  <!-- 3: example, the test fails, the agent fixes it -->
+  <div id="g3" class="g clip" data-start="17.54" data-duration="8.28" data-track-index="2">
+    <div class="box" style="left: 150px; top: 110px; width: 600px; height: 290px;">
+      <div class="lbl" style="left: 36px; top: 22px;">Add due date</div>
+      <div class="file" id="f3a" style="top: 70px; width: 528px; opacity: 0;">ask: add a due date</div>
+      <div class="file" id="f3b" style="top: 150px; width: 528px; color: var(--red); opacity: 0;">FAIL: missing field</div>
+      <div class="ok" id="ok3" style="left: 36px; top: 238px;"><i></i></div>
+      <div class="lbl2" id="fx3" style="left: 110px; top: 244px; opacity: 0;">Fixed by the agent</div>
+    </div>
+    <div class="txt" id="t3" style="top: 440px; opacity: 0;">It reads the error and fixes it.</div>
+    <div class="sub" id="s3" style="top: 510px; opacity: 0;">One failing test, then a green run.</div>
+  </div>
+
+  <!-- 4: confidently wrong -->
+  <div id="g4" class="g clip" data-start="25.88" data-duration="5.52" data-track-index="2">
+    <div class="box" style="left: 150px; top: 110px; width: 600px; height: 250px;">
+      <div class="lbl" style="left: 36px; top: 22px;">Agent says</div>
+      <div class="file" style="top: 80px; width: 528px;">Done. All good.</div>
+    </div>
+    <div class="badge" id="bd4" style="left: 520px; top: 300px;">WRONG</div>
+    <div class="txt" id="t4" style="top: 440px; opacity: 0;">Fast, but confidently wrong.</div>
+    <div class="sub" id="s4" style="top: 510px; opacity: 0;">Tests catch many mistakes, not all.</div>
+  </div>
+
+  <!-- 5: human review -->
+  <div id="g5" class="g clip" data-start="31.48" data-duration="2.34" data-track-index="2">
+    <div class="chip" id="hr5" style="left: 316px; top: 290px;">Human review</div>
+    <div class="txt" id="t5" style="top: 430px; opacity: 0;">Human review at the end.</div>
+  </div>
+
+  <!-- 6: takeaway -->
+  <div id="g6" class="g clip" data-start="33.90" data-duration="3.90" data-track-index="2">
+    <div class="ok" id="chk6" style="left: 130px; top: 170px;"><i></i></div>
+    <div class="txt" id="t6a" style="left: 230px; top: 150px; width: 660px; text-align: left; font-size: 40px; opacity: 0;">Let the agent do the loop,</div>
+    <div class="txt" id="t6b" style="left: 230px; top: 230px; width: 660px; text-align: left; font-size: 36px; opacity: 0;">and you do the final check.</div>
+  </div>
+
+  <!-- 7: question -->
+  <div id="g7" class="g clip" data-start="37.94" data-duration="2.86" data-track-index="2">
+    <div id="bigmk">
+      <div class="mkc" id="bm1"></div><div class="mkc" id="bm2"></div><div class="mkc" id="bm3"></div>
+    </div>
+    <div class="ques" id="q1" style="top: 240px;">Have you tried one yet?</div>
+    <div class="sub" id="q2" style="top: 510px; font-size: 36px; opacity: 0; color: var(--ink);">Tell me in the comments.</div>
+  </div>
+</div>
+
+<script>
+  tl.from("#mk1", { opacity: 0, x: -14, duration: 0.4, ease: "power2.out" }, 0.1);
+  tl.from("#mk2", { opacity: 0, x: -8, duration: 0.4, ease: "power2.out" }, 0.25);
+  tl.from("#mk3", { opacity: 0, x: -2, duration: 0.4, ease: "power2.out" }, 0.4);
+
+  tl.set(["#p0","#p1","#p2","#p3","#p4","#p5","#p6","#p7"], { scaleX: 0, transformOrigin: "left center" }, 0);
+  tl.set(["#wl1a","#wl1b"], { scaleX: 0, transformOrigin: "left center" }, 0);
+  tl.to("#p0", { scaleX: 1, duration: 5.34, ease: "none" }, 0);
+  tl.to("#p1", { scaleX: 1, duration: 6.84, ease: "none" }, 6.36);
+  tl.to("#p2", { scaleX: 1, duration: 2.74, ease: "none" }, 14.12);
+  tl.to("#p3", { scaleX: 1, duration: 7.58, ease: "none" }, 17.84);
+  tl.to("#p4", { scaleX: 1, duration: 4.82, ease: "none" }, 26.18);
+  tl.to("#p5", { scaleX: 1, duration: 1.64, ease: "none" }, 31.78);
+  tl.to("#p6", { scaleX: 1, duration: 3.20, ease: "none" }, 34.20);
+  tl.to("#p7", { scaleX: 1, duration: 2.16, ease: "none" }, 38.24);
+
+  tl.to("#g0", { opacity: 1, duration: 0.3 }, 0);
+  tl.to("#g0", { opacity: 0, duration: 0.3 }, 5.44);
+  tl.to("#g1", { opacity: 1, duration: 0.3 }, 6.06);
+  tl.to("#g1", { opacity: 0, duration: 0.3 }, 13.30);
+  tl.to("#g2", { opacity: 1, duration: 0.3 }, 13.82);
+  tl.to("#g2", { opacity: 0, duration: 0.3 }, 16.96);
+  tl.to("#g3", { opacity: 1, duration: 0.3 }, 17.54);
+  tl.to("#g3", { opacity: 0, duration: 0.3 }, 25.52);
+  tl.to("#g4", { opacity: 1, duration: 0.3 }, 25.88);
+  tl.to("#g4", { opacity: 0, duration: 0.3 }, 31.10);
+  tl.to("#g5", { opacity: 1, duration: 0.3 }, 31.48);
+  tl.to("#g5", { opacity: 0, duration: 0.3 }, 33.52);
+  tl.to("#g6", { opacity: 1, duration: 0.3 }, 33.90);
+  tl.to("#g6", { opacity: 0, duration: 0.3 }, 37.50);
+  tl.to("#g7", { opacity: 1, duration: 0.3 }, 37.94);
+
+  // 0: the claim, the failing tests, held
+  tl.to("#bf0", { opacity: 1, duration: 0.35 }, 0.3);
+  tl.to("#bd0", { opacity: 1, duration: 0.3 }, 1.2);
+  tl.to("#t0", { opacity: 1, duration: 0.4 }, 2.0);
+  tl.to("#s0", { opacity: 1, duration: 0.4 }, 3.4);
+
+  // 1: the loop, chips in order
+  tl.to("#lp1a", { opacity: 1, duration: 0.35 }, 6.6);
+  tl.to("#wl1a", { scaleX: 1, duration: 0.4, ease: "power2.out" }, 7.0);
+  tl.to("#lp1b", { opacity: 1, duration: 0.35 }, 7.4);
+  tl.to("#lp1c", { opacity: 1, duration: 0.35 }, 8.6);
+  tl.to("#wl1b", { scaleX: 1, duration: 0.4, ease: "power2.out" }, 9.0);
+  tl.to("#lp1d", { opacity: 1, duration: 0.35 }, 9.6);
+  tl.to("#t1", { opacity: 1, duration: 0.4 }, 10.6);
+  tl.to("#s1", { opacity: 1, duration: 0.4 }, 11.8);
+
+  // 2: used for
+  tl.to("#l2", { opacity: 1, duration: 0.3 }, 14.2);
+  tl.to("#pl1", { opacity: 1, duration: 0.35 }, 14.6);
+  tl.to("#pl2", { opacity: 1, duration: 0.35 }, 15.6);
+
+  // 3: example, the error, then the agent's fix
+  tl.to("#f3a", { opacity: 1, duration: 0.35 }, 18.2);
+  tl.to("#f3b", { opacity: 1, duration: 0.35 }, 19.6);
+  tl.to("#ok3", { opacity: 1, duration: 0.3 }, 22.0);
+  tl.to("#fx3", { opacity: 1, duration: 0.35 }, 22.2);
+  tl.to("#t3", { opacity: 1, duration: 0.4 }, 23.4);
+  tl.to("#s3", { opacity: 1, duration: 0.4 }, 24.6);
+
+  // 4: confidently wrong, the badge lands on the claim
+  tl.to("#bd4", { opacity: 1, duration: 0.3 }, 27.6);
+  tl.to("#t4", { opacity: 1, duration: 0.4 }, 28.4);
+  tl.to("#s4", { opacity: 1, duration: 0.4 }, 29.6);
+
+  // 5: human review
+  tl.to("#hr5", { opacity: 1, duration: 0.35 }, 31.7);
+  tl.to("#t5", { opacity: 1, duration: 0.4 }, 31.9);
+
+  // 6: takeaway
+  tl.to("#chk6", { opacity: 1, duration: 0.3 }, 34.2);
+  tl.to("#t6a", { opacity: 1, duration: 0.4 }, 34.4);
+  tl.to("#t6b", { opacity: 1, duration: 0.4 }, 35.4);
+
+  // 7: question, mark pulses once
+  tl.to("#bm1", { opacity: 0.4, duration: 0.4 }, 38.3);
+  tl.to("#bm2", { opacity: 0.7, duration: 0.4 }, 38.45);
+  tl.to("#bm3", { opacity: 1, duration: 0.4 }, 38.6);
+  tl.to("#q1", { opacity: 1, duration: 0.4 }, 38.3);
+  tl.to("#q2", { opacity: 1, duration: 0.4 }, 39.2);
+  tl.to("#bigmk", { scale: 1.08, duration: 0.45, yoyo: true, repeat: 1, ease: "power1.inOut" }, 39.6);
+</script>
