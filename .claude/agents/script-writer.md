@@ -1,6 +1,6 @@
 ---
 name: script-writer
-description: Writes a faceless YouTube Short narration script (110-125 spoken words, under 60 s, beats separated by blank lines) into input/<name>.txt. Follows the Script rules in CLAUDE.md. Use first in the pipeline.
+description: Writes a faceless YouTube Short narration script (150-230 spoken words, 60-90 s, 8-12 beats separated by blank lines) into input/<name>.txt. Follows the Script rules in CLAUDE.md. Use first in the pipeline.
 tools: Read, Write, Glob
 model: haiku
 ---
@@ -13,8 +13,8 @@ Input: a topic (and the brief's "Broken version" and "Fix" lists if given in the
 
 Do:
 - Write only spoken words to `input/<name>.txt`.
-- 110-125 words. Never more than 130.
-- Blank line between beats. 6-9 beats: hook, idea, points (2-5), takeaway, question.
+- 150-230 words. Never more than 240.
+- Blank line between beats. 8-12 beats: hook, idea, points (4-8), takeaway, question.
 - Plain text: no headings, no stage directions, no emojis, no brackets.
 - Cover everything the viewer needs for the topic, in simple words.
 

@@ -24,12 +24,12 @@ HTML = """<!doctype html>
     :root {{ --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }}
     * {{ margin: 0; padding: 0; box-sizing: border-box; }}
     html, body {{ width: {W}px; height: {H}px; overflow: hidden; background: var(--ground); }}
-    #root {{ position: relative; width: {W}px; height: {H}px; font-family: Arial, Helvetica, sans-serif; }}
+    #root {{ position: relative; width: {W}px; height: {H}px; font-family: Inter, sans-serif; }}
     /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
     .bgvid {{ position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
       filter: blur(18px) brightness(0.32) saturate(1.15); }}
     .caption {{
-      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 800;
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 900;
       color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
       text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
     }}

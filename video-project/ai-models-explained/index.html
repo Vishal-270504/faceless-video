@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Inter, sans-serif; }
+    /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
+    .bgvid { position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
+      filter: blur(18px) brightness(0.32) saturate(1.15); }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 900;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  .scene { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; font-family: Inter, sans-serif; }
+  .dark { background: #0b0b12; color: #fff; }
+  .light { background: #f4f4f1; color: #0b0b12; }
+  .kick { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-size: 42px; font-weight: 700; color: #e8704a; }
+  .head { position: absolute; left: 70px; right: 70px; top: 300px; text-align: center; font-size: 66px; font-weight: 400; line-height: 1.22; color: #8a8a96; }
+  .light .head { color: #5d5d68; }
+  .k { font-weight: 900; }
+  .dark .k { color: #fff; }
+  .light .k { color: #0b0b12; }
+  .hl { position: relative; display: inline-block; }
+  .hl::after { content: ""; position: absolute; left: -10px; right: -10px; top: -6px; bottom: -6px; border: 3px solid #3b82f6; background: rgba(59,130,246,.2); }
+  .card { position: absolute; left: 90px; right: 90px; border-radius: 24px; padding: 30px 40px; }
+  .dark .card { background: #17171f; border: 1px solid #2a2a36; }
+  .light .card { background: #fff; border: 1px solid #d9d9e0; }
+  .label { font-size: 40px; font-weight: 700; }
+  .sub { font-size: 34px; font-weight: 400; color: #8a8a96; }
+  .light .sub { color: #5d5d68; }
+  .mono { font-family: monospace; font-size: 40px; line-height: 1.5; }
+  .dark .mono { color: #e8704a; }
+  .light .mono { color: #b4502f; }
+  .big { font-size: 200px; font-weight: 900; line-height: 1; color: #e8704a; text-align: center; }
+  .chip { position: absolute; top: 700px; height: 110px; padding: 0 40px; border-radius: 55px; display: flex; align-items: center; font-size: 50px; font-weight: 700; background: #17171f; border: 1px solid #2a2a36; }
+  .bar { position: absolute; left: 40px; height: 60px; border-radius: 30px; background: #e8704a; transform-origin: left center; }
+  .check { width: 30px; height: 16px; border-left: 6px solid #e8704a; border-bottom: 6px solid #e8704a; transform: rotate(-45deg); display: inline-block; margin-right: 26px; }
+  .sq { position: absolute; width: 150px; height: 150px; border-radius: 18px; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="65.18"
+       data-width="1080" data-height="1920">
+
+
+
+<!-- Beat 0: hook -->
+<div id="s0" class="scene dark clip" data-start="0" data-duration="5.24" data-track-index="0">
+  <div class="head">An AI model sounds like a program. It is closer to a <span class="hl"><span class="k">file of numbers</span></span>.</div>
+  <div class="card" style="top:640px; height:420px; padding:40px 50px">
+    <div class="mono" style="color:#8a8a96">0.82  -1.37   0.05   2.91</div>
+    <div class="mono" style="color:#8a8a96">-0.44  1.18  -2.06   0.37</div>
+    <div class="mono">0.13  -0.77  1.94  -1.02</div>
+    <div class="mono" style="color:#8a8a96">1.66  0.29  -0.58  0.91</div>
+    <div class="mono" style="color:#8a8a96">-2.23  0.64  1.08  -0.15</div>
+  </div>
+</div>
+
+<!-- Beat 1: training -->
+<div id="s1" class="scene light clip" data-start="5.24" data-duration="11.4" data-track-index="0">
+  <div class="kick">TRAINING</div>
+  <div class="head">Training changes <span class="hl"><span class="k">billions</span></span> of numbers.</div>
+  <div class="card" style="top:560px; height:210px">
+    <div class="sub">Before training</div>
+    <div style="height:14px"></div>
+    <div class="mono" id="w1">0.12  0.00  0.00  0.00</div>
+  </div>
+  <div class="card" style="top:790px; height:210px; background:#0b0b12; border-color:#0b0b12">
+    <div class="sub" style="color:#8a8a96">After training</div>
+    <div style="height:14px"></div>
+    <div class="mono" id="w2">0.91  -1.37  0.58  2.12</div>
+  </div>
+</div>
+
+<!-- Beat 2: inference -->
+<div id="s2" class="scene dark clip" data-start="16.64" data-duration="9.64" data-track-index="0">
+  <div class="kick">INFERENCE</div>
+  <div class="head">It predicts the <span class="hl"><span class="k">next word</span></span>, again and again.</div>
+  <div class="chip" style="left:90px; top:700px">The</div>
+  <div class="chip" style="left:260px; top:700px">sky</div>
+  <div class="chip" style="left:400px; top:700px">is</div>
+  <div class="chip" style="left:520px; top:700px; background:#e8704a; border-color:#e8704a; color:#0b0b12">blue</div>
+</div>
+
+<!-- Beat 3: size -->
+<div id="s3" class="scene light clip" data-start="26.28" data-duration="7.76" data-track-index="0">
+  <div class="kick">SIZE</div>
+  <div class="head">Bigger models have <span class="hl"><span class="k">more weights</span></span>.</div>
+  <div class="card" style="top:580px; height:200px">
+    <div class="label">Small model</div>
+    <div class="bar" style="top:110px; width:200px"></div>
+    <div class="sub" style="position:absolute; left:40px; top:190px; display:none"></div>
+  </div>
+  <div class="card" style="top:820px; height:200px">
+    <div class="label">Large model</div>
+    <div class="bar" style="top:110px; width:800px; background:#0b0b12"></div>
+  </div>
+  <div class="sub" style="position:absolute; left:90px; top:1030px; color:#5d5d68; font-size:30px">Small: fast and cheap. Large: slower, often more accurate.</div>
+</div>
+
+<!-- Beat 4: where it runs -->
+<div id="s4" class="scene dark clip" data-start="34.04" data-duration="10.22" data-track-index="0">
+  <div class="head">Run it on a laptop, or on a <span class="hl"><span class="k">data center</span></span>.</div>
+  <div class="card" style="left:90px; right:580px; top:600px; height:330px">
+    <div class="label">Laptop</div>
+    <div style="height:30px"></div>
+    <div class="sub">Small model</div>
+    <div class="sub">Fast, cheap</div>
+  </div>
+  <div class="card" style="left:500px; right:90px; top:600px; height:330px">
+    <div class="label">Data center</div>
+    <div style="height:30px"></div>
+    <div class="sub">Large model</div>
+    <div class="sub">Slower, more accurate</div>
+  </div>
+  <div class="sq" style="left:150px; top:960px; background:#e8704a; width:100px; height:100px"></div>
+  <div class="sq" style="left:560px; top:960px; width:100px; height:100px; background:#2a2a36"></div>
+  <div class="sq" style="left:680px; top:960px; width:100px; height:100px; background:#2a2a36"></div>
+  <div class="sq" style="left:800px; top:960px; width:100px; height:100px; background:#2a2a36"></div>
+</div>
+
+<!-- Beat 5: model types -->
+<div id="s5" class="scene light clip" data-start="44.26" data-duration="7.96" data-track-index="0">
+  <div class="head">Some read <span class="hl"><span class="k">text</span></span>, some read images.</div>
+  <div class="card" style="top:540px; height:150px"><div class="label">Text</div><div class="mono" style="font-size:36px">"Hello there"</div></div>
+  <div class="card" style="top:710px; height:150px"><div class="label">Images</div><div class="sq" style="position:static; display:inline-block; width:60px; height:60px; background:#e8704a; margin-right:14px"></div><div class="sq" style="position:static; display:inline-block; width:60px; height:60px; background:#0b0b12; margin-right:14px"></div><div class="sq" style="position:static; display:inline-block; width:60px; height:60px; background:#8a8a96"></div></div>
+  <div class="card" style="top:880px; height:150px"><div class="label">Both</div></div>
+</div>
+
+<!-- Beat 6: takeaway -->
+<div id="s6" class="scene dark clip" data-start="52.22" data-duration="9.84" data-track-index="0">
+  <div class="head">A model is <span class="hl"><span class="k">learned numbers</span></span> plus code.</div>
+  <div class="card" style="top:600px; height:130px"><div class="label"><span class="check"></span>The task</div></div>
+  <div class="card" style="top:750px; height:130px"><div class="label"><span class="check"></span>The size</div></div>
+  <div class="card" style="top:900px; height:130px"><div class="label"><span class="check"></span>The cost to run</div></div>
+</div>
+
+<!-- Beat 7: question -->
+<div id="s7" class="scene light clip" data-start="62.06" data-duration="3.14" data-track-index="0">
+  <div class="big" style="position:absolute; left:0; right:0; top:600px; font-size:320px">?</div>
+  <div class="sub" style="position:absolute; left:0; right:0; top:1000px; font-size:44px; text-align:center; color:#0b0b12">Which model do you use most?</div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="1.02" data-track-index="1">An AI model</div>
+    <div id="c1" class="caption clip" data-start="1.02" data-duration="0.78" data-track-index="1">sounds like a</div>
+    <div id="c2" class="caption clip" data-start="1.80" data-duration="0.30" data-track-index="1">program.</div>
+    <div id="c3" class="caption clip" data-start="2.70" data-duration="0.44" data-track-index="1">It is closer</div>
+    <div id="c4" class="caption clip" data-start="3.14" data-duration="0.62" data-track-index="1">to a file</div>
+    <div id="c5" class="caption clip" data-start="3.76" data-duration="0.70" data-track-index="1">full of numbers.</div>
+    <div id="c6" class="caption clip" data-start="5.24" data-duration="0.52" data-track-index="1">When a model</div>
+    <div id="c7" class="caption clip" data-start="5.76" data-duration="0.44" data-track-index="1">trains,</div>
+    <div id="c8" class="caption clip" data-start="6.76" data-duration="0.60" data-track-index="1">it reads huge</div>
+    <div id="c9" class="caption clip" data-start="7.36" data-duration="0.82" data-track-index="1">amounts of data</div>
+    <div id="c10" class="caption clip" data-start="8.18" data-duration="1.08" data-track-index="1">and adjusts billions</div>
+    <div id="c11" class="caption clip" data-start="9.26" data-duration="1.16" data-track-index="1">of numbers called</div>
+    <div id="c12" class="caption clip" data-start="10.42" data-duration="0.30" data-track-index="1">weights.</div>
+    <div id="c13" class="caption clip" data-start="11.48" data-duration="0.78" data-track-index="1">Those numbers are</div>
+    <div id="c14" class="caption clip" data-start="12.26" data-duration="0.32" data-track-index="1">the model.</div>
+    <div id="c15" class="caption clip" data-start="13.28" data-duration="0.74" data-track-index="1">Once training ends,</div>
+    <div id="c16" class="caption clip" data-start="14.42" data-duration="0.62" data-track-index="1">the weights stop</div>
+    <div id="c17" class="caption clip" data-start="15.04" data-duration="0.32" data-track-index="1">changing.</div>
+    <div id="c18" class="caption clip" data-start="16.64" data-duration="0.56" data-track-index="1">Now comes inference.</div>
+    <div id="c19" class="caption clip" data-start="18.14" data-duration="0.42" data-track-index="1">You send a</div>
+    <div id="c20" class="caption clip" data-start="18.56" data-duration="0.30" data-track-index="1">question,</div>
+    <div id="c21" class="caption clip" data-start="19.32" data-duration="0.72" data-track-index="1">the model runs</div>
+    <div id="c22" class="caption clip" data-start="20.04" data-duration="0.84" data-track-index="1">its math over</div>
+    <div id="c23" class="caption clip" data-start="20.88" data-duration="0.36" data-track-index="1">your text,</div>
+    <div id="c24" class="caption clip" data-start="21.68" data-duration="0.46" data-track-index="1">and it predicts</div>
+    <div id="c25" class="caption clip" data-start="22.14" data-duration="0.76" data-track-index="1">the next word</div>
+    <div id="c26" class="caption clip" data-start="22.90" data-duration="1.18" data-track-index="1">over and over</div>
+    <div id="c27" class="caption clip" data-start="24.08" data-duration="1.04" data-track-index="1">until the answer</div>
+    <div id="c28" class="caption clip" data-start="25.12" data-duration="0.44" data-track-index="1">is done.</div>
+    <div id="c29" class="caption clip" data-start="26.28" data-duration="1.02" data-track-index="1">Each model has</div>
+    <div id="c30" class="caption clip" data-start="27.30" data-duration="0.38" data-track-index="1">a size.</div>
+    <div id="c31" class="caption clip" data-start="28.22" data-duration="0.68" data-track-index="1">A bigger model</div>
+    <div id="c32" class="caption clip" data-start="28.90" data-duration="0.82" data-track-index="1">has more weights,</div>
+    <div id="c33" class="caption clip" data-start="30.12" data-duration="0.38" data-track-index="1">so it can</div>
+    <div id="c34" class="caption clip" data-start="30.50" data-duration="0.98" data-track-index="1">learn more, but</div>
+    <div id="c35" class="caption clip" data-start="31.48" data-duration="0.50" data-track-index="1">it needs more</div>
+    <div id="c36" class="caption clip" data-start="31.98" data-duration="0.88" data-track-index="1">memory and time</div>
+    <div id="c37" class="caption clip" data-start="32.86" data-duration="0.40" data-track-index="1">to run.</div>
+    <div id="c38" class="caption clip" data-start="34.04" data-duration="0.64" data-track-index="1">That is why</div>
+    <div id="c39" class="caption clip" data-start="34.68" data-duration="0.76" data-track-index="1">some models run</div>
+    <div id="c40" class="caption clip" data-start="35.44" data-duration="0.50" data-track-index="1">on your laptop</div>
+    <div id="c41" class="caption clip" data-start="35.94" data-duration="1.16" data-track-index="1">and others need</div>
+    <div id="c42" class="caption clip" data-start="37.10" data-duration="0.70" data-track-index="1">a data center.</div>
+    <div id="c43" class="caption clip" data-start="38.38" data-duration="0.92" data-track-index="1">Small models are</div>
+    <div id="c44" class="caption clip" data-start="39.30" data-duration="0.96" data-track-index="1">fast and cheap.</div>
+    <div id="c45" class="caption clip" data-start="40.94" data-duration="0.82" data-track-index="1">Large models are</div>
+    <div id="c46" class="caption clip" data-start="41.76" data-duration="0.94" data-track-index="1">slower but often</div>
+    <div id="c47" class="caption clip" data-start="42.70" data-duration="0.68" data-track-index="1">more accurate.</div>
+    <div id="c48" class="caption clip" data-start="44.26" data-duration="0.58" data-track-index="1">There are also</div>
+    <div id="c49" class="caption clip" data-start="44.84" data-duration="0.54" data-track-index="1">different types.</div>
+    <div id="c50" class="caption clip" data-start="46.10" data-duration="0.30" data-track-index="1">Some are for</div>
+    <div id="c51" class="caption clip" data-start="46.40" data-duration="0.30" data-track-index="1">text,</div>
+    <div id="c52" class="caption clip" data-start="47.14" data-duration="0.48" data-track-index="1">some for images,</div>
+    <div id="c53" class="caption clip" data-start="47.80" data-duration="0.76" data-track-index="1">and some for</div>
+    <div id="c54" class="caption clip" data-start="48.56" data-duration="0.30" data-track-index="1">both.</div>
+    <div id="c55" class="caption clip" data-start="49.46" data-duration="0.56" data-track-index="1">The type decides</div>
+    <div id="c56" class="caption clip" data-start="50.02" data-duration="1.04" data-track-index="1">what inputs it</div>
+    <div id="c57" class="caption clip" data-start="51.06" data-duration="0.38" data-track-index="1">can take.</div>
+    <div id="c58" class="caption clip" data-start="52.22" data-duration="0.48" data-track-index="1">The takeaway,</div>
+    <div id="c59" class="caption clip" data-start="53.10" data-duration="0.70" data-track-index="1">a model is</div>
+    <div id="c60" class="caption clip" data-start="53.80" data-duration="0.82" data-track-index="1">just learned numbers</div>
+    <div id="c61" class="caption clip" data-start="54.62" data-duration="0.78" data-track-index="1">plus the code</div>
+    <div id="c62" class="caption clip" data-start="55.40" data-duration="0.64" data-track-index="1">that runs them.</div>
+    <div id="c63" class="caption clip" data-start="56.62" data-duration="0.52" data-track-index="1">When you pick</div>
+    <div id="c64" class="caption clip" data-start="57.14" data-duration="1.00" data-track-index="1">one, check three</div>
+    <div id="c65" class="caption clip" data-start="58.14" data-duration="0.32" data-track-index="1">things,</div>
+    <div id="c66" class="caption clip" data-start="59.00" data-duration="0.32" data-track-index="1">the task,</div>
+    <div id="c67" class="caption clip" data-start="59.76" data-duration="0.66" data-track-index="1">the size, and</div>
+    <div id="c68" class="caption clip" data-start="60.42" data-duration="0.58" data-track-index="1">the cost to</div>
+    <div id="c69" class="caption clip" data-start="61.00" data-duration="0.30" data-track-index="1">run.</div>
+    <div id="c70" class="caption clip" data-start="62.06" data-duration="0.82" data-track-index="1">Which model do</div>
+    <div id="c71" class="caption clip" data-start="62.88" data-duration="0.46" data-track-index="1">you use most?</div>
+    <div id="c72" class="caption clip" data-start="63.90" data-duration="0.30" data-track-index="1">Tell me in</div>
+    <div id="c73" class="caption clip" data-start="64.20" data-duration="0.38" data-track-index="1">the comments.</div>
+    <audio id="narration" data-start="0" data-duration="65.18" data-track-index="2" data-volume="1"
+           src="assets/ai-models-explained.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  // Caption colour follows the scene: dark text on light scenes, white on dark scenes.
+  tl.set(".caption", { color: "#fff" }, 0);
+  tl.set(".caption", { color: "#0b0b12" }, 5.24);
+  tl.set(".caption", { color: "#fff" }, 16.64);
+  tl.set(".caption", { color: "#0b0b12" }, 26.28);
+  tl.set(".caption", { color: "#fff" }, 34.04);
+  tl.set(".caption", { color: "#0b0b12" }, 44.26);
+  tl.set(".caption", { color: "#fff" }, 52.22);
+  tl.set(".caption", { color: "#0b0b12" }, 62.06);
+
+  tl.from("#s0 .card", { opacity: 0, y: 40, duration: 0.5, ease: "power3.out" }, 0.4);
+  // Training: the numbers change from the first state to the second.
+  tl.call(() => { document.getElementById("w1").textContent = "0.91  -1.37  0.58  2.12"; }, null, 12.0);
+  tl.from("#s1 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.4, ease: "power3.out" }, 5.5);
+  tl.from("#s2 .chip", { opacity: 0, x: -60, duration: 0.4, stagger: 1.8, ease: "power3.out" }, 17.0);
+  tl.from("#s3 .card", { opacity: 0, x: -60, duration: 0.4, stagger: 0.3, ease: "power3.out" }, 26.6);
+  tl.from("#s3 .bar", { scaleX: 0, duration: 0.8, stagger: 0.4, ease: "power3.out" }, 27.0);
+  tl.from("#s4 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.3, ease: "power3.out" }, 34.4);
+  tl.from("#s4 .sq", { opacity: 0, scale: 0.5, duration: 0.3, stagger: 0.12, ease: "back.out(1.6)" }, 35.5);
+  tl.from("#s5 .card", { opacity: 0, x: -60, duration: 0.4, stagger: 0.3, ease: "power3.out" }, 44.6);
+  tl.from("#s6 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.8, ease: "power3.out" }, 52.6);
+  tl.from("#s7 .big", { opacity: 0, scale: 0.8, duration: 0.5, ease: "back.out(1.6)" }, 62.4);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 1.02);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 1.02); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.02); tl.set("#c1", { opacity: 0 }, 1.80);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 1.80); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.80); tl.set("#c2", { opacity: 0 }, 2.10);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 2.70); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.70); tl.set("#c3", { opacity: 0 }, 3.14);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 3.14); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.14); tl.set("#c4", { opacity: 0 }, 3.76);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 3.76); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.76); tl.set("#c5", { opacity: 0 }, 4.46);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 5.24); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.24); tl.set("#c6", { opacity: 0 }, 5.76);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 5.76); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.76); tl.set("#c7", { opacity: 0 }, 6.20);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 6.76); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.76); tl.set("#c8", { opacity: 0 }, 7.36);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 7.36); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.36); tl.set("#c9", { opacity: 0 }, 8.18);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 8.18); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 8.18); tl.set("#c10", { opacity: 0 }, 9.26);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 9.26); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.26); tl.set("#c11", { opacity: 0 }, 10.42);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 10.42); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.42); tl.set("#c12", { opacity: 0 }, 10.72);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 11.48); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.48); tl.set("#c13", { opacity: 0 }, 12.26);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 12.26); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.26); tl.set("#c14", { opacity: 0 }, 12.58);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 13.28); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.28); tl.set("#c15", { opacity: 0 }, 14.02);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 14.42); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.42); tl.set("#c16", { opacity: 0 }, 15.04);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 15.04); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.04); tl.set("#c17", { opacity: 0 }, 15.36);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 16.64); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 16.64); tl.set("#c18", { opacity: 0 }, 17.20);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 18.14); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.14); tl.set("#c19", { opacity: 0 }, 18.56);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 18.56); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.56); tl.set("#c20", { opacity: 0 }, 18.86);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 19.32); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.32); tl.set("#c21", { opacity: 0 }, 20.04);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 20.04); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.04); tl.set("#c22", { opacity: 0 }, 20.88);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 20.88); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.88); tl.set("#c23", { opacity: 0 }, 21.24);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 21.68); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.68); tl.set("#c24", { opacity: 0 }, 22.14);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 22.14); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.14); tl.set("#c25", { opacity: 0 }, 22.90);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 22.90); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.90); tl.set("#c26", { opacity: 0 }, 24.08);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 24.08); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 24.08); tl.set("#c27", { opacity: 0 }, 25.12);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 25.12); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.12); tl.set("#c28", { opacity: 0 }, 25.56);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 26.28); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.28); tl.set("#c29", { opacity: 0 }, 27.30);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 27.30); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.30); tl.set("#c30", { opacity: 0 }, 27.68);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 28.22); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.22); tl.set("#c31", { opacity: 0 }, 28.90);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 28.90); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.90); tl.set("#c32", { opacity: 0 }, 29.72);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 30.12); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.12); tl.set("#c33", { opacity: 0 }, 30.50);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 30.50); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.50); tl.set("#c34", { opacity: 0 }, 31.48);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 31.48); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.48); tl.set("#c35", { opacity: 0 }, 31.98);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 31.98); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.98); tl.set("#c36", { opacity: 0 }, 32.86);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 32.86); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.86); tl.set("#c37", { opacity: 0 }, 33.26);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 34.04); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.04); tl.set("#c38", { opacity: 0 }, 34.68);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 34.68); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.68); tl.set("#c39", { opacity: 0 }, 35.44);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 35.44); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.44); tl.set("#c40", { opacity: 0 }, 35.94);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 35.94); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.94); tl.set("#c41", { opacity: 0 }, 37.10);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 37.10); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 37.10); tl.set("#c42", { opacity: 0 }, 37.80);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 38.38); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.38); tl.set("#c43", { opacity: 0 }, 39.30);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 39.30); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.30); tl.set("#c44", { opacity: 0 }, 40.26);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 40.94); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.94); tl.set("#c45", { opacity: 0 }, 41.76);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 41.76); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 41.76); tl.set("#c46", { opacity: 0 }, 42.70);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 42.70); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.70); tl.set("#c47", { opacity: 0 }, 43.38);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 44.26); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.26); tl.set("#c48", { opacity: 0 }, 44.84);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 44.84); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.84); tl.set("#c49", { opacity: 0 }, 45.38);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 46.10); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.10); tl.set("#c50", { opacity: 0 }, 46.40);
+    tl.set("#c51", { opacity: 1, scale: 0.92 }, 46.40); tl.to("#c51", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.40); tl.set("#c51", { opacity: 0 }, 46.70);
+    tl.set("#c52", { opacity: 1, scale: 0.92 }, 47.14); tl.to("#c52", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.14); tl.set("#c52", { opacity: 0 }, 47.62);
+    tl.set("#c53", { opacity: 1, scale: 0.92 }, 47.80); tl.to("#c53", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.80); tl.set("#c53", { opacity: 0 }, 48.56);
+    tl.set("#c54", { opacity: 1, scale: 0.92 }, 48.56); tl.to("#c54", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.56); tl.set("#c54", { opacity: 0 }, 48.86);
+    tl.set("#c55", { opacity: 1, scale: 0.92 }, 49.46); tl.to("#c55", { scale: 1, duration: 0.12, ease: "power2.out" }, 49.46); tl.set("#c55", { opacity: 0 }, 50.02);
+    tl.set("#c56", { opacity: 1, scale: 0.92 }, 50.02); tl.to("#c56", { scale: 1, duration: 0.12, ease: "power2.out" }, 50.02); tl.set("#c56", { opacity: 0 }, 51.06);
+    tl.set("#c57", { opacity: 1, scale: 0.92 }, 51.06); tl.to("#c57", { scale: 1, duration: 0.12, ease: "power2.out" }, 51.06); tl.set("#c57", { opacity: 0 }, 51.44);
+    tl.set("#c58", { opacity: 1, scale: 0.92 }, 52.22); tl.to("#c58", { scale: 1, duration: 0.12, ease: "power2.out" }, 52.22); tl.set("#c58", { opacity: 0 }, 52.70);
+    tl.set("#c59", { opacity: 1, scale: 0.92 }, 53.10); tl.to("#c59", { scale: 1, duration: 0.12, ease: "power2.out" }, 53.10); tl.set("#c59", { opacity: 0 }, 53.80);
+    tl.set("#c60", { opacity: 1, scale: 0.92 }, 53.80); tl.to("#c60", { scale: 1, duration: 0.12, ease: "power2.out" }, 53.80); tl.set("#c60", { opacity: 0 }, 54.62);
+    tl.set("#c61", { opacity: 1, scale: 0.92 }, 54.62); tl.to("#c61", { scale: 1, duration: 0.12, ease: "power2.out" }, 54.62); tl.set("#c61", { opacity: 0 }, 55.40);
+    tl.set("#c62", { opacity: 1, scale: 0.92 }, 55.40); tl.to("#c62", { scale: 1, duration: 0.12, ease: "power2.out" }, 55.40); tl.set("#c62", { opacity: 0 }, 56.04);
+    tl.set("#c63", { opacity: 1, scale: 0.92 }, 56.62); tl.to("#c63", { scale: 1, duration: 0.12, ease: "power2.out" }, 56.62); tl.set("#c63", { opacity: 0 }, 57.14);
+    tl.set("#c64", { opacity: 1, scale: 0.92 }, 57.14); tl.to("#c64", { scale: 1, duration: 0.12, ease: "power2.out" }, 57.14); tl.set("#c64", { opacity: 0 }, 58.14);
+    tl.set("#c65", { opacity: 1, scale: 0.92 }, 58.14); tl.to("#c65", { scale: 1, duration: 0.12, ease: "power2.out" }, 58.14); tl.set("#c65", { opacity: 0 }, 58.46);
+    tl.set("#c66", { opacity: 1, scale: 0.92 }, 59.00); tl.to("#c66", { scale: 1, duration: 0.12, ease: "power2.out" }, 59.00); tl.set("#c66", { opacity: 0 }, 59.32);
+    tl.set("#c67", { opacity: 1, scale: 0.92 }, 59.76); tl.to("#c67", { scale: 1, duration: 0.12, ease: "power2.out" }, 59.76); tl.set("#c67", { opacity: 0 }, 60.42);
+    tl.set("#c68", { opacity: 1, scale: 0.92 }, 60.42); tl.to("#c68", { scale: 1, duration: 0.12, ease: "power2.out" }, 60.42); tl.set("#c68", { opacity: 0 }, 61.00);
+    tl.set("#c69", { opacity: 1, scale: 0.92 }, 61.00); tl.to("#c69", { scale: 1, duration: 0.12, ease: "power2.out" }, 61.00); tl.set("#c69", { opacity: 0 }, 61.30);
+    tl.set("#c70", { opacity: 1, scale: 0.92 }, 62.06); tl.to("#c70", { scale: 1, duration: 0.12, ease: "power2.out" }, 62.06); tl.set("#c70", { opacity: 0 }, 62.88);
+    tl.set("#c71", { opacity: 1, scale: 0.92 }, 62.88); tl.to("#c71", { scale: 1, duration: 0.12, ease: "power2.out" }, 62.88); tl.set("#c71", { opacity: 0 }, 63.34);
+    tl.set("#c72", { opacity: 1, scale: 0.92 }, 63.90); tl.to("#c72", { scale: 1, duration: 0.12, ease: "power2.out" }, 63.90); tl.set("#c72", { opacity: 0 }, 64.20);
+    tl.set("#c73", { opacity: 1, scale: 0.92 }, 64.20); tl.to("#c73", { scale: 1, duration: 0.12, ease: "power2.out" }, 64.20); tl.set("#c73", { opacity: 0 }, 64.58);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

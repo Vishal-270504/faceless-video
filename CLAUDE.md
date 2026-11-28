@@ -3,7 +3,7 @@
 Read this whole file before doing any video task. It is the only context you need. Do not ask the user for paths, commands or the workflow again.
 
 ## What this project does
-Turns a short script into a finished faceless YouTube Short (1080x1920, under 60 s) entirely on this PC, free:
+Turns a short script into a finished faceless YouTube Short (1080x1920, 60-90 s target, never over 180 s) entirely on this PC, free:
 script -> narration (Kokoro TTS, local) -> word timings (faster-whisper, local) -> visuals (HyperFrames HTML, one per beat) + word-synced captions -> MP4.
 
 Repo: https://github.com/Vishal-270504/faceless-video (public). This folder is its clone.
@@ -54,9 +54,10 @@ Topic source (outside the repo, the user's file): `C:\Users\Visha\OneDrive\Deskt
 12. **Commit and push only when the user asks.** Then delete local media (see Local cleanup).
 
 ## Script rules
-- 110-125 spoken words (about 45 s). Hard limits: under 60 s; the script must print OK.
+- Length: 60-90 s (150-230 spoken words, about 2.6 words per second). YouTube Shorts accept up to 3 minutes, so the hard cap is 180 s. The script must print OK.
+- Each beat is one idea with its visual. Long videos need more points, not padding: add a point, example or check rather than repeating the hook.
 - Plain text in `input/<name>.txt`. No headings, no stage directions, no emojis, no brackets.
-- Beats are separated by one blank line. Aim for 6-9 beats: hook, points (2-5), takeaway, question.
+- Beats are separated by one blank line. Aim for 8-12 beats: hook, points (4-8), takeaway, question.
 - Structure: hook (name the viewer's problem) -> idea (one sentence) -> points (one fix or example per beat, each starting with a short label like "Errors:") -> takeaway (the rule to remember) -> question (invite a comment).
 - Simple words. Explain a technical term in a few words the first time, or drop it. One code name is fine; no code walkthroughs.
 - One idea per video. Show the broken version before the fix.
@@ -69,11 +70,22 @@ This file is inserted into the composition. Format:
 <markup: the visual divs, no <html> or <body> tags>
 <script> ...GSAP timeline calls on the existing `tl`... </script>
 ```
+### Visual style (reference: "Its totally Crazy... Claude wrote 335 lines for a date picker", kept in Downloads; applies to every video from now on)
+- Scene by scene, each beat is one full-frame scene. Alternate a dark scene (`#0b0b12`, black) with a light scene (off-white `#f4f4f1`) so the eye resets. Light scenes hold physical or product-like objects; dark scenes hold code, terminals and app UI.
+- Headline on top: sentence case, regular grey words with one or two bold white words that carry the point (e.g. "Claude wrote **335** lines"). Put a thin blue selection box (`outline:2px solid #3b82f6` with light blue fill) around the bold word, like a text selection.
+- Ordinal kicker per point beat: "Number one," "Number two," "Number three." Use it for the points beat; the hook and the takeaway get no number.
+- Big stat numbers: the number in very large bold (900) white, with a small grey unit under or after it ("335 lines"). Count the number up on the beat; no count-ups on text-only beats.
+- Show real UI as the main visual: code panels with line numbers (scroll them, fade the edges), a terminal panel that types a prompt, a calendar, a file tree, a repo header ("owner/repo"). Use real labels from the script.
+- Accent: one coral/orange (`#e8704a`) badge or highlight per video for the key item (the tool name, the bad value, the answer). Everything else stays grey or white.
+- Transitions: a horizontal wipe or slide between scenes, or a slow pan across a wall of blurred file names. Do not use fades alone.
+- Do not copy the reference's artwork or brand logos. Only the layout, pacing and type treatment.
+- Units: the reference is 720x1280; this build is 1080x1920. Scale the sizes above by 1.5 (headline about 66-72 px, stat numbers about 240-300 px, highlight box padding about 12 px). Keep text at least 24 px.
+
 - Every beat gets a visual that shows it. No text-only videos. Visuals show the real UI or diagram of the topic, not decorative art.
-- Keep one consistent look per video (same app, same palette, same grid). Good default that worked: dark background `#0b0b12` (already the page background), a single accent colour, a central card at `left:90px; top:330px; width:900px; height:640px`, a kicker label above it at `top:236px` and a 5-segment progress bar at `top:292px`.
+- Keep one consistent look per video (same accent, same type, same grid). The older central-card layout is replaced by the scene style above: headline at top (about `top:200px`), scene content centred between `top:330px` and `top:1000px`, and a 5-segment progress bar at `top:292px` only on videos with numbered points.
 - Visual area: keep all visuals between `top` 168 and 1000 px. Captions are placed by the build at `top:1080px`, two to three lines. Nothing important under 1330 px.
 - Fonts: only bundled ones resolve by name: **Inter** (weights 400, 700, 900 only). Do not use 800, Arial, Helvetica or other system fonts without `@font-face`.
-- Timing: each timed element has `class="clip"`, `data-start` and `data-duration` (seconds). Set times from `beat_times.py`. Land end states slightly before the end. Never exceed the video length (about beat 8 end + 0.6 s); lint warns otherwise.
+- Timing: each timed element has `class="clip"`, `data-start` and `data-duration` (seconds). Set times from `beat_times.py`. Land end states slightly before the end. Never exceed the video length (last beat end + 0.6 s); lint warns otherwise.
 - Animation: use GSAP on the existing `tl` with absolute times, e.g. `tl.from("#x", {opacity:0, y:20, duration:0.4, ease:"power3.out"}, 12.3);`. Use eases like `power2.out`, `power3.out`, `back.out(2)` sparingly. Use `repeat` only with a finite number (never `-1`).
 - No `Date.now()`, no `Math.random()`, no network fetches, no timers.
 - Use `opacity` on `.clip` elements; do not tween `display`/`visibility`. Use `scale`/`y`/`x` for motion on children.
@@ -176,6 +188,11 @@ All eight topics on the brief have a rendered video and an entry in metadata/all
 - 36 `fe-useeffect-cleanup` - Stop the leak: useEffect cleanup (advanced). Rendered. Metadata in `metadata/all-videos.md`.
 - 37 `fe-web-workers` - Stop your page freezing with Web Workers (advanced). Rendered. Metadata in `metadata/all-videos.md`.
 - 38 `fe-lazy-images` - Why your page loads 40 images before scroll (advanced). Rendered. Metadata in `metadata/all-videos.md`.
+- 79 `github-repos-for-developers` - 4 GitHub repos every developer should know (65 s). Rendered (new scene style, 60-90 s). Metadata in `metadata/all-videos.md`.
+- 80 `ai-ml-explained` - AI vs machine learning vs deep learning (67 s). Rendered (new scene style). Metadata in `metadata/all-videos.md`.
+- 81 `ai-models-explained` - What is an AI model? Weights explained (65 s). Rendered (new scene style). Metadata in `metadata/all-videos.md`.
+- 82 `typescript-vs-javascript` - TypeScript vs JavaScript: when to switch (69 s). Rendered (new scene style). Metadata in `metadata/all-videos.md`.
+- 83 `ui-vs-ux` - UI vs UX: what is the difference? (63 s). Rendered (new scene style). Metadata in `metadata/all-videos.md`.
 
 ## Install check (fresh PC)
 Node 22+, FFmpeg on PATH, Python 3.12, the venv above, then `npx --yes hyperframes@0.9.26 --version` must work.

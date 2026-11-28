@@ -33,8 +33,8 @@ def main() -> None:
         problems.append("no audio stream")
     if (video["width"], video["height"]) != (1080, 1920):
         problems.append(f"size {video['width']}x{video['height']}")
-    if dur > 60:
-        problems.append(f"{dur:.1f}s is over 60 s")
+    if dur > 180:
+        problems.append(f"{dur:.1f}s is over 180 s")
     status = "WARN" if problems else "OK"
     print(f"{status} | {name} | {dur:.1f}s | {video['width']}x{video['height']} | {','.join(kinds)} | "
           f"sheet {sheet}" + (f" | {'; '.join(problems)}" if problems else ""))

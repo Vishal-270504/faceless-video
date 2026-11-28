@@ -1,0 +1,149 @@
+<style>
+  .scene { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; font-family: Inter, sans-serif; }
+  .dark { background: #0b0b12; color: #fff; }
+  .light { background: #f4f4f1; color: #0b0b12; }
+  .kick { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-size: 42px; font-weight: 700; color: #e8704a; }
+  .head { position: absolute; left: 70px; right: 70px; top: 300px; text-align: center; font-size: 66px; font-weight: 400; line-height: 1.22; color: #8a8a96; }
+  .light .head { color: #5d5d68; }
+  .k { font-weight: 900; }
+  .dark .k { color: #fff; }
+  .light .k { color: #0b0b12; }
+  .hl { position: relative; display: inline-block; }
+  .hl::after { content: ""; position: absolute; left: -10px; right: -10px; top: -6px; bottom: -6px; border: 3px solid #3b82f6; background: rgba(59,130,246,.2); }
+  .card { position: absolute; left: 90px; right: 90px; border-radius: 24px; padding: 30px 40px; }
+  .dark .card { background: #17171f; border: 1px solid #2a2a36; }
+  .light .card { background: #fff; border: 1px solid #d9d9e0; }
+  .label { font-size: 40px; font-weight: 700; }
+  .sub { font-size: 34px; font-weight: 400; color: #8a8a96; }
+  .light .sub { color: #5d5d68; }
+  .mono { font-family: monospace; font-size: 40px; line-height: 1.5; }
+  .dark .mono { color: #e8704a; }
+  .light .mono { color: #b4502f; }
+  .big { font-size: 200px; font-weight: 900; line-height: 1; color: #e8704a; text-align: center; }
+  .chip { position: absolute; top: 700px; height: 110px; padding: 0 40px; border-radius: 55px; display: flex; align-items: center; font-size: 50px; font-weight: 700; background: #17171f; border: 1px solid #2a2a36; }
+  .bar { position: absolute; left: 40px; height: 60px; border-radius: 30px; background: #e8704a; transform-origin: left center; }
+  .check { width: 30px; height: 16px; border-left: 6px solid #e8704a; border-bottom: 6px solid #e8704a; transform: rotate(-45deg); display: inline-block; margin-right: 26px; }
+  .sq { position: absolute; width: 150px; height: 150px; border-radius: 18px; }
+</style>
+
+<!-- Beat 0: hook -->
+<div id="s0" class="scene dark clip" data-start="0" data-duration="5.24" data-track-index="0">
+  <div class="head">An AI model sounds like a program. It is closer to a <span class="hl"><span class="k">file of numbers</span></span>.</div>
+  <div class="card" style="top:640px; height:420px; padding:40px 50px">
+    <div class="mono" style="color:#8a8a96">0.82  -1.37   0.05   2.91</div>
+    <div class="mono" style="color:#8a8a96">-0.44  1.18  -2.06   0.37</div>
+    <div class="mono">0.13  -0.77  1.94  -1.02</div>
+    <div class="mono" style="color:#8a8a96">1.66  0.29  -0.58  0.91</div>
+    <div class="mono" style="color:#8a8a96">-2.23  0.64  1.08  -0.15</div>
+  </div>
+</div>
+
+<!-- Beat 1: training -->
+<div id="s1" class="scene light clip" data-start="5.24" data-duration="11.4" data-track-index="0">
+  <div class="kick">TRAINING</div>
+  <div class="head">Training changes <span class="hl"><span class="k">billions</span></span> of numbers.</div>
+  <div class="card" style="top:560px; height:210px">
+    <div class="sub">Before training</div>
+    <div style="height:14px"></div>
+    <div class="mono" id="w1">0.12  0.00  0.00  0.00</div>
+  </div>
+  <div class="card" style="top:790px; height:210px; background:#0b0b12; border-color:#0b0b12">
+    <div class="sub" style="color:#8a8a96">After training</div>
+    <div style="height:14px"></div>
+    <div class="mono" id="w2">0.91  -1.37  0.58  2.12</div>
+  </div>
+</div>
+
+<!-- Beat 2: inference -->
+<div id="s2" class="scene dark clip" data-start="16.64" data-duration="9.64" data-track-index="0">
+  <div class="kick">INFERENCE</div>
+  <div class="head">It predicts the <span class="hl"><span class="k">next word</span></span>, again and again.</div>
+  <div class="chip" style="left:90px; top:700px">The</div>
+  <div class="chip" style="left:260px; top:700px">sky</div>
+  <div class="chip" style="left:400px; top:700px">is</div>
+  <div class="chip" style="left:520px; top:700px; background:#e8704a; border-color:#e8704a; color:#0b0b12">blue</div>
+</div>
+
+<!-- Beat 3: size -->
+<div id="s3" class="scene light clip" data-start="26.28" data-duration="7.76" data-track-index="0">
+  <div class="kick">SIZE</div>
+  <div class="head">Bigger models have <span class="hl"><span class="k">more weights</span></span>.</div>
+  <div class="card" style="top:580px; height:200px">
+    <div class="label">Small model</div>
+    <div class="bar" style="top:110px; width:200px"></div>
+    <div class="sub" style="position:absolute; left:40px; top:190px; display:none"></div>
+  </div>
+  <div class="card" style="top:820px; height:200px">
+    <div class="label">Large model</div>
+    <div class="bar" style="top:110px; width:800px; background:#0b0b12"></div>
+  </div>
+  <div class="sub" style="position:absolute; left:90px; top:1030px; color:#5d5d68; font-size:30px">Small: fast and cheap. Large: slower, often more accurate.</div>
+</div>
+
+<!-- Beat 4: where it runs -->
+<div id="s4" class="scene dark clip" data-start="34.04" data-duration="10.22" data-track-index="0">
+  <div class="head">Run it on a laptop, or on a <span class="hl"><span class="k">data center</span></span>.</div>
+  <div class="card" style="left:90px; right:580px; top:600px; height:330px">
+    <div class="label">Laptop</div>
+    <div style="height:30px"></div>
+    <div class="sub">Small model</div>
+    <div class="sub">Fast, cheap</div>
+  </div>
+  <div class="card" style="left:500px; right:90px; top:600px; height:330px">
+    <div class="label">Data center</div>
+    <div style="height:30px"></div>
+    <div class="sub">Large model</div>
+    <div class="sub">Slower, more accurate</div>
+  </div>
+  <div class="sq" style="left:150px; top:960px; background:#e8704a; width:100px; height:100px"></div>
+  <div class="sq" style="left:560px; top:960px; width:100px; height:100px; background:#2a2a36"></div>
+  <div class="sq" style="left:680px; top:960px; width:100px; height:100px; background:#2a2a36"></div>
+  <div class="sq" style="left:800px; top:960px; width:100px; height:100px; background:#2a2a36"></div>
+</div>
+
+<!-- Beat 5: model types -->
+<div id="s5" class="scene light clip" data-start="44.26" data-duration="7.96" data-track-index="0">
+  <div class="head">Some read <span class="hl"><span class="k">text</span></span>, some read images.</div>
+  <div class="card" style="top:540px; height:150px"><div class="label">Text</div><div class="mono" style="font-size:36px">"Hello there"</div></div>
+  <div class="card" style="top:710px; height:150px"><div class="label">Images</div><div class="sq" style="position:static; display:inline-block; width:60px; height:60px; background:#e8704a; margin-right:14px"></div><div class="sq" style="position:static; display:inline-block; width:60px; height:60px; background:#0b0b12; margin-right:14px"></div><div class="sq" style="position:static; display:inline-block; width:60px; height:60px; background:#8a8a96"></div></div>
+  <div class="card" style="top:880px; height:150px"><div class="label">Both</div></div>
+</div>
+
+<!-- Beat 6: takeaway -->
+<div id="s6" class="scene dark clip" data-start="52.22" data-duration="9.84" data-track-index="0">
+  <div class="head">A model is <span class="hl"><span class="k">learned numbers</span></span> plus code.</div>
+  <div class="card" style="top:600px; height:130px"><div class="label"><span class="check"></span>The task</div></div>
+  <div class="card" style="top:750px; height:130px"><div class="label"><span class="check"></span>The size</div></div>
+  <div class="card" style="top:900px; height:130px"><div class="label"><span class="check"></span>The cost to run</div></div>
+</div>
+
+<!-- Beat 7: question -->
+<div id="s7" class="scene light clip" data-start="62.06" data-duration="3.14" data-track-index="0">
+  <div class="big" style="position:absolute; left:0; right:0; top:600px; font-size:320px">?</div>
+  <div class="sub" style="position:absolute; left:0; right:0; top:1000px; font-size:44px; text-align:center; color:#0b0b12">Which model do you use most?</div>
+</div>
+
+<script>
+  // Caption colour follows the scene: dark text on light scenes, white on dark scenes.
+  tl.set(".caption", { color: "#fff" }, 0);
+  tl.set(".caption", { color: "#0b0b12" }, 5.24);
+  tl.set(".caption", { color: "#fff" }, 16.64);
+  tl.set(".caption", { color: "#0b0b12" }, 26.28);
+  tl.set(".caption", { color: "#fff" }, 34.04);
+  tl.set(".caption", { color: "#0b0b12" }, 44.26);
+  tl.set(".caption", { color: "#fff" }, 52.22);
+  tl.set(".caption", { color: "#0b0b12" }, 62.06);
+
+  tl.from("#s0 .card", { opacity: 0, y: 40, duration: 0.5, ease: "power3.out" }, 0.4);
+  // Training: the numbers change from the first state to the second.
+  tl.call(() => { document.getElementById("w1").textContent = "0.91  -1.37  0.58  2.12"; }, null, 12.0);
+  tl.from("#s1 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.4, ease: "power3.out" }, 5.5);
+  tl.from("#s2 .chip", { opacity: 0, x: -60, duration: 0.4, stagger: 1.8, ease: "power3.out" }, 17.0);
+  tl.from("#s3 .card", { opacity: 0, x: -60, duration: 0.4, stagger: 0.3, ease: "power3.out" }, 26.6);
+  tl.from("#s3 .bar", { scaleX: 0, duration: 0.8, stagger: 0.4, ease: "power3.out" }, 27.0);
+  tl.from("#s4 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.3, ease: "power3.out" }, 34.4);
+  tl.from("#s4 .sq", { opacity: 0, scale: 0.5, duration: 0.3, stagger: 0.12, ease: "back.out(1.6)" }, 35.5);
+  tl.from("#s5 .card", { opacity: 0, x: -60, duration: 0.4, stagger: 0.3, ease: "power3.out" }, 44.6);
+  tl.from("#s6 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.8, ease: "power3.out" }, 52.6);
+  tl.from("#s7 .big", { opacity: 0, scale: 0.8, duration: 0.5, ease: "back.out(1.6)" }, 62.4);
+</script>

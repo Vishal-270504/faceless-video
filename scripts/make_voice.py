@@ -11,7 +11,7 @@ import numpy as np
 import soundfile as sf
 
 ROOT = Path(__file__).resolve().parent.parent
-MAX_SECONDS = 60  # Shorts limit used by this project
+MAX_SECONDS = 180  # YouTube Shorts limit (3 min)
 
 
 def tts(text: str, out_wav: Path, voice: str, speed: float) -> float:

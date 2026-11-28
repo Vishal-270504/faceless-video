@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+  <style>
+    :root { --ground: #0b0b12; --ink: #ffffff; --accent: #ffd166; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ground); }
+    #root { position: relative; width: 1080px; height: 1920px; font-family: Inter, sans-serif; }
+    /* background clip: blurred and darkened so a 720p landscape source reads as a soft backdrop, not a stretched frame */
+    .bgvid { position: absolute; left: -80px; top: -80px; width: 1240px; height: 2080px; object-fit: cover;
+      filter: blur(18px) brightness(0.32) saturate(1.15); }
+    .caption {
+      position: absolute; left: 60px; right: 60px; top: 1080px; text-align: center; font-weight: 900;
+      color: var(--ink); font-size: 110px; line-height: 1.1; text-transform: uppercase;
+      text-shadow: 0 6px 24px rgba(0,0,0,.6); opacity: 0;
+    }
+    .title {
+      position: absolute; left: 60px; right: 60px; top: 520px; text-align: center;
+      color: var(--accent); font-size: 96px; line-height: 1.05; opacity: 0;
+    }
+
+  .scene { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; font-family: Inter, sans-serif; }
+  .dark { background: #0b0b12; color: #fff; }
+  .light { background: #f4f4f1; color: #0b0b12; }
+  .kick { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-size: 42px; font-weight: 700; color: #e8704a; }
+  .head { position: absolute; left: 70px; right: 70px; top: 300px; text-align: center; font-size: 66px; font-weight: 400; line-height: 1.22; color: #8a8a96; }
+  .light .head { color: #5d5d68; }
+  .k { font-weight: 900; }
+  .dark .k { color: #fff; }
+  .light .k { color: #0b0b12; }
+  .hl { position: relative; display: inline-block; }
+  .hl::after { content: ""; position: absolute; left: -10px; right: -10px; top: -6px; bottom: -6px; border: 3px solid #3b82f6; background: rgba(59,130,246,.2); }
+  .card { position: absolute; border-radius: 24px; padding: 30px 40px; }
+  .dark .card { background: #17171f; border: 1px solid #2a2a36; }
+  .light .card { background: #fff; border: 1px solid #d9d9e0; }
+  .label { font-size: 44px; font-weight: 900; }
+  .sub { font-size: 34px; font-weight: 400; color: #8a8a96; }
+  .light .sub { color: #5d5d68; }
+  .mono { font-family: monospace; font-size: 36px; line-height: 1.5; }
+  .dark .mono { color: #fff; }
+  .light .mono { color: #0b0b12; }
+  .str { color: #e8704a; }
+  .err { color: #ff4d4d; border-bottom: 4px dotted #ff4d4d; }
+  .pill { display: inline-block; font-size: 30px; font-weight: 700; color: #0b0b12; background: #e8704a; border-radius: 40px; padding: 8px 22px; }
+  .arrow { position: absolute; left: 0; right: 0; text-align: center; font-size: 100px; font-weight: 900; color: #e8704a; }
+  .check { width: 30px; height: 16px; border-left: 6px solid #e8704a; border-bottom: 6px solid #e8704a; transform: rotate(-45deg); display: inline-block; margin-right: 24px; }
+  .big { font-size: 260px; font-weight: 900; line-height: 1; text-align: center; color: #e8704a; }
+
+  </style>
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="68.80"
+       data-width="1080" data-height="1920">
+
+
+
+<!-- Beat 0: hook -->
+<div id="s0" class="scene dark clip" data-start="0" data-duration="7.28" data-track-index="0">
+  <div class="head"><span class="hl"><span class="k">JavaScript</span></span> runs your web pages. <span class="hl"><span class="k">TypeScript</span></span> adds a safety check.</div>
+  <div class="card" style="left:90px; right:90px; top:620px; height:170px"><div class="label">JavaScript</div><div class="sub">Loose. Errors show up for users.</div></div>
+  <div class="card" style="left:90px; right:90px; top:820px; height:170px; background:#e8704a; border-color:#e8704a; color:#0b0b12"><div class="label">TypeScript</div><div class="sub" style="color:#0b0b12">JavaScript plus types.</div></div>
+</div>
+
+<!-- Beat 1: loose -->
+<div id="s1" class="scene light clip" data-start="7.28" data-duration="7.66" data-track-index="0">
+  <div class="head">JavaScript is <span class="hl"><span class="k">loose</span></span>.</div>
+  <div class="card" style="left:90px; right:90px; top:600px; height:360px; padding:50px 50px">
+    <div class="mono">let age = <span class="str">"twenty"</span>;</div>
+    <div style="height:30px"></div>
+    <div class="mono">age + 1  <span style="color:#8a8a96">// "twenty1"</span></div>
+    <div style="height:30px"></div>
+    <div class="sub">No warning. It breaks later.</div>
+  </div>
+</div>
+
+<!-- Beat 2: types -->
+<div id="s2" class="scene dark clip" data-start="14.94" data-duration="8.84" data-track-index="0">
+  <div class="head">TypeScript lets you add <span class="hl"><span class="k">types</span></span>.</div>
+  <div class="card" style="left:90px; right:90px; top:600px; height:340px; padding:50px 50px">
+    <div class="mono">type User = {</div>
+    <div class="mono" style="padding-left:50px">name: <span class="str">string</span>;</div>
+    <div class="mono" style="padding-left:50px">age: <span class="str">number</span>;</div>
+    <div class="mono">}</div>
+  </div>
+  <div class="sub" style="position:absolute; left:90px; right:90px; top:1000px; color:#fff"><span class="pill">Editor warns you before you run</span></div>
+</div>
+
+<!-- Beat 3: same mistake -->
+<div id="s3" class="scene light clip" data-start="23.78" data-duration="14.56" data-track-index="0">
+  <div class="head">The same mistake gets a <span class="hl"><span class="k">red line</span></span>.</div>
+  <div class="card" style="left:90px; width:400px; top:620px; height:400px; padding:40px 36px">
+    <div class="label">JavaScript</div>
+    <div style="height:30px"></div>
+    <div class="mono" style="font-size:26px">function addTax(price) {</div>
+    <div class="mono" style="font-size:26px; padding-left:30px">return price + 2;</div>
+    <div class="mono" style="font-size:26px">}</div>
+    <div style="height:16px"></div>
+    <div class="sub" style="font-size:28px">addTax("20") gives "202"</div>
+  </div>
+  <div class="card" style="left:590px; width:400px; top:620px; height:400px; padding:40px 36px">
+    <div class="label">TypeScript</div>
+    <div style="height:30px"></div>
+    <div class="mono" style="font-size:26px">function addTax(price: number) {</div>
+    <div class="mono" style="font-size:26px; padding-left:30px">return price + 2;</div>
+    <div class="mono" style="font-size:26px">}</div>
+    <div style="height:16px"></div>
+    <div class="mono" style="font-size:26px">addTax(<span class="err">"20"</span>)</div>
+    <div style="height:10px"></div>
+    <div class="sub" style="color:#ff4d4d; font-size:28px">Error: text is not a number</div>
+  </div>
+</div>
+
+<!-- Beat 4: compiles -->
+<div id="s4" class="scene dark clip" data-start="38.34" data-duration="11.44" data-track-index="0">
+  <div class="head">TypeScript compiles to <span class="hl"><span class="k">plain JavaScript</span></span>.</div>
+  <div class="card" style="left:90px; right:90px; top:600px; height:170px"><div class="label">app.ts</div><div class="sub">with types</div></div>
+  <div class="arrow" style="top:785px">↓</div>
+  <div class="card" style="left:90px; right:90px; top:880px; height:170px"><div class="label">app.js</div><div class="sub">the browser runs this</div></div>
+</div>
+
+<!-- Beat 5: cost -->
+<div id="s5" class="scene light clip" data-start="49.78" data-duration="6.68" data-track-index="0">
+  <div class="head">A little <span class="hl"><span class="k">more writing</span></span>.</div>
+  <div class="card" style="left:90px; right:90px; top:580px; height:150px"><div class="label">More code to type</div></div>
+  <div class="card" style="left:90px; right:90px; top:740px; height:150px"><div class="label">One build step</div></div>
+  <div class="card" style="left:90px; right:90px; top:900px; height:150px"><div class="sub" style="color:#0b0b12">Tiny script? Plain JavaScript is fine.</div></div>
+</div>
+
+<!-- Beat 6: takeaway -->
+<div id="s6" class="scene dark clip" data-start="56.46" data-duration="9.04" data-track-index="0">
+  <div class="head">Learn with JavaScript. Grow with <span class="hl"><span class="k">TypeScript</span></span>.</div>
+  <div class="card" style="left:90px; right:90px; top:640px; height:160px"><div class="label"><span class="check"></span>Quick try: JavaScript</div></div>
+  <div class="card" style="left:90px; right:90px; top:840px; height:160px"><div class="label"><span class="check"></span>Team project: TypeScript</div></div>
+</div>
+
+<!-- Beat 7: question -->
+<div id="s7" class="scene light clip" data-start="65.5" data-duration="3.1" data-track-index="0">
+  <div class="big" style="position:absolute; left:90px; width:400px; top:620px; font-size:200px; text-align:center">JS</div>
+  <div class="big" style="position:absolute; left:590px; width:400px; top:620px; font-size:200px; text-align:center">TS</div>
+  <div class="sub" style="position:absolute; left:0; right:0; top:1000px; font-size:44px; text-align:center; color:#0b0b12">Which one do you use?</div>
+</div>
+
+
+
+
+    <div id="c0" class="caption clip" data-start="0.00" data-duration="1.36" data-track-index="1">JavaScript runs your</div>
+    <div id="c1" class="caption clip" data-start="1.36" data-duration="0.56" data-track-index="1">web pages,</div>
+    <div id="c2" class="caption clip" data-start="2.50" data-duration="1.00" data-track-index="1">TypeScript is JavaScript</div>
+    <div id="c3" class="caption clip" data-start="3.50" data-duration="0.94" data-track-index="1">with a safety</div>
+    <div id="c4" class="caption clip" data-start="4.44" data-duration="0.62" data-track-index="1">check added,</div>
+    <div id="c5" class="caption clip" data-start="5.66" data-duration="0.46" data-track-index="1">here is the</div>
+    <div id="c6" class="caption clip" data-start="6.12" data-duration="0.30" data-track-index="1">difference.</div>
+    <div id="c7" class="caption clip" data-start="7.28" data-duration="1.04" data-track-index="1">JavaScript is loose.</div>
+    <div id="c8" class="caption clip" data-start="9.04" data-duration="0.42" data-track-index="1">You can pass</div>
+    <div id="c9" class="caption clip" data-start="9.46" data-duration="0.64" data-track-index="1">a number where</div>
+    <div id="c10" class="caption clip" data-start="10.10" data-duration="0.56" data-track-index="1">a name should</div>
+    <div id="c11" class="caption clip" data-start="10.66" data-duration="1.08" data-track-index="1">go, and nothing</div>
+    <div id="c12" class="caption clip" data-start="11.74" data-duration="1.16" data-track-index="1">complains until the</div>
+    <div id="c13" class="caption clip" data-start="12.90" data-duration="0.84" data-track-index="1">app crashes for</div>
+    <div id="c14" class="caption clip" data-start="13.74" data-duration="0.30" data-track-index="1">a user.</div>
+    <div id="c15" class="caption clip" data-start="14.94" data-duration="1.00" data-track-index="1">TypeScript lets you</div>
+    <div id="c16" class="caption clip" data-start="15.94" data-duration="0.46" data-track-index="1">add types.</div>
+    <div id="c17" class="caption clip" data-start="17.00" data-duration="0.56" data-track-index="1">You write that</div>
+    <div id="c18" class="caption clip" data-start="17.56" data-duration="0.64" data-track-index="1">a user has</div>
+    <div id="c19" class="caption clip" data-start="18.20" data-duration="0.56" data-track-index="1">a name that</div>
+    <div id="c20" class="caption clip" data-start="18.76" data-duration="0.88" data-track-index="1">is taxed and</div>
+    <div id="c21" class="caption clip" data-start="19.64" data-duration="0.70" data-track-index="1">an age that</div>
+    <div id="c22" class="caption clip" data-start="20.34" data-duration="0.46" data-track-index="1">is a number.</div>
+    <div id="c23" class="caption clip" data-start="21.50" data-duration="0.56" data-track-index="1">Then the editor</div>
+    <div id="c24" class="caption clip" data-start="22.06" data-duration="0.90" data-track-index="1">warns you before</div>
+    <div id="c25" class="caption clip" data-start="22.96" data-duration="0.58" data-track-index="1">you run the</div>
+    <div id="c26" class="caption clip" data-start="23.54" data-duration="1.50" data-track-index="1">code. Here is</div>
+    <div id="c27" class="caption clip" data-start="25.04" data-duration="0.78" data-track-index="1">a small example.</div>
+    <div id="c28" class="caption clip" data-start="26.52" data-duration="0.68" data-track-index="1">A function that</div>
+    <div id="c29" class="caption clip" data-start="27.20" data-duration="0.82" data-track-index="1">adds tax to</div>
+    <div id="c30" class="caption clip" data-start="28.02" data-duration="0.80" data-track-index="1">a price can</div>
+    <div id="c31" class="caption clip" data-start="28.82" data-duration="1.20" data-track-index="1">quietly join text</div>
+    <div id="c32" class="caption clip" data-start="30.02" data-duration="1.06" data-track-index="1">and numbers if</div>
+    <div id="c33" class="caption clip" data-start="31.08" data-duration="0.90" data-track-index="1">someone passes text.</div>
+    <div id="c34" class="caption clip" data-start="32.84" data-duration="0.62" data-track-index="1">In TypeScript,</div>
+    <div id="c35" class="caption clip" data-start="33.92" data-duration="0.72" data-track-index="1">the same mistake</div>
+    <div id="c36" class="caption clip" data-start="34.64" data-duration="0.60" data-track-index="1">is a red</div>
+    <div id="c37" class="caption clip" data-start="35.24" data-duration="0.68" data-track-index="1">line in your</div>
+    <div id="c38" class="caption clip" data-start="35.92" data-duration="0.94" data-track-index="1">editor before you</div>
+    <div id="c39" class="caption clip" data-start="36.86" data-duration="0.48" data-track-index="1">run anything.</div>
+    <div id="c40" class="caption clip" data-start="38.34" data-duration="0.54" data-track-index="1">The good part,</div>
+    <div id="c41" class="caption clip" data-start="39.36" data-duration="1.26" data-track-index="1">TypeScript compiles to</div>
+    <div id="c42" class="caption clip" data-start="40.62" data-duration="0.54" data-track-index="1">plain JavaScript.</div>
+    <div id="c43" class="caption clip" data-start="42.06" data-duration="0.70" data-track-index="1">The browser never</div>
+    <div id="c44" class="caption clip" data-start="42.76" data-duration="0.78" data-track-index="1">sees the types.</div>
+    <div id="c45" class="caption clip" data-start="44.34" data-duration="1.10" data-track-index="1">Every JavaScript file</div>
+    <div id="c46" class="caption clip" data-start="45.44" data-duration="0.96" data-track-index="1">is also valid</div>
+    <div id="c47" class="caption clip" data-start="46.40" data-duration="0.56" data-track-index="1">TypeScript,</div>
+    <div id="c48" class="caption clip" data-start="47.36" data-duration="0.48" data-track-index="1">so you can</div>
+    <div id="c49" class="caption clip" data-start="47.84" data-duration="0.82" data-track-index="1">switch one file</div>
+    <div id="c50" class="caption clip" data-start="48.66" data-duration="0.60" data-track-index="1">at a time.</div>
+    <div id="c51" class="caption clip" data-start="49.78" data-duration="1.04" data-track-index="1">The cost is</div>
+    <div id="c52" class="caption clip" data-start="50.82" data-duration="0.42" data-track-index="1">a little more</div>
+    <div id="c53" class="caption clip" data-start="51.24" data-duration="0.70" data-track-index="1">writing and a</div>
+    <div id="c54" class="caption clip" data-start="51.94" data-duration="0.48" data-track-index="1">build step.</div>
+    <div id="c55" class="caption clip" data-start="53.06" data-duration="0.36" data-track-index="1">For a tiny</div>
+    <div id="c56" class="caption clip" data-start="53.42" data-duration="0.40" data-track-index="1">script,</div>
+    <div id="c57" class="caption clip" data-start="54.22" data-duration="1.02" data-track-index="1">plain JavaScript is</div>
+    <div id="c58" class="caption clip" data-start="55.24" data-duration="0.30" data-track-index="1">fine.</div>
+    <div id="c59" class="caption clip" data-start="56.46" data-duration="0.32" data-track-index="1">The takeaway,</div>
+    <div id="c60" class="caption clip" data-start="57.42" data-duration="0.96" data-track-index="1">use JavaScript to</div>
+    <div id="c61" class="caption clip" data-start="58.38" data-duration="0.64" data-track-index="1">learn and to</div>
+    <div id="c62" class="caption clip" data-start="59.02" data-duration="0.68" data-track-index="1">make quick tries.</div>
+    <div id="c63" class="caption clip" data-start="60.64" data-duration="0.84" data-track-index="1">Use TypeScript when</div>
+    <div id="c64" class="caption clip" data-start="61.48" data-duration="0.72" data-track-index="1">a project grows</div>
+    <div id="c65" class="caption clip" data-start="62.20" data-duration="0.88" data-track-index="1">and more than</div>
+    <div id="c66" class="caption clip" data-start="63.08" data-duration="0.94" data-track-index="1">one person touches</div>
+    <div id="c67" class="caption clip" data-start="64.02" data-duration="0.54" data-track-index="1">the code.</div>
+    <div id="c68" class="caption clip" data-start="65.50" data-duration="0.52" data-track-index="1">Which one do</div>
+    <div id="c69" class="caption clip" data-start="66.02" data-duration="0.38" data-track-index="1">you use in</div>
+    <div id="c70" class="caption clip" data-start="66.40" data-duration="0.46" data-track-index="1">your projects?</div>
+    <div id="c71" class="caption clip" data-start="67.52" data-duration="0.32" data-track-index="1">Tell me in</div>
+    <div id="c72" class="caption clip" data-start="67.84" data-duration="0.36" data-track-index="1">the comments.</div>
+    <audio id="narration" data-start="0" data-duration="68.80" data-track-index="2" data-volume="1"
+           src="assets/typescript-vs-javascript.wav"></audio>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+  // Caption colour follows the scene: dark text on light scenes, white on dark scenes.
+  tl.set(".caption", { color: "#fff" }, 0);
+  tl.set(".caption", { color: "#0b0b12" }, 7.28);
+  tl.set(".caption", { color: "#fff" }, 14.94);
+  tl.set(".caption", { color: "#0b0b12" }, 23.78);
+  tl.set(".caption", { color: "#fff" }, 38.34);
+  tl.set(".caption", { color: "#0b0b12" }, 49.78);
+  tl.set(".caption", { color: "#fff" }, 56.46);
+  tl.set(".caption", { color: "#0b0b12" }, 65.5);
+
+  tl.from("#s0 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.6, ease: "power3.out" }, 0.4);
+  tl.from("#s1 .card", { opacity: 0, y: 40, duration: 0.5, ease: "power3.out" }, 7.5);
+  tl.from("#s2 .card", { opacity: 0, y: 40, duration: 0.5, ease: "power3.out" }, 15.1);
+  tl.from("#s3 .card", { opacity: 0, x: -60, duration: 0.5, stagger: 0.6, ease: "power3.out" }, 24.0);
+  tl.from("#s4 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 1.2, ease: "power3.out" }, 38.6);
+  tl.from("#s4 .arrow", { opacity: 0, scale: 0.5, duration: 0.4, ease: "back.out(1.6)" }, 39.6);
+  tl.from("#s5 .card", { opacity: 0, x: -60, duration: 0.4, stagger: 0.4, ease: "power3.out" }, 50.0);
+  tl.from("#s6 .card", { opacity: 0, y: 40, duration: 0.5, stagger: 0.8, ease: "power3.out" }, 56.7);
+  tl.from("#s7 .big", { opacity: 0, scale: 0.8, duration: 0.5, stagger: 0.3, ease: "back.out(1.6)" }, 65.8);
+
+
+    tl.set("#c0", { opacity: 1, scale: 0.92 }, 0.00); tl.to("#c0", { scale: 1, duration: 0.12, ease: "power2.out" }, 0.00); tl.set("#c0", { opacity: 0 }, 1.36);
+    tl.set("#c1", { opacity: 1, scale: 0.92 }, 1.36); tl.to("#c1", { scale: 1, duration: 0.12, ease: "power2.out" }, 1.36); tl.set("#c1", { opacity: 0 }, 1.92);
+    tl.set("#c2", { opacity: 1, scale: 0.92 }, 2.50); tl.to("#c2", { scale: 1, duration: 0.12, ease: "power2.out" }, 2.50); tl.set("#c2", { opacity: 0 }, 3.50);
+    tl.set("#c3", { opacity: 1, scale: 0.92 }, 3.50); tl.to("#c3", { scale: 1, duration: 0.12, ease: "power2.out" }, 3.50); tl.set("#c3", { opacity: 0 }, 4.44);
+    tl.set("#c4", { opacity: 1, scale: 0.92 }, 4.44); tl.to("#c4", { scale: 1, duration: 0.12, ease: "power2.out" }, 4.44); tl.set("#c4", { opacity: 0 }, 5.06);
+    tl.set("#c5", { opacity: 1, scale: 0.92 }, 5.66); tl.to("#c5", { scale: 1, duration: 0.12, ease: "power2.out" }, 5.66); tl.set("#c5", { opacity: 0 }, 6.12);
+    tl.set("#c6", { opacity: 1, scale: 0.92 }, 6.12); tl.to("#c6", { scale: 1, duration: 0.12, ease: "power2.out" }, 6.12); tl.set("#c6", { opacity: 0 }, 6.42);
+    tl.set("#c7", { opacity: 1, scale: 0.92 }, 7.28); tl.to("#c7", { scale: 1, duration: 0.12, ease: "power2.out" }, 7.28); tl.set("#c7", { opacity: 0 }, 8.32);
+    tl.set("#c8", { opacity: 1, scale: 0.92 }, 9.04); tl.to("#c8", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.04); tl.set("#c8", { opacity: 0 }, 9.46);
+    tl.set("#c9", { opacity: 1, scale: 0.92 }, 9.46); tl.to("#c9", { scale: 1, duration: 0.12, ease: "power2.out" }, 9.46); tl.set("#c9", { opacity: 0 }, 10.10);
+    tl.set("#c10", { opacity: 1, scale: 0.92 }, 10.10); tl.to("#c10", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.10); tl.set("#c10", { opacity: 0 }, 10.66);
+    tl.set("#c11", { opacity: 1, scale: 0.92 }, 10.66); tl.to("#c11", { scale: 1, duration: 0.12, ease: "power2.out" }, 10.66); tl.set("#c11", { opacity: 0 }, 11.74);
+    tl.set("#c12", { opacity: 1, scale: 0.92 }, 11.74); tl.to("#c12", { scale: 1, duration: 0.12, ease: "power2.out" }, 11.74); tl.set("#c12", { opacity: 0 }, 12.90);
+    tl.set("#c13", { opacity: 1, scale: 0.92 }, 12.90); tl.to("#c13", { scale: 1, duration: 0.12, ease: "power2.out" }, 12.90); tl.set("#c13", { opacity: 0 }, 13.74);
+    tl.set("#c14", { opacity: 1, scale: 0.92 }, 13.74); tl.to("#c14", { scale: 1, duration: 0.12, ease: "power2.out" }, 13.74); tl.set("#c14", { opacity: 0 }, 14.04);
+    tl.set("#c15", { opacity: 1, scale: 0.92 }, 14.94); tl.to("#c15", { scale: 1, duration: 0.12, ease: "power2.out" }, 14.94); tl.set("#c15", { opacity: 0 }, 15.94);
+    tl.set("#c16", { opacity: 1, scale: 0.92 }, 15.94); tl.to("#c16", { scale: 1, duration: 0.12, ease: "power2.out" }, 15.94); tl.set("#c16", { opacity: 0 }, 16.40);
+    tl.set("#c17", { opacity: 1, scale: 0.92 }, 17.00); tl.to("#c17", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.00); tl.set("#c17", { opacity: 0 }, 17.56);
+    tl.set("#c18", { opacity: 1, scale: 0.92 }, 17.56); tl.to("#c18", { scale: 1, duration: 0.12, ease: "power2.out" }, 17.56); tl.set("#c18", { opacity: 0 }, 18.20);
+    tl.set("#c19", { opacity: 1, scale: 0.92 }, 18.20); tl.to("#c19", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.20); tl.set("#c19", { opacity: 0 }, 18.76);
+    tl.set("#c20", { opacity: 1, scale: 0.92 }, 18.76); tl.to("#c20", { scale: 1, duration: 0.12, ease: "power2.out" }, 18.76); tl.set("#c20", { opacity: 0 }, 19.64);
+    tl.set("#c21", { opacity: 1, scale: 0.92 }, 19.64); tl.to("#c21", { scale: 1, duration: 0.12, ease: "power2.out" }, 19.64); tl.set("#c21", { opacity: 0 }, 20.34);
+    tl.set("#c22", { opacity: 1, scale: 0.92 }, 20.34); tl.to("#c22", { scale: 1, duration: 0.12, ease: "power2.out" }, 20.34); tl.set("#c22", { opacity: 0 }, 20.80);
+    tl.set("#c23", { opacity: 1, scale: 0.92 }, 21.50); tl.to("#c23", { scale: 1, duration: 0.12, ease: "power2.out" }, 21.50); tl.set("#c23", { opacity: 0 }, 22.06);
+    tl.set("#c24", { opacity: 1, scale: 0.92 }, 22.06); tl.to("#c24", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.06); tl.set("#c24", { opacity: 0 }, 22.96);
+    tl.set("#c25", { opacity: 1, scale: 0.92 }, 22.96); tl.to("#c25", { scale: 1, duration: 0.12, ease: "power2.out" }, 22.96); tl.set("#c25", { opacity: 0 }, 23.54);
+    tl.set("#c26", { opacity: 1, scale: 0.92 }, 23.54); tl.to("#c26", { scale: 1, duration: 0.12, ease: "power2.out" }, 23.54); tl.set("#c26", { opacity: 0 }, 25.04);
+    tl.set("#c27", { opacity: 1, scale: 0.92 }, 25.04); tl.to("#c27", { scale: 1, duration: 0.12, ease: "power2.out" }, 25.04); tl.set("#c27", { opacity: 0 }, 25.82);
+    tl.set("#c28", { opacity: 1, scale: 0.92 }, 26.52); tl.to("#c28", { scale: 1, duration: 0.12, ease: "power2.out" }, 26.52); tl.set("#c28", { opacity: 0 }, 27.20);
+    tl.set("#c29", { opacity: 1, scale: 0.92 }, 27.20); tl.to("#c29", { scale: 1, duration: 0.12, ease: "power2.out" }, 27.20); tl.set("#c29", { opacity: 0 }, 28.02);
+    tl.set("#c30", { opacity: 1, scale: 0.92 }, 28.02); tl.to("#c30", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.02); tl.set("#c30", { opacity: 0 }, 28.82);
+    tl.set("#c31", { opacity: 1, scale: 0.92 }, 28.82); tl.to("#c31", { scale: 1, duration: 0.12, ease: "power2.out" }, 28.82); tl.set("#c31", { opacity: 0 }, 30.02);
+    tl.set("#c32", { opacity: 1, scale: 0.92 }, 30.02); tl.to("#c32", { scale: 1, duration: 0.12, ease: "power2.out" }, 30.02); tl.set("#c32", { opacity: 0 }, 31.08);
+    tl.set("#c33", { opacity: 1, scale: 0.92 }, 31.08); tl.to("#c33", { scale: 1, duration: 0.12, ease: "power2.out" }, 31.08); tl.set("#c33", { opacity: 0 }, 31.98);
+    tl.set("#c34", { opacity: 1, scale: 0.92 }, 32.84); tl.to("#c34", { scale: 1, duration: 0.12, ease: "power2.out" }, 32.84); tl.set("#c34", { opacity: 0 }, 33.46);
+    tl.set("#c35", { opacity: 1, scale: 0.92 }, 33.92); tl.to("#c35", { scale: 1, duration: 0.12, ease: "power2.out" }, 33.92); tl.set("#c35", { opacity: 0 }, 34.64);
+    tl.set("#c36", { opacity: 1, scale: 0.92 }, 34.64); tl.to("#c36", { scale: 1, duration: 0.12, ease: "power2.out" }, 34.64); tl.set("#c36", { opacity: 0 }, 35.24);
+    tl.set("#c37", { opacity: 1, scale: 0.92 }, 35.24); tl.to("#c37", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.24); tl.set("#c37", { opacity: 0 }, 35.92);
+    tl.set("#c38", { opacity: 1, scale: 0.92 }, 35.92); tl.to("#c38", { scale: 1, duration: 0.12, ease: "power2.out" }, 35.92); tl.set("#c38", { opacity: 0 }, 36.86);
+    tl.set("#c39", { opacity: 1, scale: 0.92 }, 36.86); tl.to("#c39", { scale: 1, duration: 0.12, ease: "power2.out" }, 36.86); tl.set("#c39", { opacity: 0 }, 37.34);
+    tl.set("#c40", { opacity: 1, scale: 0.92 }, 38.34); tl.to("#c40", { scale: 1, duration: 0.12, ease: "power2.out" }, 38.34); tl.set("#c40", { opacity: 0 }, 38.88);
+    tl.set("#c41", { opacity: 1, scale: 0.92 }, 39.36); tl.to("#c41", { scale: 1, duration: 0.12, ease: "power2.out" }, 39.36); tl.set("#c41", { opacity: 0 }, 40.62);
+    tl.set("#c42", { opacity: 1, scale: 0.92 }, 40.62); tl.to("#c42", { scale: 1, duration: 0.12, ease: "power2.out" }, 40.62); tl.set("#c42", { opacity: 0 }, 41.16);
+    tl.set("#c43", { opacity: 1, scale: 0.92 }, 42.06); tl.to("#c43", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.06); tl.set("#c43", { opacity: 0 }, 42.76);
+    tl.set("#c44", { opacity: 1, scale: 0.92 }, 42.76); tl.to("#c44", { scale: 1, duration: 0.12, ease: "power2.out" }, 42.76); tl.set("#c44", { opacity: 0 }, 43.54);
+    tl.set("#c45", { opacity: 1, scale: 0.92 }, 44.34); tl.to("#c45", { scale: 1, duration: 0.12, ease: "power2.out" }, 44.34); tl.set("#c45", { opacity: 0 }, 45.44);
+    tl.set("#c46", { opacity: 1, scale: 0.92 }, 45.44); tl.to("#c46", { scale: 1, duration: 0.12, ease: "power2.out" }, 45.44); tl.set("#c46", { opacity: 0 }, 46.40);
+    tl.set("#c47", { opacity: 1, scale: 0.92 }, 46.40); tl.to("#c47", { scale: 1, duration: 0.12, ease: "power2.out" }, 46.40); tl.set("#c47", { opacity: 0 }, 46.96);
+    tl.set("#c48", { opacity: 1, scale: 0.92 }, 47.36); tl.to("#c48", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.36); tl.set("#c48", { opacity: 0 }, 47.84);
+    tl.set("#c49", { opacity: 1, scale: 0.92 }, 47.84); tl.to("#c49", { scale: 1, duration: 0.12, ease: "power2.out" }, 47.84); tl.set("#c49", { opacity: 0 }, 48.66);
+    tl.set("#c50", { opacity: 1, scale: 0.92 }, 48.66); tl.to("#c50", { scale: 1, duration: 0.12, ease: "power2.out" }, 48.66); tl.set("#c50", { opacity: 0 }, 49.26);
+    tl.set("#c51", { opacity: 1, scale: 0.92 }, 49.78); tl.to("#c51", { scale: 1, duration: 0.12, ease: "power2.out" }, 49.78); tl.set("#c51", { opacity: 0 }, 50.82);
+    tl.set("#c52", { opacity: 1, scale: 0.92 }, 50.82); tl.to("#c52", { scale: 1, duration: 0.12, ease: "power2.out" }, 50.82); tl.set("#c52", { opacity: 0 }, 51.24);
+    tl.set("#c53", { opacity: 1, scale: 0.92 }, 51.24); tl.to("#c53", { scale: 1, duration: 0.12, ease: "power2.out" }, 51.24); tl.set("#c53", { opacity: 0 }, 51.94);
+    tl.set("#c54", { opacity: 1, scale: 0.92 }, 51.94); tl.to("#c54", { scale: 1, duration: 0.12, ease: "power2.out" }, 51.94); tl.set("#c54", { opacity: 0 }, 52.42);
+    tl.set("#c55", { opacity: 1, scale: 0.92 }, 53.06); tl.to("#c55", { scale: 1, duration: 0.12, ease: "power2.out" }, 53.06); tl.set("#c55", { opacity: 0 }, 53.42);
+    tl.set("#c56", { opacity: 1, scale: 0.92 }, 53.42); tl.to("#c56", { scale: 1, duration: 0.12, ease: "power2.out" }, 53.42); tl.set("#c56", { opacity: 0 }, 53.82);
+    tl.set("#c57", { opacity: 1, scale: 0.92 }, 54.22); tl.to("#c57", { scale: 1, duration: 0.12, ease: "power2.out" }, 54.22); tl.set("#c57", { opacity: 0 }, 55.24);
+    tl.set("#c58", { opacity: 1, scale: 0.92 }, 55.24); tl.to("#c58", { scale: 1, duration: 0.12, ease: "power2.out" }, 55.24); tl.set("#c58", { opacity: 0 }, 55.54);
+    tl.set("#c59", { opacity: 1, scale: 0.92 }, 56.46); tl.to("#c59", { scale: 1, duration: 0.12, ease: "power2.out" }, 56.46); tl.set("#c59", { opacity: 0 }, 56.78);
+    tl.set("#c60", { opacity: 1, scale: 0.92 }, 57.42); tl.to("#c60", { scale: 1, duration: 0.12, ease: "power2.out" }, 57.42); tl.set("#c60", { opacity: 0 }, 58.38);
+    tl.set("#c61", { opacity: 1, scale: 0.92 }, 58.38); tl.to("#c61", { scale: 1, duration: 0.12, ease: "power2.out" }, 58.38); tl.set("#c61", { opacity: 0 }, 59.02);
+    tl.set("#c62", { opacity: 1, scale: 0.92 }, 59.02); tl.to("#c62", { scale: 1, duration: 0.12, ease: "power2.out" }, 59.02); tl.set("#c62", { opacity: 0 }, 59.70);
+    tl.set("#c63", { opacity: 1, scale: 0.92 }, 60.64); tl.to("#c63", { scale: 1, duration: 0.12, ease: "power2.out" }, 60.64); tl.set("#c63", { opacity: 0 }, 61.48);
+    tl.set("#c64", { opacity: 1, scale: 0.92 }, 61.48); tl.to("#c64", { scale: 1, duration: 0.12, ease: "power2.out" }, 61.48); tl.set("#c64", { opacity: 0 }, 62.20);
+    tl.set("#c65", { opacity: 1, scale: 0.92 }, 62.20); tl.to("#c65", { scale: 1, duration: 0.12, ease: "power2.out" }, 62.20); tl.set("#c65", { opacity: 0 }, 63.08);
+    tl.set("#c66", { opacity: 1, scale: 0.92 }, 63.08); tl.to("#c66", { scale: 1, duration: 0.12, ease: "power2.out" }, 63.08); tl.set("#c66", { opacity: 0 }, 64.02);
+    tl.set("#c67", { opacity: 1, scale: 0.92 }, 64.02); tl.to("#c67", { scale: 1, duration: 0.12, ease: "power2.out" }, 64.02); tl.set("#c67", { opacity: 0 }, 64.56);
+    tl.set("#c68", { opacity: 1, scale: 0.92 }, 65.50); tl.to("#c68", { scale: 1, duration: 0.12, ease: "power2.out" }, 65.50); tl.set("#c68", { opacity: 0 }, 66.02);
+    tl.set("#c69", { opacity: 1, scale: 0.92 }, 66.02); tl.to("#c69", { scale: 1, duration: 0.12, ease: "power2.out" }, 66.02); tl.set("#c69", { opacity: 0 }, 66.40);
+    tl.set("#c70", { opacity: 1, scale: 0.92 }, 66.40); tl.to("#c70", { scale: 1, duration: 0.12, ease: "power2.out" }, 66.40); tl.set("#c70", { opacity: 0 }, 66.86);
+    tl.set("#c71", { opacity: 1, scale: 0.92 }, 67.52); tl.to("#c71", { scale: 1, duration: 0.12, ease: "power2.out" }, 67.52); tl.set("#c71", { opacity: 0 }, 67.84);
+    tl.set("#c72", { opacity: 1, scale: 0.92 }, 67.84); tl.to("#c72", { scale: 1, duration: 0.12, ease: "power2.out" }, 67.84); tl.set("#c72", { opacity: 0 }, 68.20);
+    window.__timelines["main"] = tl;
+    tl.seek(0);
+  </script>
+</body>
+</html>

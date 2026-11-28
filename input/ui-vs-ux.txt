@@ -1,0 +1,15 @@
+UI and UX are two words people mix up. They are related, but they are not the same job.
+
+UI means user interface. It is what you see and touch: the buttons, the colors, the fonts and the layout.
+
+UX means user experience. It is how the whole thing feels to use: whether you can finish your task, how long it takes, and whether you feel stuck.
+
+Here is a simple way to remember it. UI is the look. UX is the path.
+
+Imagine a checkout page. The UI decides that the Pay button is blue, big, and easy to see. The UX decides that you can pay in three taps, that the form remembers your address, and that you get a clear message when the payment fails.
+
+A page can look beautiful and still feel bad to use. A page can also work well but look messy. Good products need both.
+
+The takeaway: UI makes the screen look right. UX makes the whole journey work. Designers, developers and product people all care about both.
+
+Which one do you think matters more? Tell me in the comments.

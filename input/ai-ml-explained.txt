@@ -1,0 +1,15 @@
+People say AI and machine learning like they mean the same thing. They do not.
+
+AI is the big idea: a machine doing something that looks smart, like answering a question or spotting a face.
+
+Machine learning is one way to build AI. Instead of writing rules by hand, you show the computer many examples, and it finds the rules itself.
+
+Here is a simple example. You want to tell spam from real email. A rule-based program needs you to list every spam word. A machine learning program looks at thousands of labeled emails and learns which patterns mean spam.
+
+There is a third term: deep learning. It is machine learning with many layers of simple math stacked together. That is how image recognition and chatbots got good.
+
+So the nesting is simple. AI is the goal. Machine learning is a method. Deep learning is a method inside that method.
+
+The takeaway: when you see AI in an app, ask one question. Did a person write the rules, or did the system learn them from data?
+
+Do you use machine learning in your own projects? Tell me in the comments.

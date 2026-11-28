@@ -1,0 +1,15 @@
+An AI model sounds like a program. It is closer to a file full of numbers.
+
+When a model trains, it reads huge amounts of data and adjusts billions of numbers called weights. Those numbers are the model. Once training ends, the weights stop changing.
+
+Now comes inference. You send a question, the model runs its math over your text, and it predicts the next word, over and over, until the answer is done.
+
+Each model has a size. A bigger model has more weights, so it can learn more, but it needs more memory and time to run.
+
+That is why some models run on your laptop and others need a data center. Small models are fast and cheap. Large models are slower but often more accurate.
+
+There are also different types. Some are for text, some for images, and some for both. The type decides what inputs it can take.
+
+The takeaway: a model is just learned numbers plus the code that runs them. When you pick one, check three things: the task, the size, and the cost to run.
+
+Which model do you use most? Tell me in the comments.

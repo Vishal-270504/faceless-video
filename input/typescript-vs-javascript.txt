@@ -1,0 +1,15 @@
+JavaScript runs your web pages. TypeScript is JavaScript with a safety check added. Here is the difference.
+
+JavaScript is loose. You can pass a number where a name should go, and nothing complains until the app crashes for a user.
+
+TypeScript lets you add types. You write that a user has a name that is text and an age that is a number. Then the editor warns you before you run the code.
+
+Here is a small example. A function that adds tax to a price can quietly join text and numbers if someone passes text. In TypeScript, the same mistake is a red line in your editor before you run anything.
+
+The good part: TypeScript compiles to plain JavaScript. The browser never sees the types. Every JavaScript file is also valid TypeScript, so you can switch one file at a time.
+
+The cost is a little more writing and a build step. For a tiny script, plain JavaScript is fine.
+
+The takeaway: use JavaScript to learn and to make quick tries. Use TypeScript when a project grows and more than one person touches the code.
+
+Which one do you use in your projects? Tell me in the comments.

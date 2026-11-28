@@ -1094,3 +1094,63 @@ One component throws an error and your whole React page goes blank. An error bou
 **Thumbnail prompt for ChatGPT:**
 > Vertical 9:16 image, 1080x1920. Dark violet background. "Isolate the broken part" in large bold white letters. One central illustration of a small page layout with one tile cracked and a fallback card with a button in its place. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
 
+
+## 79. github-repos-for-developers: 4 GitHub repos every developer should know
+
+**Title:** 4 GitHub repos every developer should know
+
+**Description:**
+A GitHub account is also a free library. This video walks through four public repositories: a full web development course, a list of free public APIs to practise with, a study plan for software interviews, and a list of free programming books. The viewer learns how to use a repo as a teacher: read the README, fork it and change one thing.
+
+#github #developers #coding #learntocode #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. "4 free repos" in large bold white letters. One central illustration of four stacked repository cards, each with a small folder icon and a number, the top one highlighted in coral. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+## 80. ai-ml-explained: AI vs machine learning vs deep learning
+
+**Title:** AI vs machine learning vs deep learning
+
+**Description:**
+AI, machine learning and deep learning are not the same thing. AI is the goal, machine learning is a way to reach it by learning from examples, and deep learning is machine learning with many layers. The viewer learns a simple test: did a person write the rules, or did the system learn them from data?
+
+#ai #machinelearning #deeplearning #programming #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Off-white background. "AI or ML?" in large bold black letters. One central illustration of three nested rounded rectangles, the outer one labelled AI, the middle one machine learning, the inner one deep learning, with the inner one in coral. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+## 81. ai-models-explained: What is an AI model? Weights explained
+
+**Title:** What is an AI model? Weights explained
+
+**Description:**
+An AI model is not a program with hidden logic. It is a file of learned numbers called weights, and running it means predicting the next word again and again. The viewer learns why bigger models need more memory and time, and what to check when picking one: the task, the size and the cost to run.
+
+#ai #aimodels #llm #machinelearning #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. "Just numbers" in large bold white letters. One central illustration of a grid of small numbers in a rounded card, with a few values highlighted in coral. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+## 82. typescript-vs-javascript: TypeScript vs JavaScript: when to switch
+
+**Title:** TypeScript vs JavaScript: when to switch
+
+**Description:**
+JavaScript runs your web pages but is loose: a number can silently become text until the app breaks for a user. TypeScript adds types and warns you in the editor, then compiles to plain JavaScript. The viewer learns when a tiny script is fine in JavaScript and when a growing project with a team should use TypeScript.
+
+#typescript #javascript #webdev #programming #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Near-black background. "JS or TS?" in large bold white letters. One central illustration of two stacked cards, the top one labelled JS in grey and the bottom one labelled TS in coral with a red underline on a small code line. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.
+
+## 83. ui-vs-ux: UI vs UX: what is the difference?
+
+**Title:** UI vs UX: what is the difference?
+
+**Description:**
+UI is how the screen looks: buttons, colours, fonts and layout. UX is how the whole experience works: whether you can finish the task, how long it takes and whether you feel stuck. The viewer learns the rule that UI is the look and UX is the path, using a checkout page as the example.
+
+#ui #ux #design #uidesign #shorts
+
+**Thumbnail prompt for ChatGPT:**
+> Vertical 9:16 image, 1080x1920. Off-white background. "UI or UX?" in large bold black letters. One central illustration of a phone screen with a blue button on the left and a dotted path of four steps on the right, with the path in coral. Flat design, high contrast, lots of negative space. No people, no logos, no real brand names, no emojis.

@@ -27,6 +27,7 @@ Categories: STORY (how the script hooks, explains and ends), EXPLAIN (how simple
 - 8 clean-architecture-aspnet: conflict hook (5 vs 3), copies drifting, three-layer stack with highlights, bypass, one-line swap. Lesson: role captions overlapped the Repository box; the stack needs its own band under it. Always check the contact sheet on text-heavy beats.
 
 ## Open items from the latest loop (apply next)
+- VISUAL (standing, every video): use the scene style in CLAUDE.md "Visual style": alternating dark/light full-frame scenes, grey headline with bold keyword in a blue selection box, ordinal kicker on points, big stat numbers, real UI panels, one coral accent.
 - VISUAL: every beat with text must have its text 24 px or more and sit clear of other boxes (check the sheet).
 - CRAFT: a beat shorter than 3 s gets at most one short phrase on screen.
 - CRAFT: qa.py samples frames evenly, so some land mid-fade. Next: sample the middle of each beat from the beat times.
@@ -89,3 +90,11 @@ Backgrounds: every video uses a Pixabay clip (one per video, cached in output/bg
 - CRAFT: the narration runs 127-145 words; aim for 110-125 before writing visuals.
 - STORY: each video has a different accent colour and a different visual idea; keep that.
 - CINEMA: Pixabay clips are stock footage. A higher-quality generated background needs a paid HeyGen account or a local GPU, neither of which is set up.
+
+## Batch 79-83 (60-90 s, scene style)
+- 79 github-repos-for-developers: four repo cards, one per numbered beat. Lesson: the preview card at the start of the points beat works; keep every list item inside 1000 px.
+- 80 ai-ml-explained: nested rings for AI / ML / deep learning. Lesson: the "1000s" stat overflowed its card at 140 px; stats must fit the card at 104 px or smaller.
+- 81 ai-models-explained: number grid, before/after weights, token chips. Lesson: the chips read as a sentence only when laid out in one row.
+- 82 typescript-vs-javascript: the code panels overflowed into the captions at 32 px. Lesson: code at 26 px max with at most 8 lines per card; check the sheet for any overflow below the card edge.
+- 83 ui-vs-ux: phone mock, path with nodes, checkout example. Lesson: a visual must end at 1000 px; the first build had the path and cards running into the caption band.
+- STANDING: the batch uses the 60-90 s target. Every beat needs at least one visual; the points beats are numbered.

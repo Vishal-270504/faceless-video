@@ -1,0 +1,15 @@
+Your GitHub account is more than a backup for code. It is a library of real projects you can learn from for free.
+
+Here are four repositories every developer should know.
+
+Number one: freeCodeCamp. It is a full course in web development, with lessons, projects and certificates. It is all free, and the whole site is open source, so you can read how it is built.
+
+Number two: public APIs. This repo is a long list of free APIs, like weather, movies and maps. Pick one, and you have a practice project in minutes.
+
+Number three: Coding Interview University. This repo is a study plan for software jobs. It lists the topics in order, from data structures to system design, with links to free courses.
+
+Number four: Free Programming Books. It is a list of free books for almost every language and tool. Search for the one you need and read it right away.
+
+The takeaway: a repo is a free teacher. Read the README, fork it, and change one thing.
+
+Which of these will you try first? Tell me in the comments.
